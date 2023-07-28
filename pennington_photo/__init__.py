@@ -5,7 +5,7 @@ from flask_cors import CORS
 app = flask.Flask(__name__)  # pylint: disable=invalid-name
 CORS(app)
 # Read settings from config module (site/config.py)
-app.config.from_object('app_rename_me.config')
+app.config.from_object('pennington_photo.config')
 # Overlay settings read from a Python file whose path is set in the environment
 # variable SITE_SETTINGS. Setting this environment variable is optional.
 # Docs: http://flask.pocoo.org/docs/latest/config/
@@ -17,6 +17,6 @@ app.config.from_envvar('SITE_SETTINGS', silent=True)
 # circular import, which is naughty, but Flask was designed that way.
 # (Reference http://flask.pocoo.org/docs/patterns/packages/)  We're
 # going to tell pylint and pycodestyle to ignore this coding style violation.
-import app_rename_me.api  # noqa: E402  pylint: disable=wrong-import-position
-import app_rename_me.views  # noqa: E402  pylint: disable=wrong-import-position
-import app_rename_me.common  # noqa: E402  pylint: disable=wrong-import-position
+import pennington_photo.api  # noqa: E402  pylint: disable=wrong-import-position
+import pennington_photo.views  # noqa: E402  pylint: disable=wrong-import-position
+import pennington_photo.common  # noqa: E402  pylint: disable=wrong-import-position

@@ -1,5 +1,5 @@
 """
-Personal website app_rename_me python package configuration.
+Personal website pennington_photo python package configuration.
 """
 
 from setuptools import setup
@@ -8,13 +8,13 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name='app_rename_me',
+    name='pennington_photo',
     version='0.1.0',
-    packages=['app_rename_me'],
+    packages=['pennington_photo'],
     author="Thomas Dokas",
     author_email="dokastho@umich.edu",
-    url="https://github.com/dokastho/app_rename_me",
-    description="A fresh take on what a app_rename_me can do",
+    url="https://github.com/dokastho/pennington_photo",
+    description="A fresh take on what a pennington_photo can do",
     long_description=long_description,
     long_description_content_type="text/markdown",
     include_package_data=True,

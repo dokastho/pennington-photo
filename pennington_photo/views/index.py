@@ -1,16 +1,16 @@
-import app_rename_me
+import pennington_photo
 import flask
-from app_rename_me.common.model import check_session
+from pennington_photo.common.model import check_session
 
 
-@app_rename_me.app.route("/")
+@pennington_photo.app.route("/")
 def show_index():
-    """Render app_rename_me for the site."""
+    """Render pennington_photo for the site."""
 
     return flask.render_template("index.html")
 
 
-@app_rename_me.app.route("/user/<uname>/")
+@pennington_photo.app.route("/user/<uname>/")
 def show_user(uname):
     """Show profile options for uname."""
     logname = check_session()
