@@ -3,15 +3,15 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   entry: {
-    account: './authserver/js/account.jsx',
-    delete: './authserver/js/delete.jsx',
-    create: './authserver/js/create.jsx',
-    index: './authserver/js/index.jsx',
-    login: './authserver/js/login.jsx',
-    password: './authserver/js/password.jsx',
+    account: './pennington_photo/js/account.jsx',
+    delete: './pennington_photo/js/delete.jsx',
+    create: './pennington_photo/js/create.jsx',
+    index: './pennington_photo/js/index.jsx',
+    login: './pennington_photo/js/login.jsx',
+    password: './pennington_photo/js/password.jsx',
   },
   output: {
-    path: path.join(__dirname, '/authserver/static/js/'),
+    path: path.join(__dirname, '/pennington_photo/static/js/'),
     filename: '[name].bundle.js',
   },
   module: {

@@ -150,19 +150,6 @@ def check_authorization(username=None, password=None):
     return username
 
 
-def show_username() -> dict:
-    """Handle the rendering of the username/sign in link."""
-    logname = pennington_photo.model.get_logname()
-    context = {}
-    if not logname:
-        context["logname"] = "Sign In"
-        context["logname_link"] = "/accounts/login/"
-    else:
-        context["logname"] = logname
-        context["logname_link"] = f"/accounts/{logname}/"
-    return context
-
-
 def encrypt(salt, password):
     """One way decryption given the plaintext pw and salt from user db."""
     algorithm = 'sha512'
@@ -173,71 +160,3 @@ def encrypt(salt, password):
     password_hash = hash_obj.hexdigest()
     password_db_string = "$".join([algorithm, salt, password_hash])
     return password_db_string
-
-
-def delete_helper(resumeid, entryid, freq):
-    """Delete an entry or update if freq > 1."""
-    database = get_db()
-    freq -= 1
-    if freq == 0:
-        # delete the entry
-        cur = database.execute(
-            "DELETE FROM entries "
-            "WHERE entryid == ?",
-            (entryid,)
-        )
-        cur.fetchone()
-
-        # delete teids associated with this entry
-        cur = database.execute(
-            "DELETE FROM entry_to_tag "
-            "WHERE entryid == ?",
-            (entryid,)
-        )
-        cur.fetchone()
-
-    else:
-        if resumeid == 0:
-            flask.abort(501)
-        # update the entry
-        cur = database.execute(
-            "UPDATE entries "
-            "SET frequency = ?, priority = ? "
-            "WHERE entryid == ?",
-            (freq, freq, entryid,)
-        )
-        cur.fetchone()
-
-        # delete the entry in table resume_to_entry
-        cur = database.execute(
-            "DELETE FROM resume_to_entry "
-            "WHERE entryid == ? "
-            "AND resumeid == ?",
-            (entryid, resumeid, )
-        )
-        cur.fetchone()
-
-    # delete tags
-    cur = database.execute(
-        "DELETE FROM entry_to_tag "
-        "WHERE resumeid == ? "
-        "AND entryid == ?",
-        (resumeid, entryid, )
-    )
-    cur.fetchall()
-
-
-def rest_api_auth_user():
-    """Standard user auth in rest api, returns logname and database connection."""
-    logname = get_logname()
-    if not logname:
-        flask.abort(403)
-
-    database = get_db()
-    return logname, database
-
-
-def print_log(msg: str, code: None) -> str:
-    now = datetime.utcnow()
-    now = now.strftime("%d/%b/%Y %H:%M:%S")
-    print(f'localhost - - [{now}] {msg} {code} -')

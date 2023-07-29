@@ -16,7 +16,8 @@ case $1 in
   "create")
   ## TODO avoid clobbering an existing database?
     mkdir -p var/uploads
-    sqlite3 var/pennington_photo.sqlite3 < sql/schema.sqlw
+    sqlite3 var/pennington_photo.sqlite3 < sql/schema.sql
+    sqlite3 var/pennington_photo.sqlite3 < sql/data.sql
     ;;
 
   "destroy")
@@ -26,10 +27,12 @@ case $1 in
     rm -rf var/pennington_photo.sqlite3 var/uploads
     mkdir -p var/uploads
     sqlite3 var/pennington_photo.sqlite3 < sql/schema.sql
+    sqlite3 var/pennington_photo.sqlite3 < sql/data.sql
     ;;
   "users")
     ;;
   "dump")
+    sqlite3 -batch -line var/pennington_photo.sqlite3 'select * from users'
     ;;
   *)
     usage
