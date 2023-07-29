@@ -9,7 +9,6 @@ render(
     </form>
     <br />
     <a href="/accounts/password/">Change password</a><br />
-    <a href="/accounts/delete/">Delete account</a><br />
   </div>,
   document.getElementById("reactEntry"),
 );

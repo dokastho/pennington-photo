@@ -3,12 +3,10 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   entry: {
-    account: './pennington_photo/js/account.jsx',
-    delete: './pennington_photo/js/delete.jsx',
-    create: './pennington_photo/js/create.jsx',
+    account: './pennington_photo/js/Account.jsx',
     index: './pennington_photo/js/index.jsx',
-    login: './pennington_photo/js/login.jsx',
-    password: './pennington_photo/js/password.jsx',
+    login: './pennington_photo/js/Login.jsx',
+    password: './pennington_photo/js/Password.jsx',
   },
   output: {
     path: path.join(__dirname, '/pennington_photo/static/js/'),
