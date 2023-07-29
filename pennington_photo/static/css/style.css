@@ -8,8 +8,26 @@ body {
 .welcome-page {
     background-image: url('/static/img/IMG_2019.jpg');
     height: 100vh;
+    color: white;
 }
 
-.bio-info {
+.info-page {
     height: 100vh;
+    color: black;
+}
+
+.navbar {
+    display: inline-flex;
+    justify-content: space-around;
+    position: fixed;
+    height: 5rem;
+    width: 100%;
+    top: 0px;
+}
+
+.navbar-item {
+    font-weight: bold;
+    color: white;
+    font-size: 3rem;
+    padding: 1rem;
 }

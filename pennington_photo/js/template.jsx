@@ -12,7 +12,7 @@ class T extends React.Component {
   }
 
   componentDidMount() {
-    const {} = this.props;
+    const { } = this.props;
 
     this.setState({});
   }

@@ -1,5 +1,8 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
+import SplashPage from './SplashPage';
+import NavBar from './NavBar';
+import InfoPage from './InfoPage';
 
 class Index extends React.Component {
   constructor(props) {
@@ -12,15 +15,14 @@ class Index extends React.Component {
   render() {
     return (
       <>
-        <div className='welcome-page'>
-          test content
-        </div>
+        <NavBar />
+        <SplashPage />
+        <InfoPage />
       </>
     )
   }
 }
 
-render(
-  <Index />,
-  document.getElementById('reactEntry')
-)
+const container = document.getElementById('reactEntry');
+const root = createRoot(container);
+root.render(<Index />);
