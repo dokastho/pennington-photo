@@ -31,3 +31,13 @@ body {
     font-size: 3rem;
     padding: 1rem;
 }
+
+.loading-page {
+    text-align: center;
+    margin-top: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 16rem;
+    height: 16rem;
+    max-width: 10%;
+}

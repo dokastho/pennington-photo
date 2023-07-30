@@ -3,22 +3,32 @@ import { createRoot } from 'react-dom/client';
 import SplashPage from './SplashPage';
 import NavBar from './NavBar';
 import InfoPage from './InfoPage';
+import Loading from './Loading';
 
 class Index extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      loaded: false,
+    }
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   render() {
+    const {
+      loaded
+    } = this.state
     return (
-      <>
-        <NavBar />
-        <SplashPage />
-        <InfoPage />
-      </>
+      loaded ? (
+        <>
+          <NavBar />
+          <SplashPage />
+          <InfoPage />
+        </>
+      ) : (
+        <Loading />
+      )
     )
   }
 }
