@@ -3,13 +3,10 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   entry: {
-    account: './pennington_photo/js/Account.jsx',
-    index: './pennington_photo/js/index.jsx',
-    login: './pennington_photo/js/Login.jsx',
-    password: './pennington_photo/js/Password.jsx',
+    index: './src/index.jsx',
   },
   output: {
-    path: path.join(__dirname, '/pennington_photo/static/js/'),
+    path: path.join(__dirname, '/dist/'),
     filename: '[name].bundle.js',
   },
   module: {

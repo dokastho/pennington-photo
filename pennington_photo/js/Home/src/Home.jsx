@@ -1,11 +1,10 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
 import SplashPage from './SplashPage';
-import NavBar from './NavBar';
 import InfoPage from './InfoPage';
-import Loading from './Loading';
+import NavBar from '../../libs/NavBar';
+import Loading from '../../libs/Loading';
 
-class Index extends React.Component {
+class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,6 +43,4 @@ class Index extends React.Component {
   }
 }
 
-const container = document.getElementById('reactEntry');
-const root = createRoot(container);
-root.render(<Index />);
+export default Home
