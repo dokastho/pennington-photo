@@ -5,10 +5,25 @@ body {
     padding: 0px;
 }
 
+.loaded {
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.loading {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    overflow: hidden;
+}
+
 .welcome-page {
-    background-image: url('/static/img/IMG_2019.jpg');
-    height: 100vh;
     color: white;
+}
+
+.background-img {
+    height: 100vh;
+    width: 100%;
+    object-fit: none;
 }
 
 .info-page {

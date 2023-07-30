@@ -10,25 +10,36 @@ class Index extends React.Component {
     super(props);
     this.state = {
       loaded: false,
+      fetched: false,
+      rendered: false,
     }
+    this.setLoaded = this.setLoaded.bind(this);
   }
 
-  componentDidMount() { }
+  setLoaded() {
+    console.log("loaded");
+    this.setState({ loaded: true });
+  }
 
   render() {
     const {
-      loaded
+      loaded,
     } = this.state
     return (
-      loaded ? (
-        <>
+      <>
+        {
+          loaded ? (
+            null
+          ) : (
+            <Loading />
+          )
+        }
+        <div className={loaded ? 'loaded' : 'loading'}>
           <NavBar />
-          <SplashPage />
+          <SplashPage setLoaded={this.setLoaded} />
           <InfoPage />
-        </>
-      ) : (
-        <Loading />
-      )
+        </div>
+      </>
     )
   }
 }

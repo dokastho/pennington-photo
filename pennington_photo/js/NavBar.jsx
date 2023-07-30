@@ -9,10 +9,10 @@ class NavBar extends React.Component {
   render() {
     return (
       <div className='navbar'>
-        <div className='navbar-item'>item</div>
-        <div className='navbar-item'>item</div>
-        <div className='navbar-item'>item</div>
-        <div className='navbar-item'>item</div>
+        <div className='navbar-item'>Galleries</div>
+        <div className='navbar-item'>Sizing</div>
+        <div className='navbar-item'>About</div>
+        <div className='navbar-item'>Contact</div>
       </div>
     );
   }
