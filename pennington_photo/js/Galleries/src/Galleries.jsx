@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from '../../libs/NavBar';
+import NavBar from './NavBar';
 
 class Galleries extends React.Component {
 

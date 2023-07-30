@@ -1,8 +1,8 @@
 import React from 'react';
 import SplashPage from './SplashPage';
 import InfoPage from './InfoPage';
-import NavBar from '../../libs/NavBar';
-import Loading from '../../libs/Loading';
+import NavBar from './NavBar';
+import Loading from './Loading';
 
 class Home extends React.Component {
   constructor(props) {
