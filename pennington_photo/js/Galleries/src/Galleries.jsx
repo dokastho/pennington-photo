@@ -1,13 +1,14 @@
 import React from 'react';
 import NavBar from './NavBar';
 import Gallery from './Gallery';
+import Loading from './Loading';
 
 class Galleries extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      loaded: true,
+      loaded: false,
       galleries: [],
     };
   }
@@ -21,7 +22,8 @@ class Galleries extends React.Component {
       })
       .then((data) => {
         this.setState({
-          galleries: data
+          galleries: data,
+          loaded: true
         });
       })
       .catch((error) => console.log(error));

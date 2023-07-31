@@ -10,33 +10,25 @@ class NavBar extends React.Component {
   }
 
   render() {
-    const {
-      divId
-    } = this.props;
     return (
-      <div className='navbar' id={divId} >
-        {
-          items.map((item) => {
-            return (
-              <a href={`/${item.toLowerCase()}/`}>
-                <div className='navbar-item' id={divId} >
-                  {item}
-                </div>
-              </a>
-            )
-          })
-        }
-      </div>
+      <>
+        <div className='navbar' >
+          {
+            items.map((item) => {
+              return (
+                <a href={`/${item.toLowerCase()}/`}>
+                  <div className='navbar-item' >
+                    {item}
+                  </div>
+                </a>
+              )
+            })
+          }
+        </div>
+        {/* <div className='navbar-gradient' /> */}
+      </>
     );
   }
-}
-
-NavBar.defaultProps = {
-  divId: 'normal'
-}
-
-NavBar.propTypes = {
-  divId: PropTypes.string
 }
 
 export default NavBar;
