@@ -9,10 +9,16 @@ class About extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <NavBar />
-        about
-      </div>
+        <div className='site-contents'>
+          <div className='dialogue'>
+            <h2>
+              About Me
+            </h2>
+          </div>
+        </div>
+      </>
     );
   }
 }

@@ -9,10 +9,16 @@ class Sizing extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <NavBar />
-        sizing
-      </div>
+        <div className='site-contents'>
+          <div className='dialogue'>
+            <h2>
+              Sizing Guide
+            </h2>
+          </div>
+        </div>
+      </>
     );
   }
 }
