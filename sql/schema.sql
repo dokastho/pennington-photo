@@ -20,6 +20,7 @@ CREATE TABLE pictures(
   pictureId INTEGER PRIMARY KEY AUTOINCREMENT,
   galleryId INTEGER NOT NULL,
   owner VARCHAR(20) NOT NULL,
+  uuid VARCHAR(256) NOT NULL,
   name VARCHAR(256) NOT NULL,
   description VARCHAR(256),
   stars INTEGER,
