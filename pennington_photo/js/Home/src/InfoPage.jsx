@@ -12,6 +12,10 @@ class InfoPage extends React.Component {
     return (
       <div className='info-page'>
         <div className='bw-info'>
+          <br />
+          <br />
+          <br />
+          <br />
           <h1>What Makes Black and White The Best Medium?</h1>
           <br />
         </div>

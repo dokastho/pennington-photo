@@ -32,7 +32,7 @@ a {
 .background-img {
     height: 100vh;
     width: 100%;
-    object-fit: none;
+    object-fit: cover;
 }
 
 .info-page {
@@ -87,16 +87,12 @@ a {
     width: 100%;
     top: 0px;
     height: 5vw;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: white;
+    background-image: linear-gradient(rgba(125, 125, 125, 1), rgba(255, 0, 0, 0));
+    z-index: 100;
 }
 
 #normal {
-    background-color: white;
-    color: black;
-}
-
-#homepage {
-    background: none;
     color: white;
 }
 
