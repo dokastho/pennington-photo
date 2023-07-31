@@ -17,7 +17,7 @@ def get_galleries():
     
     for gallery in galleries:
         cur = connection.execute(
-            "SELELCT MAX(stars) FROM pictures WHERE galleryId = ?",
+            "SELECT * FROM pictures WHERE galleryId = ? ORDER BY stars",
             (gallery["galleryId"],)
         )
         gallery["thumbnail"] = cur.fetchone()["uuid"]

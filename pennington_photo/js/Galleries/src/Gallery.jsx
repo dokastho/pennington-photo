@@ -22,8 +22,10 @@ class Gallery extends React.Component {
       name
     } = this.props;
     return (
-      <div>
-        {name}
+      <div className='gallery-card'>
+        <div className='gallery-card-contents'>
+          {name}
+        </div>
       </div>
     );
   }

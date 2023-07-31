@@ -46,6 +46,7 @@ a {
     position: fixed;
     width: 100%;
     top: 0px;
+    height: 5vw;
 }
 
 .navbar-item {
@@ -67,4 +68,38 @@ a {
     width: 16rem;
     height: 16rem;
     max-width: 10%;
+}
+
+.site-contents {
+    position: relative;
+    top: 5vw;
+    padding: 4rem;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.dialogue {
+    text-align: center;
+}
+
+.galleries-tray {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2rem;
+}
+
+.gallery-card {
+    border: 2px solid gray;
+    border-radius: 2rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    aspect-ratio: 1/ 1;
+    object-fit: cover;
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.gallery-card-contents {
+    padding: 2rem;
+    text-align: center;
 }

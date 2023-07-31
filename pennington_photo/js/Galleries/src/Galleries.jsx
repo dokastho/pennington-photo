@@ -21,7 +21,7 @@ class Galleries extends React.Component {
       })
       .then((data) => {
         this.setState({
-          galleries: data.galleries
+          galleries: data
         });
       })
       .catch((error) => console.log(error));
@@ -43,20 +43,22 @@ class Galleries extends React.Component {
         }
         <div className={loaded ? 'loaded' : 'loading'}>
           <NavBar />
-          <div className='dialogue'>
-            <h2>
-              Photo Galleries
-            </h2>
-            <h3>
-              Explore below
-            </h3>
-          </div>
-          <div className='galleries-tray'>
-            {
-              galleries.map((gallery) => {
-                return (<Gallery name={gallery.name} />)
-              })
-            }
+          <div className='site-contents'>
+            <div className='dialogue'>
+              <h2>
+                Photo Galleries
+              </h2>
+              <h3>
+                Explore below
+              </h3>
+            </div>
+            <div className='galleries-tray'>
+              {
+                galleries.map((gallery) => {
+                  return (<Gallery name={gallery.name} />)
+                })
+              }
+            </div>
           </div>
         </div>
       </>
