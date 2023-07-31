@@ -44,14 +44,13 @@ a {
     display: inline-flex;
     justify-content: space-around;
     position: fixed;
-    height: 5rem;
     width: 100%;
     top: 0px;
 }
 
 .navbar-item {
     font-weight: bold;
-    font-size: large;
+    font-size: 3vw;
     padding: 1rem;
 }
 

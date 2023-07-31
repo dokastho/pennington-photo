@@ -13,6 +13,11 @@ class NavBar extends React.Component {
     } = this.props;
     return (
       <div className='navbar' >
+        <a href='/'>
+          <div className='navbar-item' style={{ color }}>
+            Home
+          </div>
+        </a>
         <a href='/galleries/'>
           <div className='navbar-item' style={{ color }}>
             Galleries
