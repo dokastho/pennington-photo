@@ -40,6 +40,33 @@ a {
     color: black;
 }
 
+.bw-info {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: underline;
+}
+
+.info-content {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    max-width: 80%;
+}
+
+.info-text {
+    width: 50%;
+    padding-right: 2rem;
+}
+
+.info-img {
+    width: 50%;
+    height: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-left: 2rem;
+}
+
 .navbar {
     display: inline-flex;
     justify-content: space-around;
@@ -47,6 +74,7 @@ a {
     width: 100%;
     top: 0px;
     height: 5vw;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #normal {

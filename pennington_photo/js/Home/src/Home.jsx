@@ -34,7 +34,7 @@ class Home extends React.Component {
           )
         }
         <div className={loaded ? 'loaded' : 'loading'}>
-          <NavBar divId='homepage' />
+          <NavBar />
           <SplashPage setLoaded={this.setLoaded} />
           <InfoPage />
         </div>
