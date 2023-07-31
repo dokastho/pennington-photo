@@ -1,9 +1,18 @@
+/* basic styles */
+
 body {
     background-color: white;
     font-family: 'Futura', Arial, sans-serif;
     margin: 0px;
     padding: 0px;
 }
+
+a {
+    text-decoration: none;
+    font-weight: normal;
+}
+
+/* custom classes */
 
 .loaded {
     opacity: 1;
@@ -45,6 +54,11 @@ body {
     color: white;
     font-size: 3rem;
     padding: 1rem;
+}
+
+.navbar-item:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .loading-page {

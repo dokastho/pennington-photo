@@ -6,6 +6,7 @@ class Galleries extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loaded: true
     };
   }
 
@@ -30,7 +31,7 @@ class Galleries extends React.Component {
         }
         <div className={loaded ? 'loaded' : 'loading'}>
           <NavBar />
-
+          
         </div>
       </>
     )

@@ -5,7 +5,7 @@ from pennington_photo.common.model import check_session
 
 @pennington_photo.app.route("/")
 def show_index():
-    """Render pennington_photo for the site."""
+    """Render index for the site."""
 
     return flask.render_template("index.html")
 
