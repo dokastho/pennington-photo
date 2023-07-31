@@ -16,10 +16,13 @@
         "build": "./bin/build.py"
     },
     "dependencies": {
+        "about": "file:pennington_photo/js/About",
         "accounts": "file:pennington_photo/js/Accounts",
+        "contact": "file:pennington_photo/js/Contact",
         "galleries": "file:pennington_photo/js/Galleries",
         "home": "file:pennington_photo/js/Home",
         "login": "file:pennington_photo/js/Login",
-        "password": "file:pennington_photo/js/Password"
+        "password": "file:pennington_photo/js/Password",
+        "sizing": "file:pennington_photo/js/Sizing"
     }
 }
