@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react'
 
+const items = ["Home", "Galleries", "Sizing", "About", "Contact"];
+
 class NavBar extends React.Component {
 
   constructor(props) {
@@ -9,46 +11,32 @@ class NavBar extends React.Component {
 
   render() {
     const {
-      color
+      divId
     } = this.props;
     return (
-      <div className='navbar' >
-        <a href='/'>
-          <div className='navbar-item' style={{ color }}>
-            Home
-          </div>
-        </a>
-        <a href='/galleries/'>
-          <div className='navbar-item' style={{ color }}>
-            Galleries
-          </div>
-        </a>
-        <a href='/sizing/'>
-          <div className='navbar-item' style={{ color }}>
-            Sizing
-          </div>
-        </a>
-        <a href='/about/'>
-          <div className='navbar-item' style={{ color }}>
-            About
-          </div>
-        </a>
-        <a href='/contact/'>
-          <div className='navbar-item' style={{ color }}>
-            Contact
-          </div>
-        </a>
+      <div className='navbar' id={divId} >
+        {
+          items.map((item) => {
+            return (
+              <a href={`/${item.toLowerCase()}/`}>
+                <div className='navbar-item' id={divId} >
+                  {item}
+                </div>
+              </a>
+            )
+          })
+        }
       </div>
     );
   }
 }
 
 NavBar.defaultProps = {
-  color: 'black'
+  divId: 'normal'
 }
 
 NavBar.propTypes = {
-  color: PropTypes.string
+  divId: PropTypes.string
 }
 
 export default NavBar;

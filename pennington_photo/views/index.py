@@ -7,6 +7,13 @@ from pennington_photo.common.model import check_session
 def show_index():
     """Render index for the site."""
 
+    return flask.redirect("/home/")
+
+
+@pennington_photo.app.route("/home/")
+def show_home():
+    """Render index for the site."""
+
     return flask.render_template("index.html")
 
 

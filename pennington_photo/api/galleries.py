@@ -15,13 +15,13 @@ def get_galleries():
     
     galleries = cur.fetchall()
     
-    for gallery in galleries:
-        cur = connection.execute(
-            "SELECT * FROM pictures WHERE galleryId = ? ORDER BY stars",
-            (gallery["galleryId"],)
-        )
-        gallery["thumbnail"] = cur.fetchone()["uuid"]
-        pass
+    # for gallery in galleries:
+    #     cur = connection.execute(
+    #         "SELECT * FROM pictures WHERE galleryId = ? ORDER BY stars",
+    #         (gallery["galleryId"],)
+    #     )
+    #     gallery["thumbnail"] = cur.fetchone()["uuid"]
+    #     pass
     
     return flask.jsonify(galleries), 201
 

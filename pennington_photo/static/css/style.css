@@ -49,10 +49,22 @@ a {
     height: 5vw;
 }
 
+#normal {
+    background-color: white;
+    color: black;
+}
+
+#homepage {
+    background: none;
+    color: white;
+}
+
 .navbar-item {
     font-weight: bold;
-    font-size: 3vw;
+    font-size: 2vw;
     padding: 1rem;
+    width: 10vw;
+    text-align: center;
 }
 
 .navbar-item:hover {
@@ -97,6 +109,13 @@ a {
     object-fit: cover;
     grid-column: span 1;
     grid-row: span 1;
+    transition: all 0.2s ease-in-out;
+}
+
+.gallery-card:hover {
+    cursor: pointer;
+    transform: translateY(-0.5rem);
+    transition: all 0.2s ease-in-out;
 }
 
 .gallery-card-contents {

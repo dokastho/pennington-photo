@@ -51,6 +51,7 @@ class Galleries extends React.Component {
               <h3>
                 Explore below
               </h3>
+              <br />
             </div>
             <div className='galleries-tray'>
               {
