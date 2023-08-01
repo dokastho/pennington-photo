@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react'
 
-class Gallery extends React.Component {
+class Thumbnail extends React.Component {
 
   constructor(props) {
     super(props);
@@ -19,26 +19,30 @@ class Gallery extends React.Component {
 
   render() {
     const {
-      name
+      name,
+      galleryId
     } = this.props;
     return (
-      <div className='gallery-card'>
-        <div className='gallery-card-contents'>
-          {name}
+      <a href={`/gallery/${galleryId}/`}>
+        <div className='gallery-card' >
+          <div className='gallery-card-contents' >
+            {name}
+          </div>
         </div>
-      </div>
+      </a>
     );
   }
 }
 
-Gallery.propTypes = {
+Thumbnail.propTypes = {
   // prop types go here
   // s: PropTypes.string.isRequired,
 };
 
-Gallery.defaultProps = {
+Thumbnail.defaultProps = {
   // default prop values go here if not required
   name: PropTypes.string.isRequired,
+  galleryId: PropTypes.number.isRequired,
 };
 
-export default Gallery
+export default Thumbnail

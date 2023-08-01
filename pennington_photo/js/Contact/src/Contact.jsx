@@ -13,9 +13,9 @@ class Contact extends React.Component {
         <NavBar />
         <div className='site-contents'>
           <div className='dialogue'>
-            <h2>
+            <h1>
               Contact Me
-            </h2>
+            </h1>
           </div>
         </div>
       </>

@@ -13,9 +13,9 @@ class Sizing extends React.Component {
         <NavBar />
         <div className='site-contents'>
           <div className='dialogue'>
-            <h2>
+            <h1>
               Sizing Guide
-            </h2>
+            </h1>
           </div>
         </div>
       </>

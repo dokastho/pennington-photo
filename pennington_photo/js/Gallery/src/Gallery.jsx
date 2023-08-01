@@ -1,29 +1,39 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import NavBar from './NavBar';
-import Thumbnail from './Thumbnail';
 import Loading from './Loading';
+import Photo from './Photo';
 
-class Galleries extends React.Component {
+class Gallery extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      galleryId: 0,
       loaded: false,
-      galleries: [],
+      photos: [],
+      name: "",
+      description: "",
+      created: 0,
     };
   }
 
   componentDidMount() {
+    const galleryId = document.getElementById("galleryId").content;
     // fetch all gallery metadata
-    fetch("/api/v1/galleries/", { credentials: 'same-origin' })
+    fetch(`/api/v1/gallery/${galleryId}/`, { credentials: 'same-origin' })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
         return response.json();
       })
       .then((data) => {
         this.setState({
-          galleries: data,
-          loaded: true
+          photos: data.photos,
+          name: data.name,
+          description: data.description,
+          created: data.created,
+          loaded: true,
+          galleryId: galleryId,
         });
       })
       .catch((error) => console.log(error));
@@ -32,7 +42,10 @@ class Galleries extends React.Component {
   render() {
     const {
       loaded,
-      galleries
+      photos,
+      name,
+      description,
+      created,
     } = this.state
     return (
       <>
@@ -48,17 +61,26 @@ class Galleries extends React.Component {
           <div className='site-contents'>
             <div className='dialogue'>
               <h1>
-                Photo Galleries
+                {name}
               </h1>
+              <h3 className='fancy'>
+                {
+                  description.length === 0 ? <br /> : (
+                    <em>
+                      "{description}"
+                    </em>
+                  )
+                }
+              </h3>
               <h3>
-                Explore below
+                {created}
               </h3>
               <br />
             </div>
-            <div className='galleries-tray'>
+            <div className='photos-tray'>
               {
-                galleries.map((gallery) => {
-                  return (<Thumbnail name={gallery.name} galleryId={gallery.galleryId} />)
+                photos.map((photo) => {
+                  return (<Photo uuid={photo.uuid} />)
                 })
               }
             </div>
@@ -69,4 +91,4 @@ class Galleries extends React.Component {
   }
 }
 
-export default Galleries
+export default Gallery

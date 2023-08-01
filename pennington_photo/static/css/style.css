@@ -7,6 +7,10 @@ body {
     padding: 0px;
 }
 
+h3.fancy {
+    color: gray;
+}
+
 a {
     text-decoration: none;
     font-weight: normal;
@@ -164,4 +168,31 @@ a {
 .gallery-card-contents {
     padding: 2rem;
     text-align: center;
+    color: black;
+}
+
+.photos-tray {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 2rem;
+}
+
+.photo-slot {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    aspect-ratio: 3/ 2;
+    object-fit: cover;
+    grid-column: span 3;
+    grid-row: span 2;
+    transition: all 0.2s ease-in-out;
+}
+
+.photo-slot:hover {
+    transform: translateY(-0.5rem);
+    transition: all 0.2s ease-in-out;
+}
+
+.photo {
+    object-fit: cover;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
 }
