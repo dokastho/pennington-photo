@@ -25,7 +25,6 @@ class NavBar extends React.Component {
             })
           }
         </div>
-        {/* <div className='navbar-gradient' /> */}
       </>
     );
   }

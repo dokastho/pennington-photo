@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react'
+import Photo from './Photo';
 
 class Thumbnail extends React.Component {
 
@@ -20,13 +21,17 @@ class Thumbnail extends React.Component {
   render() {
     const {
       name,
-      galleryId
+      galleryId,
+      imgSrc
     } = this.props;
     return (
       <a href={`/gallery/${galleryId}/`}>
         <div className='gallery-card' >
           <div className='gallery-card-contents' >
+            <Photo uuid={imgSrc} imgClass={'thumbnail'} />
+            <h3>
             {name}
+            </h3>
           </div>
         </div>
       </a>
@@ -43,6 +48,7 @@ Thumbnail.defaultProps = {
   // default prop values go here if not required
   name: PropTypes.string.isRequired,
   galleryId: PropTypes.number.isRequired,
+  imgSrc: PropTypes.string.isRequired,
 };
 
 export default Thumbnail
