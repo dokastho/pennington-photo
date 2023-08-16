@@ -7,6 +7,10 @@ body {
     padding: 0px;
 }
 
+#body {
+    overflow: auto;
+}
+
 h3.fancy {
     color: gray;
 }

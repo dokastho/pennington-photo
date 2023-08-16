@@ -21,9 +21,11 @@ class ClickablePhoto extends React.Component {
     if (event.target.id != uuid) {
       document.removeEventListener("mousedown", this.handleClickOutside);
       this.setState({ blownUp: false });
-
+      
+      // remove topical styles
       document.getElementById('site-contents').style.marginLeft = 'auto';
       document.getElementById('site-contents').style.marginRight = 'auto';
+      document.getElementById('body').style.overflow = 'auto';
     }
   }
 
@@ -34,8 +36,11 @@ class ClickablePhoto extends React.Component {
     }
     this.setState({ blownUp: true });
     document.addEventListener("mousedown", this.handleClickOutside);
+
+    // apply topical styles
     document.getElementById('site-contents').style.marginLeft = '0px';
     document.getElementById('site-contents').style.marginRight = '0px';
+    document.getElementById('body').style.overflow = 'hidden';
   }
 
   setLoaded() {
