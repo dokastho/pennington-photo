@@ -9,7 +9,6 @@ class ClickablePhoto extends React.Component {
     this.state = {
       loaded: false,
       blownUp: false,
-      screenYWhenClicked: 0
     };
     this.setLoaded = this.setLoaded.bind(this);
     this.clickToBlowUp = this.clickToBlowUp.bind(this);
@@ -19,16 +18,9 @@ class ClickablePhoto extends React.Component {
 
   handleClickOutside(event) {
     const { uuid } = this.props;
-    const { screenYWhenClicked } = this.state;
     if (event.target.id != uuid) {
       document.removeEventListener("mousedown", this.handleClickOutside);
-      window.scrollTo(0, screenYWhenClicked)
       this.setState({ blownUp: false });
-      
-      // remove topical styles
-      document.getElementById('site-contents').style.marginLeft = 'auto';
-      document.getElementById('site-contents').style.marginRight = 'auto';
-      document.getElementById('body').style.overflow = 'auto';
     }
   }
 
@@ -37,13 +29,8 @@ class ClickablePhoto extends React.Component {
     if (blownUp) {
       return;
     }
-    this.setState({ blownUp: true, screenYWhenClicked: window.scrollY });
+    this.setState({ blownUp: true });
     document.addEventListener("mousedown", this.handleClickOutside);
-
-    // apply topical styles
-    document.getElementById('site-contents').style.marginLeft = '0px';
-    document.getElementById('site-contents').style.marginRight = '0px';
-    document.getElementById('body').style.overflow = 'hidden';
   }
 
   setLoaded() {
@@ -60,22 +47,36 @@ class ClickablePhoto extends React.Component {
       imgClass
     } = this.props;
     return (
-      <div className={blownUp ? 'blown-up-container' : imgClass}>
+      <>
+        <div className={imgClass}>
+          {
+            loaded ? (
+              null
+            ) : (
+              <Loading />
+            )
+          }
+          <img
+            src={`/static/img/${uuid}`}
+            id={uuid}
+            className={`clickable photo ${loaded ? 'loaded' : 'loading-invis'}`}
+            onLoad={() => { this.setLoaded() }}
+            onClick={() => { this.clickToBlowUp() }}
+          />
+        </div>
         {
-          loaded ? (
-            null
-          ) : (
-            <Loading />
-          )
+          blownUp ? (
+            <div className='blown-up-container'>
+              <img
+                src={`/static/img/${uuid}`}
+                id={uuid}
+                className={`blown-up photo ${loaded ? 'loaded' : 'loading-invis'}`}
+                onLoad={() => { this.setLoaded() }}
+              />
+            </div>
+          ) : null
         }
-        <img
-          src={`/static/img/${uuid}`}
-          id={uuid}
-          className={`${loaded ? 'loaded' : 'loading-invis'} ${blownUp ? 'blown-up' : 'clickable photo'}`}
-          onLoad={() => { this.setLoaded() }}
-          onClick={() => { this.clickToBlowUp() }}
-        />
-      </div>
+      </>
     );
   }
 }

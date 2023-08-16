@@ -208,9 +208,9 @@ a {
 
 .blown-up {
     position: relative;
-    top: 6vw;
     max-width: 80vw;
     max-height: 80vh;
+    top: 10vw;
 }
 
 .blown-up-container {
@@ -219,7 +219,7 @@ a {
     height: 100vh;
     top: 0px;
     left: 0px;
-    background-color: black;
+    background-color:rgba(0, 0, 0, 0.5);
     text-align: center;
     overflow:hidden;
 }
