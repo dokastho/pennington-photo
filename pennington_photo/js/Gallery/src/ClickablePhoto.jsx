@@ -44,7 +44,8 @@ class ClickablePhoto extends React.Component {
     } = this.state;
     const {
       uuid,
-      imgClass
+      imgClass,
+      description
     } = this.props;
     return (
       <>
@@ -73,6 +74,9 @@ class ClickablePhoto extends React.Component {
                 className={`blown-up photo ${loaded ? 'loaded' : 'loading-invis'}`}
                 onLoad={() => { this.setLoaded() }}
               />
+              {
+                description === "" ? null : (<h3 className='fancy'>"{description}"</h3>)
+              }
             </div>
           ) : null
         }
@@ -82,13 +86,15 @@ class ClickablePhoto extends React.Component {
 }
 
 ClickablePhoto.defaultProps = {
-  imgClass: 'photo-slot'
+  imgClass: 'photo-slot',
+  description: '',
 }
 
 ClickablePhoto.propTypes = {
   // prop types go here
   uuid: PropTypes.string.isRequired,
-  imgClass: PropTypes.string
+  imgClass: PropTypes.string,
+  description: PropTypes.string,
 };
 
 export default ClickablePhoto

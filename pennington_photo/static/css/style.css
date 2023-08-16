@@ -210,9 +210,10 @@ a {
     position: relative;
     overflow: visible;
     object-position: top;
-    max-width: 60%;
-    max-height: 60vh;
-    top: 7rem;
+    max-width: fit-content;
+    max-height: fit-content;
+    scale: 80%;
+    /* top: 7rem; */
 }
 
 .blown-up-container {

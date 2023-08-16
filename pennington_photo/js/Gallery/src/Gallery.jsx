@@ -80,7 +80,7 @@ class Gallery extends React.Component {
             <div className='photos-tray'>
               {
                 photos.map((photo) => {
-                  return (<ClickablePhoto uuid={photo.uuid} />)
+                  return (<ClickablePhoto uuid={photo.uuid} description={photo.description} />)
                 })
               }
             </div>
