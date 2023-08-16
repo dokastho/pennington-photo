@@ -8,7 +8,8 @@ class ClickablePhoto extends React.Component {
     super(props);
     this.state = {
       loaded: false,
-      blownUp: false
+      blownUp: false,
+      screenYWhenClicked: 0
     };
     this.setLoaded = this.setLoaded.bind(this);
     this.clickToBlowUp = this.clickToBlowUp.bind(this);
@@ -18,8 +19,10 @@ class ClickablePhoto extends React.Component {
 
   handleClickOutside(event) {
     const { uuid } = this.props;
+    const { screenYWhenClicked } = this.state;
     if (event.target.id != uuid) {
       document.removeEventListener("mousedown", this.handleClickOutside);
+      window.scrollTo(0, screenYWhenClicked)
       this.setState({ blownUp: false });
       
       // remove topical styles
@@ -34,7 +37,7 @@ class ClickablePhoto extends React.Component {
     if (blownUp) {
       return;
     }
-    this.setState({ blownUp: true });
+    this.setState({ blownUp: true, screenYWhenClicked: window.scrollY });
     document.addEventListener("mousedown", this.handleClickOutside);
 
     // apply topical styles
