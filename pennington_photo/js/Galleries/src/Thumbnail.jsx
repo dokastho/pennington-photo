@@ -25,16 +25,14 @@ class Thumbnail extends React.Component {
       imgSrc
     } = this.props;
     return (
-      <a href={`/gallery/${galleryId}/`}>
-        <div className='gallery-card' >
-          <div className='gallery-card-contents' >
-            <Photo uuid={imgSrc} imgClass={'thumbnail'} />
-            <h3>
+      <div className='thumbnail'>
+        <a href={`/gallery/${galleryId}/`}>
+          <Photo uuid={imgSrc} imgClass='thumbnail-photo' />
+          <h3>
             {name}
-            </h3>
-          </div>
-        </div>
-      </a>
+          </h3>
+        </a>
+      </div>
     );
   }
 }

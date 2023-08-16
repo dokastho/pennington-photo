@@ -1,6 +1,6 @@
 import React from 'react'
 
-const imgName = 'IMG_2019.jpg';
+const imgName = 'IMG_3942.jpg';
 
 class SplashPage extends React.Component {
 

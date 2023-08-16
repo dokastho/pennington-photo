@@ -14,6 +14,7 @@ h3.fancy {
 a {
     text-decoration: none;
     font-weight: normal;
+    color: black;
 }
 
 /* custom classes */
@@ -27,6 +28,7 @@ a {
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
     overflow: hidden;
+    height: -webkit-fill-available;
 }
 
 .loading-invis {
@@ -42,6 +44,7 @@ a {
     height: 100vh;
     width: 100%;
     object-fit: cover;
+    object-position: top;
 }
 
 .info-page {
@@ -103,11 +106,11 @@ a {
 
 .navbar-gradient {
     position: fixed;
-    background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(0, 0, 0, 0));
     z-index: 100;
-    height: 2vw;
     top: 5vw;
+    height: 2vw;
     width: 100%;
+    background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(0, 0, 0, 0));
 }
 
 .navbar-item {
@@ -147,31 +150,26 @@ a {
 
 .galleries-tray {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     grid-gap: 2rem;
 }
 
-.gallery-card {
-    border: 2px solid gray;
-    border-radius: 2rem;
+.thumbnail {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    aspect-ratio: 1/ 1;
+    aspect-ratio: 3/ 2;
     object-fit: cover;
-    grid-column: span 1;
-    grid-row: span 1;
+    grid-column: span 3;
+    grid-row: span 2;
     transition: all 0.2s ease-in-out;
+    text-align: center;
+    color: black;
+    max-height: 2fr;
 }
 
-.gallery-card:hover {
+.thumbnail:hover {
     cursor: pointer;
     transform: translateY(-0.5rem);
     transition: all 0.2s ease-in-out;
-}
-
-.gallery-card-contents {
-    padding: 2rem;
-    text-align: center;
-    color: black;
 }
 
 .photos-tray {
@@ -188,11 +186,6 @@ a {
     grid-row: span 2;
     transition: all 0.2s ease-in-out;
 }
-
-.thumbnail {
-    
-}
-
 
 .photo-slot:hover {
     transform: translateY(-0.5rem);
