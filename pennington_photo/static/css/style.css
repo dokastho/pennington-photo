@@ -208,8 +208,10 @@ a {
 
 .blown-up {
     position: relative;
-    max-width: 80%;
-    max-height: 80vh;
+    overflow: visible;
+    object-position: top;
+    max-width: 60%;
+    max-height: 60vh;
     top: 7rem;
 }
 
@@ -221,5 +223,4 @@ a {
     left: 0px;
     background-color:rgba(0, 0, 0, 0.7);
     text-align: center;
-    overflow:hidden;
 }
