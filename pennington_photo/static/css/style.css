@@ -135,7 +135,7 @@ a {
     max-width: 8rem;
 }
 
-.site-contents {
+#site-contents {
     position: relative;
     top: 5vw;
     padding: 4rem;
@@ -196,4 +196,26 @@ a {
     object-fit: cover;
     width: -webkit-fill-available;
     height: -webkit-fill-available;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.blown-up {
+    position: relative;
+    top: 10vh;
+    max-width: 80vw;
+    max-height: 80vh;
+}
+
+.blown-up-container {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0px;
+    left: 0px;
+    background-color: black;
+    text-align: center;
+    overflow:hidden;
 }

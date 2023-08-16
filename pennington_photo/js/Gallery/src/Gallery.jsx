@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NavBar from './NavBar';
 import Loading from './Loading';
-import Photo from './Photo';
+import ClickablePhoto from './ClickablePhoto';
 
 class Gallery extends React.Component {
 
@@ -58,7 +58,7 @@ class Gallery extends React.Component {
         }
         <div className={loaded ? 'loaded' : 'loading'}>
           <NavBar />
-          <div className='site-contents'>
+          <div className='site-contents' id='site-contents'>
             <div className='dialogue'>
               <h1>
                 {name}
@@ -80,7 +80,7 @@ class Gallery extends React.Component {
             <div className='photos-tray'>
               {
                 photos.map((photo) => {
-                  return (<Photo uuid={photo.uuid} />)
+                  return (<ClickablePhoto uuid={photo.uuid} />)
                 })
               }
             </div>
