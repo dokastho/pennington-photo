@@ -11,7 +11,7 @@ class Contact extends React.Component {
     return (
       <>
         <NavBar />
-        <div className='site-contents' id='site-contents'>
+        <div className='site-contents'>
           <div className='dialogue'>
             <h1>
               Contact Me

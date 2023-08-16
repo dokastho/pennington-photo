@@ -58,7 +58,7 @@ class Gallery extends React.Component {
         }
         <div className={loaded ? 'loaded' : 'loading'}>
           <NavBar />
-          <div className='site-contents' id='site-contents'>
+          <div className='site-contents'>
             <div className='dialogue'>
               <h1>
                 {name}
