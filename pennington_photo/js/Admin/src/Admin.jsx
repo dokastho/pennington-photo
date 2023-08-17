@@ -42,7 +42,7 @@ class Admin extends React.Component {
   }
 
   showContent(displayedContent) {
-    this.setState({ displayedContent });
+    this.setState({ displayedContent, editingGalleryIdx: NOT_EDITING });
   }
 
   doEditGallery(editingGalleryIdx) {
