@@ -206,14 +206,8 @@ a {
     cursor: pointer;
 }
 
-.blown-up {
-    position: relative;
-    overflow: visible;
-    object-position: top;
-    max-width: fit-content;
-    max-height: fit-content;
-    scale: 80%;
-    /* top: 7rem; */
+.blown-up-image {
+    scale: 70%;
 }
 
 .blown-up-container {
@@ -223,5 +217,12 @@ a {
     top: 0px;
     left: 0px;
     background-color:rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+}
+
+.blown-up-content {
     text-align: center;
+    vertical-align: top;
+    display: inline-block;
 }

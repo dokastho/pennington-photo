@@ -68,15 +68,18 @@ class ClickablePhoto extends React.Component {
         {
           blownUp ? (
             <div className='blown-up-container'>
-              <img
-                src={`/static/img/${uuid}`}
-                id={uuid}
-                className={`blown-up photo ${loaded ? 'loaded' : 'loading-invis'}`}
-                onLoad={() => { this.setLoaded() }}
-              />
-              {
-                description === "" ? null : (<h3 className='fancy'>"{description}"</h3>)
-              }
+              <div className='blown-up-content'>
+
+                <img
+                  src={`/static/img/${uuid}`}
+                  id={uuid}
+                  className={`blown-up-image photo ${loaded ? 'loaded' : 'loading-invis'}`}
+                  onLoad={() => { this.setLoaded() }}
+                />
+                {
+                  description === "" ? null : (<span className='fancy'>"{description}"</span>)
+                }
+              </div>
             </div>
           ) : null
         }
