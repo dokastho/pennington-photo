@@ -6,16 +6,6 @@ class Thumbnail extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      // state attributes go here
-      // a: props.a
-    };
-  }
-
-  componentDidMount() {
-    const { } = this.props;
-
-    this.setState({});
   }
 
   render() {
@@ -38,11 +28,6 @@ class Thumbnail extends React.Component {
 }
 
 Thumbnail.propTypes = {
-  // prop types go here
-  // s: PropTypes.string.isRequired,
-};
-
-Thumbnail.defaultProps = {
   // default prop values go here if not required
   name: PropTypes.string.isRequired,
   galleryId: PropTypes.number.isRequired,

@@ -3,6 +3,7 @@ import SideBar from './Sidebar';
 import EditGallery from './EditGallery';
 import EditGalleries from './EditGalleries';
 import UserList from './UserList';
+import Loading from './Loading';
 
 const NOT_EDITING = -1;
 
@@ -30,6 +31,7 @@ class Admin extends React.Component {
         return response.json();
       })
       .then((data) => {
+        console.log(data)
         this.setState({
           galleries: data.galleries,
           users: data.users,

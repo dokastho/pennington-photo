@@ -26,10 +26,16 @@ def get_admin():
             pass
         else:
             gallery["thumbnail"] = img["uuid"]
+            pass
+        cur = connection.execute(
+            "SELECT * FROM pictures WHERE galleryId = ?",
+            (gallery["galleryId"],)
+        )
+        gallery["photos"] = cur.fetchall()
         pass
     
     cur = connection.execute(
-        "SELECT * FROM users",
+        "SELECT username FROM users",
         ()
     )
     

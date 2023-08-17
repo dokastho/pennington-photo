@@ -19,7 +19,7 @@ class SideBar extends React.Component {
           {
             items.map((item) => {
               return (
-                <div className='sidebar-item' onClick={() => { setContentFocus(item.toLowerCase()) }} >
+                <div className='sidebar-item' key={item} onClick={() => { setContentFocus(item.toLowerCase()) }} >
                   {item}
                 </div>
               )
@@ -36,3 +36,6 @@ SideBar.propTypes = {
 }
 
 export default SideBar;
+
+// notes
+// needs css

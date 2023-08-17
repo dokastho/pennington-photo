@@ -131,6 +131,18 @@ a {
     cursor: pointer;
 }
 
+.sidebar {
+
+}
+
+.sidebar-item {
+    
+}
+
+.sidebar-item:hover {
+    cursor: pointer;
+}
+
 .loading-page {
     text-align: center;
     margin-top: 20%;

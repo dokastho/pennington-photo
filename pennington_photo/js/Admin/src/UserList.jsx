@@ -5,23 +5,39 @@ class UserList extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      users: []
+    };
   }
 
   componentDidMount() {
-    const { } = this.props;
+    const {
+      users
+    } = this.props;
 
-    this.setState({});
+    this.setState({ users });
   }
 
   render() {
-    const { } = this.state;
+    const {
+      users
+    } = this.state;
     return (
-      <></>
+      <>
+        {
+          users.map((user) => {
+            return (<p>{user.username}</p>);
+          })
+        }
+      </>
     );
   }
 }
 
-UserList.propTypes = {};
+UserList.propTypes = {
+  users: PropTypes.instanceOf(Array).isRequired,
+};
 
 export default UserList
+
+// todo: add user delete with confirmatory buttons and user create
