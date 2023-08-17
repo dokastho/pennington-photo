@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Penning Photographics</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+  </head>
+  <body id="body">
+    <div id="reactEntry" class="site">
+      <div class="admin-welcome">
+        <h1>Pennington Photographics Administrator Tools</h1>
+        <h3 class="fancy">Welcome {{ logname }}.</h3>
+        <p>Not {{ logname }}? <a href="/accounts/logout/">logout</a></p>
+      </div>
+      <!-- Load JavaScript -->
+      <script type="text/javascript" src="{{ url_for('static', filename = 'js/about.bundle.js') }}"></script>
+    </div>
+  </body>
+</html>
