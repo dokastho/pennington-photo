@@ -25,6 +25,12 @@ class SideBar extends React.Component {
               )
             })
           }
+          <br />
+          <a href='/new/'>
+            <div className='new-button'>
+              Create a new gallery
+            </div>
+          </a>
         </div>
       </>
     );

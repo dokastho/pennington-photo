@@ -106,7 +106,7 @@ class Admin extends React.Component {
         }
         <div className={loaded ? 'loaded' : 'loading'}>
           <SideBar setContentFocus={this.showContent} />
-          <a href='/gallery/new/'>
+          <a href='/new/'>
             <div className='new-button'>
               Create a new gallery
             </div>

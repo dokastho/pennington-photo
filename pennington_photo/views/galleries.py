@@ -10,6 +10,13 @@ def show_galleries():
     return flask.render_template("galleries.html")
 
 
+@pennington_photo.app.route("/new/")
+def show_new():
+    """Render new gallery page."""
+
+    return flask.render_template("new.html")
+
+
 @pennington_photo.app.route("/gallery/<galleryId>/")
 def show_gallery(galleryId):
     """Render one gallery."""
