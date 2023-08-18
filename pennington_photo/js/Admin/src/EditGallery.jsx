@@ -2,15 +2,24 @@ import PropTypes from 'prop-types';
 import React from 'react'
 import EditablePhoto from './EditablePhoto';
 
+const SAVED = "saved.";
+const SAVING = "saving...";
+const UNSAVED = "unsaved changes.";
+
 class EditGallery extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      description: "",
-      name: "",
-      photos: [],
+      content: {
+        description: "",
+        name: "",
+        photos: [],
+      },
+      saveState: SAVED,
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.doSave = this.doSave.bind(this);
   }
 
   componentDidMount() {
@@ -19,33 +28,74 @@ class EditGallery extends React.Component {
     } = this.props;
 
     this.setState({
-      description: content.description,
-      name: content.name,
-      photos: content.photos,
+      content
     });
+  }
+
+  doSave() {
+    const {
+      galleryId
+    } = this.props;
+    const {
+      content
+    } = this.state;
+    const {
+      name,
+      description
+    } = content;
+    fetch(`/api/v1/save/gallery/${galleryId}/`,
+      {
+        credentials: 'same-origin',
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, description }),
+      })
+      .then((response) => {
+        if (!response.ok) throw Error(response.statusText);
+        this.setState({ saveState: SAVED });
+        return response.json();
+      })
+      .catch((error) => console.log(error));
+  }
+
+  handleChange(key, value) {
+    const {
+      content
+    } = this.state;
+    content[key] = value;
+    this.setState({ content, saveState: UNSAVED });
+    setTimeout(() => {
+      const { saveState } = this.state;
+      if (saveState !== UNSAVED) {
+        return;
+      }
+      this.setState({ saveState: SAVING });
+      this.doSave();
+    }, 1000);
   }
 
   render() {
     const {
+      content,
+      saveState
+    } = this.state;
+
+    const {
       description,
       name,
       photos,
-    } = this.state;
+    } = content;
+
     return (
       <>
         <div className='dialogue'>
-          <h1>
-            {name}
-          </h1>
-          <h3 className='fancy'>
-            {
-              description.length === 0 ? <br /> : (
-                <em>
-                  "{description}"
-                </em>
-              )
-            }
-          </h3>
+          <label>Name:</label>
+          <input className='h1' type='text' value={name} onChange={(e) => { this.handleChange("name", e.target.value) }} />
+          <label>Description:</label>
+          <input className='h3 em fancy' type='text' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} />
           <br />
         </div>
         <div className='photos-tray'>
@@ -55,9 +105,8 @@ class EditGallery extends React.Component {
             })
           }
         </div>
-        <form>
-          <button type='submit'>save</button>
-        </form>
+        <button type='submit' onClick={() => { this.doSave() }}>save</button>
+        <label>{saveState}</label>
       </>
     );
   }
@@ -65,6 +114,7 @@ class EditGallery extends React.Component {
 
 EditGallery.propTypes = {
   content: PropTypes.instanceOf(Object).isRequired,
+  galleryId: PropTypes.number.isRequired,
 };
 
 export default EditGallery

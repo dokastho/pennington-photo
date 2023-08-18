@@ -62,7 +62,7 @@ class Admin extends React.Component {
 
     var content;
     if (isEditing) {
-      content = <EditGallery content={galleries[editingGalleryIdx]} />;
+      content = <EditGallery content={galleries[editingGalleryIdx]} galleryId={galleries[editingGalleryIdx].galleryId} />;
     }
     else if (displayedContent === "galleries") {
       content = <EditGalleries galleries={galleries} doEditGallery={this.doEditGallery} />;
