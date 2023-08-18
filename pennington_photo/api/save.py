@@ -1,4 +1,4 @@
-"""Handle edits & new gallery requests."""
+"""Handle edits for gallery requests."""
 
 import pennington_photo
 import flask

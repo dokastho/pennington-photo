@@ -20,6 +20,15 @@ h3.alt {
     
 }
 
+button.confirmatory {
+
+}
+
+button.clicked {
+    background-color: darkred;
+    color: white;
+}
+
 h5 {
     font-size: small;
 }

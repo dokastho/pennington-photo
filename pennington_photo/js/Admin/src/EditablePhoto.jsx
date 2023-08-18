@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react'
 import Loading from './Loading';
+import ConfirmatoryButton from './Buttons';
 
 const SAVED = "saved.";
 const SAVING = "saving...";
@@ -25,11 +26,21 @@ class EditablePhoto extends React.Component {
     this.clickToBlowUp = this.clickToBlowUp.bind(this);
     this.wrapperRef = React.createRef();
     this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.deletePhotoWrapper = this.deletePhotoWrapper.bind(this);
 
     this.handleChange = this.handleChange.bind(this);
     this.doSave = this.doSave.bind(this);
 
     this.timeout = null;
+  }
+
+  deletePhotoWrapper() {
+    const {
+      deletePhoto,
+      pictureId,
+    } = this.props;
+    this.setState({ blownUp: false });
+    deletePhoto({pictureId});
   }
 
   componentDidMount() {
@@ -168,6 +179,8 @@ class EditablePhoto extends React.Component {
                   <br />
                   <button id={uuid} type='submit' onClick={() => { this.doSave() }}>save</button>
                   <label id={uuid} className='fancy'>{saveState}</label>
+                  <br />
+                  <ConfirmatoryButton id={uuid} text={"Delete"} callback={this.deletePhotoWrapper} />
                 </div>
               </div>
             </div>
@@ -183,19 +196,15 @@ EditablePhoto.defaultProps = {
 }
 
 EditablePhoto.propTypes = {
-  // prop types go here
   uuid: PropTypes.string.isRequired,
   pictureId: PropTypes.number.isRequired,
   imgClass: PropTypes.string,
   content: PropTypes.instanceOf(Object).isRequired,
+  // deletePhoto
 };
 
 export default EditablePhoto
 
 // notes
-// when clicked display photo in place of gallery
 // requires 
   // delete confirmatory button
-  // back to gallery button
-  // save every 1s like gallery
-  // include save now button

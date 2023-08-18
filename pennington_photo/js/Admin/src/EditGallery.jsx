@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react'
 import EditablePhoto from './EditablePhoto';
+import ConfirmatoryButton from './Buttons';
 
 const SAVED = "saved.";
 const SAVING = "saving...";
@@ -19,6 +20,7 @@ class EditGallery extends React.Component {
       },
       saveState: SAVED,
     };
+    this.deletePhoto = this.deletePhoto.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.doSave = this.doSave.bind(this);
 
@@ -82,7 +84,33 @@ class EditGallery extends React.Component {
     }, 1000);
   }
 
+  deletePhoto(args) {
+    const { pictureId } = args;
+    fetch(`/api/v1/delete/photo/${pictureId}/`,
+      {
+        credentials: 'same-origin',
+        method: 'POST',
+      })
+      .then((response) => {
+        if (!response.ok) throw Error(response.statusText);
+        this.setState((prevState) => ({
+          content: {
+            dateTaken: prevState.content.dateTaken,
+            description: prevState.content.description,
+            name: prevState.content.name,
+            photos: prevState.content.photos.filter((photo) => photo.pictureId !== pictureId)
+          }
+        }));
+        return response.json();
+      })
+      .catch((error) => console.log(error));
+  }
+
   render() {
+    const {
+      galleryId,
+      deleteGallery,
+    } = this.props;
     const {
       content,
       saveState
@@ -109,13 +137,15 @@ class EditGallery extends React.Component {
         <div className='photos-tray'>
           {
             photos.map((photo) => {
-              const {name, description, stars} = photo;
-              return (<EditablePhoto uuid={photo.uuid} content={{name, description, stars}} pictureId={photo.pictureId} />)
+              const { name, description, stars } = photo;
+              return (<EditablePhoto uuid={photo.uuid} content={{ name, description, stars }} pictureId={photo.pictureId} deletePhoto={this.deletePhoto} />)
             })
           }
         </div>
         <button type='submit' onClick={() => { this.doSave() }}>save</button>
         <label>{saveState}</label>
+        <br />
+        <ConfirmatoryButton text={"Delete"} callback={deleteGallery} args={{ galleryId }} />
       </>
     );
   }
@@ -124,6 +154,7 @@ class EditGallery extends React.Component {
 EditGallery.propTypes = {
   content: PropTypes.instanceOf(Object).isRequired,
   galleryId: PropTypes.number.isRequired,
+  // deleteGallery
 };
 
 export default EditGallery

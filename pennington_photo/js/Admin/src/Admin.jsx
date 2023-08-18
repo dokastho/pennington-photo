@@ -21,6 +21,7 @@ class Admin extends React.Component {
     };
     this.showContent = this.showContent.bind(this);
     this.doEditGallery = this.doEditGallery.bind(this);
+    this.deleteGallery = this.deleteGallery.bind(this);
   }
 
   componentDidMount() {
@@ -49,6 +50,24 @@ class Admin extends React.Component {
     this.setState({ editingGalleryIdx });
   }
 
+  deleteGallery(args) {
+    const { galleryId } = args;
+    fetch(`/api/v1/delete/gallery/${galleryId}/`,
+      {
+        credentials: 'same-origin',
+        method: 'POST',
+      })
+      .then((response) => {
+        if (!response.ok) throw Error(response.statusText);
+        this.setState((prevState) => ({
+          galleries: prevState.galleries.filter((gallery) => gallery.galleryId !== galleryId),
+          editingGalleryIdx: NOT_EDITING,
+        }));
+        return response.json();
+      })
+      .catch((error) => console.log(error));
+  }
+
   render() {
     const {
       loaded,
@@ -62,7 +81,7 @@ class Admin extends React.Component {
 
     var content;
     if (isEditing) {
-      content = <EditGallery content={galleries[editingGalleryIdx]} galleryId={galleries[editingGalleryIdx].galleryId} />;
+      content = <EditGallery content={galleries[editingGalleryIdx]} galleryId={galleries[editingGalleryIdx].galleryId} deleteGallery={this.deleteGallery} />;
     }
     else if (displayedContent === "galleries") {
       content = <EditGalleries galleries={galleries} doEditGallery={this.doEditGallery} />;
