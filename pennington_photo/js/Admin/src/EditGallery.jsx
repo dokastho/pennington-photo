@@ -15,11 +15,14 @@ class EditGallery extends React.Component {
         description: "",
         name: "",
         photos: [],
+        dateTaken: null,
       },
       saveState: SAVED,
     };
     this.handleChange = this.handleChange.bind(this);
     this.doSave = this.doSave.bind(this);
+
+    this.timeout = null;
   }
 
   componentDidMount() {
@@ -41,7 +44,8 @@ class EditGallery extends React.Component {
     } = this.state;
     const {
       name,
-      description
+      description,
+      dateTaken
     } = content;
     fetch(`/api/v1/save/gallery/${galleryId}/`,
       {
@@ -51,7 +55,7 @@ class EditGallery extends React.Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, description }),
+        body: JSON.stringify({ name, description, dateTaken }),
       })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
@@ -67,11 +71,12 @@ class EditGallery extends React.Component {
     } = this.state;
     content[key] = value;
     this.setState({ content, saveState: UNSAVED });
-    setTimeout(() => {
-      const { saveState } = this.state;
-      if (saveState !== UNSAVED) {
-        return;
-      }
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+      this.timeout = null;
+    }
+    this.timeout = setTimeout(() => {
+      this.timeout = null;
       this.setState({ saveState: SAVING });
       this.doSave();
     }, 1000);
@@ -86,6 +91,7 @@ class EditGallery extends React.Component {
     const {
       description,
       name,
+      dateTaken,
       photos,
     } = content;
 
@@ -96,6 +102,8 @@ class EditGallery extends React.Component {
           <input className='h1' type='text' value={name} onChange={(e) => { this.handleChange("name", e.target.value) }} />
           <label>Description:</label>
           <input className='h3 em fancy' type='text' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} />
+          <label>Date:</label>
+          <input className='h5' type='date' value={dateTaken} onChange={(e) => { this.handleChange("dateTaken", e.target.value) }} />
           <br />
         </div>
         <div className='photos-tray'>

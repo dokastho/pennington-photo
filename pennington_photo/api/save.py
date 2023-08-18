@@ -2,6 +2,7 @@
 
 import pennington_photo
 import flask
+import arrow
 from pennington_photo.common.model import get_db, check_session
 
 @pennington_photo.app.route("/api/v1/save/gallery/<gallery_id>/", methods=["POST"])
@@ -16,7 +17,7 @@ def save_gallery(gallery_id):
         flask.abort(400)
         pass
     
-    keys = ["name", "description"]
+    keys = ["name", "description", "dateTaken"]
     for key in keys:
         if key not in body:
             flask.abort(400)
@@ -25,15 +26,19 @@ def save_gallery(gallery_id):
     
     name = body["name"]
     description = body["description"]
+    date_taken = body["dateTaken"]
+    created = arrow.utcnow().format()
     
     connection = get_db()
     cur = connection.execute(
         "UPDATE galleries "
-        "SET name = ?, description = ? "
+        "SET name = ?, description = ?, dateTaken = ?, created = ? "
         "WHERE galleryId = ? AND owner = ?",
         (
             name,
             description,
+            date_taken,
+            created,
             gallery_id,
             logname,
         )

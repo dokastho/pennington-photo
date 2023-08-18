@@ -1,12 +1,12 @@
 INSERT INTO users (username, password)
 VALUES ("dokastho", "password");
 
-INSERT INTO galleries (owner, name, description)
-VALUES ("dokastho", "Friends", "");
+INSERT INTO galleries (owner, name, dateTaken)
+VALUES ("dokastho", "Friends", "2023-04-21");
 INSERT INTO galleries (owner, name, description)
 VALUES ("dokastho", "Cycling", "Sporty");
-INSERT INTO galleries (owner, name, description)
-VALUES ("dokastho", "Untitled", "");
+INSERT INTO galleries (owner, name)
+VALUES ("dokastho", "Untitled");
 
 INSERT INTO pictures (galleryId, owner, name, uuid, description, stars)
 VALUES (1, "dokastho", "Elizabeth", "IMG_3745.jpg", "", 0);

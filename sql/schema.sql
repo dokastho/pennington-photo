@@ -13,6 +13,7 @@ CREATE TABLE galleries(
   name VARCHAR(256) NOT NULL,
   description VARCHAR(256),
   created DATETIME DEFAULT CURRENT_TIMESTAMP,
+  dateTaken DATE,
   FOREIGN KEY(owner) REFERENCES users(username) ON DELETE CASCADE
 );
 

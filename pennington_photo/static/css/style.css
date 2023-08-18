@@ -15,6 +15,10 @@ h3.fancy {
     color: gray;
 }
 
+h5 {
+    font-size: small;
+}
+
 a {
     text-decoration: none;
     font-weight: normal;

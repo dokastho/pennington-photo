@@ -14,6 +14,7 @@ class Gallery extends React.Component {
       photos: [],
       name: "",
       description: "",
+      dateTaken: 0,
       created: 0,
     };
   }
@@ -31,6 +32,7 @@ class Gallery extends React.Component {
           photos: data.photos,
           name: data.name,
           description: data.description,
+          dateTaken: data.dateTaken,
           created: data.created,
           loaded: true,
           galleryId: galleryId,
@@ -45,6 +47,7 @@ class Gallery extends React.Component {
       photos,
       name,
       description,
+      dateTaken,
       created,
     } = this.state
     return (
@@ -73,8 +76,17 @@ class Gallery extends React.Component {
                 }
               </h3>
               <h3>
-                {created}
+                {
+                  dateTaken === 0 ? <br /> : (
+                    <>{ dateTaken }</>
+                  )
+                }
               </h3>
+              <h5>
+                <em>
+                  Updated {created}
+                </em>
+              </h5>
               <br />
             </div>
             <div className='photos-tray'>
