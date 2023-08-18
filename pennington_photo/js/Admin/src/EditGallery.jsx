@@ -110,6 +110,7 @@ class EditGallery extends React.Component {
     const {
       galleryId,
       deleteGallery,
+      deselectGallery,
     } = this.props;
     const {
       content,
@@ -126,12 +127,15 @@ class EditGallery extends React.Component {
     return (
       <>
         <div className='dialogue'>
+          <button onClick={() => { deselectGallery() }}>Return to Galleries</button>
           <label>Name:</label>
           <input className='h1' type='text' value={name} onChange={(e) => { this.handleChange("name", e.target.value) }} />
           <label>Description:</label>
           <input className='h3 em fancy' type='text' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} />
           <label>Date:</label>
           <input className='h5' type='date' value={dateTaken} onChange={(e) => { this.handleChange("dateTaken", e.target.value) }} />
+          <br />
+          <br />
           <br />
         </div>
         <div className='photos-tray'>
@@ -155,6 +159,7 @@ EditGallery.propTypes = {
   content: PropTypes.instanceOf(Object).isRequired,
   galleryId: PropTypes.number.isRequired,
   // deleteGallery
+  // deselectGallery
 };
 
 export default EditGallery
