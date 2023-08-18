@@ -15,6 +15,11 @@ h3.fancy {
     color: gray;
 }
 
+h3.alt {
+    color: white;
+    
+}
+
 h5 {
     font-size: small;
 }
@@ -240,5 +245,23 @@ a {
 .blown-up-content {
     text-align: center;
     vertical-align: top;
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+input.span {
+}
+
+input.fancy {
+
+}
+
+label.fancy {
+    color: white;
+}
+
+.edit-box {
+    text-align: left;
 }

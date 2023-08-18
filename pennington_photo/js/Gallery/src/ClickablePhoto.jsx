@@ -77,7 +77,7 @@ class ClickablePhoto extends React.Component {
                   onLoad={() => { this.setLoaded() }}
                 />
                 {
-                  description === "" ? null : (<span className='fancy'>"{description}"</span>)
+                  description === "" ? null : (<h3 className='alt'><em>{description}</em></h3>)
                 }
               </div>
             </div>

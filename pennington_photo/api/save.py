@@ -47,6 +47,43 @@ def save_gallery(gallery_id):
     return flask.Response(status=204)
 
 
-@pennington_photo.app.route("/api/v1/save/photo/<photo_id>/", methods=["POST"])
-def save_photo(gallery_id):
-    pass
+@pennington_photo.app.route("/api/v1/save/photo/<picture_id>/", methods=["POST"])
+def save_photo(picture_id):
+    logname = check_session()
+    if not logname:
+        flask.abort(403)
+        pass
+
+    body = flask.request.get_json()
+    if body is None:
+        flask.abort(400)
+        pass
+    
+    keys = ["name", "description", "stars"]
+    for key in keys:
+        if key not in body:
+            flask.abort(400)
+            pass
+        pass
+    
+    name = body["name"]
+    description = body["description"]
+    stars = body["stars"]
+    created = arrow.utcnow().format()
+    
+    connection = get_db()
+    cur = connection.execute(
+    "UPDATE pictures "
+        "SET name = ?, description = ?, stars = ?, created = ? "
+        "WHERE pictureId = ? AND owner = ?",
+        (
+            name,
+            description,
+            stars,
+            created,
+            picture_id,
+            logname,
+        )
+    )
+    cur.fetchone()
+    return flask.Response(status=204)

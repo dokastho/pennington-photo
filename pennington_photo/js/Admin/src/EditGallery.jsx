@@ -109,7 +109,8 @@ class EditGallery extends React.Component {
         <div className='photos-tray'>
           {
             photos.map((photo) => {
-              return (<EditablePhoto uuid={photo.uuid} description={photo.description} />)
+              const {name, description, stars} = photo;
+              return (<EditablePhoto uuid={photo.uuid} content={{name, description, stars}} pictureId={photo.pictureId} />)
             })
           }
         </div>
@@ -126,8 +127,3 @@ EditGallery.propTypes = {
 };
 
 export default EditGallery
-
-// notes
-// save every 1s after changes for this component
-// add save now button, no cancel
-// delete photos using the editable photo component
