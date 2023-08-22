@@ -54,8 +54,10 @@ class EditUser extends React.Component {
           <input type="hidden" name="pass2val" value={pass2} />
           <label htmlFor="newpw">New Password</label><br />
           <input type="password" name="newpw" id="newpw" value={success ? "" : pass1} onChange={(e) => { this.handleChange('pass1', e.target.value) }} /><br />
+          <br />
           <label htmlFor="renewpw">Retype New Password</label><br />
           <input type="password" name="renewpw" id="renewpw" value={success ? "" : pass2} onChange={(e) => { this.handleChange('pass2', e.target.value) }} /><br />
+          <br />
           {
             success ? <span className='successpass'>Password reset successfully!</span> :
               pass1 !== pass2 ? (

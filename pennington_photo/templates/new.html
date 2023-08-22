@@ -5,24 +5,26 @@
     <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
   </head>
   <body id="body">
-    <div class="new-page-wrapper">
-      <div class="new-page-content">
-        <form action="/api/v1/gallery/new/" encType='multipart/form-data' method="post">
-            <label><h3>Gallery Name</h3></label><br />
-            <input type="text" name="name" id="name" required /><br />
-            <label><h3>Description (optional)</h3></label><br />
-            <label>This is where you can share some details about this gallery</label><br />
-            <input type="text" name="description" id="description" /><br />
-            <label><h3>Date (optional)</h3></label><br />
-            <label>Date of when these pictures were taken</label><br />
-            <input type="date" name="date" id="date" /><br />
-            <label><h3>Pictures</h3></label><br />
-            <input type="file" name="file" id="file" multiple /><br />
-            <br />
+    <div class="center-static">
+      <h1>Create a New Gallery</h1>
+      <div class="center-static-content">
+        <form action="/api/v1/gallery/new/" encType="multipart/form-data" method="post">
+          <label><h3>Gallery Name</h3></label>
+          <input type="text" name="name" id="name" required /><br />
+          <label><h3>Description (optional)</h3></label>
+          <label>This is where you can share some details about this gallery</label><br />
+          <input type="text" name="description" id="description" /><br />
+          <label><h3>Date (optional)</h3></label>
+          <label>Date of when these pictures were taken</label><br />
+          <input type="date" name="date" id="date" /><br />
+          <br />
+          <label for="file">AttachPictures</label><br />
+          <input type="file" name="file" id="file" multiple /><br />
+          <br />
+          <div class="menu-buttons">
+            <h3><a href="/admin/" className="logout-button">go back</a></h3>
             <input type="submit" value="Create" />
-            <br />
-            or
-            <a href="/admin/">go back</a>
+          </div>
         </form>
       </div>
     </div>

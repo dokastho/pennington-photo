@@ -40,7 +40,7 @@ class EditablePhoto extends React.Component {
       pictureId,
     } = this.props;
     this.setState({ blownUp: false });
-    deletePhoto({pictureId});
+    deletePhoto({ pictureId });
   }
 
   componentDidMount() {
@@ -163,6 +163,7 @@ class EditablePhoto extends React.Component {
                 <img
                   src={`/static/img/${uuid}`}
                   id={uuid}
+                  key={uuid}
                   className={`blown-up-image photo ${loaded ? 'loaded' : 'loading-invis'}`}
                   onLoad={() => { this.setLoaded() }}
                 />
@@ -177,10 +178,13 @@ class EditablePhoto extends React.Component {
                   <input id={uuid} className='span fancy' type='number' min="1" max="5" value={stars} onChange={(e) => { this.handleChange("stars", e.target.value) }} />
                   <br />
                   <br />
-                  <button id={uuid} type='submit' onClick={() => { this.doSave() }}>save</button>
-                  <label id={uuid} className='fancy'>{saveState}</label>
-                  <br />
-                  <ConfirmatoryButton id={uuid} text={"Delete"} callback={this.deletePhotoWrapper} />
+                  <div className='menu-buttons'>
+                    <div>
+                      <button id={uuid} type='submit' onClick={() => { this.doSave() }}>save</button>
+                      <label id={uuid} className='fancy'>{saveState}</label>
+                    </div>
+                    <ConfirmatoryButton id={uuid} text={"Delete"} callback={this.deletePhotoWrapper} />
+                  </div>
                 </div>
               </div>
             </div>

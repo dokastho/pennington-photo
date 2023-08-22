@@ -11,6 +11,114 @@ body {
     overflow: auto;
 }
 
+input[type=text],
+input[type=password] {
+    appearance: none;
+    border: none;
+    outline: none;
+    border-bottom: 0.2em solid rgb(26,115,232);
+    background: rgba(26,115,232, 0.2);
+    border-radius: 0.2em 0.2em 0 0;
+    padding: 0.4em;
+    color: rgb(26,115,232);
+}
+
+input[type=submit] {
+    border-radius: 0.25rem;
+    padding: 0.85em 1.5em;
+    color: black;
+    background-color: rgb(26,115,232);
+    color: white;
+    font-weight: bold;
+    transition: 0.1s all ease;
+    border: 0px;
+    cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+}
+
+input[type=submit]:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+label[for=file] {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 0.5em;
+    justify-items: center;
+    align-content: center;
+    color: rgb(26,115,232);
+    border: 0.2em solid rgb(26,115,232);
+    background: rgba(0, 0, 0, 0);
+    padding: 0.85em 1.5em;
+    color: rgb(26,115,232);
+    border-radius: 0.5rem;
+    transition: 0.1s;
+    width: fit-content;
+    cursor: pointer;
+}
+
+label[for=file]:hover, label[for=file]:focus, label[for=file]:active {
+    background: rgb(26,115,232);
+    color: #fff;
+}
+
+input[type=file] {
+    display: none;
+}
+
+input[type=date] {
+    cursor: pointer;
+    outline: none;
+    border: 0.2em solid rgb(26,115,232);
+    padding: 0.8em 0.9em;
+    border-radius: 0.5rem;
+    color: rgb(26,115,232);
+}
+
+input[type=button], button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0.2em solid rgb(26,115,232);
+    background: rgba(0, 0, 0, 0);
+    padding: 0.85em 1.5em;
+    color: rgb(26,115,232);
+    border-radius: 0.5rem;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+input[type=button]:hover, input[type=button]:focus, input[type=button]:active, button:hover {
+    background: rgb(26,115,232);
+    color: #fff;
+}
+
+input[type=number] {
+    width: 3em;
+    padding: 0.5em;
+    border: 0.2em solid rgb(26,115,232);
+    border-radius: 0.5rem;
+    text-align: center;
+    color: rgb(26,115,232);
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+    margin: 0;
+    background: rgba(26,115,232, 0.2);
+    outline: none;
+}
+
+label.fancy {
+    padding: 1rem;
+}
+
+.menu-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 h3.fancy {
     color: gray;
 }
@@ -27,6 +135,7 @@ button.confirmatory {
 button.clicked {
     background-color: darkred;
     color: white;
+    border: 0.2em solid darkred;
 }
 
 h5 {
@@ -181,6 +290,22 @@ a {
     font-weight: bold;
 }
 
+.center-static {
+    border-radius: 2rem;
+    border: 2px solid gray;
+    padding: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: fit-content;
+    text-align: center;
+}
+
+.center-static-content {
+    text-align: left;
+}
+
 .logout-button {
     text-decoration: underline;
     padding: 0.25rem;
@@ -312,7 +437,10 @@ a {
 }
 
 .blown-up-image {
-    scale: 70%;
+    position: absolute;
+    object-fit: scale-down;
+    height: 50%;
+    top: 10%;
 }
 
 .blown-up-container {
@@ -348,4 +476,9 @@ label.fancy {
 
 .edit-box {
     text-align: left;
+    background-color: rgb(255, 255, 255, 0.8);
+    padding: 3rem;
+    border-radius: 0.5rem;
+    position: relative;
+    width: 100%;
 }

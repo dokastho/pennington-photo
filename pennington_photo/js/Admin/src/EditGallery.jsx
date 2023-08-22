@@ -133,10 +133,13 @@ class EditGallery extends React.Component {
             <br />
             <label>Name:</label>
             <input className='h1' type='text' value={name} onChange={(e) => { this.handleChange("name", e.target.value) }} /><br />
+            <br />
             <label>Description:</label>
             <input className='h3 em fancy' type='text' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} /><br />
+            <br />
             <label>Date:</label>
             <input className='h5' type='date' value={dateTaken} onChange={(e) => { this.handleChange("dateTaken", e.target.value) }} /><br />
+            <br />
             <h3><a href={`/gallery/${galleryId}/`} className='logout-button'>View This Gallery</a></h3>
             <br />
           </div>
@@ -150,10 +153,14 @@ class EditGallery extends React.Component {
             })
           }
         </div>
-        <button type='submit' onClick={() => { this.doSave() }}>save</button>
-        <label>{saveState}</label>
         <br />
-        <ConfirmatoryButton text={"Delete"} callback={deleteGallery} args={{ galleryId }} />
+        <div className='menu-buttons'>
+          <div>
+            <button type='submit' onClick={() => { this.doSave() }}>save</button>
+            <label>{saveState}</label>
+          </div>
+          <ConfirmatoryButton text={"Delete"} callback={deleteGallery} args={{ galleryId }} />
+        </div>
       </>
     );
   }
