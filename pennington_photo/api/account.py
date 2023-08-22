@@ -43,8 +43,6 @@ def accounts():
                 # username is taken
                 return redirect("/accounts/create/?baduser=1")
 
-            session['logname'] = info['username']
-
         elif operation == "delete":
             do_delete(connection)
             return Response(status=204)
@@ -126,9 +124,6 @@ def do_delete(connection):
         (uname,)
     )
     cur.fetchall()
-
-    # clear the session
-    session.clear()
 
 
 def do_update_password(connection, info):

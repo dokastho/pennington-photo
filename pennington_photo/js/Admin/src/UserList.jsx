@@ -35,8 +35,11 @@ class UserList extends React.Component {
     this.setState({ editingUserIdx: NOT_EDITING });
   }
 
-  deleteUser(user) {
-    fetch(`/api/v1/acounts/?target=/admin/`,
+  deleteUser(args) {
+    const {
+      user
+    } = args;
+    fetch(`/accounts/?target=/admin/`,
       {
         credentials: 'same-origin',
         method: 'POST',
@@ -48,7 +51,7 @@ class UserList extends React.Component {
       })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
-        this.setState((prevState) => ({ editingUserIdx: NOT_EDITING, users: prevState.users.filter((u) => u !== user) }));
+        this.setState((prevState) => ({ editingUserIdx: NOT_EDITING, users: prevState.users.filter((u) => u.username !== user) }));
         return response.json();
       })
       .catch((error) => console.log(error));
