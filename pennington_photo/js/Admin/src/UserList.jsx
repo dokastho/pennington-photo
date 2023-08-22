@@ -68,13 +68,18 @@ class UserList extends React.Component {
           isEditing ? (
             <EditUser logname={logname} username={users[editingUserIdx].username} deleteUser={this.deleteUser} cancelEdit={this.cancelEdit} />
           ) : (
-            users.map((user, idx) => {
-              return (
-                <div className='edit-list-item' onClick={() => { this.selectUser(idx) }}>
-                  <h3>{user.username}</h3>
-                </div>
-              );
-            })
+            <>
+              <h3><a href='/accounts/create/' className='logout-button'>Create a new Administrator Account</a></h3>
+              {
+                users.map((user, idx) => {
+                  return (
+                    <div className='edit-list-item' onClick={() => { this.selectUser(idx) }}>
+                      <h3>{user.username}</h3>
+                    </div>
+                  );
+                })
+              }
+            </>
           )
 
         }

@@ -37,7 +37,6 @@ def accounts():
         elif operation == "create":
             info = {
                 "username": request.form.get("username"),
-                "email": request.form.get("email"),
                 "password": request.form.get("password")
             }
             if not do_create(connection, info):
@@ -56,9 +55,9 @@ def accounts():
                 abort(403)
 
             info = {
-                "username": session['logname'],
-                "new": request.form.get("newpw"),
-                "verify_new": request.form.get("renewpw"),
+                "username": request.form.get('username'),
+                "new": request.form.get("pass1val"),
+                "verify_new": request.form.get("pass2val"),
             }
             do_update_password(connection, info)
             return Response(status=204)
@@ -84,11 +83,6 @@ def do_create(connection, info):
         if i == "":
             abort(400)
 
-    utc = arrow.utcnow()
-    local = utc.to('US/Pacific')
-    timestamp = local.format()
-
-    pp_str = model.get_uuid(info['file'].filename)
     pw_str = create_hashed_password(info['password'])
 
     cur = connection.execute(
@@ -101,17 +95,12 @@ def do_create(connection, info):
     if len(user) != 0:
         return False
 
-    # save image
-    path = pennington_photo.app.config["UPLOAD_FOLDER"]/pp_str
-    info['file'].save(path)
-
     cur = connection.execute(
         "INSERT INTO users "
-        "(username, fullname, email, filename, password, created) "
-        "VALUES (?, ?, ?, ?, ?, ?)",
+        "(username, password) "
+        "VALUES (?, ?)",
         (
-            info['username'], info['name'], info['email'],
-            pp_str, pw_str, timestamp
+            info['username'], pw_str
         )
     )
     cur.fetchall()

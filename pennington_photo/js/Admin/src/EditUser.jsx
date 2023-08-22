@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react'
+import ConfirmatoryButton from './Buttons';
 
 class EditUser extends React.Component {
 
@@ -44,14 +45,17 @@ class EditUser extends React.Component {
         <h3>Manage Administrator {username}</h3>
         <hr />
         <h5>Change Password</h5>
-        <form action="/accounts/?target=/admin/" method="post" onSubmit={() => {
-          this.handleChange("pass1", ""); this.handleChange("pass2", ""); this.handleChange("success", true)
+        <form action="/accounts/?target=/admin/" method="post" onSubmitCapture={() => {
+          this.handleChange("success", true)
         }}>
           <input type="hidden" name="operation" value="update_password" />
+          <input type="hidden" name="username" value={username} />
+          <input type="hidden" name="pass1val" value={pass1} />
+          <input type="hidden" name="pass2val" value={pass2} />
           <label htmlFor="newpw">New Password</label><br />
-          <input type="password" name="newpw" id="newpw" value={pass1} onChange={(e) => { this.handleChange('pass1', e.target.value) }} /><br />
+          <input type="password" name="newpw" id="newpw" value={success ? "" : pass1} onChange={(e) => { this.handleChange('pass1', e.target.value) }} /><br />
           <label htmlFor="renewpw">Retype New Password</label><br />
-          <input type="password" name="renewpw" id="renewpw" value={pass2} onChange={(e) => { this.handleChange('pass2', e.target.value) }} /><br />
+          <input type="password" name="renewpw" id="renewpw" value={success ? "" : pass2} onChange={(e) => { this.handleChange('pass2', e.target.value) }} /><br />
           {
             success ? <span className='successpass'>Password reset successfully!</span> :
               pass1 !== pass2 ? (
@@ -63,7 +67,7 @@ class EditUser extends React.Component {
         </form>
         <hr />
         {
-          isOtherAdmin ? <button onClick={() => { deleteUser(username) }}>delete this administrator</button> : null
+          isOtherAdmin ? <ConfirmatoryButton text={'Delete this administrator'} args={{'user': username}} callback={deleteUser} /> : null
         }
         <button onClick={() => { cancelEdit() }}>{success ? 'go back' : 'cancel'}</button>
       </div>
