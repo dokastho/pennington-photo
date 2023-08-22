@@ -137,7 +137,7 @@ class EditGallery extends React.Component {
             <input className='h3 em fancy' type='text' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} /><br />
             <label>Date:</label>
             <input className='h5' type='date' value={dateTaken} onChange={(e) => { this.handleChange("dateTaken", e.target.value) }} /><br />
-            <h3><a href={`/galllery/${galleryId}/`} className='logout-button'>View This Gallery</a></h3>
+            <h3><a href={`/gallery/${galleryId}/`} className='logout-button'>View This Gallery</a></h3>
             <br />
           </div>
           <br />
