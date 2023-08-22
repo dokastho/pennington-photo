@@ -13,6 +13,9 @@ class NavBar extends React.Component {
     return (
       <>
         <div className='navbar' >
+          <a href='/admin/'>
+            <img src="/static/icon/Bio.svg" />
+          </a>
           {
             items.map((item) => {
               return (
@@ -24,6 +27,9 @@ class NavBar extends React.Component {
               )
             })
           }
+          <a href='/'>
+            <img src="/static/icon/Cart.svg" />
+          </a>
         </div>
       </>
     );

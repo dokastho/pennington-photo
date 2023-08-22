@@ -18,7 +18,11 @@ class Login extends React.Component {
             <label htmlFor="password">Password</label><br />
             <input type="password" name="password" id="password" /><br />
             <br />
-            <input type="submit" value="log in" /><br />
+            <div className='menu-buttons'>
+              <div>
+              </div>
+              <input type="submit" value="log in" /><br />
+            </div>
           </form>
         </div>
       </div>

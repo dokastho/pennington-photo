@@ -86,6 +86,7 @@ input[type=button], button {
     color: rgb(26,115,232);
     border-radius: 0.5rem;
     transition: 0.1s;
+    font-weight: bold;
     cursor: pointer;
 }
 
@@ -226,6 +227,7 @@ a {
 .navbar {
     display: inline-flex;
     justify-content: space-around;
+    align-items: center;
     position: fixed;
     width: 100%;
     top: 0vw;
@@ -276,6 +278,10 @@ a {
 
 .edit-list-item {
     cursor: pointer;
+}
+
+.edit-list-item.h3:hover {
+    text-decoration: underline;
 }
 
 .badpass {
