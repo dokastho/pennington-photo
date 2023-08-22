@@ -127,16 +127,19 @@ class EditGallery extends React.Component {
     return (
       <>
         <div className='dialogue'>
-          <button onClick={() => { deselectGallery() }}>Return to Galleries</button>
-          <label>Name:</label>
-          <input className='h1' type='text' value={name} onChange={(e) => { this.handleChange("name", e.target.value) }} />
-          <label>Description:</label>
-          <input className='h3 em fancy' type='text' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} />
-          <label>Date:</label>
-          <input className='h5' type='date' value={dateTaken} onChange={(e) => { this.handleChange("dateTaken", e.target.value) }} />
-          <br />
-          <a href={`/galllery/${galleryId}/`}><h3>View This Gallery</h3></a>
-          <br />
+          <div className='edit-stuff'>
+            <h3>Edit Gallery Details</h3>
+            <button onClick={() => { deselectGallery() }}>Return to Galleries</button><br />
+            <br />
+            <label>Name:</label>
+            <input className='h1' type='text' value={name} onChange={(e) => { this.handleChange("name", e.target.value) }} /><br />
+            <label>Description:</label>
+            <input className='h3 em fancy' type='text' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} /><br />
+            <label>Date:</label>
+            <input className='h5' type='date' value={dateTaken} onChange={(e) => { this.handleChange("dateTaken", e.target.value) }} /><br />
+            <h3><a href={`/galllery/${galleryId}/`} className='logout-button'>View This Gallery</a></h3>
+            <br />
+          </div>
           <br />
         </div>
         <div className='photos-tray'>

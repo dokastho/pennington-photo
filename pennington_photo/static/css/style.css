@@ -161,6 +161,26 @@ a {
     position: absolute;
 }
 
+.edit-stuff {
+    text-align: left;
+}
+
+.edit-list-item {
+    cursor: pointer;
+}
+
+.badpass {
+    padding: 0.5rem;
+    color: red;
+    font-weight: bold;
+}
+
+.successpass {
+    padding: 0.5rem;
+    color: green;
+    font-weight: bold;
+}
+
 .logout-button {
     text-decoration: underline;
     padding: 0.25rem;

@@ -5,7 +5,7 @@ import os
 import pennington_photo
 import arrow
 from pennington_photo.common import model
-from flask import abort, redirect, render_template, request, session
+from flask import abort, redirect, render_template, Response, request, session
 
 
 @pennington_photo.app.route('/accounts/', methods=['POST'])
@@ -18,6 +18,8 @@ def accounts():
         target = model.get_target()
         # get operation
         operation = request.form.get('operation')
+        if operation is None:
+            operation = request.get_json()["operation"]
 
         # create a login cookie
         if operation == "login":
@@ -46,6 +48,7 @@ def accounts():
 
         elif operation == "delete":
             do_delete(connection)
+            return Response(status=204)
 
         elif operation == "update_password":
             # user must be logged in
@@ -54,11 +57,11 @@ def accounts():
 
             info = {
                 "username": session['logname'],
-                "old": request.form.get('old_password'),
-                "new": request.form.get("password"),
-                "verify_new": request.form.get("check_password"),
+                "new": request.form.get("newpw"),
+                "verify_new": request.form.get("renewpw"),
             }
             do_update_password(connection, info)
+            return Response(status=204)
 
         else:
             abort(400)  # invalid request
@@ -121,8 +124,11 @@ def do_delete(connection):
     # user must be logged in
     if 'logname' not in session:
         abort(403)
+        
+    if not model.get_logname():
+        abort(403)
 
-    uname = session['logname']
+    uname = request.get_json()["user"]
 
     # delete users entry and all related ones
     cur = connection.execute(
@@ -138,37 +144,9 @@ def do_delete(connection):
 
 def do_update_password(connection, info):
     """Update password with info."""
-    if (info['old'] is None or info['new'] is None or
+    if (info['new'] is None or
             info['verify_new'] is None):
         abort(400)
-
-    cur = connection.execute(
-        "SELECT password "
-        "FROM users "
-        "WHERE username == ? ",
-        (info['username'],)
-    )
-    old_pw_hash = cur.fetchall()
-    old_pw_hash = old_pw_hash[0]
-
-    # check if salt is present (default data isn't encrypted)
-    salt = old_pw_hash['password'].split("$")
-    if len(salt) > 1:
-        salt = salt[1]
-        pw_str = model.encrypt(salt, info['old'])
-    else:
-        pw_str = info['old']
-
-    cur = connection.execute(
-        "SELECT username "
-        "FROM users "
-        "WHERE username == ? "
-        "AND password == ?",
-        (info['username'], pw_str,)
-    )
-    user = cur.fetchall()
-    if len(user) == 0:
-        abort(403)
 
     if info['new'] != info['verify_new']:
         abort(401)
@@ -180,7 +158,7 @@ def do_update_password(connection, info):
         "WHERE username == ? ",
         (new_pw_hash, info['username'],)
     )
-    user = cur.fetchall()
+    cur.fetchone()
 
 
 @pennington_photo.app.route('/accounts/login/')

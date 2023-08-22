@@ -27,13 +27,14 @@ class SideBar extends React.Component {
     return (
       <>
         <div className='sidebar' >
-          <div class="admin-welcome">
+          <div className="admin-welcome">
             <h1>Pennington Photographics Administrator Tools</h1>
-            <br />
-            <h3 class="fancy">Welcome {logname}.</h3>
+            <hr />
+            <h3 className="fancy">Welcome {logname}.</h3>
             <span>Not {logname}? <a href="/accounts/logout/" className='logout-button'>logout</a></span>
             <br />
             <br />
+            <hr />
             <br />
           </div>
           {
@@ -45,6 +46,8 @@ class SideBar extends React.Component {
               )
             })
           }
+          <br />
+          <br />
           <br />
           <a href='/new/'>
             <div className='new-button'>
