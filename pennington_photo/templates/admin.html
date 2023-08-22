@@ -3,13 +3,9 @@
   <head>
     <title>Penning Photographics</title>
     <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+    <meta id="logname" content="{{ logname }}" />
   </head>
   <body id="body">
-    <div class="admin-welcome">
-      <h1>Pennington Photographics Administrator Tools</h1>
-      <h3 class="fancy">Welcome {{ logname }}.</h3>
-      <span>Not {{ logname }}? <a href="/accounts/logout/">logout</a></span>
-    </div>
     <div id="reactEntry" class="site">
       <!-- Load JavaScript -->
       <script type="text/javascript" src="{{ url_for('static', filename = 'js/admin.bundle.js') }}"></script>

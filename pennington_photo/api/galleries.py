@@ -53,8 +53,10 @@ def get_gallery(gallery_id):
     if gallery["description"] is None:
         gallery["description"] = ""
     
-    dmy = gallery["dateTaken"]
-    gallery["dateTaken"] = arrow.get(dmy).format("MMMM DD, YYYY")
+    if gallery["dateTaken"] is not None:
+        dmy = gallery["dateTaken"]
+        gallery["dateTaken"] = arrow.get(dmy).format("MMMM DD, YYYY")
+        pass
     dmy = gallery["created"]
     gallery["created"] = arrow.get(dmy).humanize()
     
