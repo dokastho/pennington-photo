@@ -149,16 +149,71 @@ a {
     cursor: pointer;
 }
 
-.sidebar {
+.admin-page {
+    display: flex;
+}
 
+.admin-content {
+    display: block;
+    margin: 3rem;
+    width: 70%;
+    right: 0;
+    position: absolute;
+}
+
+.logout-button {
+    text-decoration: underline;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+}
+
+.logout-button:hover {
+    background-color: darkgrey;
+}
+
+.sidebar {
+    width: 20%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: lightgray;
+    border-right: 2px solid black;
+    padding: 2rem;
 }
 
 .sidebar-item {
-    
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    font-size: larger;
 }
 
 .sidebar-item:hover {
     cursor: pointer;
+    background-color: darkgrey;
+    transition: all 0.2s ease-in-out;
+}
+
+.sidebar-item:active {
+    background-color: grey;
+}
+
+.new-button {
+    background: green;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    color: white;
+    font-weight: bolder;
+    width: fit-content;
+}
+
+.new-button:hover {
+    background-color: darkgreen;
+    transition: all 0.2s ease-in-out;
+}
+
+.new-button:active {
+    color: lightgrey;
 }
 
 .loading-page {

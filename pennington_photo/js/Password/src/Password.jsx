@@ -10,7 +10,7 @@ class Password extends React.Component {
     return (
       <div>
         <h1>Change Password</h1>
-        <form action="/accounts/?target=/" method="post">
+        <form action="/accounts/?admin/" method="post">
           <input type="hidden" name="operation" value="update_password" />
           <label htmlFor="oldpw">Old Password</label><br />
           <input type="password" name="oldpw" id="oldpw" /><br />

@@ -29,8 +29,12 @@ class SideBar extends React.Component {
         <div className='sidebar' >
           <div class="admin-welcome">
             <h1>Pennington Photographics Administrator Tools</h1>
+            <br />
             <h3 class="fancy">Welcome {logname}.</h3>
-            <span>Not {logname}? <a href="/accounts/logout/">logout</a></span>
+            <span>Not {logname}? <a href="/accounts/logout/" className='logout-button'>logout</a></span>
+            <br />
+            <br />
+            <br />
           </div>
           {
             items.map((item) => {

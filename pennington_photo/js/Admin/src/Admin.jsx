@@ -105,13 +105,12 @@ class Admin extends React.Component {
           )
         }
         <div className={loaded ? 'loaded' : 'loading'}>
-          <SideBar setContentFocus={this.showContent} />
-          <a href='/new/'>
-            <div className='new-button'>
-              Create a new gallery
+          <div className='admin-page'>
+            <SideBar setContentFocus={this.showContent} />
+            <div className='admin-content'>
+              {content}
             </div>
-          </a>
-          {content}
+          </div>
         </div>
       </>
     );

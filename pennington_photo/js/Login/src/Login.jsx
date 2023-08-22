@@ -10,7 +10,7 @@ class Login extends React.Component {
     return (
       <div>
         <h1>Log In</h1>
-        <form action="/accounts/?target=/" method="post">
+        <form action="/accounts/?target=/admin/" method="post">
           <input type="hidden" name="operation" value="login" />
           <label htmlFor="username">Username</label><br />
           <input type="text" name="username" id="username" /><br />
