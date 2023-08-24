@@ -11,23 +11,46 @@ body {
     overflow: auto;
 }
 
+.altbody {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 input[type=text],
+textarea,
 input[type=password] {
     appearance: none;
     border: none;
     outline: none;
-    border-bottom: 0.2em solid rgb(26,115,232);
-    background: rgba(26,115,232, 0.2);
+    border-bottom: 0.2em solid rgb(26, 115, 232);
+    background: rgba(26, 115, 232, 0.2);
     border-radius: 0.2em 0.2em 0 0;
     padding: 0.4em;
-    color: rgb(26,115,232);
+    color: rgb(26, 115, 232);
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+h4 {
+    font-weight: normal;
+}
+
+textarea {
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 95%;
+    height: 150px;
+    resize: none;
 }
 
 input[type=submit] {
     border-radius: 0.25rem;
     padding: 0.85em 1.5em;
     color: black;
-    background-color: rgb(26,115,232);
+    background-color: rgb(26, 115, 232);
     color: white;
     font-weight: bold;
     transition: 0.1s all ease;
@@ -47,19 +70,21 @@ label[for=file] {
     grid-gap: 0.5em;
     justify-items: center;
     align-content: center;
-    color: rgb(26,115,232);
-    border: 0.2em solid rgb(26,115,232);
+    color: rgb(26, 115, 232);
+    border: 0.2em solid rgb(26, 115, 232);
     background: rgba(0, 0, 0, 0);
     padding: 0.85em 1.5em;
-    color: rgb(26,115,232);
+    color: rgb(26, 115, 232);
     border-radius: 0.5rem;
     transition: 0.1s;
     width: fit-content;
     cursor: pointer;
 }
 
-label[for=file]:hover, label[for=file]:focus, label[for=file]:active {
-    background: rgb(26,115,232);
+label[for=file]:hover,
+label[for=file]:focus,
+label[for=file]:active {
+    background: rgb(26, 115, 232);
     color: #fff;
 }
 
@@ -70,43 +95,47 @@ input[type=file] {
 input[type=date] {
     cursor: pointer;
     outline: none;
-    border: 0.2em solid rgb(26,115,232);
+    border: 0.2em solid rgb(26, 115, 232);
     padding: 0.8em 0.9em;
     border-radius: 0.5rem;
-    color: rgb(26,115,232);
+    color: rgb(26, 115, 232);
 }
 
-input[type=button], button {
+input[type=button],
+button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    border: 0.2em solid rgb(26,115,232);
+    border: 0.2em solid rgb(26, 115, 232);
     background: rgba(0, 0, 0, 0);
     padding: 0.85em 1.5em;
-    color: rgb(26,115,232);
+    color: rgb(26, 115, 232);
     border-radius: 0.5rem;
     transition: 0.1s;
     font-weight: bold;
     cursor: pointer;
 }
 
-input[type=button]:hover, input[type=button]:focus, input[type=button]:active, button:hover {
-    background: rgb(26,115,232);
+input[type=button]:hover,
+input[type=button]:focus,
+input[type=button]:active,
+button:hover {
+    background: rgb(26, 115, 232);
     color: #fff;
 }
 
 input[type=number] {
     width: 3em;
     padding: 0.5em;
-    border: 0.2em solid rgb(26,115,232);
+    border: 0.2em solid rgb(26, 115, 232);
     border-radius: 0.5rem;
     text-align: center;
-    color: rgb(26,115,232);
+    color: rgb(26, 115, 232);
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
     appearance: textfield;
     margin: 0;
-    background: rgba(26,115,232, 0.2);
+    background: rgba(26, 115, 232, 0.2);
     outline: none;
 }
 
@@ -126,12 +155,10 @@ h3.fancy {
 
 h3.alt {
     color: white;
-    
-}
-
-button.confirmatory {
 
 }
+
+button.confirmatory {}
 
 button.clicked {
     background-color: darkred;
@@ -455,7 +482,7 @@ a {
     height: 100vh;
     top: 0px;
     left: 0px;
-    background-color:rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
 }
@@ -469,12 +496,9 @@ a {
     align-items: center;
 }
 
-input.span {
-}
+input.span {}
 
-input.fancy {
-
-}
+input.fancy {}
 
 label.fancy {
     color: white;
