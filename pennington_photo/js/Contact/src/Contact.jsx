@@ -10,7 +10,9 @@ class Contact extends React.Component {
         name: "",
         email: "",
         message: "Hello D. Pennington,\n\nI would like to purchase prints of the following photos. Thank you!"
-      }
+      },
+      photos: [""],
+      sent: false
     }
     this.handleChage = this.handleChage.bind(this);
   }
@@ -25,7 +27,9 @@ class Contact extends React.Component {
 
   render() {
     const {
-      content
+      content,
+      photos,
+      sent,
     } = this.state;
     const {
       name,
@@ -41,9 +45,10 @@ class Contact extends React.Component {
               Contact Donald N. Pennington
             </h1>
             <h4>
-              You can email me either via the form below or with your favorite email application at <a href = "mailto: donpennington@comcast.net" className='underline'>donpennington@comcast.net</a>
+              You can email me either via the form below or with your favorite email application at <a href="mailto: donpennington@comcast.net" className='underline'>donpennington@comcast.net</a>
             </h4>
             <form action="/api/v1/contact/" method="post">
+              <input type='hidden' value={photos} />
               <label htmlFor="name">Name</label><br />
               <input type="text" name="name" id="name" value={name} onChange={(e) => { this.handleChage("name", e.target.value) }} required /><br />
               <br />
@@ -56,10 +61,14 @@ class Contact extends React.Component {
                 value={message} />
               <br />
               <br />
-              <div class="menu-buttons">
-                <button onClick={() => { this.handleChage("name", ""); this.handleChage("email", ""); this.handleChage("message", ""); }}>Cancel</button>
-                <input type="submit" value="Send" />
-              </div>
+              {
+                sent ? <h1 className='successpass'>Sent</h1> : (
+                  <div class="menu-buttons">
+                    <button onClick={() => { this.handleChage("name", ""); this.handleChage("email", ""); this.handleChage("message", ""); }}>Cancel</button>
+                    <input type="submit" value="Send" />
+                  </div>
+                )
+              }
             </form>
           </div>
         </div>

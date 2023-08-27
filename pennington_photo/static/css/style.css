@@ -119,7 +119,8 @@ button {
 input[type=button]:hover,
 input[type=button]:focus,
 input[type=button]:active,
-button:hover {
+button:hover,
+button.cart-button {
     background: rgb(26, 115, 232);
     color: #fff;
 }
@@ -258,7 +259,7 @@ a {
     position: fixed;
     width: 100%;
     top: 0vw;
-    height: 5rem;
+    height: 8%;
     z-index: 100;
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -394,6 +395,19 @@ a {
     color: lightgrey;
 }
 
+.gray-out {
+    background-color: lightgray;
+    color: black;
+    cursor: default;
+    opacity: 80%;
+    border: 0.2em solid gray;
+}
+
+.gray-out:hover {
+    background-color: lightgray;
+    color: black;
+}
+
 .loading-page {
     text-align: center;
     margin-top: 20%;
@@ -470,17 +484,16 @@ a {
 }
 
 .blown-up-image {
-    position: absolute;
     object-fit: scale-down;
-    height: 50%;
-    top: 10%;
+    width: auto;
+    height: 80%;
 }
 
 .blown-up-container {
     position: fixed;
     width: 100%;
-    height: 100vh;
-    top: 0px;
+    height: 92%;
+    top: 8%;
     left: 0px;
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;
@@ -489,10 +502,9 @@ a {
 
 .blown-up-content {
     text-align: center;
-    vertical-align: top;
+    margin: 2%;
     display: inline-flex;
     flex-direction: column;
-    justify-content: flex-end;
     align-items: center;
 }
 

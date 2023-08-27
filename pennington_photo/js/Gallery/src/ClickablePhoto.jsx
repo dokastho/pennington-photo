@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react'
 import Loading from './Loading';
+import CartButton from './CartButton';
 
 class ClickablePhoto extends React.Component {
 
@@ -44,6 +45,7 @@ class ClickablePhoto extends React.Component {
     } = this.state;
     const {
       uuid,
+      name,
       imgClass,
       description
     } = this.props;
@@ -76,9 +78,11 @@ class ClickablePhoto extends React.Component {
                   className={`blown-up-image photo ${loaded ? 'loaded' : 'loading-invis'}`}
                   onLoad={() => { this.setLoaded() }}
                 />
+                <h3 className='fancy'>{name}</h3>
                 {
                   description === "" ? null : (<h3 className='alt'><em>{description}</em></h3>)
                 }
+                <CartButton photo={name} uuid={uuid} />
               </div>
             </div>
           ) : null
@@ -96,6 +100,7 @@ ClickablePhoto.defaultProps = {
 ClickablePhoto.propTypes = {
   // prop types go here
   uuid: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   imgClass: PropTypes.string,
   description: PropTypes.string,
 };

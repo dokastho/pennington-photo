@@ -23,4 +23,5 @@ def handle_contact():
     message = body["message"]
     photos = flask.request.form.getlist("photos")
     # ... send email
-    pass
+    
+    return flask.Response(status=204)
