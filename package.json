@@ -19,6 +19,7 @@
         "about": "file:pennington_photo/js/About",
         "accounts": "file:pennington_photo/js/Accounts",
         "admin": "file:pennington_photo/js/Admin",
+        "cart": "file:pennington_photo/js/Cart",
         "contact": "file:pennington_photo/js/Contact",
         "galleries": "file:pennington_photo/js/Galleries",
         "home": "file:pennington_photo/js/Home",

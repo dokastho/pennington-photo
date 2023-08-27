@@ -523,3 +523,21 @@ label.fancy {
     position: relative;
     width: 100%;
 }
+
+.cart-list {
+    text-align: center;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+li.cart-item {
+    text-align: left;
+    border-top: 1px solid gray;
+    /* text-decoration: none; */
+}
+
+.cart-thumbnail {
+    width: 80px;
+    height: 60px;
+}

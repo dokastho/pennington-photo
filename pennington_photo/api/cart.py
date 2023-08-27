@@ -4,6 +4,22 @@ import flask
 import pennington_photo
 
 
+@pennington_photo.app.route('/api/v1/cart/contents/')
+def get_cart_contents():
+    data = {
+        'cart': []
+    }
+    
+    if 'cart' in flask.session:
+        for uuid, photo in flask.session['cart'].items():
+            photo['uuid'] = uuid
+            data['cart'].append(photo)
+            pass
+        pass
+
+    return flask.jsonify(data), 200
+
+
 @pennington_photo.app.route('/api/v1/cart/status/', methods=["POST"])
 def cart_status():
     body = flask.request.json

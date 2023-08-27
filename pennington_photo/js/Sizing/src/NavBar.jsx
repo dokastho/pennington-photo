@@ -27,7 +27,7 @@ class NavBar extends React.Component {
               )
             })
           }
-          <a href='/'>
+          <a href='/cart/'>
             <img src="/static/icon/Cart.svg" />
           </a>
         </div>
