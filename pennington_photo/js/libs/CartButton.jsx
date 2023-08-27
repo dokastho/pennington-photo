@@ -7,6 +7,7 @@ class CartButton extends React.Component {
     super(props);
     this.state = {
       added: false,
+      checked: false,
       loaded: false
     };
     this.addToCart = this.addToCart.bind(this);
@@ -60,7 +61,10 @@ class CartButton extends React.Component {
       })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
-        this.setState({ added: true });
+        this.setState({ added: true, checked: true });
+        setTimeout(() => {
+          this.setState({ checked: false });
+        }, 500);
         return response.json();
       })
       .catch((error) => console.log(error));
@@ -69,13 +73,14 @@ class CartButton extends React.Component {
   render() {
     const {
       added,
+      checked,
       loaded
     } = this.state;
     const {
       uuid
     } = this.props;
     return (
-      loaded ? <button id={uuid} className={`${added ? 'gray-out' : 'cart-button'}`} onClick={() => { this.addToCart() }}>{`${added ? 'Added to cart' : 'Add to cart'}`}</button> : null
+      loaded ? <button id={uuid} className={`cart-button ${checked ? 'done' : null}`} onClick={() => { this.addToCart() }}>{checked ? 'Done!' : added ? 'Add Another?' : 'Add to Cart'}</button> : null
     );
   }
 }

@@ -9,19 +9,17 @@ def cart_status():
     body = flask.request.json
     if body is None:
         flask.abort(400)
-        
+
     if 'uuid' not in body:
         flask.abort(400)
 
     uuid = body['uuid']
-    
+
     if 'cart' not in flask.session:
         return flask.jsonify({'in': False}), 200
 
-    for photo in flask.session['cart']:
-        if photo['uuid'] == uuid:
-            return flask.jsonify({'in': True}), 200
-        pass
+    if uuid in flask.session['cart'].keys():
+        return flask.jsonify({'in': True}), 200
 
     return flask.jsonify({'in': False}), 200
 
@@ -31,21 +29,31 @@ def cart_add():
     body = flask.request.json
     if body is None:
         flask.abort(400)
-        
+
     if 'photo' not in body:
         flask.abort(400)
 
-    photo = body['photo']
+    item = body['photo']
+    key = item['uuid']
+    val = {
+        'name': item['name'],
+        'qty': 1,
+    }
 
     if 'cart' not in flask.session:
-        flask.session['cart'] = []
-    
+        flask.session['cart'] = dict()
+        pass
+
     cart = flask.session['cart']
 
-    cart.append(photo)
-
+    if key in cart.keys():
+        cart[key]['qty'] += val['qty']
+        pass
+    else:
+        cart[key] = val
+        pass
     flask.session['cart'] = cart
-    
+
     return flask.Response(status=204)
 
 
@@ -54,16 +62,21 @@ def cart_remove():
     body = flask.request.json
     if body is None:
         flask.abort(400)
-        
+
     if 'photo' not in body:
         flask.abort(400)
 
-    photo = body['photo']
+    item = body['uuid']
 
     if 'cart' not in flask.session:
         return flask.Response(status=204)
 
-    if photo in flask.session['cart']:
-        flask.session['cart'].pop(photo)
+    cart = flask.session['cart']
+    
+    if item in cart.keys():
+        cart.pop(item)
+        pass
+
+    flask.session['cart'] = cart
 
     return flask.Response(status=204)
