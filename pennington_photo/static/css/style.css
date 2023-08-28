@@ -212,7 +212,7 @@ a {
     height: 100vh;
     width: 100%;
     object-fit: cover;
-    object-position: top;
+    object-position: top left;
 }
 
 .info-page {
@@ -531,13 +531,23 @@ label.fancy {
     margin-right: auto;
 }
 
-li.cart-item {
+.cart-item {
     text-align: left;
-    border-top: 1px solid gray;
-    /* text-decoration: none; */
+    width: 60vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .cart-thumbnail {
     width: 80px;
     height: 60px;
+    object-fit: contain;
+}
+
+.cart-item-options {
+    display: flex;
+    width: 20vw;
+    justify-content: space-evenly;
+    align-items: center;
 }

@@ -9,7 +9,7 @@ def get_cart_contents():
     data = {
         'cart': []
     }
-    
+
     if 'cart' in flask.session:
         for uuid, photo in flask.session['cart'].items():
             photo['uuid'] = uuid
@@ -73,13 +73,38 @@ def cart_add():
     return flask.Response(status=204)
 
 
+@pennington_photo.app.route('/api/v1/cart/update/', methods=['POST'])
+def cart_update():
+    body = flask.request.json
+    if body is None:
+        flask.abort(400)
+
+    if 'cart' not in body:
+        flask.abort(400)
+
+    cart: 'list[dict]' = body['cart']
+    cart_p = dict()
+
+    for photo in cart:
+        val = {
+            'name': photo['name'],
+            'qty': photo['qty'],
+        }
+        cart_p[photo['uuid']] = val
+        pass
+    
+    flask.session['cart'] = cart_p
+
+    return flask.Response(status=204)
+
+
 @pennington_photo.app.route('/api/v1/cart/remove/', methods=['POST'])
 def cart_remove():
     body = flask.request.json
     if body is None:
         flask.abort(400)
 
-    if 'photo' not in body:
+    if 'uuid' not in body:
         flask.abort(400)
 
     item = body['uuid']
@@ -88,7 +113,7 @@ def cart_remove():
         return flask.Response(status=204)
 
     cart = flask.session['cart']
-    
+
     if item in cart.keys():
         cart.pop(item)
         pass

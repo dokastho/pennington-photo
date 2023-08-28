@@ -2,6 +2,10 @@ import React from 'react'
 import NavBar from './NavBar';
 import Loading from './Loading';
 
+const SAVED = "is saved.";
+const SAVING = "is saving...";
+const UNSAVED = "has unsaved changes.";
+
 class Cart extends React.Component {
 
   constructor(props) {
@@ -9,8 +13,13 @@ class Cart extends React.Component {
     this.state = {
       cart: [],
       loaded: false,
+      saveState: SAVED,
     }
     this.handleChage = this.handleChage.bind(this);
+    this.doUpdate = this.doUpdate.bind(this);
+    this.deletePhoto = this.deletePhoto.bind(this);
+
+    this.timeout = null;
   }
 
   componentDidMount() {
@@ -29,22 +38,77 @@ class Cart extends React.Component {
       .catch((error) => console.log(error));
   }
 
+  doUpdate() {
+    const {
+      cart
+    } = this.state;
+    fetch('/api/v1/cart/update/',
+      {
+        credentials: 'same-origin',
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ cart }),
+      })
+      .then((response) => {
+        if (!response.ok) throw Error(response.statusText);
+        this.setState({ saveState: SAVED });
+        return response.json();
+      })
+      .catch((error) => console.log(error));
+  }
+
   handleChage(index, key, val) {
     const {
       cart
     } = this.state;
     cart[index][key] = val;
-    this.setState({ cart });
+    this.setState({ cart, saveState: UNSAVED });
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+      this.timeout = null;
+    }
+    this.timeout = setTimeout(() => {
+      this.timeout = null;
+      this.setState({ saveState: SAVING });
+      this.doUpdate();
+    }, 1000);
   }
 
   deletePhoto(uuid) {
-
+    while (this.timeout) {
+      setTimeout(() => {
+        this.deletePhoto(uuid);
+      }, 100);
+      return;
+    }
+    fetch('/api/v1/cart/remove/',
+      {
+        credentials: 'same-origin',
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ uuid }),
+      })
+      .then((response) => {
+        if (!response.ok) throw Error(response.statusText);
+        this.setState((prevState) => ({
+          cart: prevState.cart.filter((photo) => photo.uuid !== uuid),
+        }));
+        return response.json();
+      })
+      .catch((error) => console.log(error));
   }
 
   render() {
     const {
       cart,
-      loaded
+      loaded,
+      saveState
     } = this.state;
     return (
       <>
@@ -66,21 +130,31 @@ class Cart extends React.Component {
                 cart.length === 0 ? (
                   <h3>Your Cart is Empty</h3>
                 ) : (
-                  <div>
+                  <>
+                  <h3 className='fancy'><em>Your cart {saveState}</em></h3>
+                  <div className='cart-list'>
                     {
                       cart.map((photo, index) => {
                         return (
-                          <div>
-                            <img src={`/static/img/${photo.uuid}`} className='cart-thumbnail' />
-                            <span className='cart-item'>{photo.name}</span>
-                            <label htmlFor='number'>Qty:</label>
-                            <input type='number' value={photo.qty} onChange={(e) => { this.handleChage(index, 'qty', e.target.value) }} />
-                            <button onClick={() => { this.deletePhoto(photo.uuid) }}>Remove from Cart</button>
-                          </div>
+                          <>
+                            <hr />
+                            <div className='cart-item'>
+                              <img src={`/static/img/${photo.uuid}`} className='cart-thumbnail' />
+                              <h3 className='fancy'>{photo.name}</h3>
+                              <div className='cart-item-options'>
+                                <div>
+                                  <label htmlFor='number'>Qty: </label>
+                                  <input type='number' value={photo.qty} onChange={(e) => { this.handleChage(index, 'qty', e.target.value) }} />
+                                </div>
+                                <button onClick={() => { this.deletePhoto(photo.uuid) }}>Remove from Cart</button>
+                              </div>
+                            </div>
+                          </>
                         )
                       })
                     }
                   </div>
+                  </>
                 )
               }
             </div>
