@@ -30,6 +30,8 @@ class SideBar extends React.Component {
           <div className="admin-welcome">
             <h1>Pennington Photographics Administrator Tools</h1>
             <hr />
+            <h1 className='sidebar-item'><a href='/home/'>Back to Site</a></h1>
+            <hr />
             <h3 className="fancy">Welcome {logname}.</h3>
             <span>Not {logname}? <a href="/accounts/logout/" className='logout-button'>logout</a></span>
             <br />
