@@ -132,7 +132,6 @@ class Cart extends React.Component {
                 ) : (
                   <>
                     <h3 className='fancy'><em>Your cart {saveState}</em></h3>
-                    <button onClick={() => { this.doUpdate() }}>Save Cart</button>
                     <div className='cart-list'>
                       {
                         cart.map((photo, index) => {
@@ -154,6 +153,12 @@ class Cart extends React.Component {
                           )
                         })
                       }
+                    </div>
+                    <br />
+                    <br />
+                    <div className='menu-buttons'>
+                      <button onClick={() => { this.doUpdate() }}>Save Cart</button>
+                      <a href='/contact/?checkout=true' className='submit-button'>Check Out</a>
                     </div>
                   </>
                 )

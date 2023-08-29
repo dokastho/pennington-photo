@@ -1,5 +1,6 @@
 """Handle requests and sending emails."""
 
+import arrow
 import flask
 import pennington_photo
 from pennington_photo.common.model import get_db
@@ -11,7 +12,7 @@ def handle_contact():
         flask.abort(400)
         pass
 
-    keys = ["name", "email", "message", "photos"]
+    keys = ["name", "email", "message", "checkout"]
     for key in keys:
         if key not in body:
             flask.abort(400)
@@ -21,7 +22,28 @@ def handle_contact():
     name = body["name"]
     email = body["email"]
     message = body["message"]
-    photos = flask.request.form.getlist("photos")
+    checkout = bool(body["checkout"])
+    cart = {}
+    if checkout:
+        cart = flask.session["cart"]
+        pass
+    
     # ... send email
     
-    return flask.Response(status=204)
+    context = {
+        "cart": cart,
+        "name": name.capitalize(),
+        "email": email,
+        "message": message
+    }
+    
+    invoice = flask.render_template("invoice.html", **context)
+    
+    ts = arrow.utcnow()
+    ts = ts.format().replace(' ', '_')
+    
+    with open(pennington_photo.app.config["SITE_ROOT"] / f"invoice-{name.replace(' ', '-')}-{ts}.html", "w") as fp:
+        fp.writelines(invoice)
+        pass
+    
+    return flask.redirect("/contact")

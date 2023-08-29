@@ -10,18 +10,27 @@ class Contact extends React.Component {
       content: {
         name: "",
         email: "",
-        message: "Hello D. Pennington,\n\nI would like to purchase prints of the following photos. Thank you!"
+        message: ""
       },
-      photos: [""],
       sent: false,
+      checkout: false,
       loaded: false,
     }
     this.handleChage = this.handleChage.bind(this);
   }
 
   componentDidMount() {
+    const checkout = document.getElementById("checkout").content === 'True';
+    const {
+      content
+    } = this.state;
+    var message = "Hello D. Pennington,\n\n...";
+    if (checkout) {
+      message = "Hello D. Pennington,\n\nI would like to purchase prints of a few of your photos. Please see the invoice that is sent with this message.\n\nThank you!"
+    }
+    content.message = message;
     setTimeout(() => {
-      this.setState({ loaded: true });
+      this.setState({ loaded: true, checkout, content });
     }, 40);
   }
 
@@ -36,9 +45,9 @@ class Contact extends React.Component {
   render() {
     const {
       content,
-      photos,
       sent,
       loaded,
+      checkout,
     } = this.state;
     const {
       name,
@@ -65,7 +74,7 @@ class Contact extends React.Component {
                 You can email me either via the form below or with your favorite email application at <a href="mailto: donpennington@comcast.net" className='underline'>donpennington@comcast.net</a>
               </h4>
               <form action="/api/v1/contact/" method="post">
-                <input type='hidden' value={photos} />
+                <input type='hidden' name='checkout' value={checkout} />
                 <label htmlFor="name">Name</label><br />
                 <input type="text" name="name" id="name" value={name} onChange={(e) => { this.handleChage("name", e.target.value) }} required /><br />
                 <br />
@@ -77,11 +86,14 @@ class Contact extends React.Component {
                   onChange={(e) => { this.handleChage("message", e.target.value) }}
                   value={message} />
                 <br />
+                {
+                  checkout ? <h3>An invoice for your order will be sent with this message.</h3> : null
+                }
                 <br />
                 {
                   sent ? <h1 className='successpass'>Sent</h1> : (
-                    <div class="menu-buttons">
-                      <button onClick={() => { this.handleChage("name", ""); this.handleChage("email", ""); this.handleChage("message", ""); }}>Cancel</button>
+                    <div className="menu-buttons">
+                      <button onClick={() => { this.handleChage("name", ""); this.handleChage("email", ""); this.handleChage("message", ""); }}>Clear</button>
                       <input type="submit" value="Send" />
                     </div>
                   )
