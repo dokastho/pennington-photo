@@ -10,11 +10,13 @@ class ClickablePhoto extends React.Component {
     this.state = {
       loaded: false,
       blownUp: false,
+      showDetails: false,
     };
     this.setLoaded = this.setLoaded.bind(this);
     this.clickToBlowUp = this.clickToBlowUp.bind(this);
     this.wrapperRef = React.createRef();
     this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.toggleDetails = this.toggleDetails.bind(this);
   }
 
   handleClickOutside(event) {
@@ -23,6 +25,11 @@ class ClickablePhoto extends React.Component {
       document.removeEventListener("mousedown", this.handleClickOutside);
       this.setState({ blownUp: false });
     }
+  }
+
+  toggleDetails() {
+    const { showDetails } = this.state;
+    this.setState({ showDetails: !showDetails });
   }
 
   clickToBlowUp() {
@@ -41,7 +48,8 @@ class ClickablePhoto extends React.Component {
   render() {
     const {
       loaded,
-      blownUp
+      blownUp,
+      showDetails
     } = this.state;
     const {
       uuid,
@@ -71,16 +79,28 @@ class ClickablePhoto extends React.Component {
           blownUp ? (
             <div className='blown-up-container'>
               <div className='blown-up-content'>
-
                 <img
                   src={`/static/img/${uuid}`}
                   id={uuid}
-                  className={`blown-up-image photo ${loaded ? 'loaded' : 'loading-invis'}`}
+                  className={`blown-up-image${showDetails ? '' : '-big'} photo ${loaded ? 'loaded' : 'loading-invis'}`}
                   onLoad={() => { this.setLoaded() }}
                 />
-                <h3 className='fancy'>{name}</h3>
                 {
-                  description === "" ? null : (<h3 className='alt'><em>{description}</em></h3>)
+                  showDetails ? (
+                    <>
+                      <h3 className='fancy but'>{name}</h3>
+                      {
+                        description === "" ? null : (<h3 className='alt but'><em>{description}</em></h3>)
+                      }
+                      <div id={uuid} className='details-box' onClick={() => { this.toggleDetails() }}>
+                        hide details
+                      </div>
+                    </>
+                  ) : (
+                    <div id={uuid} className='details-box' onClick={() => { this.toggleDetails() }}>
+                      show details
+                    </div>
+                  )
                 }
                 <CartButton photo={name} uuid={uuid} />
               </div>

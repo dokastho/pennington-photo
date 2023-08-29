@@ -140,6 +140,15 @@ class EditGallery extends React.Component {
             <label>Date:</label>
             <input className='h5' type='date' value={dateTaken} onChange={(e) => { this.handleChange("dateTaken", e.target.value) }} /><br />
             <br />
+            <div className='upload-picture-form'>
+              <form action="/api/v1/photo/new/" encType="multipart/form-data" method="post">
+                <input type='hidden' name='galleryId' value={galleryId} />
+                <label for="file">Attach Pictures</label><br />
+                <input type="file" name="file" id="file" multiple required /><br />
+                <input type="submit" value="Save Attached Pictures" />
+              </form>
+            </div>
+            <br />
             <div className='menu-buttons'>
               <div className='save-buttons'>
                 <button type='submit' onClick={() => { this.doSave() }}>Save Changes</button>

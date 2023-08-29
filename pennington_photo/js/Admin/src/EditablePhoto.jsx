@@ -3,9 +3,9 @@ import React from 'react'
 import Loading from './Loading';
 import ConfirmatoryButton from './Buttons';
 
-const SAVED = "saved.";
-const SAVING = "saving...";
-const UNSAVED = "unsaved changes.";
+const SAVED = "Saved.";
+const SAVING = "Saving...";
+const UNSAVED = "Unsaved Changes.";
 
 class EditablePhoto extends React.Component {
 
@@ -157,7 +157,7 @@ class EditablePhoto extends React.Component {
         </div>
         {
           blownUp ? (
-            <div className='blown-up-container'>
+            <div className='blown-up-container-nh'>
               <div className='blown-up-content'>
 
                 <img
@@ -180,7 +180,7 @@ class EditablePhoto extends React.Component {
                   <br />
                   <div className='menu-buttons'>
                     <div>
-                      <button id={uuid} type='submit' onClick={() => { this.doSave() }}>save</button>
+                      <button id={uuid} type='submit' onClick={() => { this.doSave() }}>Save</button>
                       <label id={uuid} className='fancy'>{saveState}</label>
                     </div>
                     <ConfirmatoryButton id={uuid} text={"Delete"} callback={this.deletePhotoWrapper} />

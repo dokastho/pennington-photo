@@ -513,7 +513,28 @@ a {
 .blown-up-image {
     object-fit: scale-down;
     width: auto;
-    height: 80%;
+    height: 60vh;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.4), 0 24px 80px 0 rgba(0, 0, 0, 0.38);
+}
+
+.blown-up-image-big {
+    object-fit: scale-down;
+    width: auto;
+    height: 75vh;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.4), 0 24px 80px 0 rgba(0, 0, 0, 0.38);
+}
+
+.but {
+    font-size: 2.5vh;
+}
+
+.details-box {
+    cursor: pointer;
+    padding: 1rem;
+    width: auto;
+    color: white;
 }
 
 .blown-up-container {
@@ -521,6 +542,17 @@ a {
     width: 100%;
     height: 92%;
     top: 8%;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+}
+
+.blown-up-container-nh {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 100%;
     left: 0px;
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;
@@ -546,10 +578,12 @@ label.fancy {
 .edit-box {
     text-align: left;
     background-color: rgb(255, 255, 255, 0.8);
-    padding: 3rem;
+    padding: 1rem;
     border-radius: 0.5rem;
     position: relative;
-    width: 100%;
+    width: 60vw;
+    margin-top: 1rem;
+    height: 20vh;
 }
 
 .cart-list {
@@ -578,4 +612,11 @@ label.fancy {
     width: 20vw;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.upload-picture-form {
+    border: 2px solid gray;
+    border-radius: 1rem;
+    padding: 1.75rem;
+    width: fit-content;
 }
