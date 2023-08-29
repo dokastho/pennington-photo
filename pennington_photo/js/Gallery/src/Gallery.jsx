@@ -78,7 +78,7 @@ class Gallery extends React.Component {
               <h3>
                 {
                   dateTaken === 0 ? <br /> : (
-                    <>{ dateTaken }</>
+                    <>{dateTaken}</>
                   )
                 }
               </h3>

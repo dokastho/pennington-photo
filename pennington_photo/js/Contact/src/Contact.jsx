@@ -1,5 +1,6 @@
 import React from 'react'
 import NavBar from './NavBar';
+import Loading from './Loading';
 
 class Contact extends React.Component {
 
@@ -12,9 +13,16 @@ class Contact extends React.Component {
         message: "Hello D. Pennington,\n\nI would like to purchase prints of the following photos. Thank you!"
       },
       photos: [""],
-      sent: false
+      sent: false,
+      loaded: false,
     }
     this.handleChage = this.handleChage.bind(this);
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ loaded: true });
+    }, 40);
   }
 
   handleChage(key, val) {
@@ -30,6 +38,7 @@ class Contact extends React.Component {
       content,
       photos,
       sent,
+      loaded,
     } = this.state;
     const {
       name,
@@ -38,38 +47,47 @@ class Contact extends React.Component {
     } = content;
     return (
       <>
-        <NavBar />
-        <div className='site-contents'>
-          <div className='dialogue altbody'>
-            <h1>
-              Contact Donald N. Pennington
-            </h1>
-            <h4>
-              You can email me either via the form below or with your favorite email application at <a href="mailto: donpennington@comcast.net" className='underline'>donpennington@comcast.net</a>
-            </h4>
-            <form action="/api/v1/contact/" method="post">
-              <input type='hidden' value={photos} />
-              <label htmlFor="name">Name</label><br />
-              <input type="text" name="name" id="name" value={name} onChange={(e) => { this.handleChage("name", e.target.value) }} required /><br />
-              <br />
-              <label htmlFor="email">email</label><br />
-              <input type="text" name="email" id="email" value={email} onChange={(e) => { this.handleChage("email", e.target.value) }} required /><br />
-              <br />
-              <label htmlFor="message">Message</label><br />
-              <textarea name="message"
-                onChange={(e) => { this.handleChage("message", e.target.value) }}
-                value={message} />
-              <br />
-              <br />
-              {
-                sent ? <h1 className='successpass'>Sent</h1> : (
-                  <div class="menu-buttons">
-                    <button onClick={() => { this.handleChage("name", ""); this.handleChage("email", ""); this.handleChage("message", ""); }}>Cancel</button>
-                    <input type="submit" value="Send" />
-                  </div>
-                )
-              }
-            </form>
+        {
+          loaded ? (
+            null
+          ) : (
+            <Loading />
+          )
+        }
+        <div className={loaded ? 'loaded' : 'loading'}>
+          <NavBar />
+          <div className='site-contents'>
+            <div className='dialogue altbody'>
+              <h1>
+                Contact Donald N. Pennington
+              </h1>
+              <h4>
+                You can email me either via the form below or with your favorite email application at <a href="mailto: donpennington@comcast.net" className='underline'>donpennington@comcast.net</a>
+              </h4>
+              <form action="/api/v1/contact/" method="post">
+                <input type='hidden' value={photos} />
+                <label htmlFor="name">Name</label><br />
+                <input type="text" name="name" id="name" value={name} onChange={(e) => { this.handleChage("name", e.target.value) }} required /><br />
+                <br />
+                <label htmlFor="email">email</label><br />
+                <input type="text" name="email" id="email" value={email} onChange={(e) => { this.handleChage("email", e.target.value) }} required /><br />
+                <br />
+                <label htmlFor="message">Message</label><br />
+                <textarea name="message"
+                  onChange={(e) => { this.handleChage("message", e.target.value) }}
+                  value={message} />
+                <br />
+                <br />
+                {
+                  sent ? <h1 className='successpass'>Sent</h1> : (
+                    <div class="menu-buttons">
+                      <button onClick={() => { this.handleChage("name", ""); this.handleChage("email", ""); this.handleChage("message", ""); }}>Cancel</button>
+                      <input type="submit" value="Send" />
+                    </div>
+                  )
+                }
+              </form>
+            </div>
           </div>
         </div>
       </>

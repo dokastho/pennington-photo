@@ -5,7 +5,7 @@
   "main": "src/index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cp ../libs/NavBar.jsx src && rm -rf dist && npx webpack && cp ./dist/index.bundle.js ../../static/js/about.bundle.js"
+    "build": "cp ../libs/Loading.jsx src && cp ../libs/NavBar.jsx src && rm -rf dist && npx webpack && cp ./dist/index.bundle.js ../../static/js/about.bundle.js"
   },
   "devDependencies": {
     "@babel/core": ">=7.15.5",
@@ -28,7 +28,8 @@
     "eslint": "^7.5.0",
     "node": "^17.4.0",
     "react": "^18.2.0",
-    "react-dom": ">=17.0.2"
+    "react-dom": ">=17.0.2",
+    "react-lottie-player": "^1.5.5"
   },
   "author": "TJ Dokas",
   "license": "ISC"

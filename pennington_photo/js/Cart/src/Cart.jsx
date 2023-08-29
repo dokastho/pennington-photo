@@ -131,29 +131,30 @@ class Cart extends React.Component {
                   <h3 className='fancy'><em>Your Cart is Empty</em></h3>
                 ) : (
                   <>
-                  <h3 className='fancy'><em>Your cart {saveState}</em></h3>
-                  <div className='cart-list'>
-                    {
-                      cart.map((photo, index) => {
-                        return (
-                          <>
-                            <hr />
-                            <div className='cart-item'>
-                              <img src={`/static/img/${photo.uuid}`} className='cart-thumbnail' />
-                              <h3 className='fancy'>{photo.name}</h3>
-                              <div className='cart-item-options'>
-                                <div>
-                                  <label htmlFor='number'>Qty: </label>
-                                  <input type='number' min={1} value={photo.qty} onChange={(e) => { this.handleChage(index, 'qty', e.target.value) }} />
+                    <h3 className='fancy'><em>Your cart {saveState}</em></h3>
+                    <button onClick={() => { this.doUpdate() }}>Save Cart</button>
+                    <div className='cart-list'>
+                      {
+                        cart.map((photo, index) => {
+                          return (
+                            <>
+                              <hr />
+                              <div className='cart-item'>
+                                <img src={`/static/img/${photo.uuid}`} className='cart-thumbnail' />
+                                <h3 className='fancy'>{photo.name}</h3>
+                                <div className='cart-item-options'>
+                                  <div>
+                                    <label htmlFor='number'>Qty: </label>
+                                    <input type='number' min={1} value={photo.qty} onChange={(e) => { this.handleChage(index, 'qty', e.target.value) }} />
+                                  </div>
+                                  <button onClick={() => { this.deletePhoto(photo.uuid) }}>Remove from Cart</button>
                                 </div>
-                                <button onClick={() => { this.deletePhoto(photo.uuid) }}>Remove from Cart</button>
                               </div>
-                            </div>
-                          </>
-                        )
-                      })
-                    }
-                  </div>
+                            </>
+                          )
+                        })
+                      }
+                    </div>
                   </>
                 )
               }

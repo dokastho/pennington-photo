@@ -7,6 +7,10 @@ body {
     padding: 0px;
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
 #body {
     overflow: auto;
 }
@@ -118,19 +122,20 @@ button {
 
 input[type=button]:hover,
 input[type=button]:focus,
-input[type=button]:active,
 button:hover,
 button.cart-button {
     background: rgb(26, 115, 232);
     color: #fff;
 }
 
-button.cart-button {
-    width: 9rem;
-}
-
+input[type=button]:active,
+button:active,
 button.cart-button:active {
     background: rgb(2, 70, 180);
+}
+
+button.cart-button {
+    width: 9rem;
 }
 
 input[type=number] {
@@ -199,6 +204,16 @@ a {
     height: -webkit-fill-available;
 }
 
+.loaded-nf {
+    opacity: 1;
+}
+
+.loading-nf {
+    opacity: 0;
+    overflow: hidden;
+    height: -webkit-fill-available;
+}
+
 .loading-invis {
     display: none;
     overflow: hidden;
@@ -261,9 +276,6 @@ a {
 }
 
 .navbar {
-    display: inline-flex;
-    justify-content: space-around;
-    align-items: center;
     position: fixed;
     width: 100%;
     top: 0vw;
@@ -271,6 +283,13 @@ a {
     z-index: 100;
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.navbar-body {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .navbar-gradient {

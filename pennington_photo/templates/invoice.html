@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Penning Photographics Invoice</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+  </head>
+  <body id="body">
+    <div class="message">{{ message }}</div>
+    <div class="info">{{ name.capitalize() }} ({{ email }}) requested the following photographics:</div>
+    <div class="list">
+      <ol type="1">
+        {% for uuid, photo in cart.items() %}
+          <li>
+            <h1><a href="/static/img/{{ uuid }}">{{ photo.name }}</a></h1>
+            <h2>Qty: {{ photo.qty }}</h2>
+          </li>
+        {% endfor %}
+      </ol>
+    </div>
+  </body>
+</html>
