@@ -22,10 +22,11 @@ def handle_contact():
     name = body["name"]
     email = body["email"]
     message = body["message"]
-    checkout = bool(body["checkout"])
+    checkout = body["checkout"] == "true"
     cart = {}
     if checkout:
         cart = flask.session["cart"]
+        flask.session.clear()
         pass
     
     # ... send email
