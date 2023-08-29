@@ -165,6 +165,13 @@ label.fancy {
     align-items: center;
 }
 
+.save-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 13rem;
+}
+
 h3.fancy {
     color: gray;
 }

@@ -3,9 +3,9 @@ import React from 'react'
 import EditablePhoto from './EditablePhoto';
 import ConfirmatoryButton from './Buttons';
 
-const SAVED = "saved.";
-const SAVING = "saving...";
-const UNSAVED = "unsaved changes.";
+const SAVED = "Saved.";
+const SAVING = "Saving...";
+const UNSAVED = "Unsaved Changes.";
 
 class EditGallery extends React.Component {
 
@@ -140,6 +140,14 @@ class EditGallery extends React.Component {
             <label>Date:</label>
             <input className='h5' type='date' value={dateTaken} onChange={(e) => { this.handleChange("dateTaken", e.target.value) }} /><br />
             <br />
+            <div className='menu-buttons'>
+              <div className='save-buttons'>
+                <button type='submit' onClick={() => { this.doSave() }}>Save Changes</button>
+                <label>{saveState}</label>
+              </div>
+              <ConfirmatoryButton text={"Delete This Gallery"} callback={deleteGallery} args={{ galleryId }} />
+            </div>
+            <br />
             <h3><a href={`/gallery/${galleryId}/`} className='logout-button'>View This Gallery</a></h3>
             <br />
           </div>
@@ -152,14 +160,6 @@ class EditGallery extends React.Component {
               return (<EditablePhoto uuid={photo.uuid} content={{ name, description, stars }} pictureId={photo.pictureId} deletePhoto={this.deletePhoto} />)
             })
           }
-        </div>
-        <br />
-        <div className='menu-buttons'>
-          <div>
-            <button type='submit' onClick={() => { this.doSave() }}>save</button>
-            <label>{saveState}</label>
-          </div>
-          <ConfirmatoryButton text={"Delete"} callback={deleteGallery} args={{ galleryId }} />
         </div>
       </>
     );
