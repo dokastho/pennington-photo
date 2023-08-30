@@ -1,4 +1,3 @@
-from pennington_photo.views.about import *
 from pennington_photo.views.admin import *
 from pennington_photo.views.account import *
 from pennington_photo.views.cart import *

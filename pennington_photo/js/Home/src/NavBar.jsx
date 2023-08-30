@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react'
 
-const items = ["Home", "Galleries", "Sizing", "About", "Contact"];
+const items = ["Home", "Galleries", "Sizing", "Contact"];
 
 class NavBar extends React.Component {
 
