@@ -105,6 +105,7 @@ class EditablePhoto extends React.Component {
     if (event.target.id != uuid) {
       document.removeEventListener("mousedown", this.handleClickOutside);
       this.setState({ blownUp: false });
+      document.getElementById('body').style["overflow"] = "auto";
     }
   }
 
@@ -115,6 +116,7 @@ class EditablePhoto extends React.Component {
     }
     this.setState({ blownUp: true });
     document.addEventListener("mousedown", this.handleClickOutside);
+    document.getElementById('body').style["overflow"] = "hidden";
   }
 
   setLoaded() {
