@@ -42,4 +42,25 @@ def del_photo(picture_id):
         )
     )
     cur.fetchone()
+    
+    # set gallery last-updated timestamp
+    created = arrow.utcnow().format()
+    cur = connection.execute(
+        "SELECT galleryId "
+        "FROM pictures "
+        "WHERE pictureId = ?",
+        (picture_id,)
+    )
+    gallery_id = cur.fetchone()["galleryId"]
+    cur = connection.execute(
+        "UPDATE galleries "
+        "SET created = ? "
+        "WHERE galleryId = ? AND owner = ?",
+        (
+            created,
+            gallery_id,
+            logname,
+        )
+    )
+    cur.fetchone()
     return flask.Response(status=204)

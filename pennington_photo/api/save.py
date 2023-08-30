@@ -5,6 +5,7 @@ import flask
 import arrow
 from pennington_photo.common.model import get_db, check_session
 
+
 @pennington_photo.app.route("/api/v1/save/gallery/<gallery_id>/", methods=["POST"])
 def save_gallery(gallery_id):
     logname = check_session()
@@ -16,19 +17,19 @@ def save_gallery(gallery_id):
     if body is None:
         flask.abort(400)
         pass
-    
+
     keys = ["name", "description", "dateTaken"]
     for key in keys:
         if key not in body:
             flask.abort(400)
             pass
         pass
-    
+
     name = body["name"]
     description = body["description"]
     date_taken = body["dateTaken"]
     created = arrow.utcnow().format()
-    
+
     connection = get_db()
     cur = connection.execute(
         "UPDATE galleries "
@@ -58,22 +59,22 @@ def save_photo(picture_id):
     if body is None:
         flask.abort(400)
         pass
-    
+
     keys = ["name", "description", "stars"]
     for key in keys:
         if key not in body:
             flask.abort(400)
             pass
         pass
-    
+
     name = body["name"]
     description = body["description"]
     stars = body["stars"]
     created = arrow.utcnow().format()
-    
+
     connection = get_db()
     cur = connection.execute(
-    "UPDATE pictures "
+        "UPDATE pictures "
         "SET name = ?, description = ?, stars = ?, created = ? "
         "WHERE pictureId = ? AND owner = ?",
         (
@@ -82,6 +83,26 @@ def save_photo(picture_id):
             stars,
             created,
             picture_id,
+            logname,
+        )
+    )
+    cur.fetchone()
+
+    # set gallery last-updated timestamp
+    cur = connection.execute(
+        "SELECT galleryId "
+        "FROM pictures "
+        "WHERE pictureId = ?",
+        (picture_id,)
+    )
+    gallery_id = cur.fetchone()["galleryId"]
+    cur = connection.execute(
+        "UPDATE galleries "
+        "SET created = ? "
+        "WHERE galleryId = ? AND owner = ?",
+        (
+            created,
+            gallery_id,
             logname,
         )
     )

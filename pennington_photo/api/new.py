@@ -1,6 +1,7 @@
 """Handle requests for new galleries and photos."""
 
 import pennington_photo
+import arrow
 import flask
 from pennington_photo.common.model import get_db, check_session, get_uuid
 
@@ -121,5 +122,19 @@ def new_photo():
         )
         cur.fetchone()
         pass
+    
+    # set gallery last-updated timestamp
+    created = arrow.utcnow().format()
+    cur = connection.execute(
+        "UPDATE galleries "
+        "SET created = ? "
+        "WHERE galleryId = ? AND owner = ?",
+        (
+            created,
+            galleryId,
+            logname,
+        )
+    )
+    cur.fetchone()
     
     return flask.redirect("/admin/")
