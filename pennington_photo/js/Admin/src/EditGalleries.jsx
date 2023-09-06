@@ -24,7 +24,7 @@ class EditGalleries extends React.Component {
         <div className='galleries-tray'>
           {
             galleries.map((gallery, idx) => {
-              return (<EditThumbnail name={gallery.name} galleryIdx={idx} imgSrc={gallery.thumbnail} doEditGallery={doEditGallery} />)
+              return (<EditThumbnail key={gallery.galleryId} name={gallery.name} galleryIdx={idx} imgSrc={gallery.thumbnail} doEditGallery={doEditGallery} />)
             })
           }
         </div>

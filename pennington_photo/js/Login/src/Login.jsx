@@ -7,9 +7,15 @@ class Login extends React.Component {
   }
 
   render() {
+    const badpass = document.getElementById("badpass").content === "True";
     return (
       <div className='center-static'>
         <h1>Log In</h1>
+        <div className='badpass'>
+          {
+            badpass ? 'Username or Password was incorrect.' : ''
+          }
+        </div>
         <div className='center-static-content'>
           <form action="/accounts/?target=/admin/" method="post">
             <input type="hidden" name="operation" value="login" />

@@ -42,7 +42,7 @@ class NavBar extends React.Component {
             {
               items.map((item) => {
                 return (
-                  <a href={`/${item.toLowerCase()}/`}>
+                  <a href={`/${item.toLowerCase()}/`} key={item}>
                     <div className='navbar-item' >
                       {item}
                     </div>

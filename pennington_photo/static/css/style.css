@@ -167,9 +167,12 @@ label.fancy {
 
 .save-buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    width: 13rem;
+}
+
+.save-label {
+    padding-left: 1rem;
 }
 
 h3.fancy {
@@ -649,6 +652,12 @@ label.fancy {
     width: fit-content;
 }
 
+.mobile {
+    text-align: center;
+    margin-top: 20%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 /* mobile */
 @media only screen and (max-width: 1200px) {

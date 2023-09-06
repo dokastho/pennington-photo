@@ -143,7 +143,7 @@ class EditGallery extends React.Component {
             <div className='upload-picture-form'>
               <form action="/api/v1/photo/new/" encType="multipart/form-data" method="post">
                 <input type='hidden' name='galleryId' value={galleryId} />
-                <label for="file">Attach Pictures</label><br />
+                <label htmlFor="file">Attach Pictures</label><br />
                 <input type="file" name="file" id="file" multiple required /><br />
                 <input type="submit" value="Save Attached Pictures" />
               </form>
@@ -152,7 +152,7 @@ class EditGallery extends React.Component {
             <div className='menu-buttons'>
               <div className='save-buttons'>
                 <button type='submit' onClick={() => { this.doSave() }}>Save Changes</button>
-                <label>{saveState}</label>
+                <label className='save-label'>{saveState}</label>
               </div>
               <ConfirmatoryButton text={"Delete This Gallery"} callback={deleteGallery} args={{ galleryId }} />
             </div>
@@ -166,7 +166,7 @@ class EditGallery extends React.Component {
           {
             photos.map((photo) => {
               const { name, description, stars } = photo;
-              return (<EditablePhoto uuid={photo.uuid} content={{ name, description, stars }} pictureId={photo.pictureId} deletePhoto={this.deletePhoto} />)
+              return (<EditablePhoto key={photo.uuid} uuid={photo.uuid} content={{ name, description, stars }} pictureId={photo.pictureId} deletePhoto={this.deletePhoto} />)
             })
           }
         </div>

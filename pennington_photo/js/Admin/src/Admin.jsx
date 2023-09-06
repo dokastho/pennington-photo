@@ -2,6 +2,8 @@ import React from 'react'
 import SideBar from './Sidebar';
 import EditGallery from './EditGallery';
 import EditGalleries from './EditGalleries';
+import { BrowserView, MobileView } from 'react-device-detect';
+import MobilePage from './MobilePage';
 import UserList from './UserList';
 import Loading from './Loading';
 
@@ -97,21 +99,28 @@ class Admin extends React.Component {
 
     return (
       <>
-        {
-          loaded ? (
-            null
-          ) : (
-            <Loading />
-          )
-        }
-        <div className={loaded ? 'loaded' : 'loading'}>
-          <div className='admin-page'>
-            <SideBar setContentFocus={this.showContent} />
-            <div className='admin-content'>
-              {content}
+        <BrowserView>
+          {
+            loaded ? (
+              null
+            ) : (
+              <Loading />
+            )
+          }
+          <div className={loaded ? 'loaded' : 'loading'}>
+            <div className='admin-page'>
+              <SideBar setContentFocus={this.showContent} />
+              <div className='admin-content'>
+                {content}
+              </div>
             </div>
           </div>
-        </div>
+        </BrowserView>
+        <MobileView>
+          <div className='site'>
+            <MobilePage />
+          </div>
+        </MobileView>
       </>
     );
   }
