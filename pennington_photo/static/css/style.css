@@ -323,6 +323,10 @@ a {
     color: black;
 }
 
+.navbar-icon {
+    height: 32px;
+}
+
 .navbar-item:hover {
     text-decoration: underline;
     cursor: pointer;

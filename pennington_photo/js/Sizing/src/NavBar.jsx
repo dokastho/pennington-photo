@@ -37,7 +37,7 @@ class NavBar extends React.Component {
           {/* <div className={`navbar-body ${isLoaded ? 'loaded' : 'loading'}`}> */}
           <div className='navbar-body'>
             <a href='/admin/'>
-              <img src="/static/icon/Bio.svg" className={loaded[0] ? 'loaded-nf' : 'loading-nf'} key='admin-icon' onLoad={() => { this.setLoaded(0) }} />
+              <img src="/static/icon/Bio.png" className={`navbar-icon ${loaded[0] ? 'loaded-nf' : 'loading-nf'}`} key='admin-icon' onLoad={() => { this.setLoaded(0) }} />
             </a>
             {
               items.map((item) => {
@@ -51,7 +51,7 @@ class NavBar extends React.Component {
               })
             }
             <a href='/cart/'>
-              <img src="/static/icon/Cart.svg" className={loaded[1] ? 'loaded-nf' : 'loading-nf'} key='cart-icon' onLoad={() => { this.setLoaded(1) }} />
+              <img src="/static/icon/Cart.png" className={`navbar-icon ${loaded[0] ? 'loaded-nf' : 'loading-nf'}`} key='cart-icon' onLoad={() => { this.setLoaded(1) }} />
             </a>
           </div>
         </div>
