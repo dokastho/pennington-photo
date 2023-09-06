@@ -80,7 +80,7 @@ class CartButton extends React.Component {
       uuid
     } = this.props;
     return (
-      loaded ? <button id={uuid} className={`cart-button ${checked ? 'done' : null}`} onClick={() => { this.addToCart() }}>{checked ? 'Done!' : added ? 'Add Another?' : 'Add to Cart'}</button> : null
+      loaded ? <button id={uuid} className={`cart-button mfs ${checked ? 'done' : null}`} onClick={() => { this.addToCart() }}>{checked ? 'Done!' : added ? 'Add Another?' : 'Add to Cart'}</button> : null
     );
   }
 }

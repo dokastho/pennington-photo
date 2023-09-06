@@ -90,16 +90,16 @@ class ClickablePhoto extends React.Component {
                 {
                   showDetails ? (
                     <>
-                      <h3 className='fancy but'>{name}</h3>
+                      <h3 className='fancy big-text'>{name}</h3>
                       {
-                        description === "" ? null : (<h3 className='alt but'><em>{description}</em></h3>)
+                        description === "" ? null : (<h3 className='alt big-text'><em>{description}</em></h3>)
                       }
-                      <div id={uuid} className='details-box' onClick={() => { this.toggleDetails() }}>
+                      <div id={uuid} className='details-box mfs' onClick={() => { this.toggleDetails() }}>
                         hide details
                       </div>
                     </>
                   ) : (
-                    <div id={uuid} className='details-box' onClick={() => { this.toggleDetails() }}>
+                    <div id={uuid} className='details-box mfs' onClick={() => { this.toggleDetails() }}>
                       show details
                     </div>
                   )

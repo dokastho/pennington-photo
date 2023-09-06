@@ -87,7 +87,16 @@ class Contact extends React.Component {
                   value={message} />
                 <br />
                 {
-                  checkout ? <h3>An invoice for your order will be sent with this message.</h3> : null
+                  checkout ? (
+                    <>
+                      <h3>
+                        An invoice for your order will be sent with this message.
+                      </h3>
+                      <p>
+                        6% sales tax will be added to orders. Shipping costs are variable depending on delivery speed and carrier. Orders are shipped within 3-4 weeks unless otherwise specified at time of ordering.
+                      </p>
+                    </>
+                  ) : null
                 }
                 <br />
                 {
