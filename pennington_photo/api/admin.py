@@ -32,6 +32,19 @@ def get_admin():
             (gallery["galleryId"],)
         )
         gallery["photos"] = cur.fetchall()
+        
+        for photo in gallery["photos"]:
+            picture_id = photo["pictureId"]
+            
+            cur = connection.execute(
+                "SELECT * "
+                "FROM sizes "
+                "WHERE pictureId = ?",
+                (picture_id,)
+            )
+            photo["sizes"] = cur.fetchall()
+            pass
+            
         pass
     
     cur = connection.execute(

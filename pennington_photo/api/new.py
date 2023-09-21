@@ -6,6 +6,50 @@ import flask
 from pennington_photo.common.model import get_db, check_session, get_uuid
 
 
+SIZES = [
+    {
+        "info": "Matted 11\" x 14\" Print",
+        "price": 300
+    },
+    {
+        "info": "Matted 16\" x 20\" Print",
+        "price": 500
+    },
+    {
+        "info": "Matted 20\" x 24\" Print",
+        "price": 800
+    },
+    {
+        "info": "Matted 26\" x 32\" Print",
+        "price": 1200
+    },
+    {
+        "info": "Matted/Overmatted 16\" x 20\" Framed",
+        "price": 450
+    },
+    {
+        "info": "Matted/Overmatted 28\" x 28\" Framed",
+        "price": 750
+    },
+    {
+        "info": "Matted/Overmatted 22\" x 40\" Framed",
+        "price": 950
+    },
+    {
+        "info": "Matted/Overmatted 32\" x 40\" Framed",
+        "price": 1450
+    },
+    {
+        "info": "Mirror Image 22\" x 40\" Framed",
+        "price": 1450
+    },
+    {
+        "info": "Mirror Image 32\" x 40\" Framed",
+        "price": 1750
+    },
+]
+
+
 @pennington_photo.app.route("/api/v1/gallery/new/", methods=["POST"])
 def new_gallery():
     logname = check_session()
@@ -121,6 +165,27 @@ def new_photo():
             )
         )
         cur.fetchone()
+        
+        cur = connection.execute(
+            "SELECT pictureId "
+            "FROM pictures "
+            "WHERE uuid = ?",
+            (uuid,)
+        )
+        picture_id = cur.fetchone()["pictureId"]
+        
+        for size in SIZES:
+            info = size["info"]
+            price = size["price"]
+            
+            cur = connection.execute(
+                "INSERT INTO sizes "
+                "(pictureId, owner, offered, info, price)",
+                (picture_id, logname, False, info, price,)
+            )
+            cur.fetchone()
+            pass
+        
         pass
     
     # set gallery last-updated timestamp

@@ -108,3 +108,79 @@ def save_photo(picture_id):
     )
     cur.fetchone()
     return flask.Response(status=204)
+
+
+@pennington_photo.app.route("/api/v1/save/select/<size_id>/", methods=["POST"])
+def select_size(size_id):
+    logname = check_session()
+    if not logname:
+        flask.abort(403)
+        pass
+
+    connection = get_db()
+    cur = connection.execute(
+        "UPDATE sizes "
+        "SET offered = ? "
+        "WHERE sizeId = ?",
+        (
+            True,
+            size_id,
+        )
+    )
+    cur.fetchone()
+    return flask.Response(status=201)
+
+
+@pennington_photo.app.route("/api/v1/save/deselect/<size_id>/", methods=["POST"])
+def deselect_size(size_id):
+    logname = check_session()
+    if not logname:
+        flask.abort(403)
+        pass
+
+    connection = get_db()
+    cur = connection.execute(
+        "UPDATE sizes "
+        "SET offered = ? "
+        "WHERE sizeId = ?",
+        (
+            False,
+            size_id,
+        )
+    )
+    cur.fetchone()
+    return flask.Response(status=201)
+
+
+@pennington_photo.app.route("/api/v1/save/price/<size_id>/", methods=["POST"])
+def update_price(size_id):
+    logname = check_session()
+    if not logname:
+        flask.abort(403)
+        pass
+
+    body = flask.request.get_json()
+    if body is None:
+        flask.abort(400)
+        pass
+
+    keys = ["price"]
+    for key in keys:
+        if key not in body:
+            flask.abort(400)
+            pass
+        pass
+
+    price = body["price"]
+    connection = get_db()
+    cur = connection.execute(
+        "UPDATE sizes "
+        "SET price = ? "
+        "WHERE sizeId = ?",
+        (
+            price,
+            size_id,
+        )
+    )
+    cur.fetchone()
+    return flask.Response(status=201)

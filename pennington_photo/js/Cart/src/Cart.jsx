@@ -145,6 +145,7 @@ class Cart extends React.Component {
                                   <div>
                                     <label htmlFor='number'>Qty: </label>
                                     <input type='number' min={1} value={photo.qty} onChange={(e) => { this.handleChage(index, 'qty', e.target.value) }} />
+                                    {/* add item sizes drop down */}
                                   </div>
                                   <button onClick={() => { this.deletePhoto(photo.uuid) }}>Remove from Cart</button>
                                 </div>

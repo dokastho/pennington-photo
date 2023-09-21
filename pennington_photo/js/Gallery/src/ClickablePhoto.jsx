@@ -94,6 +94,7 @@ class ClickablePhoto extends React.Component {
                       {
                         description === "" ? null : (<h3 className='alt big-text'><em>{description}</em></h3>)
                       }
+                      {/* add offered sizes */}
                       <div id={uuid} className='details-box mfs' onClick={() => { this.toggleDetails() }}>
                         hide details
                       </div>
