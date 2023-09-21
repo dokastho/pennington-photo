@@ -169,23 +169,39 @@ class EditablePhoto extends React.Component {
                   className={`blown-up-image photo ${loaded ? 'loaded' : 'loading-invis'}`}
                   onLoad={() => { this.setLoaded() }}
                 />
-                <div className='edit-box' id={uuid}>
-                  <label id={uuid} className='fancy'>Name:</label>
-                  <input id={uuid} className='span fancy' type='text' value={name} onChange={(e) => { this.handleChange("name", e.target.value) }} />
-                  <br />
-                  <label id={uuid} className='fancy'>Description:</label>
-                  <input id={uuid} className='span fancy' type='text' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} />
-                  <br />
-                  <label id={uuid} className='fancy'>Stars:</label>
-                  <input id={uuid} className='span fancy' type='number' min="1" max="5" value={stars} onChange={(e) => { this.handleChange("stars", e.target.value) }} />
-                  <br />
-                  <br />
-                  <div className='menu-buttons'>
-                    <div>
-                      <button id={uuid} type='submit' onClick={() => { this.doSave() }}>Save</button>
-                      <label id={uuid} className='fancy'>{saveState}</label>
+                <div className='edit-box-flex' id={uuid}>
+                  <div className='edit-box left'>
+                    <label id={uuid} className='fancy'>Name:</label>
+                    <input id={uuid} className='span fancy' type='text' value={name} onChange={(e) => { this.handleChange("name", e.target.value) }} />
+                    <br />
+                    <label id={uuid} className='fancy'>Description:</label>
+                    <input id={uuid} className='span fancy' type='text' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} />
+                    <br />
+                    <label id={uuid} className='fancy'>Stars:</label>
+                    <input id={uuid} className='span fancy' type='number' min="1" max="5" value={stars} onChange={(e) => { this.handleChange("stars", e.target.value) }} />
+                    <br />
+                    <br />
+                    <div className='menu-buttons'>
+                      <div>
+                        <button id={uuid} type='submit' onClick={() => { this.doSave() }}>Save</button>
+                        <label id={uuid} className='fancy'>{saveState}</label>
+                      </div>
+                      <ConfirmatoryButton id={uuid} text={"Delete"} callback={this.deletePhotoWrapper} />
                     </div>
-                    <ConfirmatoryButton id={uuid} text={"Delete"} callback={this.deletePhotoWrapper} />
+                  </div>
+                  <div className='edit-box right'>
+                    <input type='checkbox' value={'size one'} onChange={(e) => { this.handleChange("", e.target)}}  />
+                    <label></label>
+                    <br />
+                    <input type='checkbox' value={'size two'} onChange={(e) => { this.handleChange("", e.target)}}  />
+                    <label></label>
+                    <br />
+                    <input type='checkbox' value={'size three'} onChange={(e) => { this.handleChange("", e.target)}}  />
+                    <label></label>
+                    <br />
+                    <input type='checkbox' value={'size four'} onChange={(e) => { this.handleChange("", e.target)}}  />
+                    <label></label>
+                    <br />
                   </div>
                 </div>
               </div>
@@ -213,4 +229,4 @@ export default EditablePhoto
 
 // notes
 // requires 
-  // delete confirmatory button
+// delete confirmatory button

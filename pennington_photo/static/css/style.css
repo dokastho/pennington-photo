@@ -155,10 +155,6 @@ input[type=number] {
     outline: none;
 }
 
-label.fancy {
-    padding: 1rem;
-}
-
 .menu-buttons {
     display: flex;
     justify-content: space-between;
@@ -607,7 +603,21 @@ input.span {}
 input.fancy {}
 
 label.fancy {
-    color: white;
+    color: rgb(26, 115, 232);
+}
+
+.edit-box-flex {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.left {
+    margin-right: 1rem;
+}
+
+.right {
+    margin-left: 1rem;
 }
 
 .edit-box {
