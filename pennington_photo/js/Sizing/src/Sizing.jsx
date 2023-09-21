@@ -41,7 +41,7 @@ class Sizing extends React.Component {
               </h1>
               <div className='p'>
                 <p>
-                  I personally process all photographic prints to the highest quality and archival standards. All photographic images are printed onto glossy fiberbase silver gelatin double weight paper and selenium-toned for additional permanence, then washed and air-dried. An 8" X 10" negative is used to create photographic prints.
+                  I personally process all photographic prints to the highest quality and archival standards. All photographic images are processed using fiberbase silver gelatin double weight paper, selenium-toned for additional permanence, then washed and air-dried to create a permanent photograph and present a full tonal range and dynamic quality. A 4" X 5" negative is used to create photographic prints.
                 </p>
                 <p>
                   Prints are signed, numbered, mounted, matted and over-matted on white acid-free 4 ply 100% cotton rag museum board. Framing is silver or black metal. Contact me for additonal details.
@@ -55,7 +55,7 @@ class Sizing extends React.Component {
                   Exclusive Photographic Prints
                 </h3>
                 <p>
-                  These photographs are only printed 26" X 32", dry-mounted on 32" X 40" museum board, and if requested, framed 32" X 40" on silver or black metal frames. These exclusive photographic prints are limited to no more than 50 copies each.
+                  These photographs are only printed 26" X 32", dry-mounted on 32" X 40" 100% cotton rag museum board, and can be framed on silver or black metal 32" X 40" frames. These exclusive photographic prints are limited to no more than 50 copies each.
                 </p>
                 <h3>
                   Mirror Image Prints
@@ -66,6 +66,9 @@ class Sizing extends React.Component {
                 <h3>
                   Select Photographic Prints
                 </h3>
+                <p>
+                  Prices for each print in a given size are as follows (unless otherwise listed)
+                </p>
                 <table>
                   <tr>
                     <th>Print Size</th>
@@ -76,26 +79,26 @@ class Sizing extends React.Component {
                   <tr>
                     <td>11" X 14"</td>
                     <td>16" X 20"</td>
-                    <td>{filler}</td>
-                    <td>{filler}</td>
+                    <td>300</td>
+                    <td>450</td>
                   </tr>
                   <tr>
                     <td>16" X 20"</td>
                     <td>28" X 28"</td>
-                    <td>{filler}</td>
-                    <td>{filler}</td>
+                    <td>500</td>
+                    <td>750</td>
                   </tr>
                   <tr>
                     <td>20" X 24"</td>
-                    <td>{filler}</td>
-                    <td>{filler}</td>
-                    <td>{filler}</td>
+                    <td>22" x 40"</td>
+                    <td>800</td>
+                    <td>950</td>
                   </tr>
                   <tr>
                     <td>26" X 32"</td>
                     <td>32" X 40"</td>
-                    <td>{filler}</td>
-                    <td>{filler}</td>
+                    <td>1200</td>
+                    <td>1450</td>
                   </tr>
                 </table>
                 <p>
