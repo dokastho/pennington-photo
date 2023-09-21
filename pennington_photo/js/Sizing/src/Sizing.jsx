@@ -63,6 +63,20 @@ class Sizing extends React.Component {
                 <p>
                   These photographs consist of two prints with one printed in reverse of the other. They are then mounted together on a single 32" X 42" piece of museum board, then over-matted. Framing would consist of silver or black metal.
                 </p>
+                <table>
+                  <tr>
+                    <th>Matted & Framed Size</th>
+                    <th>Matted, Overmatted & Framed Price</th>
+                  </tr>
+                  <tr>
+                    <td>22" x 40"</td>
+                    <td>$1,450</td>
+                  </tr>
+                  <tr>
+                    <td>32" x 40"</td>
+                    <td>$1,750</td>
+                  </tr>
+                </table>
                 <h3>
                   Select Photographic Prints
                 </h3>
@@ -79,26 +93,26 @@ class Sizing extends React.Component {
                   <tr>
                     <td>11" X 14"</td>
                     <td>16" X 20"</td>
-                    <td>300</td>
-                    <td>450</td>
+                    <td>$300</td>
+                    <td>$450</td>
                   </tr>
                   <tr>
                     <td>16" X 20"</td>
                     <td>28" X 28"</td>
-                    <td>500</td>
-                    <td>750</td>
+                    <td>$500</td>
+                    <td>$750</td>
                   </tr>
                   <tr>
                     <td>20" X 24"</td>
                     <td>22" x 40"</td>
-                    <td>800</td>
-                    <td>950</td>
+                    <td>$800</td>
+                    <td>$950</td>
                   </tr>
                   <tr>
                     <td>26" X 32"</td>
                     <td>32" X 40"</td>
-                    <td>1200</td>
-                    <td>1450</td>
+                    <td>$1,200</td>
+                    <td>$1,450</td>
                   </tr>
                 </table>
                 <p>
