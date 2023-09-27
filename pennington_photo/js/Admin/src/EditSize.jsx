@@ -11,9 +11,11 @@ class EditablePriceCheckBox extends React.Component {
     super(props);
     this.state = {
       // state attributes go here
-      selected: false,
-      price: 0,
-      info: "",
+      content: {
+        offered: false,
+        price: 0,
+        info: "",
+      },
       saveState: SAVED,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -24,24 +26,28 @@ class EditablePriceCheckBox extends React.Component {
 
   componentDidMount() {
     const {
-      selected,
+      offered,
       price,
       info
     } = this.props;
 
-    this.setState({
-      selected,
+    const content = {
+      offered,
       price,
       info,
-    });
+    }
+
+    this.setState({ content });
   }
 
   handleChange(key, value) {
+    console.log(key);
+    console.log(value);
     const {
       content
     } = this.state;
     content[key] = value;
-    this.setState({ content, saveState: UNSAVED, selected: true });
+    this.setState({ content, saveState: UNSAVED, offered: true });
     if (this.timeout) {
       clearTimeout(this.timeout);
       this.timeout = null;
@@ -50,32 +56,50 @@ class EditablePriceCheckBox extends React.Component {
       this.timeout = null;
       this.setState({ saveState: SAVING });
       this.doSave();
-    }, 1000);
+    }, 100);
   }
 
   doSave() {
     const {
       sizeId,
+      callback,
     } = this.props;
     const {
-      price
+      content
     } = this.state;
-    
-    // API call to save price update
-  }
+    const {
+      price,
+      offered
+    } = content;
 
-  doSelect() {
-    // API call to set this size as offered
-  }
+    callback({ price, offered, sizeId });
 
-  doDeselect() {
-    // API call to remove this size as offered
+    console.log("API call");
   }
 
   render() {
-    const { } = this.state;
+    const {
+      content
+    } = this.state;
+    const {
+      uuid,
+      sizeId,
+    } = this.props;
+    const {
+      info,
+      price,
+      offered,
+    } = content;
     return (
-      <div>
+      <div className='size-checkbox' key={sizeId} id={uuid}>
+        <span id={uuid}>
+          <input id={uuid} type='checkbox' checked={offered} onChange={() => { this.handleChange("offered", !offered) }} />
+          <label id={uuid}>{info}</label>
+        </span>
+        <span id={uuid} className='right-text'>
+          <label id={uuid}>Price: </label>
+          <input id={uuid} type='text' value={price} onChange={(e) => { this.handleChange("price", e.target.value) }} />
+        </span>
       </div>
     );
   }
@@ -84,15 +108,12 @@ class EditablePriceCheckBox extends React.Component {
 EditablePriceCheckBox.propTypes = {
   // prop types go here
   // s: PropTypes.string.isRequired,
-  selected: PropTypes.bool.isRequired,
+  offered: PropTypes.bool.isRequired,
   price: PropTypes.number.isRequired,
-  info: PropTypes.number.isRequired,
+  info: PropTypes.string.isRequired,
+  uuid: PropTypes.string.isRequired,
   sizeId: PropTypes.number.isRequired,
+  // callback
 };
 
 export default EditablePriceCheckBox
-
-// NOTES
-// on upload, insert into the sizes db each of the sizes as not offered
-// when selected it becomes offered, deselected it does not
-// price subject to change

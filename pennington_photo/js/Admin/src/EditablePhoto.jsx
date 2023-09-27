@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react'
 import Loading from './Loading';
 import ConfirmatoryButton from './Buttons';
+import EditablePriceCheckBox from './EditSize';
 
 const SAVED = "Saved.";
 const SAVING = "Saving...";
@@ -19,6 +20,7 @@ class EditablePhoto extends React.Component {
         name: "",
         description: "",
         stars: "",
+        sizes: [],
       },
       saveState: SAVED,
     };
@@ -32,6 +34,8 @@ class EditablePhoto extends React.Component {
     this.doSave = this.doSave.bind(this);
 
     this.timeout = null;
+
+    this.setPhotoSizes = this.setPhotoSizes.bind(this);
   }
 
   deletePhotoWrapper() {
@@ -123,6 +127,20 @@ class EditablePhoto extends React.Component {
     this.setState({ loaded: true });
   }
 
+  setPhotoSizes(size) {
+    const {
+      content
+    } = this.state;
+    const { price, offered, sizeId } = size;
+    content.sizes.forEach((s) => {
+      if (s.sizeId == sizeId) {
+        s.price = price;
+        s.offered = Number(offered);
+      }
+    })
+    this.setState({ content });
+  }
+
   render() {
     const {
       uuid,
@@ -137,7 +155,8 @@ class EditablePhoto extends React.Component {
     const {
       name,
       description,
-      stars
+      stars,
+      sizes,
     } = content;
     return (
       <>
@@ -161,47 +180,51 @@ class EditablePhoto extends React.Component {
           blownUp ? (
             <div className='blown-up-container-nh'>
               <div className='blown-up-content'>
-
-                <img
-                  src={`/static/img/${uuid}`}
-                  id={uuid}
-                  key={uuid}
-                  className={`blown-up-image photo ${loaded ? 'loaded' : 'loading-invis'}`}
-                  onLoad={() => { this.setLoaded() }}
-                />
-                <div className='edit-box-flex' id={uuid}>
-                  <div className='edit-box left' id={uuid}>
-                    <label id={uuid} className='fancy'>Name:</label>
-                    <input id={uuid} className='span fancy' type='text' value={name} onChange={(e) => { this.handleChange("name", e.target.value) }} />
-                    <br />
-                    <label id={uuid} className='fancy'>Description:</label>
-                    <input id={uuid} className='span fancy' type='text' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} />
-                    <br />
-                    <label id={uuid} className='fancy'>Stars:</label>
-                    <input id={uuid} className='span fancy' type='number' min="1" max="5" value={stars} onChange={(e) => { this.handleChange("stars", e.target.value) }} />
-                    <br />
-                    <br />
-                    <div className='menu-buttons'>
-                      <div>
-                        <button id={uuid} type='submit' onClick={() => { this.doSave() }}>Save</button>
-                        <label id={uuid} className='fancy'>{saveState}</label>
-                      </div>
-                      <ConfirmatoryButton id={uuid} text={"Delete"} callback={this.deletePhotoWrapper} />
-                    </div>
-                  </div>
+                <div className='blown-up-img-and-sizes'>
+                  <img
+                    src={`/static/img/${uuid}`}
+                    id={uuid}
+                    key={uuid}
+                    className={`blown-up-image photo ${loaded ? 'loaded' : 'loading-invis'}`}
+                    onLoad={() => { this.setLoaded() }}
+                  />
                   <div className='edit-box right' id={uuid}>
-                    <input type='checkbox' value={'size one'} onChange={(e) => { this.handleChange("", e.target)}}  />
-                    <label></label>
+                    <h3 id={uuid}><em id={uuid}>Select which sizes you would like to offer, and edit the price (if necessary)</em></h3>
+                    {
+                      sizes.map((size) => {
+                        return (
+                          <EditablePriceCheckBox
+                            // key={`${size.sizeId}-${size.offered}-${size.price}`}
+                            offered={Boolean(size.offered)}
+                            price={size.price}
+                            info={size.info}
+                            sizeId={size.sizeId}
+                            uuid={uuid}
+                            callback={this.setPhotoSizes}
+                          />
+                        )
+                      })
+                    }
                     <br />
-                    <input type='checkbox' value={'size two'} onChange={(e) => { this.handleChange("", e.target)}}  />
-                    <label></label>
-                    <br />
-                    <input type='checkbox' value={'size three'} onChange={(e) => { this.handleChange("", e.target)}}  />
-                    <label></label>
-                    <br />
-                    <input type='checkbox' value={'size four'} onChange={(e) => { this.handleChange("", e.target)}}  />
-                    <label></label>
-                    <br />
+                  </div>
+                </div>
+                <div className='edit-box short wide' id={uuid}>
+                  <label id={uuid} className='fancy'>Name:</label>
+                  <input id={uuid} className='span fancy' type='text' value={name} onChange={(e) => { this.handleChange("name", e.target.value) }} />
+                  <br id={uuid} />
+                  <label id={uuid} className='fancy'>Description:</label>
+                  <input id={uuid} className='span fancy' type='text' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} />
+                  <br id={uuid} />
+                  <label id={uuid} className='fancy'>Stars:</label>
+                  <input id={uuid} className='span fancy' type='number' min="1" max="5" value={stars} onChange={(e) => { this.handleChange("stars", e.target.value) }} />
+                  <br id={uuid} />
+                  <br id={uuid} />
+                  <div className='menu-buttons' id={uuid}>
+                    <div>
+                      <button id={uuid} type='submit' onClick={() => { this.doSave() }}>Save</button>
+                      <label id={uuid} className='fancy'>{saveState}</label>
+                    </div>
+                    <ConfirmatoryButton id={uuid} text={"Delete"} callback={this.deletePhotoWrapper} />
                   </div>
                 </div>
               </div>

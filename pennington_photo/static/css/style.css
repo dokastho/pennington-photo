@@ -598,6 +598,12 @@ td {
     align-items: center;
 }
 
+.blown-up-img-and-sizes {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
 input.span {}
 
 input.fancy {}
@@ -627,6 +633,24 @@ label.fancy {
     border-radius: 0.5rem;
     position: relative;
     margin-top: 1rem;
+}
+
+.right-text {
+    text-align: right;
+}
+
+.size-checkbox {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wide {
+    width: 100%;
+}
+
+.short {
     height: 20vh;
 }
 
