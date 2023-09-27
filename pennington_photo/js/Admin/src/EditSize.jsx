@@ -41,8 +41,6 @@ class EditablePriceCheckBox extends React.Component {
   }
 
   handleChange(key, value) {
-    console.log(key);
-    console.log(value);
     const {
       content
     } = this.state;
@@ -74,7 +72,23 @@ class EditablePriceCheckBox extends React.Component {
 
     callback({ price, offered, sizeId });
 
-    console.log("API call");
+    fetch(`/api/v1/save/price/${sizeId}/`,
+    {
+      credentials: 'same-origin',
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ price, offered }),
+    })
+    .then((response) => {
+      if (!response.ok) throw Error(response.statusText);
+      this.setState({ saveState: SAVED });
+      console.log("API call");
+      return response.json();
+    })
+    .catch((error) => console.log(error));
   }
 
   render() {

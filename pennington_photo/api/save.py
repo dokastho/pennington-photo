@@ -164,7 +164,7 @@ def update_price(size_id):
         flask.abort(400)
         pass
 
-    keys = ["price"]
+    keys = ["price", "offered"]
     for key in keys:
         if key not in body:
             flask.abort(400)
@@ -172,13 +172,15 @@ def update_price(size_id):
         pass
 
     price = body["price"]
+    offered = body["offered"]
     connection = get_db()
     cur = connection.execute(
         "UPDATE sizes "
-        "SET price = ? "
+        "SET price = ?, offered = ? "
         "WHERE sizeId = ?",
         (
             price,
+            offered,
             size_id,
         )
     )
