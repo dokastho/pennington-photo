@@ -35,6 +35,7 @@ case $1 in
     sqlite3 -batch -line var/pennington_photo.sqlite3 'select * from users'
     sqlite3 -batch -line var/pennington_photo.sqlite3 'select * from galleries'
     sqlite3 -batch -line var/pennington_photo.sqlite3 'select * from pictures'
+    sqlite3 -batch -line var/pennington_photo.sqlite3 'select * from sizes'
     ;;
   *)
     usage

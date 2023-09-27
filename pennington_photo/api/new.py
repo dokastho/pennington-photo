@@ -118,6 +118,7 @@ def new_gallery():
             )
         )
         cur.fetchone()
+        insert_sizes(uuid)
         pass
 
     return flask.redirect('/admin/')
@@ -165,27 +166,7 @@ def new_photo():
             )
         )
         cur.fetchone()
-        
-        cur = connection.execute(
-            "SELECT pictureId "
-            "FROM pictures "
-            "WHERE uuid = ?",
-            (uuid,)
-        )
-        picture_id = cur.fetchone()["pictureId"]
-        
-        for size in SIZES:
-            info = size["info"]
-            price = size["price"]
-            
-            cur = connection.execute(
-                "INSERT INTO sizes "
-                "(pictureId, owner, offered, info, price)",
-                (picture_id, logname, False, info, price,)
-            )
-            cur.fetchone()
-            pass
-        
+        insert_sizes(uuid)
         pass
     
     # set gallery last-updated timestamp
@@ -203,3 +184,30 @@ def new_photo():
     cur.fetchone()
     
     return flask.redirect("/admin/")
+
+
+def insert_sizes(uuid:str):
+    connection = get_db()
+    logname = check_session()
+
+    cur = connection.execute(
+        "SELECT pictureId "
+        "FROM pictures "
+        "WHERE uuid = ?",
+        (uuid,)
+    )
+    picture_id = cur.fetchone()["pictureId"]
+    
+    for size in SIZES:
+        info = size["info"]
+        price = size["price"]
+        
+        cur = connection.execute(
+            "INSERT INTO sizes "
+            "(pictureId, owner, offered, info, price) "
+            "VALUES (?, ?, ?, ?, ?)",
+            (picture_id, logname, False, info, price,)
+        )
+        cur.fetchone()
+        pass
+    pass

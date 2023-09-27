@@ -170,7 +170,7 @@ class EditablePhoto extends React.Component {
                   onLoad={() => { this.setLoaded() }}
                 />
                 <div className='edit-box-flex' id={uuid}>
-                  <div className='edit-box left'>
+                  <div className='edit-box left' id={uuid}>
                     <label id={uuid} className='fancy'>Name:</label>
                     <input id={uuid} className='span fancy' type='text' value={name} onChange={(e) => { this.handleChange("name", e.target.value) }} />
                     <br />
@@ -189,7 +189,7 @@ class EditablePhoto extends React.Component {
                       <ConfirmatoryButton id={uuid} text={"Delete"} callback={this.deletePhotoWrapper} />
                     </div>
                   </div>
-                  <div className='edit-box right'>
+                  <div className='edit-box right' id={uuid}>
                     <input type='checkbox' value={'size one'} onChange={(e) => { this.handleChange("", e.target)}}  />
                     <label></label>
                     <br />

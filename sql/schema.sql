@@ -37,6 +37,6 @@ CREATE TABLE sizes(
   offered INTEGER NOT NULL,
   info VARCHAR(64) NOT NULL,
   price INTEGER NOT NULL,
-  FOREIGN KEY(pictureId) REFERENCES galleries(galleryId) ON DELETE CASCADE,
+  FOREIGN KEY(pictureId) REFERENCES pictures(pictureId) ON DELETE CASCADE,
   FOREIGN KEY(owner) REFERENCES users(username) ON DELETE CASCADE
 );
