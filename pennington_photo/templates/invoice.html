@@ -13,9 +13,13 @@
           <li>
             <h1><a href="/static/img/{{ uuid }}">{{ photo.name }}</a></h1>
             <h2>Qty: {{ photo.qty }}</h2>
+            <h2>Size: {{ photo.size }}</h2>
+            <h2>Price: ${{ photo.price }}</h2>
           </li>
         {% endfor %}
       </ol>
+      <br />
+      <h1>Order Total: ${{ total_cost }}</h1>
     </div>
   </body>
 </html>

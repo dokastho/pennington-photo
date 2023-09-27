@@ -5,6 +5,7 @@ import flask
 import pennington_photo
 from pennington_photo.common.model import get_db
 
+
 @pennington_photo.app.route('/api/v1/contact/', methods=['POST'])
 def handle_contact():
     body = flask.request.form
@@ -28,23 +29,28 @@ def handle_contact():
         cart = flask.session["cart"]
         flask.session.clear()
         pass
-    
+
     # ... send email
-    
+
+    total_cost = 0
+    for item in cart.values():
+        total_cost += item['price']
+
     context = {
         "cart": cart,
         "name": name.capitalize(),
         "email": email,
-        "message": message
+        "message": message,
+        "total_cost" : total_cost
     }
-    
+
     invoice = flask.render_template("invoice.html", **context)
-    
+
     ts = arrow.utcnow()
     ts = ts.format().replace(' ', '_')
-    
+
     with open(pennington_photo.app.config["SITE_ROOT"] / f"invoice-{name.replace(' ', '-')}-{ts}.html", "w") as fp:
         fp.writelines(invoice)
         pass
-    
+
     return flask.redirect("/contact")

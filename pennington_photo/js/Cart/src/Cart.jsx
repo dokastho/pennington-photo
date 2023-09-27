@@ -6,6 +6,8 @@ const SAVED = "is saved.";
 const SAVING = "is saving...";
 const UNSAVED = "has unsaved changes.";
 
+const default_size = "-- select an option --";
+
 class Cart extends React.Component {
 
   constructor(props) {
@@ -34,7 +36,6 @@ class Cart extends React.Component {
           cart: data.cart,
           loaded: true
         });
-        console.log(data.cart);
       })
       .catch((error) => console.log(error));
   }
@@ -65,7 +66,12 @@ class Cart extends React.Component {
     const {
       cart
     } = this.state;
-    cart[index][key] = val;
+    if (key === 'info') {
+      cart[index]['size'] = val.size;
+      cart[index]['price'] = val.price;
+    } else {
+      cart[index][key] = val;
+    }
     this.setState({ cart, saveState: UNSAVED });
     if (this.timeout) {
       clearTimeout(this.timeout);
@@ -111,6 +117,10 @@ class Cart extends React.Component {
       loaded,
       saveState
     } = this.state;
+    let ready = true;
+    cart.forEach((photo) => {
+      ready = ready && (photo.size !== "");
+    })
     return (
       <>
         {
@@ -149,11 +159,12 @@ class Cart extends React.Component {
                                     {/* add item sizes drop down */}
                                   </div>
                                   <label className='min-margin' htmlFor="size">Choose a size:</label>
-                                  <select className='min-margin' id="size" name="size">
+                                  <select className='min-margin' id="size" name="size" onChange={(e) => { this.handleChage(index, 'info', JSON.parse(e.target.value)) }}>
+                                    <option disabled selected value={""}>{default_size}</option>
                                     {
                                       photo.sizes.map((size) => {
-                                        return(
-                                          <option value={size.info}>{`${size.info} ($${size.price})`}</option>
+                                        return (
+                                          <option selected={photo.size === size.info} key={size.info} value={JSON.stringify({ size: size.info, price: size.price })}>{`${size.info} ($${size.price})`}</option>
                                         )
                                       })
                                     }
@@ -170,7 +181,9 @@ class Cart extends React.Component {
                     <br />
                     <div className='menu-buttons'>
                       <button onClick={() => { this.doUpdate() }}>Save Cart</button>
-                      <a href='/contact/?checkout=true' className='submit-button'>Check Out</a>
+                      {
+                        ready ? (<a href='/contact/?checkout=true' className='submit-button'>Check Out</a>) : (<h3 className='badpass'>Please select a size & finish for each item to check out</h3>)
+                      }
                     </div>
                   </>
                 )

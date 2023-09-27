@@ -206,7 +206,7 @@ def insert_sizes(uuid:str):
             "INSERT INTO sizes "
             "(pictureId, owner, offered, info, price) "
             "VALUES (?, ?, ?, ?, ?)",
-            (picture_id, logname, False, info, price,)
+            (picture_id, logname, True, info, price,)
         )
         cur.fetchone()
         pass

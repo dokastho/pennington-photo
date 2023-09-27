@@ -16,6 +16,10 @@ def get_cart_contents():
     if 'cart' in flask.session:
         for uuid, photo in flask.session['cart'].items():
             photo['uuid'] = uuid
+            if 'price' not in photo:
+                photo['price'] = 0
+            if 'size' not in photo:
+                photo['size'] = ""
             cur = connection.execute(
                 "SELECT info, price "
                 "FROM sizes s "
@@ -102,6 +106,8 @@ def cart_update():
         val = {
             'name': photo['name'],
             'qty': photo['qty'],
+            'size': photo['size'],
+            'price': photo['price'],
         }
         cart_p[photo['uuid']] = val
         pass
