@@ -34,6 +34,22 @@ input[type=password] {
     color: rgb(26, 115, 232);
 }
 
+select {
+    appearance: none;
+    border: none;
+    outline: none;
+    border-bottom: 0.2em solid rgb(26, 115, 232);
+    background: rgba(26, 115, 232, 0.2);
+    border-radius: 0.2em 0.2em 0 0;
+    padding: 0.4em;
+    color: rgb(26, 115, 232);
+    cursor: pointer;
+}
+
+option {
+    cursor: pointer;
+}
+
 .underline {
     text-decoration: underline;
 }
@@ -635,6 +651,11 @@ label.fancy {
     margin-top: 1rem;
 }
 
+.min-margin {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
 .right-text {
     text-align: right;
 }
@@ -677,7 +698,6 @@ label.fancy {
 
 .cart-item-options {
     display: flex;
-    width: 20vw;
     justify-content: space-evenly;
     align-items: center;
 }

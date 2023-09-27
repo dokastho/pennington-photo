@@ -34,6 +34,7 @@ class Cart extends React.Component {
           cart: data.cart,
           loaded: true
         });
+        console.log(data.cart);
       })
       .catch((error) => console.log(error));
   }
@@ -142,12 +143,22 @@ class Cart extends React.Component {
                                 <img src={`/static/img/${photo.uuid}`} className='cart-thumbnail' />
                                 <h3 className='fancy'>{photo.name}</h3>
                                 <div className='cart-item-options'>
-                                  <div>
+                                  <div className='min-margin'>
                                     <label htmlFor='number'>Qty: </label>
                                     <input type='number' min={1} value={photo.qty} onChange={(e) => { this.handleChage(index, 'qty', e.target.value) }} />
                                     {/* add item sizes drop down */}
                                   </div>
-                                  <button onClick={() => { this.deletePhoto(photo.uuid) }}>Remove from Cart</button>
+                                  <label className='min-margin' htmlFor="size">Choose a size:</label>
+                                  <select className='min-margin' id="size" name="size">
+                                    {
+                                      photo.sizes.map((size) => {
+                                        return(
+                                          <option value={size.info}>{`${size.info} ($${size.price})`}</option>
+                                        )
+                                      })
+                                    }
+                                  </select>
+                                  <button className='min-margin' onClick={() => { this.deletePhoto(photo.uuid) }}>Remove from Cart</button>
                                 </div>
                               </div>
                             </>

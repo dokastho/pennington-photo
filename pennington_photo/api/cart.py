@@ -2,6 +2,7 @@
 
 import flask
 import pennington_photo
+from pennington_photo.common.model import get_db
 
 
 @pennington_photo.app.route('/api/v1/cart/contents/')
@@ -9,10 +10,22 @@ def get_cart_contents():
     data = {
         'cart': []
     }
+    
+    connection = get_db()
 
     if 'cart' in flask.session:
         for uuid, photo in flask.session['cart'].items():
             photo['uuid'] = uuid
+            cur = connection.execute(
+                "SELECT info, price "
+                "FROM sizes s "
+                "LEFT JOIN pictures p "
+                "USING(pictureId) "
+                "WHERE offered "
+                "AND p.uuid = ?",
+                (uuid,)
+            )
+            photo["sizes"] = cur.fetchall()
             data['cart'].append(photo)
             pass
         pass
