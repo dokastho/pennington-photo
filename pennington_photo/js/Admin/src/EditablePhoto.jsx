@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react'
-import Loading from './Loading';
 import ConfirmatoryButton from './Buttons';
 import EditablePriceCheckBox from './EditSize';
+import Photo from './Photo';
 
 const SAVED = "Saved.";
 const SAVING = "Saving...";
@@ -13,7 +13,6 @@ class EditablePhoto extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: false,
       blownUp: false,
 
       content: {
@@ -24,7 +23,6 @@ class EditablePhoto extends React.Component {
       },
       saveState: SAVED,
     };
-    this.setLoaded = this.setLoaded.bind(this);
     this.clickToBlowUp = this.clickToBlowUp.bind(this);
     this.wrapperRef = React.createRef();
     this.handleClickOutside = this.handleClickOutside.bind(this);
@@ -123,10 +121,6 @@ class EditablePhoto extends React.Component {
     document.getElementById('body').style["overflow"] = "hidden";
   }
 
-  setLoaded() {
-    this.setState({ loaded: true });
-  }
-
   setPhotoSizes(size) {
     const {
       content
@@ -147,7 +141,6 @@ class EditablePhoto extends React.Component {
       imgClass,
     } = this.props;
     const {
-      loaded,
       blownUp,
       content,
       saveState
@@ -161,19 +154,12 @@ class EditablePhoto extends React.Component {
     return (
       <>
         <div className={imgClass} key={uuid}>
-          {
-            loaded ? (
-              null
-            ) : (
-              <Loading />
-            )
-          }
-          <img
-            src={`/static/img/${uuid}`}
+          <Photo
+            uuid={uuid}
             id={uuid}
-            className={`clickable photo ${loaded ? 'loaded' : 'loading-invis'}`}
-            onLoad={() => { this.setLoaded() }}
-            onClick={() => { this.clickToBlowUp() }}
+            key={uuid}
+            imgClass='clickable'
+            clickCallback={this.clickToBlowUp}
           />
         </div>
         {
@@ -181,12 +167,11 @@ class EditablePhoto extends React.Component {
             <div className='blown-up-container-nh'>
               <div className='blown-up-content'>
                 <div className='blown-up-img-and-sizes'>
-                  <img
-                    src={`/static/img/${uuid}`}
+                  <Photo
+                    uuid={uuid}
                     id={uuid}
                     key={uuid}
-                    className={`blown-up-image photo ${loaded ? 'loaded' : 'loading-invis'}`}
-                    onLoad={() => { this.setLoaded() }}
+                    imgClass='blown-up-image'
                   />
                   <div className='edit-box right' id={uuid}>
                     <h3 id={uuid}><em id={uuid}>Select which sizes you would like to offer, and edit the price (if necessary)</em></h3>

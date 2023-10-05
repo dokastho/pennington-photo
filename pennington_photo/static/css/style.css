@@ -522,8 +522,14 @@ a {
 
 .photo {
     object-fit: cover;
+    /* pointer-events: none; */
     width: -webkit-fill-available;
     height: -webkit-fill-available;
+}
+
+.blur {
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
 }
 
 .clickable {
@@ -765,13 +771,14 @@ label.fancy {
     }
 
     textarea {
-        min-height:40vh;
+        min-height: 40vh;
         height: fit-content;
     }
 
     input[type=submit] {
         border-radius: 0.75rem;
     }
+
     input[type=button] {
         border-radius: 0.75rem;
     }

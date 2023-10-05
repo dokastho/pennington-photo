@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react'
-import Loading from './Loading';
+import Photo from './Photo';
 import CartButton from './CartButton';
 
 class ClickablePhoto extends React.Component {
@@ -8,11 +8,9 @@ class ClickablePhoto extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: false,
       blownUp: false,
       showDetails: false,
     };
-    this.setLoaded = this.setLoaded.bind(this);
     this.clickToBlowUp = this.clickToBlowUp.bind(this);
     this.wrapperRef = React.createRef();
     this.handleClickOutside = this.handleClickOutside.bind(this);
@@ -43,13 +41,8 @@ class ClickablePhoto extends React.Component {
     document.getElementById('body').style["overflow"] = "hidden";
   }
 
-  setLoaded() {
-    this.setState({ loaded: true });
-  }
-
   render() {
     const {
-      loaded,
       blownUp,
       showDetails
     } = this.state;
@@ -61,31 +54,22 @@ class ClickablePhoto extends React.Component {
     } = this.props;
     return (
       <>
-        <div className={imgClass}>
-          {
-            loaded ? (
-              null
-            ) : (
-              <Loading />
-            )
-          }
-          <img
-            src={`/static/img/${uuid}`}
+        <div className='photo-slot'>
+          <Photo
+            uuid={uuid}
             id={uuid}
-            className={`clickable photo ${loaded ? 'loaded' : 'loading-invis'}`}
-            onLoad={() => { this.setLoaded() }}
-            onClick={() => { this.clickToBlowUp() }}
+            imgClass={`clickable ${imgClass}`}
+            clickCallback={this.clickToBlowUp}
           />
         </div>
         {
           blownUp ? (
             <div className='blown-up-container'>
               <div className='blown-up-content'>
-                <img
-                  src={`/static/img/${uuid}`}
+                <Photo
+                  uuid={uuid}
                   id={uuid}
-                  className={`blown-up-image${showDetails ? '' : '-big'} photo ${loaded ? 'loaded' : 'loading-invis'}`}
-                  onLoad={() => { this.setLoaded() }}
+                  imgClass={`blown-up-image${showDetails ? '' : '-big'}`}
                 />
                 {
                   showDetails ? (
@@ -116,7 +100,7 @@ class ClickablePhoto extends React.Component {
 }
 
 ClickablePhoto.defaultProps = {
-  imgClass: 'photo-slot',
+  imgClass: '',
   description: '',
 }
 
