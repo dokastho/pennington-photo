@@ -1,6 +1,6 @@
 import React from 'react'
 
-const imgName = "IMG_3752.jpg"
+const imgName = "IMG_6867.png"
 
 class InfoPage extends React.Component {
 
