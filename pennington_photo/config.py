@@ -11,3 +11,4 @@ SITE_ROOT = pathlib.Path(__file__).resolve().parent.parent
 UPLOADS_FOLDER = SITE_ROOT/"pennington_photo"/"static"/"img"
 # Database file is var/resume.sqlite3
 DATABASE_FILENAME = SITE_ROOT/'var'/'pennington_photo.sqlite3'
+EMAIL_RECIPIENT = "tjdokas@gmail.com"

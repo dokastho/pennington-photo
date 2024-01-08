@@ -61,7 +61,7 @@ def handle_contact():
 
 def send_email_ses(body_content: str, subject: str):
     sender = "Pennington Photographics <noreply@penningtonphotographic.com>"
-    recipient = "tjdokas@gmail.com"
+    recipient = pennington_photo.app.config["EMAIL_RECIPIENT"]
     charset = "UTF-8"
     region = "us-east-1"
 
