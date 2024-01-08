@@ -4,8 +4,6 @@ Personal website pennington_photo python package configuration.
 
 from setuptools import setup
 
-with open("README.md", "r", encoding="utf-8") as fh:
-    long_description = fh.read()
 
 setup(
     name='pennington_photo',
@@ -15,8 +13,6 @@ setup(
     author_email="dokastho@umich.edu",
     url="https://github.com/dokastho/pennington_photo",
     description="A fresh take on what a pennington_photo can do",
-    long_description=long_description,
-    long_description_content_type="text/markdown",
     include_package_data=True,
     install_requires=[
         'arrow',

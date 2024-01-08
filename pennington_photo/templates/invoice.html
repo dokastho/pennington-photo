@@ -5,21 +5,30 @@
     <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
   </head>
   <body id="body">
+    <h2>Message from {{name}}:</h2>
+    <br>
     <div class="message">{{ message }}</div>
-    <div class="info">{{ name.capitalize() }} ({{ email }}) requested the following photographics:</div>
+    <br>
+    {% if checkout %}
+    <h2>Order Details</h2>
+    <div class="info">{{ name }} ({{ email }}) requested the following photographics:</div>
     <div class="list">
       <ol type="1">
         {% for uuid, photo in cart.items() %}
-          <li>
-            <h1><a href="/static/img/{{ uuid }}">{{ photo.name }}</a></h1>
-            <h2>Qty: {{ photo.qty }}</h2>
-            <h2>Size: {{ photo.size }}</h2>
-            <h2>Price: ${{ photo.price }}</h2>
-          </li>
+        <li>
+          <h1><a href="/static/img/{{ uuid }}">{{ photo.name }}</a></h1>
+          <h2>Qty: {{ photo.qty }}</h2>
+          <h2>Size: {{ photo.size }}</h2>
+          <h2>Price: ${{ photo.price }}</h2>
+        </li>
         {% endfor %}
       </ol>
       <br />
       <h1>Order Total: ${{ total_cost }}</h1>
+      {% endif %}
+      <p>
+        <em>This is an automated message from the Pennington Photographics server. If you have questions, please direct them to <a href="mailto:tjdokas@gmail.com">tjdokas@gmail.com.</a></em>
+      </p>
     </div>
   </body>
 </html>
