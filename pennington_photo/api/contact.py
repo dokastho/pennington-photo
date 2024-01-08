@@ -36,7 +36,8 @@ def handle_contact():
             "name": name,
             "email": email,
             "message": message,
-            "total_cost" : total_cost
+            "total_cost" : total_cost,
+            "subjet" : f"Invoice Order From {name}"
         }
         pass
     else:
@@ -44,24 +45,21 @@ def handle_contact():
             "name": name,
             "email": email,
             "message": message,
+            "subject": f"Message From {name}"
         }
         pass
-
-    # ... send email
 
     total_cost = 0
     for item in cart.values():
         total_cost += item['price']
 
-    
-
     invoice = flask.render_template("invoice.html", **context)
-    send_email_ses(invoice, context["name"])
+    send_email_ses(invoice, context["subject"])
 
-    return flask.redirect("/contact")
+    return flask.redirect("/")
 
 
-def send_email_ses(body_content: str, sender_name: str):
+def send_email_ses(body_content: str, subject: str):
     sender = "Pennington Photographics <noreply@penningtonphotographic.com>"
     recipient = "tjdokas@gmail.com"
     charset = "UTF-8"
@@ -92,7 +90,7 @@ def send_email_ses(body_content: str, sender_name: str):
                 },
                 'Subject': {
                     'Charset': charset,
-                    'Data': f"Invoice Order From {sender_name}",
+                    'Data': subject,
                 },
             },
             Source=sender
