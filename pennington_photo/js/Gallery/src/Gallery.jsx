@@ -16,6 +16,7 @@ class Gallery extends React.Component {
       description: "",
       dateTaken: 0,
       created: 0,
+      galleryType: "",
     };
   }
 
@@ -34,6 +35,7 @@ class Gallery extends React.Component {
           description: data.description,
           dateTaken: data.dateTaken,
           created: data.created,
+          galleryType: data.type,
           loaded: true,
           galleryId: galleryId,
         });
@@ -49,6 +51,7 @@ class Gallery extends React.Component {
       description,
       dateTaken,
       created,
+      galleryType,
     } = this.state
     return (
       <>
@@ -89,10 +92,10 @@ class Gallery extends React.Component {
               </h5>
               <br />
             </div>
-            <div className='photos-tray'>
+            <div className={`photos-tray ${galleryType}`}>
               {
                 photos.map((photo) => {
-                  return (<ClickablePhoto key={photo.uuid} uuid={photo.uuid} name={photo.name} description={photo.description} />)
+                  return (<ClickablePhoto key={photo.uuid} uuid={photo.uuid} name={photo.name} description={photo.description} galleryType={galleryType} />)
                 })
               }
             </div>

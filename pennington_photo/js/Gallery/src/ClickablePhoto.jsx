@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react'
 import Photo from './Photo';
 import CartButton from './CartButton';
+import GALLERYTYPES from './GalleryTypes';
 
 class ClickablePhoto extends React.Component {
 
@@ -50,27 +51,68 @@ class ClickablePhoto extends React.Component {
       uuid,
       name,
       imgClass,
-      description
+      description,
+      galleryType,
     } = this.props;
+
+    var PhotoComponent;
+    var BlownUpPhotoComponent;
+    switch (galleryType) {
+      case GALLERYTYPES.MIRRORIMAGE:
+        PhotoComponent = <Photo
+          uuid={uuid}
+          id={uuid}
+          imgClass={`blown-up-image${showDetails ? '' : '-big'}`}
+        />;
+        BlownUpPhotoComponent = <Photo
+          uuid={uuid}
+          id={uuid}
+          imgClass={`blown-up-image${showDetails ? '' : '-big'}`}
+        />
+        break;
+      case GALLERYTYPES.TRIPTYCH:
+        PhotoComponent = <Photo
+          uuid={uuid}
+          id={uuid}
+          imgClass={`blown-up-image${showDetails ? '' : '-big'}`}
+        />;
+        BlownUpPhotoComponent = <Photo
+          uuid={uuid}
+          id={uuid}
+          imgClass={`blown-up-image${showDetails ? '' : '-big'}`}
+        />
+        break;
+      default:  // select
+        PhotoComponent = <Photo
+          uuid={uuid}
+          id={uuid}
+          imgClass={`blown-up-image${showDetails ? '' : '-big'}`}
+        />;
+        BlownUpPhotoComponent = <Photo
+          uuid={uuid}
+          id={uuid}
+          imgClass={`blown-up-image${showDetails ? '' : '-big'}`}
+        />
+        break;
+    }
+
+    const PhotoComponent = <Photo
+      uuid={uuid}
+      id={uuid}
+      imgClass={`clickable ${imgClass}`}
+      clickCallback={this.clickToBlowUp}
+    />
+
     return (
       <>
         <div className='photo-slot'>
-          <Photo
-            uuid={uuid}
-            id={uuid}
-            imgClass={`clickable ${imgClass}`}
-            clickCallback={this.clickToBlowUp}
-          />
+          {PhotoComponent}
         </div>
         {
           blownUp ? (
             <div className='blown-up-container'>
               <div className='blown-up-content'>
-                <Photo
-                  uuid={uuid}
-                  id={uuid}
-                  imgClass={`blown-up-image${showDetails ? '' : '-big'}`}
-                />
+                {BlownUpPhotoComponent}
                 {
                   showDetails ? (
                     <>
@@ -108,6 +150,7 @@ ClickablePhoto.propTypes = {
   // prop types go here
   uuid: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  galleryType: PropTypes.string.isRequired,
   imgClass: PropTypes.string,
   description: PropTypes.string,
 };

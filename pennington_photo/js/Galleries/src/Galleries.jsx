@@ -58,7 +58,7 @@ class Galleries extends React.Component {
             <div className='galleries-tray'>
               {
                 galleries.map((gallery) => {
-                  return (<Thumbnail key={gallery.galleryId} name={gallery.name} galleryId={gallery.galleryId} imgSrc={gallery.thumbnail} />)
+                  return (<Thumbnail key={gallery.galleryId} name={gallery.name} galleryId={gallery.galleryId} imgSrc={gallery.thumbnail} galleryType={gallery.type} />)
                 })
               }
             </div>

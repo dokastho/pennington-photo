@@ -62,7 +62,7 @@ def new_gallery():
         flask.abort(400)
         pass
 
-    keys = ["name", "description", "date"]
+    keys = ["name", "description", "date", "type"]
     for key in keys:
         if key not in body:
             flask.abort(400)
@@ -71,6 +71,7 @@ def new_gallery():
 
     name = body["name"]
     description = body["description"]
+    gallery_type = body["type"]
     if description == '':
         description = None
     date_taken = body["date"]
@@ -81,13 +82,14 @@ def new_gallery():
     connection = get_db()
     cur = connection.execute(
         "INSERT INTO galleries"
-        "(owner, name, description, datetaken) "
-        "VALUES (?, ?, ?, ?)",
+        "(owner, name, description, datetaken, type) "
+        "VALUES (?, ?, ?, ?, ?)",
         (
             logname,
             name,
             description,
-            date_taken
+            date_taken,
+            gallery_type
         )
     )
     cur.fetchone()

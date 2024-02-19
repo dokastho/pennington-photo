@@ -1,33 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Penning Photographics</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
-    <link rel="icon" type="image/x-icon" href="/static/img/favicon.png">
-  </head>
-  <body id="body">
-    <div class="center-static">
-      <h1>Create a New Gallery</h1>
-      <div class="center-static-content">
-        <form action="/api/v1/gallery/new/" encType="multipart/form-data" method="post">
-          <label><h3>Gallery Name</h3></label>
-          <input type="text" name="name" id="name" required /><br />
-          <label><h3>Description (optional)</h3></label>
-          <label>This is where you can share some details about this gallery</label><br />
-          <input type="text" name="description" id="description" /><br />
-          <label><h3>Date (optional)</h3></label>
-          <label>Date of when these pictures were taken</label><br />
-          <input type="date" name="date" id="date" /><br />
-          <br />
-          <label for="file">Attach Pictures</label><br />
-          <input type="file" name="file" id="file" multiple /><br />
-          <br />
-          <div class="menu-buttons">
-            <h3><a href="/admin/" className="logout-button">go back</a></h3>
-            <input type="submit" value="Create" />
-          </div>
-        </form>
-      </div>
+
+<head>
+  <title>Penning Photographics</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+  <link rel="icon" type="image/x-icon" href="/static/img/favicon.png">
+</head>
+
+<body id="body">
+  <div class="center-static">
+    <h1>Create a New Gallery</h1>
+    <div class="center-static-content">
+      <form action="/api/v1/gallery/new/" encType="multipart/form-data" method="post">
+        <label>
+          <h3>Gallery Name</h3>
+        </label>
+        <input type="text" name="name" id="name" required /><br />
+        <label>
+          <h3>Description (optional)</h3>
+        </label>
+        <label>This is where you can share some details about this gallery</label><br />
+        <input type="text" name="description" id="description" /><br />
+        <label>
+          <h3>Date (optional)</h3>
+        </label>
+        <label>Date of when these pictures were taken</label><br />
+        <input type="date" name="date" id="date" /><br />
+        <p>Type of photographics in this gallery</p>
+        <input type="radio" id="select" name="type" value="select" checked>
+        <label for="select">Select</label><br>
+        <input type="radio" id="mirror_image" name="type" value="mirror_image">
+        <label for="mirror_image">Mirror Image</label><br>
+        <input type="radio" id="triptych" name="type" value="triptych">
+        <label for="triptych">Triptych</label>
+        <br />
+        <br />
+        <label for="file">Attach Pictures</label><br />
+        <input type="file" name="file" id="file" multiple /><br />
+        <br />
+        <div class="menu-buttons">
+          <h3><a href="/admin/" className="logout-button">go back</a></h3>
+          <input type="submit" value="Create" />
+        </div>
+      </form>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

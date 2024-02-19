@@ -9,6 +9,7 @@ CREATE TABLE users(
 
 CREATE TABLE galleries(
   galleryId INTEGER PRIMARY KEY AUTOINCREMENT,
+  type VARCHAR(20) NOT NULL,
   owner VARCHAR(20) NOT NULL,
   name VARCHAR(256) NOT NULL,
   description VARCHAR(256),

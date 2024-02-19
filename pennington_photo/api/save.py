@@ -18,7 +18,7 @@ def save_gallery(gallery_id):
         flask.abort(400)
         pass
 
-    keys = ["name", "description", "dateTaken"]
+    keys = ["name", "description", "dateTaken", "type"]
     for key in keys:
         if key not in body:
             flask.abort(400)
@@ -28,18 +28,20 @@ def save_gallery(gallery_id):
     name = body["name"]
     description = body["description"]
     date_taken = body["dateTaken"]
+    gallery_type = body["type"]
     created = arrow.utcnow().format()
 
     connection = get_db()
     cur = connection.execute(
         "UPDATE galleries "
-        "SET name = ?, description = ?, dateTaken = ?, created = ? "
+        "SET name = ?, description = ?, dateTaken = ?, created = ?, type = ? "
         "WHERE galleryId = ? AND owner = ?",
         (
             name,
             description,
             date_taken,
             created,
+            gallery_type,
             gallery_id,
             logname,
         )
