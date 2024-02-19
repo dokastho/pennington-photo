@@ -492,6 +492,7 @@ a {
     text-align: center;
     color: black;
     max-height: 2fr;
+    padding: 1rem;
 }
 
 .thumbnail:hover {
@@ -508,11 +509,12 @@ a {
 
 .photo-slot {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    aspect-ratio: 3/ 2;
+    aspect-ratio: 3/ 3;
     object-fit: cover;
     grid-column: span 3;
-    grid-row: span 2;
+    grid-row: span 3;
     transition: all 0.2s ease-in-out;
+    padding: 1rem;
 }
 
 .photo-slot:hover {
@@ -521,7 +523,7 @@ a {
 }
 
 .photo {
-    object-fit: cover;
+    object-fit:scale-down;
     /* pointer-events: none; */
     width: -webkit-fill-available;
     height: -webkit-fill-available;
