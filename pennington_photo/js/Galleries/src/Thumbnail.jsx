@@ -24,7 +24,7 @@ class Thumbnail extends React.Component {
       case GALLERYTYPES.TRIPTYCH:
         thumbnailClassName = "triptych";
         break;
-      default:  // select
+      default:
         thumbnailClassName = "default";
         break;
     }

@@ -63,7 +63,7 @@ class ClickablePhoto extends React.Component {
       case GALLERYTYPES.TRIPTYCH:
         photoClassName = "triptych";
         break;
-      default:  // select
+      default:
         photoClassName = "default";
         break;
     }

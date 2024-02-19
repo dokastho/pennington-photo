@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react'
 import EditablePhoto from './EditablePhoto';
 import ConfirmatoryButton from './Buttons';
+import GALLERYTYPES from './GalleryTypes';
 
 const SAVED = "Saved.";
 const SAVING = "Saving...";
@@ -47,7 +48,8 @@ class EditGallery extends React.Component {
     const {
       name,
       description,
-      dateTaken
+      dateTaken,
+      type,
     } = content;
     fetch(`/api/v1/save/gallery/${galleryId}/`,
       {
@@ -57,7 +59,7 @@ class EditGallery extends React.Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, description, dateTaken }),
+        body: JSON.stringify({ name, description, dateTaken, type }),
       })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
@@ -122,6 +124,7 @@ class EditGallery extends React.Component {
       name,
       dateTaken,
       photos,
+      type,
     } = content;
 
     return (
@@ -139,6 +142,24 @@ class EditGallery extends React.Component {
             <br />
             <label>Date:</label>
             <input className='h5' type='date' value={dateTaken} onChange={(e) => { this.handleChange("dateTaken", e.target.value) }} /><br />
+            <br />
+            <p>Type of photographics in this gallery</p>
+            <input type="radio" id="default" name="type" value="default"
+              checked={type === GALLERYTYPES.SELECT ? "checked" : null}
+              onChange={(e) => { this.handleChange("type", e.target.value) }}
+            />
+            <label for="default">Default</label><br />
+            <input type="radio" id="mirror_image" name="type" value="mirror_image"
+              checked={type === GALLERYTYPES.MIRRORIMAGE ? "checked" : null}
+              onChange={(e) => { this.handleChange("type", e.target.value) }}
+            />
+            <label for="mirror_image">Mirror Image</label><br />
+            <input type="radio" id="triptych" name="type" value="triptych"
+              checked={type === GALLERYTYPES.TRIPTYCH ? "checked" : null}
+              onChange={(e) => { this.handleChange("type", e.target.value) }}
+            />
+            <label for="triptych">Triptych</label>
+            <br />
             <br />
             <div className='upload-picture-form'>
               <h3>Add new photos to this gallery by clicking the "Attach" button below</h3>
