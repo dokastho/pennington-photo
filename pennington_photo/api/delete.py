@@ -4,6 +4,7 @@ import pennington_photo
 import flask
 import arrow
 from pennington_photo.common.model import get_db, check_session
+import os
 
 @pennington_photo.app.route("/api/v1/delete/gallery/<gallery_id>/", methods=["POST"])
 def del_gallery(gallery_id):
@@ -13,6 +14,17 @@ def del_gallery(gallery_id):
         pass
     
     connection = get_db()
+    # delete photo files
+    cur = connection.execute(
+        "SELECT uuid FROM pictures WHERE galleryId = ?",
+        (gallery_id,)
+    )
+    uuids = cur.fetchall()
+    uuid: str
+    for uuid in uuids:
+        os.remove(pennington_photo.app.config["UPLOADS_FOLDER"] / uuid["uuid"])
+        pass
+    
     cur = connection.execute(
         "DELETE FROM galleries "
         "WHERE galleryId = ? AND owner = ?",
@@ -33,6 +45,14 @@ def del_photo(picture_id):
         pass
     
     connection = get_db()
+    # delete file
+    cur = connection.execute(
+        "SELECT uuid FROM pictures WHERE pictureId = ?",
+        (picture_id,)
+    )
+    uuid = cur.fetchone()["uuid"]
+    os.remove(pennington_photo.app.config["UPLOADS_FOLDER"] / uuid)
+     
     cur = connection.execute(
         "DELETE FROM pictures "
         "WHERE pictureId = ? AND owner = ?",
