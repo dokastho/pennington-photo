@@ -73,7 +73,7 @@ class Photo extends React.Component {
 }
 
 Photo.defaultProps = {
-  imgClass: 'photo-slot',
+  imgClass: 'photo-slot-default',
   id: '',
 }
 

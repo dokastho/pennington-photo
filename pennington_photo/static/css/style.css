@@ -507,7 +507,7 @@ a {
     grid-gap: 2rem;
 }
 
-.photo-slot {
+.photo-slot-default {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     aspect-ratio: 3/ 3;
     object-fit: cover;
@@ -517,7 +517,37 @@ a {
     padding: 1rem;
 }
 
-.photo-slot:hover {
+.photo-slot-default:hover {
+    transform: translateY(-0.5rem);
+    transition: all 0.2s ease-in-out;
+}
+
+.photo-slot-triptych {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    aspect-ratio: 6/ 4;
+    object-fit: cover;
+    grid-column: span 6;
+    grid-row: span 4;
+    transition: all 0.2s ease-in-out;
+    padding: 1rem;
+}
+
+.photo-slot-triptych:hover {
+    transform: translateY(-0.5rem);
+    transition: all 0.2s ease-in-out;
+}
+
+.photo-slot-mirror-image {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    aspect-ratio: 6/ 4;
+    object-fit: cover;
+    grid-column: span 6;
+    grid-row: span 4;
+    transition: all 0.2s ease-in-out;
+    padding: 1rem;
+}
+
+.photo-slot-mirror-image:hover {
     transform: translateY(-0.5rem);
     transition: all 0.2s ease-in-out;
 }

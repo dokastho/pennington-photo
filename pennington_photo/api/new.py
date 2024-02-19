@@ -47,6 +47,10 @@ SIZES = [
         "info": "Mirror Image 32\" x 40\" Framed",
         "price": 1750
     },
+    {
+        "info": "Triptych 16\" x 32\" Framed",
+        "price": 1450
+    },
 ]
 
 
