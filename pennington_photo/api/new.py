@@ -110,6 +110,9 @@ def new_gallery():
     galleryId = cur.fetchone()['galleryId']
 
     for file in files:
+        if not file:
+            break
+        
         uuid = get_uuid(file.filename)
         file.save(pennington_photo.app.config["UPLOADS_FOLDER"] / uuid)
         cur = connection.execute(
