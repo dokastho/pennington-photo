@@ -42,6 +42,8 @@ class EditablePhoto extends React.Component {
       pictureId,
     } = this.props;
     this.setState({ blownUp: false });
+    document.removeEventListener("mousedown", this.handleClickOutside);
+    document.getElementById('body').style["overflow"] = "auto";
     deletePhoto({ pictureId });
   }
 

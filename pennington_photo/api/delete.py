@@ -52,6 +52,16 @@ def del_photo(picture_id):
     )
     uuid = cur.fetchone()["uuid"]
     os.remove(pennington_photo.app.config["UPLOADS_FOLDER"] / uuid)
+    
+    # set gallery last-updated timestamp
+    created = arrow.utcnow().format()
+    cur = connection.execute(
+        "SELECT galleryId "
+        "FROM pictures "
+        "WHERE pictureId = ?",
+        (picture_id,)
+    )
+    gallery_id = cur.fetchone()["galleryId"]
      
     cur = connection.execute(
         "DELETE FROM pictures "
@@ -63,15 +73,6 @@ def del_photo(picture_id):
     )
     cur.fetchone()
     
-    # set gallery last-updated timestamp
-    created = arrow.utcnow().format()
-    cur = connection.execute(
-        "SELECT galleryId "
-        "FROM pictures "
-        "WHERE pictureId = ?",
-        (picture_id,)
-    )
-    gallery_id = cur.fetchone()["galleryId"]
     cur = connection.execute(
         "UPDATE galleries "
         "SET created = ? "
