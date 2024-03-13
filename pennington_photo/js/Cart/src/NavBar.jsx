@@ -35,6 +35,13 @@ class NavBar extends React.Component {
       <>
         <div className='navbar' >
           {/* <div className={`navbar-body ${isLoaded ? 'loaded' : 'loading'}`}> */}
+          <div className='center-navbar'>
+            <div className='navfont'>The Photography of Donald N. Pennington</div>
+            <div className='navfont'>Focus on Nature</div>
+            <hr />
+          </div>
+          <br />
+          <br />
           <div className='navbar-body'>
             <a href='/admin/'>
               <img src="/static/icon/Bio.png" className={`navbar-icon ${loaded[0] ? 'loaded-nf' : 'loading-nf'}`} key='admin-icon' onLoad={() => { this.setLoaded(0) }} />

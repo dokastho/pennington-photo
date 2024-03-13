@@ -248,7 +248,8 @@ a {
 }
 
 .background-img {
-    height: 100vh;
+    margin-top: 10vh;
+    height: 90vh;
     width: 100%;
     object-fit: cover;
     object-position: top left;
@@ -304,10 +305,22 @@ a {
     position: fixed;
     width: 100%;
     top: 0vw;
-    height: 8%;
+    height: 10rem;
     z-index: 100;
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.center-navbar {
+    height: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: fit-content;
+}
+
+.navfont {
+    /* font-size: small; */
 }
 
 .navbar-body {
@@ -465,7 +478,7 @@ a {
 
 .site-contents {
     position: relative;
-    top: 5rem;
+    top: 8rem;
     padding: 4rem;
     width: 80%;
     margin-right: auto;
