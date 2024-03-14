@@ -781,6 +781,21 @@ label.fancy {
     margin-top: 1rem;
 }
 
+.edit-box-bottom {
+    text-align: left;
+    background-color: rgb(255, 255, 255, 0.8);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    position: relative;
+    margin-top: 1rem;
+    display: inline-flex;
+    justify-content: space-around;
+}
+
+.edit-box-column {
+    text-align: left;
+}
+
 .min-margin {
     margin-left: 0.5em;
     margin-right: 0.5em;

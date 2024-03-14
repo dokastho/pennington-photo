@@ -202,8 +202,8 @@ class EditGallery extends React.Component {
         <div className='photos-tray'>
           {
             photos.map((photo) => {
-              const { name, description, stars, sizes } = photo;
-              return (<EditablePhoto key={photo.uuid} uuid={photo.uuid} content={{ name, description, stars, sizes }} pictureId={photo.pictureId} deletePhoto={this.deletePhoto} />)
+              const { name, description, stars, qty, total, sizes } = photo;
+              return (<EditablePhoto key={photo.uuid} uuid={photo.uuid} content={{ name, description, stars, qty, total, sizes }} pictureId={photo.pictureId} deletePhoto={this.deletePhoto} />)
             })
           }
         </div>

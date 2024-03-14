@@ -3,7 +3,8 @@
 import pennington_photo
 import flask
 import arrow
-from pennington_photo.common.model import get_db, check_session
+import os
+from pennington_photo.common.model import get_db, check_session, get_uuid
 
 
 @pennington_photo.app.route("/api/v1/save/gallery/<gallery_id>/", methods=["POST"])
@@ -61,7 +62,7 @@ def save_photo(picture_id):
         flask.abort(400)
         pass
 
-    keys = ["name", "description", "stars"]
+    keys = ["name", "description", "stars", "qty", "total"]
     for key in keys:
         if key not in body:
             flask.abort(400)
@@ -71,17 +72,21 @@ def save_photo(picture_id):
     name = body["name"]
     description = body["description"]
     stars = body["stars"]
+    qty = body["qty"]
+    total = body["total"]
     created = arrow.utcnow().format()
 
     connection = get_db()
     cur = connection.execute(
         "UPDATE pictures "
-        "SET name = ?, description = ?, stars = ?, created = ? "
+        "SET name = ?, description = ?, stars = ?, qty = ?, total = ?, created = ? "
         "WHERE pictureId = ?",
         (
             name,
             description,
             stars,
+            qty,
+            total,
             created,
             picture_id,
         )

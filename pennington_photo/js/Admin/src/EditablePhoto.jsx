@@ -3,6 +3,7 @@ import React from 'react'
 import ConfirmatoryButton from './Buttons';
 import EditablePriceCheckBox from './EditablePriceCheckBox';
 import Photo from './Photo';
+import axios from "axios";
 
 const SAVED = "Saved.";
 const SAVING = "Saving...";
@@ -19,6 +20,8 @@ class EditablePhoto extends React.Component {
         name: "",
         description: "",
         stars: "",
+        qty: 0,
+        total: 0,
         sizes: [],
       },
       saveState: SAVED,
@@ -51,7 +54,7 @@ class EditablePhoto extends React.Component {
     const {
       content
     } = this.props;
-
+    console.log(content);
     this.setState({
       content
     });
@@ -67,22 +70,23 @@ class EditablePhoto extends React.Component {
     const {
       name,
       description,
-      stars
+      stars,
+      qty,
+      total,
     } = content;
     fetch(`/api/v1/save/photo/${pictureId}/`,
       {
         credentials: 'same-origin',
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, description, stars }),
+        body: JSON.stringify({ name, description, stars, qty, total }),
       })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
         this.setState({ saveState: SAVED });
-        return response.json();
+        return response;
       })
       .catch((error) => console.log(error));
   }
@@ -147,12 +151,14 @@ class EditablePhoto extends React.Component {
     const {
       blownUp,
       content,
-      saveState
+      saveState,
     } = this.state;
     const {
       name,
       description,
       stars,
+      qty,
+      total,
       sizes,
     } = content;
     return (
@@ -198,23 +204,34 @@ class EditablePhoto extends React.Component {
                     <br />
                   </div>
                 </div>
-                <div className='edit-box short wide' id={uuid}>
-                  <label id={uuid} className='fancy'>Name:</label>
-                  <input id={uuid} className='span fancy' type='text' value={name} onChange={(e) => { this.handleChange("name", e.target.value) }} />
-                  <br id={uuid} />
-                  <label id={uuid} className='fancy'>Description:</label>
-                  <input id={uuid} className='span fancy' type='text' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} />
-                  <br id={uuid} />
-                  <label id={uuid} className='fancy'>Stars:</label>
-                  <input id={uuid} className='span fancy' type='number' min="1" max="5" value={stars} onChange={(e) => { this.handleChange("stars", e.target.value) }} />
-                  <br id={uuid} />
-                  <br id={uuid} />
-                  <div className='menu-buttons' id={uuid}>
-                    <div>
-                      <button id={uuid} type='submit' onClick={() => { this.doSave() }}>Save</button>
-                      <label id={uuid} className='fancy'>{saveState}</label>
+                <div className='edit-box-bottom short wide' id={uuid}>
+                  <div className='edit-box-column' id={uuid}>
+                    {/* name desc stars */}
+                    <label id={uuid} className='fancy'>Name:</label>
+                    <input id={uuid} className='span fancy' type='text' value={name} onChange={(e) => { this.handleChange("name", e.target.value) }} />
+                    <br id={uuid} />
+                    <label id={uuid} className='fancy'>Description:</label>
+                    <input id={uuid} className='span fancy' type='text' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} />
+                    <br id={uuid} />
+                    <label id={uuid} className='fancy'>Stars:</label>
+                    <input id={uuid} className='span fancy' type='number' min="1" max="5" value={stars} onChange={(e) => { this.handleChange("stars", e.target.value) }} />
+                    <br id={uuid} />
+                    <br id={uuid} />
+                    <div className='menu-buttons' id={uuid}>
+                      <div>
+                        <button id={uuid} type='submit' onClick={() => { this.doSave() }}>Save</button>
+                        <label id={uuid} className='fancy'>{saveState}</label>
+                      </div>
+                      <ConfirmatoryButton id={uuid} text={"Delete"} callback={this.deletePhotoWrapper} />
                     </div>
-                    <ConfirmatoryButton id={uuid} text={"Delete"} callback={this.deletePhotoWrapper} />
+                  </div>
+                  <div className='edit-box-column' id={uuid}>
+                    {/* edition qty and total */}
+                    <label id={uuid} className='fancy'>Qty:</label>
+                    <input id={uuid} className='span fancy' type='number' value={qty} onChange={(e) => { this.handleChange("qty", e.target.value) }} />
+                    <br />
+                    <label id={uuid} className='fancy'>Total:</label>
+                    <input id={uuid} className='span fancy' type='number' value={total} onChange={(e) => { this.handleChange("total", e.target.value) }} />
                   </div>
                 </div>
               </div>

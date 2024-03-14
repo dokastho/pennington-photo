@@ -24,7 +24,8 @@
     "webpack-cli": ">=4.8.0"
   },
   "dependencies": {
-    "chromedriver": "^98.0.0",
+    "axios": "^1.6.7",
+    "chromedriver": "^122.0.6",
     "eslint": "^7.5.0",
     "node": "^17.4.0",
     "react": "^18.2.0",

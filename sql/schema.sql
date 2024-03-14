@@ -26,6 +26,9 @@ CREATE TABLE pictures(
   name VARCHAR(256) NOT NULL,
   description VARCHAR(256),
   stars INTEGER,
+  qty INTEGER,
+  total INTEGER,
+  -- ordernum INTEGER NOT NULL,
   created DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY(galleryId) REFERENCES galleries(galleryId) ON DELETE CASCADE,
   FOREIGN KEY(owner) REFERENCES users(username) ON DELETE CASCADE
