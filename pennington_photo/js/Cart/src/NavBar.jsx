@@ -3,15 +3,26 @@ import React from 'react'
 
 const items = ["Home", "Galleries", "Sizing", "Contact"];
 
+const timerInterval = 3500;  // in ms
+const transitionInterval = 200;  // in ms
+
 class NavBar extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      loaded: [false, false]
+      loaded: [false, false],
+      displayLinks: false,
+      displayTitles: true,
     }
+    this.timeout = null;
 
+    this.showLinks = this.showLinks.bind(this);
+    this.showTitles = this.showTitles.bind(this);
     this.setLoaded = this.setLoaded.bind(this);
+    this.mouseOver = this.mouseOver.bind(this);
+    this.mouseLeave = this.mouseLeave.bind(this);
+    this.contentDisplayTimer = this.contentDisplayTimer.bind(this);
   }
 
   setLoaded(index) {
@@ -22,41 +33,89 @@ class NavBar extends React.Component {
     this.setState({ loaded });
   }
 
+  componentDidMount() {
+    this.contentDisplayTimer(2000);
+  }
+
+  mouseOver() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+      this.timeout = null;
+    }
+    this.showLinks();
+  }
+
+  mouseLeave() {
+    this.contentDisplayTimer(timerInterval);
+  }
+
+  showLinks() {
+    setTimeout(() => {
+      this.setState({ displayLinks: true });
+    }, transitionInterval);
+    this.setState({ displayTitles: false });
+  }
+
+  showTitles() {
+    setTimeout(() => {
+      this.setState({ displayTitles: true });
+    }, transitionInterval);
+    this.setState({ displayLinks: false });
+  }
+
+  contentDisplayTimer(interval) {
+    this.timeout = setTimeout(() => {
+      const { displayLinks } = this.state;
+      if (displayLinks) {
+        this.showTitles();
+      } else {
+        this.showLinks();
+      }
+      this.contentDisplayTimer(timerInterval);
+    }, interval);
+  }
+
   render() {
     const {
-      loaded
+      loaded,
+      displayLinks,
+      displayTitles,
     } = this.state;
-    // var isLoaded = true;
-    // for (let index = 0; index < loaded.length; index++) {
-    //   const element = loaded[index];
-    //   isLoaded = isLoaded && element;
-    // }
     return (
       <>
-        <div className='navbar' >
-          {/* <div className={`navbar-body ${isLoaded ? 'loaded' : 'loading'}`}> */}
-          <div className='center-navbar'>
-            <div className='navfont'>The Photography of Donald N. Pennington</div>
-            <div className='navfont'>Focus on Nature</div>
-            <hr />
-          </div>
-          <br />
-          <br />
-          <div className='navbar-body'>
+        <div className='navbar' onMouseEnter={() => { this.mouseOver() }} onMouseLeave={() => { this.mouseLeave() }} >
+          <div className='navbar-icon'>
             <a href='/admin/'>
               <img src="/static/icon/Bio.png" className={`navbar-icon ${loaded[0] ? 'loaded-nf' : 'loading-nf'}`} key='admin-icon' onLoad={() => { this.setLoaded(0) }} />
             </a>
-            {
-              items.map((item) => {
-                return (
-                  <a href={`/${item.toLowerCase()}/`} key={item}>
-                    <div className='navbar-item' >
-                      {item}
-                    </div>
-                  </a>
-                )
-              })
-            }
+          </div>
+          <div className='navbar-spacer' />
+          <div className='navbar-content'>
+            <div className={`navbar-links ${displayLinks ? 'loaded' : 'navbar-loading'}`}>
+              {
+                items.map((item) => {
+                  return (
+                    <a href={`/${item.toLowerCase()}/`} key={item}>
+                      <div className='navbar-link' >
+                        {item}
+                      </div>
+                    </a>
+                  )
+                })
+              }
+            </div>
+            <div className={`navbar-titles ${displayTitles ? 'loaded' : 'navbar-loading'}`}>
+              <h3 className='navbar-title'>
+                The Photograpy of Donald N. Pennington
+              </h3>
+              <h3 className='navbar-title fancy'>
+                <em>
+                  "Focus on Nature"
+                </em>
+              </h3>
+            </div>
+          </div>
+          <div className='navbar-icon'>
             <a href='/cart/'>
               <img src="/static/icon/Cart.png" className={`navbar-icon ${loaded[0] ? 'loaded-nf' : 'loading-nf'}`} key='cart-icon' onLoad={() => { this.setLoaded(1) }} />
             </a>
