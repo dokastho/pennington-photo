@@ -19,6 +19,7 @@ class EditablePriceCheckBox extends React.Component {
       saveState: SAVED,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
     this.doSave = this.doSave.bind(this);
 
     this.timeout = null;
@@ -40,6 +41,42 @@ class EditablePriceCheckBox extends React.Component {
     this.setState({ content });
   }
 
+  handleSelectChange(offered) {
+    const { picturepriceId, pictureId, sizeId, callback } = this.props;
+    const { content } = this.state;
+    content.offered = offered;
+    this.setState({ content });
+    const { price } = content;
+    callback({ price, offered, sizeId });
+    let uri = '';
+    if (offered) {
+      uri = '/api/v1/save/pictureprice/select/';
+    } else {
+      uri = '/api/v1/save/pictureprice/deselect/';
+    }
+
+    fetch(uri,
+      {
+        credentials: 'same-origin',
+        method: 'POST',
+        headers: {
+          'Accept': '*/*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          picturepriceId,
+          pictureId,
+          sizenameId: sizeId,
+        }),
+      })
+      .then((response) => {
+        if (!response.ok) throw Error(response.statusText);
+        this.setState({ saveState: SAVED });
+        return response;
+      })
+      .catch((error) => console.log(error));
+  }
+
   handleChange(key, value) {
     const {
       content
@@ -58,9 +95,11 @@ class EditablePriceCheckBox extends React.Component {
   }
 
   doSave() {
+    // for changing price
     const {
-      sizeId,
+      picturepriceId,
       callback,
+      sizeId,
     } = this.props;
     const {
       content
@@ -72,23 +111,22 @@ class EditablePriceCheckBox extends React.Component {
 
     callback({ price, offered, sizeId });
 
-    fetch(`/api/v1/save/price/${sizeId}/`,
-    {
-      credentials: 'same-origin',
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ price, offered }),
-    })
-    .then((response) => {
-      if (!response.ok) throw Error(response.statusText);
-      this.setState({ saveState: SAVED });
-      console.log("API call");
-      return response.json();
-    })
-    .catch((error) => console.log(error));
+    fetch('/api/v1/save/price/',
+      {
+        credentials: 'same-origin',
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ price, picturepriceId }),
+      })
+      .then((response) => {
+        if (!response.ok) throw Error(response.statusText);
+        this.setState({ saveState: SAVED });
+        return response;
+      })
+      .catch((error) => console.log(error));
   }
 
   render() {
@@ -97,7 +135,7 @@ class EditablePriceCheckBox extends React.Component {
     } = this.state;
     const {
       uuid,
-      sizeId,
+      picturepriceId,
     } = this.props;
     const {
       info,
@@ -105,15 +143,23 @@ class EditablePriceCheckBox extends React.Component {
       offered,
     } = content;
     return (
-      <div className='size-checkbox' key={sizeId} id={uuid}>
+      <div className='size-checkbox' key={`${picturepriceId}`} id={uuid}>
         <span id={uuid}>
-          <input id={uuid} type='checkbox' checked={offered} onChange={() => { this.handleChange("offered", !offered) }} />
+          <input id={uuid} type='checkbox' checked={offered} onChange={() => { this.handleSelectChange(!offered) }} />
           <label id={uuid}>{info}</label>
         </span>
-        <span id={uuid} className='right-text'>
-          <label id={uuid}>Price: </label>
-          <input id={uuid} type='text' value={price} onChange={(e) => { this.handleChange("price", e.target.value) }} />
-        </span>
+        {
+          offered ? (
+            <span id={uuid} className='right-text'>
+              <label id={uuid}>Price: </label>
+              <input id={uuid} type='text' value={price} onChange={(e) => { this.handleChange("price", e.target.value) }} />
+            </span>
+          ) : (
+            <span>
+              Check the box to set a price
+            </span>
+          )
+        }
       </div>
     );
   }
@@ -123,10 +169,12 @@ EditablePriceCheckBox.propTypes = {
   // prop types go here
   // s: PropTypes.string.isRequired,
   offered: PropTypes.bool.isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.number,
   info: PropTypes.string.isRequired,
   uuid: PropTypes.string.isRequired,
+  picturepriceId: PropTypes.number,
   sizeId: PropTypes.number.isRequired,
+  pictureId: PropTypes.number.isRequired,
   // callback
 };
 

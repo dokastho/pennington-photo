@@ -129,7 +129,7 @@ class EditablePhoto extends React.Component {
     } = this.state;
     const { price, offered, sizeId } = size;
     content.sizes.forEach((s) => {
-      if (s.sizeId == sizeId) {
+      if (s.sizenameId == sizeId) {
         s.price = price;
         s.offered = Number(offered);
       }
@@ -141,6 +141,7 @@ class EditablePhoto extends React.Component {
     const {
       uuid,
       imgClass,
+      pictureId,
     } = this.props;
     const {
       blownUp,
@@ -181,11 +182,12 @@ class EditablePhoto extends React.Component {
                       sizes.map((size) => {
                         return (
                           <EditablePriceCheckBox
-                            // key={`${size.sizeId}-${size.offered}-${size.price}`}
                             offered={Boolean(size.offered)}
                             price={size.price}
-                            info={size.info}
-                            sizeId={size.sizeId}
+                            info={size.name}
+                            picturepriceId={size.picturepriceId}
+                            sizeId={size.sizenameId}
+                            pictureId={pictureId}
                             uuid={uuid}
                             callback={this.setPhotoSizes}
                           />

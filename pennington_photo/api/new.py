@@ -52,10 +52,9 @@ def new_gallery():
 
     cur = connection.execute(
         "SELECT galleryId FROM galleries "
-        "WHERE owner = ? AND name = ? "
+        "WHERE name = ? "
         "ORDER BY created DESC",
         (
-            logname,
             name
         )
     )
@@ -133,11 +132,10 @@ def new_photo():
     cur = connection.execute(
         "UPDATE galleries "
         "SET created = ? "
-        "WHERE galleryId = ? AND owner = ?",
+        "WHERE galleryId = ?",
         (
             created,
             galleryId,
-            logname,
         )
     )
     cur.fetchone()

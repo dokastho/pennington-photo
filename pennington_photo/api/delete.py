@@ -27,10 +27,9 @@ def del_gallery(gallery_id):
     
     cur = connection.execute(
         "DELETE FROM galleries "
-        "WHERE galleryId = ? AND owner = ?",
+        "WHERE galleryId = ?",
         (
             gallery_id,
-            logname,
         )
     )
     cur.fetchone()
@@ -65,10 +64,9 @@ def del_photo(picture_id):
      
     cur = connection.execute(
         "DELETE FROM pictures "
-        "WHERE pictureId = ? AND owner = ?",
+        "WHERE pictureId = ?",
         (
             picture_id,
-            logname,
         )
     )
     cur.fetchone()
@@ -76,11 +74,29 @@ def del_photo(picture_id):
     cur = connection.execute(
         "UPDATE galleries "
         "SET created = ? "
-        "WHERE galleryId = ? AND owner = ?",
+        "WHERE galleryId = ?",
         (
             created,
             gallery_id,
-            logname,
+        )
+    )
+    cur.fetchone()
+    return flask.Response(status=204)
+
+
+@pennington_photo.app.route("/api/v1/delete/sizenames/<sizename_id>/", methods=["POST"])
+def del_sizename(sizename_id):
+    logname = check_session()
+    if not logname:
+        flask.abort(403)
+        pass
+    
+    connection = get_db()
+    cur = connection.execute(
+        "DELETE FROM sizenames "
+        "WHERE sizenameId = ?",
+        (
+            sizename_id,
         )
     )
     cur.fetchone()

@@ -35,7 +35,7 @@ def save_gallery(gallery_id):
     cur = connection.execute(
         "UPDATE galleries "
         "SET name = ?, description = ?, dateTaken = ?, created = ?, type = ? "
-        "WHERE galleryId = ? AND owner = ?",
+        "WHERE galleryId = ?",
         (
             name,
             description,
@@ -43,7 +43,6 @@ def save_gallery(gallery_id):
             created,
             gallery_type,
             gallery_id,
-            logname,
         )
     )
     cur.fetchone()
@@ -78,14 +77,13 @@ def save_photo(picture_id):
     cur = connection.execute(
         "UPDATE pictures "
         "SET name = ?, description = ?, stars = ?, created = ? "
-        "WHERE pictureId = ? AND owner = ?",
+        "WHERE pictureId = ?",
         (
             name,
             description,
             stars,
             created,
             picture_id,
-            logname,
         )
     )
     cur.fetchone()
@@ -101,18 +99,17 @@ def save_photo(picture_id):
     cur = connection.execute(
         "UPDATE galleries "
         "SET created = ? "
-        "WHERE galleryId = ? AND owner = ?",
+        "WHERE galleryId = ?",
         (
             created,
             gallery_id,
-            logname,
         )
     )
     cur.fetchone()
     return flask.Response(status=204)
 
 
-@pennington_photo.app.route("/api/v1/save/select/", methods=["POST"])
+@pennington_photo.app.route("/api/v1/save/pictureprice/select/", methods=["POST"])
 def select_size():
     logname = check_session()
     if not logname:
@@ -144,10 +141,10 @@ def select_size():
         )
     )
     cur.fetchone()
-    return flask.Response(status=201)
+    return flask.Response(status=204)
 
 
-@pennington_photo.app.route("/api/v1/save/deselect/", methods=["POST"])
+@pennington_photo.app.route("/api/v1/save/pictureprice/deselect/", methods=["POST"])
 def deselect_size():
     logname = check_session()
     if not logname:
@@ -175,11 +172,11 @@ def deselect_size():
         )
     )
     cur.fetchone()
-    return flask.Response(status=201)
+    return flask.Response(status=204)
 
 
-@pennington_photo.app.route("/api/v1/save/price/<size_id>/", methods=["POST"])
-def update_price(size_id):
+@pennington_photo.app.route("/api/v1/save/price/", methods=["POST"])
+def update_price():
     logname = check_session()
     if not logname:
         flask.abort(403)
@@ -210,4 +207,4 @@ def update_price(size_id):
         )
     )
     cur.fetchone()
-    return flask.Response(status=201)
+    return flask.Response(status=204)

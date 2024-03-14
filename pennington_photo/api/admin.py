@@ -37,9 +37,11 @@ def get_admin():
             picture_id = photo["pictureId"]
             
             cur = connection.execute(
-                "SELECT * "
-                "FROM sizes "
-                "WHERE pictureId = ?",
+                "SELECT name, price, picturepriceId, s.sizenameId, pictureId as offered "
+                "FROM sizenames s "
+                "LEFT JOIN pictureprices p "
+                "ON s.sizenameId = p.sizenameId "
+                "AND pictureId = ? ",
                 (picture_id,)
             )
             photo["sizes"] = cur.fetchall()

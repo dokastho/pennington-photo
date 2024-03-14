@@ -32,7 +32,6 @@ class Photo extends React.Component {
   }
 
   toggleFocused(e, focused) {
-    console.log(`image is ${focused ? 'clear' : 'blurred'}`);
     this.setState({ focused });
   }
 
