@@ -112,42 +112,66 @@ def save_photo(picture_id):
     return flask.Response(status=204)
 
 
-@pennington_photo.app.route("/api/v1/save/select/<size_id>/", methods=["POST"])
-def select_size(size_id):
+@pennington_photo.app.route("/api/v1/save/select/", methods=["POST"])
+def select_size():
     logname = check_session()
     if not logname:
         flask.abort(403)
         pass
+    
+    body = flask.request.get_json()
+    if body is None:
+        flask.abort(400)
+        pass
+
+    keys = ["pictureId", "sizenameId"]
+    for key in keys:
+        if key not in body:
+            flask.abort(400)
+            pass
+        pass
 
     connection = get_db()
     cur = connection.execute(
-        "UPDATE sizes "
-        "SET offered = ? "
-        "WHERE sizeId = ?",
+        "INSERT INTO pictureprices "
+        "(owner, pictureId, sizenameId, price) "
+        "VALUES (?, ?, ?, ?)",
         (
-            True,
-            size_id,
+            logname,
+            body["pictureId"],
+            body["sizenameId"],
+            0
         )
     )
     cur.fetchone()
     return flask.Response(status=201)
 
 
-@pennington_photo.app.route("/api/v1/save/deselect/<size_id>/", methods=["POST"])
-def deselect_size(size_id):
+@pennington_photo.app.route("/api/v1/save/deselect/", methods=["POST"])
+def deselect_size():
     logname = check_session()
     if not logname:
         flask.abort(403)
         pass
+    
+    body = flask.request.get_json()
+    if body is None:
+        flask.abort(400)
+        pass
+
+    keys = ["picturepriceId"]
+    for key in keys:
+        if key not in body:
+            flask.abort(400)
+            pass
+        pass
 
     connection = get_db()
     cur = connection.execute(
-        "UPDATE sizes "
-        "SET offered = ? "
-        "WHERE sizeId = ?",
+        "DELETE FROM pictureprices "
+        "WHERE picturepriceId = ?",
         (
-            False,
-            size_id,
+            body["picturepriceId"],
         )
     )
     cur.fetchone()
@@ -166,7 +190,7 @@ def update_price(size_id):
         flask.abort(400)
         pass
 
-    keys = ["price", "offered"]
+    keys = ["picturepriceId", "price"]
     for key in keys:
         if key not in body:
             flask.abort(400)
@@ -174,16 +198,15 @@ def update_price(size_id):
         pass
 
     price = body["price"]
-    offered = body["offered"]
+    pictureprice_id = body["picturepriceId"]
     connection = get_db()
     cur = connection.execute(
-        "UPDATE sizes "
-        "SET price = ?, offered = ? "
-        "WHERE sizeId = ?",
+        "UPDATE pictureprices "
+        "SET price = ? "
+        "WHERE picturepriceId = ?",
         (
             price,
-            offered,
-            size_id,
+            pictureprice_id,
         )
     )
     cur.fetchone()

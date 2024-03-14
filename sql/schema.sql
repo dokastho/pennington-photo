@@ -43,6 +43,7 @@ CREATE TABLE pictureprices(
   owner VARCHAR(20) NOT NULL,
   pictureId INTEGER NOT NULL,
   sizenameId INTEGER NOT NULL,
+  price INTEGER,
   FOREIGN KEY(owner) REFERENCES users(username) ON DELETE CASCADE,
   FOREIGN KEY(pictureId) REFERENCES pictures(pictureId) ON DELETE CASCADE,
   FOREIGN KEY(sizenameId) REFERENCES sizenames(sizenameId) ON DELETE CASCADE
