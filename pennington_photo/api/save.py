@@ -141,7 +141,15 @@ def select_size():
         )
     )
     cur.fetchone()
-    return flask.Response(status=204)
+    cur = connection.execute(
+        "SELECT picturepriceId "
+        "FROM pictureprices "
+        "ORDER BY picturepriceId DESC "
+        "LIMIT 1",
+        (
+        )
+    )
+    return flask.jsonify(cur.fetchone()), 201
 
 
 @pennington_photo.app.route("/api/v1/save/pictureprice/deselect/", methods=["POST"])
@@ -172,7 +180,7 @@ def deselect_size():
         )
     )
     cur.fetchone()
-    return flask.Response(status=204)
+    return flask.jsonify({"picturepriceId": None}), 201
 
 
 @pennington_photo.app.route("/api/v1/save/price/", methods=["POST"])
@@ -195,7 +203,15 @@ def update_price():
         pass
 
     price = body["price"]
+    if price == '':
+        price = 0
+        pass
+    price = int(price)
     pictureprice_id = body["picturepriceId"]
+    if not pictureprice_id:
+        flask.abort(400)
+        pass
+    
     connection = get_db()
     cur = connection.execute(
         "UPDATE pictureprices "

@@ -127,11 +127,12 @@ class EditablePhoto extends React.Component {
     const {
       content
     } = this.state;
-    const { price, offered, sizeId } = size;
+    const { price, offered, sizeId, picturepriceId } = size;
     content.sizes.forEach((s) => {
       if (s.sizenameId == sizeId) {
-        s.price = price;
+        s.price = Number(price);
         s.offered = Number(offered);
+        s.picturepriceId = picturepriceId;
       }
     })
     this.setState({ content });

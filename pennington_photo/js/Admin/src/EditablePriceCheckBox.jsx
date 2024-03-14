@@ -17,6 +17,7 @@ class EditablePriceCheckBox extends React.Component {
         info: "",
       },
       saveState: SAVED,
+      picturepriceId: 0,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
@@ -29,7 +30,8 @@ class EditablePriceCheckBox extends React.Component {
     const {
       offered,
       price,
-      info
+      info,
+      picturepriceId,
     } = this.props;
 
     const content = {
@@ -38,16 +40,17 @@ class EditablePriceCheckBox extends React.Component {
       info,
     }
 
-    this.setState({ content });
+    this.setState({ content, picturepriceId });
   }
 
   handleSelectChange(offered) {
-    const { picturepriceId, pictureId, sizeId, callback } = this.props;
-    const { content } = this.state;
+    const { pictureId, sizeId, callback } = this.props;
+    const { content, picturepriceId } = this.state;
     content.offered = offered;
+    content.price = 0;
     this.setState({ content });
     const { price } = content;
-    callback({ price, offered, sizeId });
+    callback({ price, offered, sizeId, picturepriceId });
     let uri = '';
     if (offered) {
       uri = '/api/v1/save/pictureprice/select/';
@@ -60,7 +63,7 @@ class EditablePriceCheckBox extends React.Component {
         credentials: 'same-origin',
         method: 'POST',
         headers: {
-          'Accept': '*/*',
+          'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -72,7 +75,13 @@ class EditablePriceCheckBox extends React.Component {
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
         this.setState({ saveState: SAVED });
-        return response;
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        const { picturepriceId } = data;
+        callback({ price, offered, sizeId, picturepriceId });
+        this.setState({ picturepriceId });
       })
       .catch((error) => console.log(error));
   }
@@ -97,19 +106,18 @@ class EditablePriceCheckBox extends React.Component {
   doSave() {
     // for changing price
     const {
-      picturepriceId,
       callback,
       sizeId,
     } = this.props;
     const {
-      content
+      content,
+      picturepriceId,
     } = this.state;
     const {
       price,
       offered
     } = content;
-
-    callback({ price, offered, sizeId });
+    callback({ price, offered, sizeId, picturepriceId });
 
     fetch('/api/v1/save/price/',
       {
@@ -131,11 +139,11 @@ class EditablePriceCheckBox extends React.Component {
 
   render() {
     const {
-      content
+      content,
+      picturepriceId,
     } = this.state;
     const {
       uuid,
-      picturepriceId,
     } = this.props;
     const {
       info,
