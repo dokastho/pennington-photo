@@ -21,12 +21,13 @@ def get_cart_contents():
             if 'size' not in photo:
                 photo['size'] = ""
             cur = connection.execute(
-                "SELECT info, price "
-                "FROM sizes s "
+                "SELECT s.name as info, price "
+                "FROM sizenames s "
+                "INNER JOIN pictureprices pp "
+                "ON s.sizenameId = pp.sizenameId "
                 "LEFT JOIN pictures p "
                 "USING(pictureId) "
-                "WHERE offered "
-                "AND p.uuid = ?",
+                "WHERE p.uuid = ?",
                 (uuid,)
             )
             photo["sizes"] = cur.fetchall()
