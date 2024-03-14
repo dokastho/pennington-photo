@@ -3,6 +3,7 @@ import React from 'react'
 import EditablePhoto from './EditablePhoto';
 import ConfirmatoryButton from './Buttons';
 import GALLERYTYPES from './GalleryTypes';
+import UploadLock from './UploadLock';
 
 const SAVED = "Saved.";
 const SAVING = "Saving...";
@@ -20,10 +21,12 @@ class EditGallery extends React.Component {
         dateTaken: null,
       },
       saveState: SAVED,
+      displayLock: false,
     };
     this.deletePhoto = this.deletePhoto.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.doSave = this.doSave.bind(this);
+    this.showLock = this.showLock.bind(this);
 
     this.timeout = null;
   }
@@ -108,6 +111,10 @@ class EditGallery extends React.Component {
       .catch((error) => console.log(error));
   }
 
+  showLock() {
+    this.setState({ displayLock: true });
+  }
+
   render() {
     const {
       galleryId,
@@ -116,7 +123,8 @@ class EditGallery extends React.Component {
     } = this.props;
     const {
       content,
-      saveState
+      saveState,
+      displayLock,
     } = this.state;
 
     const {
@@ -163,11 +171,18 @@ class EditGallery extends React.Component {
             <br />
             <div className='upload-picture-form'>
               <h3>Add new photos to this gallery by clicking the "Attach" button below</h3>
-              <form action="/api/v1/photo/new/" encType="multipart/form-data" method="post">
+              <form action="/api/v1/photo/new/" name='upload-pictures' encType="multipart/form-data" method="post">
                 <input type='hidden' name='galleryId' value={galleryId} />
                 <label htmlFor="file">Attach Pictures (.png, .jpg or .jpeg)</label><br />
-                <input type="file" name="file" id="file" multiple required accept=".png, .jpg, .jpeg" /><br />
-                <input type="submit" value="Save Attached Pictures" />
+                <input type="file" name="file" id="file" multiple required accept=".png, .jpg, .jpeg" onChange={() => { this.showLock(); }} />
+                {
+                  displayLock ? (
+                    <>
+                      <UploadLock />
+                      {document.forms["upload-pictures"].submit()}
+                    </>
+                  ) : (null)
+                }
               </form>
             </div>
             <br />
