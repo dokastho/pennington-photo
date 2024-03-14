@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react'
 
-const items = ["Galleries", "Administrators"];
+const items = ["Galleries", "Administrators", "Print Sizes"];
 
 class SideBar extends React.Component {
 

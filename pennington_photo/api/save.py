@@ -208,3 +208,36 @@ def update_price():
     )
     cur.fetchone()
     return flask.Response(status=204)
+
+
+@pennington_photo.app.route("/api/v1/save/sizename/", methods=["POST"])
+def update_sizename():
+    logname = check_session()
+    if not logname:
+        flask.abort(403)
+        pass
+
+    body = flask.request.get_json()
+    if body is None:
+        flask.abort(400)
+        pass
+
+    keys = ["sizenameId", "info"]
+    for key in keys:
+        if key not in body:
+            flask.abort(400)
+            pass
+        pass
+    
+    connection = get_db()
+    cur = connection.execute(
+        "UPDATE sizenames "
+        "SET name = ? "
+        "WHERE sizenameId = ?",
+        (
+            body["info"],
+            body["sizenameId"],
+        )
+    )
+    cur.fetchone()
+    return flask.Response(status=204)

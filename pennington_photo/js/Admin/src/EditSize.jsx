@@ -1,88 +1,38 @@
 import PropTypes from 'prop-types';
 import React from 'react'
+import ConfirmatoryButton from './Buttons';
 
 const SAVED = "Saved.";
 const SAVING = "Saving...";
 const UNSAVED = "Unsaved Changes.";
 
-class EditablePriceCheckBox extends React.Component {
+class EditSize extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      // state attributes go here
       content: {
-        offered: false,
-        price: 0,
         info: "",
       },
       saveState: SAVED,
-    };
+    }
     this.handleChange = this.handleChange.bind(this);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
     this.doSave = this.doSave.bind(this);
 
     this.timeout = null;
   }
 
   componentDidMount() {
-    const {
-      offered,
-      price,
-      info
-    } = this.props;
-
-    const content = {
-      offered,
-      price,
-      info,
-    }
-
-    this.setState({ content });
+    const { sizename } = this.props;
+    this.setState({ content: { info: sizename } });
   }
 
-  handleSelectChange(offered) {
-    const { picturepriceId, pictureId, sizeId, callback } = this.props;
-    const { content } = this.state;
-    content.offered = offered;
-    this.setState({ content });
-    const { price } = content;
-    callback({ price, offered, sizeId });
-    let uri = '';
-    if (offered) {
-      uri = '/api/v1/save/pictureprice/select/';
-    } else {
-      uri = '/api/v1/save/pictureprice/deselect/';
-    }
-
-    fetch(uri,
-      {
-        credentials: 'same-origin',
-        method: 'POST',
-        headers: {
-          'Accept': '*/*',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          picturepriceId,
-          pictureId,
-          sizenameId: sizeId,
-        }),
-      })
-      .then((response) => {
-        if (!response.ok) throw Error(response.statusText);
-        this.setState({ saveState: SAVED });
-        return response;
-      })
-      .catch((error) => console.log(error));
-  }
-
-  handleChange(key, value) {
+  handleChange(key, val) {
     const {
       content
     } = this.state;
-    content[key] = value;
-    this.setState({ content, saveState: UNSAVED, offered: true });
+    content[key] = val;
+    this.setState({ content, saveState: UNSAVED });
     if (this.timeout) {
       clearTimeout(this.timeout);
       this.timeout = null;
@@ -91,35 +41,29 @@ class EditablePriceCheckBox extends React.Component {
       this.timeout = null;
       this.setState({ saveState: SAVING });
       this.doSave();
-    }, 100);
+    }, 1000);
   }
 
   doSave() {
-    // for changing price
     const {
-      picturepriceId,
-      callback,
-      sizeId,
+      sizenameId,
+      callback
     } = this.props;
     const {
       content
     } = this.state;
     const {
-      price,
-      offered
+      info
     } = content;
-
-    callback({ price, offered, sizeId });
-
-    fetch('/api/v1/save/price/',
+    callback({ sizenameId, info });
+    fetch(`/api/v1/save/sizename/`,
       {
         credentials: 'same-origin',
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ price, picturepriceId }),
+        body: JSON.stringify({ info, sizenameId }),
       })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
@@ -131,51 +75,43 @@ class EditablePriceCheckBox extends React.Component {
 
   render() {
     const {
-      content
-    } = this.state;
-    const {
-      uuid,
-      picturepriceId,
+      sizenameId,
+      deleteSize,
+      cancelEdit,
     } = this.props;
     const {
+      content,
+      saveState,
+    } = this.state;
+    const {
       info,
-      price,
-      offered,
     } = content;
     return (
-      <div className='size-checkbox' key={`${picturepriceId}`} id={uuid}>
-        <span id={uuid}>
-          <input id={uuid} type='checkbox' checked={offered} onChange={() => { this.handleSelectChange(!offered) }} />
-          <label id={uuid}>{info}</label>
-        </span>
-        {
-          offered ? (
-            <span id={uuid} className='right-text'>
-              <label id={uuid}>Price: </label>
-              <input id={uuid} type='text' value={price} onChange={(e) => { this.handleChange("price", e.target.value) }} />
-            </span>
-          ) : (
-            <span>
-              Check the box to set a price
-            </span>
-          )
-        }
+      <div className='edit-account'>
+        <h3>Manage Size: "{info}"</h3>
+        <hr />
+        <input type='text' value={info} onChange={(e) => { this.handleChange("info", e.target.value) }} />
+        <hr />
+        <div className='menu-buttons'>
+          <div>
+            <button type='submit' onClick={() => { this.doSave() }}>Save</button>
+            <label className='fancy'>{saveState}</label>
+          </div>
+          <button onClick={() => { cancelEdit() }}>go back</button>
+          <ConfirmatoryButton text={"Delete"} args={{ sizenameId }} callback={deleteSize} />
+        </div>
       </div>
     );
   }
 }
 
-EditablePriceCheckBox.propTypes = {
+EditSize.propTypes = {
   // prop types go here
-  // s: PropTypes.string.isRequired,
-  offered: PropTypes.bool.isRequired,
-  price: PropTypes.number,
-  info: PropTypes.string.isRequired,
-  uuid: PropTypes.string.isRequired,
-  picturepriceId: PropTypes.number,
-  sizeId: PropTypes.number.isRequired,
-  pictureId: PropTypes.number.isRequired,
+  sizename: PropTypes.string.isRequired,
+  sizenameId: PropTypes.number.isRequired,
+  // deleteSize
+  // cancelEdit
   // callback
 };
 
-export default EditablePriceCheckBox
+export default EditSize

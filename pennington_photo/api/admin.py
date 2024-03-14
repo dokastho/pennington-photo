@@ -56,9 +56,18 @@ def get_admin():
     
     users = cur.fetchall()
     
+    cur = connection.execute(
+        "SELECT sizenameId, name FROM sizenames",
+        ()
+    )
+    
+    sizes = cur.fetchall()
+    
+    
     data = {
         "galleries": galleries,
-        "users": users
+        "users": users,
+        "sizes": sizes
     }
     
     return flask.jsonify(data), 201

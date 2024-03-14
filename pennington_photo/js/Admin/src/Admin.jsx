@@ -6,6 +6,7 @@ import { BrowserView, MobileView } from 'react-device-detect';
 import MobilePage from './MobilePage';
 import UserList from './UserList';
 import Loading from './Loading';
+import SizeList from './SizeList';
 
 const NOT_EDITING = -1;
 
@@ -18,6 +19,7 @@ class Admin extends React.Component {
       displayedContent: "galleries",
       galleries: [],
       users: [],
+      sizes: [],
       editingGalleryIdx: NOT_EDITING,
 
     };
@@ -25,27 +27,34 @@ class Admin extends React.Component {
     this.doEditGallery = this.doEditGallery.bind(this);
     this.deleteGallery = this.deleteGallery.bind(this);
     this.deselectGallery = this.deselectGallery.bind(this);
+    this.fetchState = this.fetchState.bind(this);
   }
 
   componentDidMount() {
     // fetch all gallery metadata
+    this.fetchState();
+  }
+
+  fetchState() {
     fetch("/api/v1/admin/", { credentials: 'same-origin' })
-      .then((response) => {
-        if (!response.ok) throw Error(response.statusText);
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data)
-        this.setState({
-          galleries: data.galleries,
-          users: data.users,
-          loaded: true
-        });
-      })
-      .catch((error) => console.log(error));
+    .then((response) => {
+      if (!response.ok) throw Error(response.statusText);
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data)
+      this.setState({
+        galleries: data.galleries,
+        users: data.users,
+        sizes: data.sizes,
+        loaded: true
+      });
+    })
+    .catch((error) => console.log(error));
   }
 
   showContent(displayedContent) {
+    this.fetchState();
     this.setState({ displayedContent, editingGalleryIdx: NOT_EDITING });
   }
 
@@ -80,6 +89,7 @@ class Admin extends React.Component {
       loaded,
       galleries,
       users,
+      sizes,
       displayedContent,
       editingGalleryIdx,
     } = this.state;
@@ -95,6 +105,9 @@ class Admin extends React.Component {
     }
     else if (displayedContent === "administrators") {
       content = <UserList users={users} />
+    }
+    else if (displayedContent === "print sizes") {
+      content = <SizeList sizes={sizes} />
     }
 
     return (

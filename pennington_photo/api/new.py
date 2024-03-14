@@ -45,7 +45,7 @@ def new_gallery():
             name,
             description,
             date_taken,
-            gallery_type
+            gallery_type,
         )
     )
     cur.fetchone()
@@ -55,7 +55,7 @@ def new_gallery():
         "WHERE name = ? "
         "ORDER BY created DESC",
         (
-            name
+            name,
         )
     )
     galleryId = cur.fetchone()['galleryId']
@@ -150,7 +150,7 @@ def new_size():
         flask.abort(403)
         pass
 
-    body = flask.request.form
+    body = flask.request.json
     if body is None:
         flask.abort(400)
         pass
@@ -173,5 +173,14 @@ def new_size():
         )
     )
     cur.fetchone()
-    return flask.Response(status=200)
+    
+    cur = connection.execute(
+        "SELECT name, sizenameId "
+        "FROM sizenames "
+        "ORDER BY sizenameId DESC "
+        "LIMIT 1",
+        ()
+    )
+    
+    return flask.jsonify(cur.fetchone()), 201
     

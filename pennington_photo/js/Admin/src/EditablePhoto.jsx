@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react'
 import ConfirmatoryButton from './Buttons';
-import EditablePriceCheckBox from './EditSize';
+import EditablePriceCheckBox from './EditablePriceCheckBox';
 import Photo from './Photo';
 
 const SAVED = "Saved.";
