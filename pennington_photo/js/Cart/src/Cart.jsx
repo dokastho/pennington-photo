@@ -119,7 +119,7 @@ class Cart extends React.Component {
     } = this.state;
     let ready = true;
     cart.forEach((photo) => {
-      ready = ready && (photo.size !== "");
+      ready = ready && (photo.size !== "") && (saveState == SAVED);
     })
     return (
       <>
