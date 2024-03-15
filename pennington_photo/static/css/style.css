@@ -21,6 +21,11 @@ body::-webkit-scrollbar {
     margin-right: auto;
 }
 
+.center {
+    margin-right: auto;
+    margin-left: auto;
+}
+
 input[type=text],
 textarea,
 input[type=password] {
@@ -377,6 +382,7 @@ a {
     margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
+    height: 32px;
 }
 
 .navbar-gradient {
@@ -386,10 +392,6 @@ a {
     height: 2rem;
     width: 100%;
     background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(0, 0, 0, 0));
-}
-
-.navbar-icon {
-    height: 32px;
 }
 
 .navbar-item:hover {
@@ -859,6 +861,25 @@ label.fancy {
     margin-top: 20%;
     margin-left: auto;
     margin-right: auto;
+}
+
+.arrows {
+    display: flex;
+    justify-content: space-between;
+}
+
+.arrow {
+    height: 32px;
+    border-radius: 20%;
+}
+
+.arrow:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+}
+
+.arrow:active {
+    background-color: gray;
 }
 
 /* mobile */

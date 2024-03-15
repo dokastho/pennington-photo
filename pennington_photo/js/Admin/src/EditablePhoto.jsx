@@ -15,7 +15,7 @@ class EditablePhoto extends React.Component {
     super(props);
     this.state = {
       blownUp: false,
-
+      loadedArrows: [false, false],
       content: {
         name: "",
         description: "",
@@ -33,10 +33,19 @@ class EditablePhoto extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.doSave = this.doSave.bind(this);
+    this.setArrowLoaded = this.setArrowLoaded.bind(this);
 
     this.timeout = null;
 
     this.setPhotoSizes = this.setPhotoSizes.bind(this);
+  }
+
+  setArrowLoaded(index) {
+    const {
+      loadedArrows
+    } = this.state;
+    loadedArrows[index] = true;
+    this.setState({ loadedArrows });
   }
 
   deletePhotoWrapper() {
@@ -54,7 +63,6 @@ class EditablePhoto extends React.Component {
     const {
       content
     } = this.props;
-    console.log(content);
     this.setState({
       content
     });
@@ -147,11 +155,15 @@ class EditablePhoto extends React.Component {
       uuid,
       imgClass,
       pictureId,
+      swapleft,
+      swapright,
+      idx,
     } = this.props;
     const {
       blownUp,
       content,
       saveState,
+      loadedArrows,
     } = this.state;
     const {
       name,
@@ -161,6 +173,7 @@ class EditablePhoto extends React.Component {
       total,
       sizes,
     } = content;
+    const loadingArrows = !loadedArrows[0] || !loadedArrows[1];
     return (
       <>
         <div className={imgClass} key={uuid}>
@@ -171,6 +184,25 @@ class EditablePhoto extends React.Component {
             imgClass='clickable'
             clickCallback={this.clickToBlowUp}
           />
+          <div className='arrows'>
+            {loadingArrows ? (<div className='center'><em>Arrow icons are loading...</em></div>) : null}
+            <img
+              key={"leftarrow"}
+              src="/static/img/left.svg"
+              type="image/svg+xml"
+              className={`arrow ${!loadingArrows ? 'loaded-nf' : 'loading-nf'}`}
+              onLoad={() => { this.setArrowLoaded(0) }}
+              onClick={() => { swapleft(idx) }}>
+            </img>
+            <img
+              key={"rightarrow"}
+              src="/static/img/right.svg"
+              type="image/svg+xml"
+              className={`arrow ${!loadingArrows ? 'loaded-nf' : 'loading-nf'}`}
+              onLoad={() => { this.setArrowLoaded(1) }}
+              onClick={() => { swapright(idx) }}>
+            </img>
+          </div>
         </div>
         {
           blownUp ? (
@@ -252,6 +284,9 @@ EditablePhoto.propTypes = {
   pictureId: PropTypes.number.isRequired,
   imgClass: PropTypes.string,
   content: PropTypes.instanceOf(Object).isRequired,
+  idx: PropTypes.number.isRequired,
+  // swapleft
+  // swapright
   // deletePhoto
 };
 

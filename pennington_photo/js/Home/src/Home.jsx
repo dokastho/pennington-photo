@@ -16,7 +16,6 @@ class Home extends React.Component {
   }
 
   setLoaded() {
-    console.log("loaded");
     this.setState({ loaded: true });
   }
 

@@ -28,6 +28,10 @@ class EditGallery extends React.Component {
     this.doSave = this.doSave.bind(this);
     this.showLock = this.showLock.bind(this);
 
+    this.swap = this.swap.bind(this);
+    this.swapleft = this.swapleft.bind(this);
+    this.swapright = this.swapright.bind(this);
+
     this.timeout = null;
   }
 
@@ -70,6 +74,53 @@ class EditGallery extends React.Component {
         return response.json();
       })
       .catch((error) => console.log(error));
+  }
+
+  swap(lhs, rhs) {
+    const { content } = this.state;
+    const { photos } = content;
+    console.log(photos[lhs]);
+    console.log(photos[rhs]);
+    fetch('/api/v1/swap/pictures/',
+      {
+        credentials: 'same-origin',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          lhsId: photos[lhs].pictureId,
+          rhsId: photos[rhs].pictureId,
+          lhsOrdernum: photos[lhs].ordernum,
+          rhsOrdernum: photos[rhs].ordernum
+        }),
+      })
+      .then((response) => {
+        if (!response.ok) throw Error(response.statusText);
+        this.setState({ saveState: SAVED });
+        const temp = photos[lhs];
+        photos[lhs] = photos[rhs];
+        photos[rhs] = temp;
+        const tempon = photos[lhs].ordernum;
+        photos[lhs].ordernum = photos[rhs].ordernum;
+        photos[rhs].ordernum = tempon;
+        return response;
+      })
+      .catch((error) => console.log(error));
+  }
+
+  swapleft(idx) {
+    const { content } = this.state;
+    const { photos } = content;
+    const lhs = (idx + photos.length - 1) % photos.length;
+    this.swap(lhs, idx);
+  }
+
+  swapright(idx) {
+    const { content } = this.state;
+    const { photos } = content;
+    const rhs = (idx + 1) % photos.length;
+    this.swap(idx, rhs);
   }
 
   handleChange(key, value) {
@@ -201,9 +252,20 @@ class EditGallery extends React.Component {
         </div>
         <div className='photos-tray'>
           {
-            photos.map((photo) => {
+            photos.map((photo, idx) => {
               const { name, description, stars, qty, total, sizes } = photo;
-              return (<EditablePhoto key={photo.uuid} uuid={photo.uuid} content={{ name, description, stars, qty, total, sizes }} pictureId={photo.pictureId} deletePhoto={this.deletePhoto} />)
+              return (
+                <EditablePhoto
+                  key={photo.uuid}
+                  uuid={photo.uuid}
+                  content={{ name, description, stars, qty, total, sizes }}
+                  pictureId={photo.pictureId}
+                  deletePhoto={this.deletePhoto}
+                  swapleft={this.swapleft}
+                  swapright={this.swapright}
+                  idx={idx}
+                />
+              )
             })
           }
         </div>

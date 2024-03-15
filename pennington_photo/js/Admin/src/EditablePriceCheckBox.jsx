@@ -78,7 +78,6 @@ class EditablePriceCheckBox extends React.Component {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         const { picturepriceId } = data;
         callback({ price, offered, sizeId, picturepriceId });
         this.setState({ picturepriceId });

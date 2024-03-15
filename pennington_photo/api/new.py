@@ -110,18 +110,35 @@ def new_photo():
     
     galleryId = body["galleryId"]
     
+    # get max ordernum
+    cur = connection.execute(
+        "SELECT ordernum "
+        "FROM pictures "
+        "WHERE galleryId = ? "
+        "ORDER BY ordernum DESC "
+        "LIMIT 1",
+        (galleryId,)
+    )
+    blob = cur.fetchone()
+    ordernum = 0
+    if blob is not None:
+        ordernum = blob["ordernum"]
+        pass
+    
     for file in photos:
         uuid = get_uuid(file.filename)
         file.save(pennington_photo.app.config["UPLOADS_FOLDER"] / uuid)
+        ordernum += 1
         cur = connection.execute(
             "INSERT INTO pictures"
-            "(galleryId, owner, name, uuid) "
-            "VALUES (?, ?, ?, ?)",
+            "(galleryId, owner, name, uuid, ordernum) "
+            "VALUES (?, ?, ?, ?, ?)",
             (
                 galleryId,
                 logname,
                 file.filename,
                 uuid,
+                ordernum,
             )
         )
         cur.fetchone()

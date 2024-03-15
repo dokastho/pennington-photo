@@ -18,7 +18,7 @@ def get_galleries():
     
     for gallery in galleries:
         cur = connection.execute(
-            "SELECT * FROM pictures WHERE galleryId = ? ORDER BY stars DESC",
+            "SELECT * FROM pictures WHERE galleryId = ? ORDER BY stars DESC, ordernum",
             (gallery["galleryId"],)
         )
         img = cur.fetchone()
@@ -44,7 +44,7 @@ def get_gallery(gallery_id):
     gallery = cur.fetchone()
     
     cur = connection.execute(
-        "SELECT * FROM pictures WHERE galleryId = ?",
+        "SELECT * FROM pictures WHERE galleryId = ? ORDER BY ordernum",
         (gallery_id,)
     )
     

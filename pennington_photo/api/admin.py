@@ -17,7 +17,7 @@ def get_admin():
     
     for gallery in galleries:
         cur = connection.execute(
-            "SELECT * FROM pictures WHERE galleryId = ? ORDER BY stars DESC",
+            "SELECT * FROM pictures WHERE galleryId = ? ORDER BY stars DESC, ordernum",
             (gallery["galleryId"],)
         )
         img = cur.fetchone()
@@ -28,7 +28,7 @@ def get_admin():
             gallery["thumbnail"] = img["uuid"]
             pass
         cur = connection.execute(
-            "SELECT * FROM pictures WHERE galleryId = ?",
+            "SELECT * FROM pictures WHERE galleryId = ? ORDER BY ordernum",
             (gallery["galleryId"],)
         )
         gallery["photos"] = cur.fetchall()
