@@ -31,7 +31,7 @@ def handle_contact():
     total_cost = 0
     if checkout:
         cart = flask.session["cart"]
-        # flask.session.clear()
+        flask.session.clear()
         for item in cart.values():
             total_cost += (item['price'] * item['qty'])
             pass
