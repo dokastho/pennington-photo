@@ -95,7 +95,16 @@ class Gallery extends React.Component {
             <div className={`photos-tray ${galleryType}`}>
               {
                 photos.map((photo) => {
-                  return (<ClickablePhoto key={photo.uuid} uuid={photo.uuid} name={photo.name} description={photo.description} galleryType={galleryType} />)
+                  return (<ClickablePhoto
+                    key={photo.uuid}
+                    uuid={photo.uuid}
+                    name={photo.name}
+                    qty={photo.qty}
+                    total={photo.total}
+                    minprice={photo.minprice}
+                    description={photo.description}
+                    galleryType={galleryType}
+                  />)
                 })
               }
             </div>

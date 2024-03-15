@@ -21,6 +21,10 @@ body::-webkit-scrollbar {
     margin-right: auto;
 }
 
+.smallpad {
+    margin: 0.2em;
+}
+
 .center {
     margin-right: auto;
     margin-left: auto;
@@ -201,6 +205,10 @@ h3.alt {
 }
 
 h1.alt {
+    color: white;
+}
+
+p.alt {
     color: white;
 }
 

@@ -50,10 +50,16 @@ class ClickablePhoto extends React.Component {
     const {
       uuid,
       name,
+      qty,
+      total,
+      minprice,
       imgClass,
       description,
       galleryType,
     } = this.props;
+
+    const onlyTotal = total && !qty;
+    const both = total && qty;
 
     var photoClassName;
     switch (galleryType) {
@@ -89,11 +95,19 @@ class ClickablePhoto extends React.Component {
                 {
                   showDetails ? (
                     <>
-                      <h3 className='fancy big-text'>{name}</h3>
+                      <h3 className='fancy big-text smallpad'>{name}</h3>
                       {
-                        description === "" ? null : (<h3 className='alt big-text'><em>{description}</em></h3>)
+                        description === "" ? null : (<h3 className='alt big-text smallpad'><em>{description}</em></h3>)
                       }
-                      {/* add offered sizes */}
+                      {
+                        onlyTotal ? (<p className='alt smallpad'><em>Limited Edition of {total}</em></p>) : null
+                      }
+                      {
+                        both ? (<p className='alt smallpad'><em>{qty}/{total}</em></p>) : null
+                      }
+                      {
+                        minprice ? (<p className='alt smallpad'><em>From ${minprice}</em></p>) : (<h3 className='alt big-text smallpad'><em>Not Available For Sale</em></h3>)
+                      }
                       <div id={uuid} className='details-box mfs' onClick={() => { this.toggleDetails() }}>
                         hide details
                       </div>
@@ -123,6 +137,9 @@ ClickablePhoto.propTypes = {
   // prop types go here
   uuid: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  qty: PropTypes.number,
+  total: PropTypes.number,
+  minprice: PropTypes.number,
   galleryType: PropTypes.string.isRequired,
   imgClass: PropTypes.string,
   description: PropTypes.string,

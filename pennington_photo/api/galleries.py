@@ -49,6 +49,20 @@ def get_gallery(gallery_id):
     )
     
     gallery["photos"] = cur.fetchall()
+    for photo in gallery["photos"]:
+        cur = connection.execute(
+            "SELECT price AS minprice FROM pictureprices "
+            "WHERE pictureId = ? "
+            "AND price > 0 "
+            "ORDER BY price "
+            "LIMIT 1",
+            (photo["pictureId"],)
+        )
+        
+        blob = cur.fetchone()
+        photo["minprice"] = None
+        if blob:
+            photo["minprice"] = blob["minprice"]
     
     if gallery["description"] is None:
         gallery["description"] = ""
