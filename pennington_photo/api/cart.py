@@ -1,8 +1,14 @@
 """Handle Cart Requests."""
 
 import flask
+import hashlib
 import pennington_photo
 from pennington_photo.common.model import get_db
+
+def do_hash(s: str) -> str:
+    m = hashlib.sha256()
+    m.update(s.encode('utf-8'))
+    return m.hexdigest()
 
 
 @pennington_photo.app.route('/api/v1/cart/contents/')
@@ -14,7 +20,8 @@ def get_cart_contents():
     connection = get_db()
 
     if 'cart' in flask.session:
-        for uuid, photo in flask.session['cart'].items():
+        for photo in flask.session['cart'].values():
+            uuid = photo['uuid']
             photo['uuid'] = uuid
             if 'price' not in photo:
                 photo['price'] = 0
@@ -52,8 +59,9 @@ def cart_status():
     if 'cart' not in flask.session:
         return flask.jsonify({'in': False}), 200
 
-    if uuid in flask.session['cart'].keys():
-        return flask.jsonify({'in': True}), 200
+    for photo in flask.session['cart'].values():
+        if uuid == photo['uuid']:
+            return flask.jsonify({'in': True}), 200
 
     return flask.jsonify({'in': False}), 200
 
@@ -68,24 +76,25 @@ def cart_add():
         flask.abort(400)
 
     item = body['photo']
-    key = item['uuid']
+    key = do_hash(item['uuid'])
     val = {
         'name': item['name'],
+        'uuid': item['uuid'],
         'qty': 1,
     }
 
     if 'cart' not in flask.session:
         flask.session['cart'] = dict()
         pass
+    
 
     cart = flask.session['cart']
 
-    if key in cart.keys():
-        cart[key]['qty'] += val['qty']
+    while key in cart.keys():
+        key = do_hash(key)
         pass
-    else:
-        cart[key] = val
-        pass
+    val["hashId"] = key
+    cart[key] = val
     flask.session['cart'] = cart
 
     return flask.Response(status=204)
@@ -106,11 +115,13 @@ def cart_update():
     for photo in cart:
         val = {
             'name': photo['name'],
-            'qty': photo['qty'],
+            'qty': int(photo['qty']),
             'size': photo['size'],
             'price': photo['price'],
+            'uuid': photo['uuid'],
+            'hashId': photo['hashId']
         }
-        cart_p[photo['uuid']] = val
+        cart_p[photo['hashId']] = val
         pass
     
     flask.session['cart'] = cart_p
@@ -124,10 +135,10 @@ def cart_remove():
     if body is None:
         flask.abort(400)
 
-    if 'uuid' not in body:
+    if 'hashId' not in body:
         flask.abort(400)
 
-    item = body['uuid']
+    item = body['hashId']
 
     if 'cart' not in flask.session:
         return flask.Response(status=204)

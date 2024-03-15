@@ -28,16 +28,21 @@ def handle_contact():
     checkout = body["checkout"] == "true"
     context = {}
     cart = {}
+    total_cost = 0
     if checkout:
         cart = flask.session["cart"]
-        flask.session.clear()
+        # flask.session.clear()
+        for item in cart.values():
+            total_cost += (item['price'] * item['qty'])
+            pass
         context = {
             "cart": cart,
             "name": name,
             "email": email,
             "message": message,
             "total_cost" : total_cost,
-            "subjet" : f"Invoice Order From {name}"
+            "subject" : f"Invoice Order From {name}",
+            "checkout": True
         }
         pass
     else:
@@ -45,13 +50,10 @@ def handle_contact():
             "name": name,
             "email": email,
             "message": message,
-            "subject": f"Message From {name}"
+            "subject": f"Message From {name}",
+            "checkout": False
         }
         pass
-
-    total_cost = 0
-    for item in cart.values():
-        total_cost += item['price']
 
     invoice = flask.render_template("invoice.html", **context)
     send_email_ses(invoice, context["subject"])

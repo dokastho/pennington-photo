@@ -15,9 +15,9 @@
     <div class="info">{{ name }} ({{ email }}) requested the following photographics:</div>
     <div class="list">
       <ol type="1">
-        {% for uuid, photo in cart.items() %}
+        {% for photo in cart.values() %}
         <li>
-          <h1><a href="/static/img/{{ uuid }}">{{ photo.name }}</a></h1>
+          <h1><a href="/static/img/{{ photo.uuid }}">{{ photo.name }}</a></h1>
           <h2>Qty: {{ photo.qty }}</h2>
           <h2>Size: {{ photo.size }}</h2>
           <h2>Price: ${{ photo.price }}</h2>

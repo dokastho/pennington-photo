@@ -84,10 +84,10 @@ class Cart extends React.Component {
     }, 1000);
   }
 
-  deletePhoto(uuid) {
+  deletePhoto(hashId) {
     while (this.timeout) {
       setTimeout(() => {
-        this.deletePhoto(uuid);
+        this.deletePhoto(hashId);
       }, 100);
       return;
     }
@@ -99,12 +99,12 @@ class Cart extends React.Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ uuid }),
+        body: JSON.stringify({ hashId }),
       })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
         this.setState((prevState) => ({
-          cart: prevState.cart.filter((photo) => photo.uuid !== uuid),
+          cart: prevState.cart.filter((photo) => photo.hashId !== hashId),
         }));
         return response.json();
       })
@@ -169,7 +169,7 @@ class Cart extends React.Component {
                                       })
                                     }
                                   </select>
-                                  <button className='min-margin' onClick={() => { this.deletePhoto(photo.uuid) }}>Remove from Cart</button>
+                                  <button className='min-margin' onClick={() => { this.deletePhoto(photo.hashId) }}>Remove from Cart</button>
                                 </div>
                               </div>
                             </>
