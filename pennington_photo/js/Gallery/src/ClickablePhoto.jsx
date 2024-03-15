@@ -118,7 +118,9 @@ class ClickablePhoto extends React.Component {
                     </div>
                   )
                 }
-                <CartButton photo={name} uuid={uuid} />
+                {
+                  minprice ? (<CartButton photo={name} uuid={uuid} />) : (null)
+                }
               </div>
             </div>
           ) : null

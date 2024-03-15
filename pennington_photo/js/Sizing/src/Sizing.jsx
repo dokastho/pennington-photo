@@ -58,25 +58,28 @@ class Sizing extends React.Component {
                   Exclusive Photographic Prints
                 </h3>
                 <p>
-                  These photographs are only printed 26" X 32", dry-mounted on 32" X 40" 100% cotton rag museum board, and can be framed on silver or black metal 32" X 40" frames. These exclusive photographic prints are limited to no more than 50 copies each.
-                </p>
-                <h3>
-                  Triptych Prints
-                </h3>
-                <p>
-                  These photographic prints consist of three segments of one image arranged in a traditional triptych format. Two neighboring 6" x 10" photogrpahics accompany one central 10" x 10" print on a 16" x 32" frame. 
+                  In my collection of archival processed photographic prints, I have selected what I consider to be exclusive photographs that are my favorites and stand out from the rest. These prints are only printed 26" x 32", dry mounted on 32" x 40" museum board, and also framed 32" x 40". These exclusive photographic prints are limited to no more than 50 copies each.
                 </p>
                 <h3>
                   Mirror Image Prints
                 </h3>
                 <p>
-                  These photographs consist of two prints with one printed in reverse of the other. They are then mounted together on a single 32" X 42" piece of museum board, then over-matted. Framing would consist of silver or black metal.
-                </p>
-                <p>
-                  Mirror image prints come in 22" x 40" and 32" x 40" prints.
+                  Certain photographic images have the opportunity to be presented as mirror images. Mirror image photographs present a unique visual photographic presentation which is accomplished by printing the same image side by side with one image being printed in reverse of the other. The perspective of this type of combined photographic image is unusual and visually dynamic.
                 </p>
                 <h3>
-                  Select Photographic Prints
+                  Triptych Prints
+                </h3>
+                <p>
+                  These photographic prints consist of three segments of one image arranged in a traditional triptych format. Two neighboring 6" x 10" photogrpahics accompany one central 10" x 10" print on a single piece of museum mount board that is then matted and framed 16" x 32".
+                </p>
+                <h3>
+                  Favorite Images
+                </h3>
+                <p>
+                  In the years spent photographing unique aspects of the natural environment, I have acquired a variety of images that I consider significant and desirable regarding composition, expressions of visual tonalities and images that can be beautifully expressed as a Black and White photograph. In the category of featured photographs, I have thus included some of the images that are my favorites. I also hope you enjoy the other photographic images in the adjoining categories.
+                </p>
+                <h3>
+                  Framed & Unframed Sizes
                 </h3>
                 <p>
                   Prices for each print in a given size are as follows (unless otherwise listed)
