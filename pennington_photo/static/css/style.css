@@ -837,12 +837,20 @@ label.fancy {
     margin-right: auto;
 }
 
-.cart-item {
+.cart-line {
     text-align: left;
     width: 60vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.cart-item-name {
+    width: 20vw;
+}
+
+.cart-select {
+    width: 10vw;
 }
 
 .cart-thumbnail {
@@ -855,6 +863,7 @@ label.fancy {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    width: 40vw;
 }
 
 .upload-picture-form {

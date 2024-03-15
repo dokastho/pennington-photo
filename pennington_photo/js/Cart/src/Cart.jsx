@@ -149,9 +149,11 @@ class Cart extends React.Component {
                           return (
                             <>
                               <hr />
-                              <div className='cart-item'>
+                              <div className='cart-line'>
                                 <img src={`/static/img/${photo.uuid}`} className='cart-thumbnail' />
-                                <h3 className='fancy'>{photo.name}</h3>
+                                <div className='cart-item-name'>
+                                  <h3 className='fancy'>{photo.name}</h3>
+                                </div>
                                 <div className='cart-item-options'>
                                   <div className='min-margin'>
                                     <label htmlFor='number'>Qty: </label>
@@ -159,7 +161,7 @@ class Cart extends React.Component {
                                     {/* add item sizes drop down */}
                                   </div>
                                   <label className='min-margin' htmlFor="size">Choose a size:</label>
-                                  <select className='min-margin' id="size" name="size" onChange={(e) => { this.handleChage(index, 'info', JSON.parse(e.target.value)) }}>
+                                  <select className='min-margin cart-select' id="size" name="size" onChange={(e) => { this.handleChage(index, 'info', JSON.parse(e.target.value)) }}>
                                     <option disabled selected value={""}>{default_size}</option>
                                     {
                                       photo.sizes.map((size) => {
