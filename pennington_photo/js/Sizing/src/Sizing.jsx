@@ -64,11 +64,11 @@ class Sizing extends React.Component {
                 <div className='info-content'>
                   <div className='info-img nopadside'>
                     <h3>Athabasca Falls</h3>
-                    {/* <Photo uuid={ } /> */}
+                    <Photo uuid={ "no-img.svg" } imgClass={"photo-slot-static-content"} />
                   </div>
                   <div className='info-img nopadside'>
                     <h3>Light Fall</h3>
-                    {/* <Photo uuid={ } /> */}
+                    <Photo uuid={ "no-img.svg" } imgClass={"photo-slot-static-content"} />
                   </div>
                 </div>
                 <h3>
