@@ -301,6 +301,12 @@ a {
     margin-top: auto;
     margin-bottom: auto;
     padding-left: 2rem;
+    text-align: center;
+}
+
+.nopadside {
+    padding-right: 0;
+    padding-left: 0;
 }
 
 .bio-text {
@@ -620,6 +626,20 @@ a {
     /* pointer-events: none; */
     width: -webkit-fill-available;
     height: -webkit-fill-available;
+}
+
+.photo-slot-static-content {
+    box-shadow: none;
+    /* object-fit: cover; */
+    grid-column: span 3;
+    grid-row: span 3;
+    padding: 1rem;
+    width: -webkit-fill-available;
+    height: auto;
+}
+
+.photo-slot-static-content:hover {
+    transform: none;
 }
 
 .blur {
