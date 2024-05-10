@@ -290,6 +290,10 @@ a {
     max-width: 80%;
 }
 
+.favorites-info-content-side-by-side {
+    max-width: 100%;
+}
+
 .info-text {
     width: 50%;
     padding-right: 2rem;

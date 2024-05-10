@@ -23,7 +23,6 @@
         "galleries": "file:pennington_photo/js/Galleries",
         "gallery": "file:pennington_photo/js/Gallery",
         "home": "file:pennington_photo/js/Home",
-        "login": "file:pennington_photo/js/Login",
-        "sizing": "file:pennington_photo/js/Sizing"
+        "login": "file:pennington_photo/js/Login"
     }
 }

@@ -27,7 +27,7 @@
     "axios": "^1.6.7",
     "chromedriver": "^122.0.6",
     "eslint": "^7.5.0",
-    "node": "^17.4.0",
+    "node": "^20.13.1",
     "react": "^18.2.0",
     "react-device-detect": "^2.2.3",
     "react-dom": ">=17.0.2",

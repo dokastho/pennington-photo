@@ -2,6 +2,7 @@ import React from 'react';
 import NavBar from './NavBar';
 import Thumbnail from './Thumbnail';
 import Loading from './Loading';
+import Sizing from './Sizing';
 
 class Galleries extends React.Component {
 
@@ -46,6 +47,7 @@ class Galleries extends React.Component {
         <div className={loaded ? 'loaded' : 'loading'}>
           <NavBar />
           <div className='site-contents'>
+            <Sizing />
             <div className='dialogue'>
               <h1>
                 Photo Galleries
