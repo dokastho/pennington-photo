@@ -259,10 +259,10 @@ class EditablePhoto extends React.Component {
                   </div>
                   <div className='edit-box-column' id={uuid}>
                     {/* edition qty and total */}
-                    <label id={uuid} className='fancy'>Qty:</label>
+                    <label id={uuid} className='fancy'>Edition:</label>
                     <input id={uuid} className='span fancy' type='number' value={qty} onChange={(e) => { this.handleChange("qty", e.target.value) }} />
                     <br />
-                    <label id={uuid} className='fancy'>Total:</label>
+                    <label id={uuid} className='fancy'>Limit:</label>
                     <input id={uuid} className='span fancy' type='number' value={total} onChange={(e) => { this.handleChange("total", e.target.value) }} />
                   </div>
                 </div>

@@ -103,7 +103,7 @@ class ClickablePhoto extends React.Component {
                         onlyTotal ? (<p className='alt smallpad'><em>Limited Edition of {total}</em></p>) : null
                       }
                       {
-                        both ? (<p className='alt smallpad'><em>{qty}/{total}</em></p>) : null
+                        both ? (<p className='alt smallpad'><em>Edition: {qty} of {total} available</em></p>) : null
                       }
                       {
                         minprice ? (<p className='alt smallpad'><em>From ${minprice}</em></p>) : (<h3 className='alt big-text smallpad'><em>Not Available For Sale</em></h3>)
