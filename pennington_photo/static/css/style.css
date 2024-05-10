@@ -292,6 +292,14 @@ a {
     max-width: 80%;
 }
 
+.home-info-content {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    max-width: 80%;
+    flex-direction: column;
+}
+
 .favorites-info-content-side-by-side {
     max-width: 100%;
 }
@@ -299,6 +307,7 @@ a {
 .info-text {
     width: 50%;
     padding-right: 2rem;
+    font-size: x-large;
 }
 
 .info-img {
@@ -308,6 +317,21 @@ a {
     margin-bottom: auto;
     padding-left: 2rem;
     text-align: center;
+}
+
+.home-info-text {
+    width: 100%;
+    padding-right: 2rem;
+    font-size: x-large;
+}
+
+.home-info-img {
+    width: 70%;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .nopadside {
@@ -550,6 +574,7 @@ a {
 
 .dialogue {
     text-align: center;
+    font-size: x-large;
 }
 
 .galleries-tray {
