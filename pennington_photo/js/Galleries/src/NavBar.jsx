@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react'
 
-const items = ["Home", "Galleries", "Sizing", "Contact"];
+const items = ["Home", "Galleries", "Contact"];
 
 const timerInterval = 3500;  // in ms
 const transitionInterval = 200;  // in ms

@@ -212,7 +212,7 @@ p.alt {
     color: white;
 }
 
-button.confirmatory {}
+/* button.confirmatory {} */
 
 button.clicked {
     background-color: darkred;
@@ -784,9 +784,9 @@ td {
     align-items: flex-start;
 }
 
-input.span {}
+/* input.span {} */
 
-input.fancy {}
+/* input.fancy {} */
 
 label.fancy {
     color: rgb(26, 115, 232);
