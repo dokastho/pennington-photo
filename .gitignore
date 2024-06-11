@@ -136,3 +136,9 @@ node_modules
 *.jpg
 *.jpeg
 backups/*
+
+!miex*
+!exex*
+!tripex*
+!img073.jpg
+!favicon.png
