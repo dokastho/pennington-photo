@@ -19,7 +19,7 @@ class InfoPage extends React.Component {
           <h1>The Beauty and Power of Black & White Photography</h1>
           <br />
         </div>
-        <div className='home-info-content'>
+        <div className='home-info-content side-by-side'>
           <div className='home-info-text'>
             <p>
               Visualization and exploration of our natural environment is a rewarding experience. Beauty and composition can be found at arm's reach in our back yard, across the country and around the world. I believe that my next photograph could be my finest. I strive for this concept and continue to cherish for the splendor and magnificence of our natural environment.
@@ -31,7 +31,7 @@ class InfoPage extends React.Component {
               All prints are mnade on Silver Gelatin Fiber based photographic paper, processed to archival standards, selenium toned and dry mounted on 100% rag museum board. I personally print and process all prints to order.
             </p>
           </div>
-          <img src={`/static/img/${imgName}`} className='home-info-img' />
+          <img src={`/static/img/${imgName}`} className='home-info-img background-img' />
         </div>
       </div>
     );

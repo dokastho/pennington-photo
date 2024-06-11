@@ -300,6 +300,10 @@ a {
     flex-direction: column;
 }
 
+.side-by-side {
+    flex-direction: row;
+}
+
 .favorites-info-content-side-by-side {
     max-width: 100%;
 }
