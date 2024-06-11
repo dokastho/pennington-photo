@@ -5,7 +5,8 @@
   "main": "src/index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf dist && npx webpack && cp ./dist/index.bundle.js ../../static/js/accounts.bundle.js"
+    "build": "rm -rf dist && npx webpack && cp ./dist/index.bundle.js ../../static/js/accounts.bundle.js",
+    "rebuild": "rm -rf dist && rm -rf node_modules/ && npm i && npm audit fix && npx webpack && cp ./dist/index.bundle.js ../../static/js/accounts.bundle.js"
   },
   "devDependencies": {
     "@babel/core": ">=7.15.5",
@@ -26,7 +27,7 @@
   "dependencies": {
     "chromedriver": "^124.0.2",
     "eslint": "^7.5.0",
-    "node": "^20.13.1",
+    "node": ">=20.12.2",
     "react": "^18.2.0",
     "react-dom": ">=17.0.2"
   },

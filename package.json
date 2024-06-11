@@ -6,14 +6,15 @@
     "license": "MIT",
     "repository": {},
     "engines": {
-        "node": ">=8.0.0"
+        "node": "^20.12.2"
     },
     "directories": {
         "test": "tests"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "./bin/build.py"
+        "build": "./bin/build.py",
+        "rebuild": "./bin/build.py rebuild"
     },
     "dependencies": {
         "accounts": "file:pennington_photo/js/Accounts",
