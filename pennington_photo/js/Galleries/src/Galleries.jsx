@@ -5,7 +5,6 @@ import Loading from './Loading';
 import Sizing from './Sizing';
 
 class Galleries extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +15,7 @@ class Galleries extends React.Component {
 
   componentDidMount() {
     // fetch all gallery metadata
-    fetch("/api/v1/galleries/", { credentials: 'same-origin' })
+    fetch('/api/v1/galleries/', { credentials: 'same-origin' })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
         return response.json();
@@ -24,7 +23,7 @@ class Galleries extends React.Component {
       .then((data) => {
         this.setState({
           galleries: data,
-          loaded: true
+          loaded: true,
         });
       })
       .catch((error) => console.log(error));
@@ -33,8 +32,8 @@ class Galleries extends React.Component {
   render() {
     const {
       loaded,
-      galleries
-    } = this.state
+      galleries,
+    } = this.state;
     return (
       <>
         {
@@ -46,9 +45,9 @@ class Galleries extends React.Component {
         }
         <div className={loaded ? 'loaded' : 'loading'}>
           <NavBar />
-          <div className='site-contents'>
+          <div className="site-contents">
             <Sizing />
-            <div className='dialogue'>
+            <div className="dialogue">
               <h1>
                 Photo Galleries
               </h1>
@@ -57,18 +56,24 @@ class Galleries extends React.Component {
               </h3>
               <br />
             </div>
-            <div className='galleries-tray'>
+            <div className="galleries-tray">
               {
-                galleries.map((gallery) => {
-                  return (<Thumbnail key={gallery.galleryId} name={gallery.name} galleryId={gallery.galleryId} imgSrc={gallery.thumbnail} galleryType={gallery.type} />)
-                })
+                galleries.map((gallery) => (
+                  <Thumbnail
+                    key={gallery.galleryId}
+                    name={gallery.name}
+                    galleryId={gallery.galleryId}
+                    imgSrc={gallery.thumbnail}
+                    galleryType={gallery.type}
+                  />
+                ))
               }
             </div>
           </div>
         </div>
       </>
-    )
+    );
   }
 }
 
-export default Galleries
+export default Galleries;

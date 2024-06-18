@@ -1,20 +1,20 @@
-import PropTypes from 'prop-types';
-import React from 'react'
+/* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable jsx-a11y/alt-text */
+import React from 'react';
 
-const items = ["Home", "Galleries", "Contact"];
+const items = ['Home', 'Galleries', 'Contact'];
 
-const timerInterval = 3500;  // in ms
-const transitionInterval = 200;  // in ms
+const timerInterval = 3500; // in ms
+const transitionInterval = 200; // in ms
 
 class NavBar extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       loaded: [false, false],
       displayLinks: false,
       displayTitles: true,
-    }
+    };
     this.timeout = null;
 
     this.showLinks = this.showLinks.bind(this);
@@ -25,16 +25,16 @@ class NavBar extends React.Component {
     this.contentDisplayTimer = this.contentDisplayTimer.bind(this);
   }
 
+  componentDidMount() {
+    this.contentDisplayTimer(2000);
+  }
+
   setLoaded(index) {
     const {
-      loaded
+      loaded,
     } = this.state;
     loaded[index] = true;
     this.setState({ loaded });
-  }
-
-  componentDidMount() {
-    this.contentDisplayTimer(2000);
   }
 
   mouseOver() {
@@ -82,46 +82,42 @@ class NavBar extends React.Component {
       displayTitles,
     } = this.state;
     return (
-      <>
-        <div className='navbar' onMouseEnter={() => { this.mouseOver() }} onMouseLeave={() => { this.mouseLeave() }} >
-          <div className='navbar-icon'>
-            <a href='/admin/'>
-              <img src="/static/icon/Bio.png" className={`navbar-icon ${loaded[0] ? 'loaded-nf' : 'loading-nf'}`} key='admin-icon' onLoad={() => { this.setLoaded(0) }} />
-            </a>
+      <div className="navbar" onMouseEnter={() => { this.mouseOver(); }} onMouseLeave={() => { this.mouseLeave(); }}>
+        <div className="navbar-icon">
+          <a href="/admin/">
+            <img src="/static/icon/Bio.png" className={`navbar-icon ${loaded[0] ? 'loaded-nf' : 'loading-nf'}`} key="admin-icon" onLoad={() => { this.setLoaded(0); }} />
+          </a>
+        </div>
+        <div className="navbar-spacer" />
+        <div className="navbar-content">
+          <div className={`navbar-links ${displayLinks ? 'loaded' : 'navbar-loading'}`}>
+            {
+              items.map((item) => (
+                <a href={`/${item.toLowerCase()}/`} key={item}>
+                  <div className="navbar-link">
+                    {item}
+                  </div>
+                </a>
+              ))
+            }
           </div>
-          <div className='navbar-spacer' />
-          <div className='navbar-content'>
-            <div className={`navbar-links ${displayLinks ? 'loaded' : 'navbar-loading'}`}>
-              {
-                items.map((item) => {
-                  return (
-                    <a href={`/${item.toLowerCase()}/`} key={item}>
-                      <div className='navbar-link' >
-                        {item}
-                      </div>
-                    </a>
-                  )
-                })
-              }
-            </div>
-            <div className={`navbar-titles ${displayTitles ? 'loaded' : 'navbar-loading'}`}>
-              <h3 className='navbar-title'>
-                The Photograpy of Donald N. Pennington
-              </h3>
-              <h3 className='navbar-title fancy'>
-                <em>
-                  "Focus on Nature"
-                </em>
-              </h3>
-            </div>
-          </div>
-          <div className='navbar-icon'>
-            <a href='/cart/'>
-              <img src="/static/icon/Cart.png" className={`navbar-icon ${loaded[0] ? 'loaded-nf' : 'loading-nf'}`} key='cart-icon' onLoad={() => { this.setLoaded(1) }} />
-            </a>
+          <div className={`navbar-titles ${displayTitles ? 'loaded' : 'navbar-loading'}`}>
+            <h3 className="navbar-title">
+              The Photograpy of Donald N. Pennington
+            </h3>
+            <h3 className="navbar-title fancy">
+              <em>
+                &quot;Focus on Nature&quot;
+              </em>
+            </h3>
           </div>
         </div>
-      </>
+        <div className="navbar-icon">
+          <a href="/cart/">
+            <img src="/static/icon/Cart.png" className={`navbar-icon ${loaded[0] ? 'loaded-nf' : 'loading-nf'}`} key="cart-icon" onLoad={() => { this.setLoaded(1); }} />
+          </a>
+        </div>
+      </div>
     );
   }
 }

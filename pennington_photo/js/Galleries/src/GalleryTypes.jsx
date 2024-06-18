@@ -1,7 +1,7 @@
 const GALLERYTYPES = {
-    MIRRORIMAGE: "mirror_image",
-    TRIPTYCH: "triptych",
-    SELECT: "default"
+  MIRRORIMAGE: 'mirror_image',
+  TRIPTYCH: 'triptych',
+  SELECT: 'default',
 };
 
-export default GALLERYTYPES
+export default GALLERYTYPES;
