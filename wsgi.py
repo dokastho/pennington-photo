@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/home/ubuntu/pennington-photo/env/bin/python3
 
 import flask
 import pennington_photo
