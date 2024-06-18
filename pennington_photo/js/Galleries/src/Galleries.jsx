@@ -51,11 +51,13 @@ class Galleries extends React.Component {
               <h1>
                 Galleries
               </h1>
-              {
-                galleries.map((gallery) => {
-                  return <Thumbnail key={gallery.galleryId} customClassName={"photo-slot-static-content"} name={gallery.name} galleryId={gallery.galleryId} imgSrc={gallery.thumbnail} galleryType={gallery.type} />
-                })
-              }
+              <div className='galleries-tray'>
+                {
+                  galleries.map((gallery) => {
+                    return <Thumbnail key={gallery.galleryId} customClassName={"photo-slot-static-content"} name={gallery.name} galleryId={gallery.galleryId} imgSrc={gallery.thumbnail} galleryType={gallery.type} />
+                  })
+                }
+              </div>
               <h3>
                 Framed & Unframed Sizes
               </h3>
