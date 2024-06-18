@@ -601,6 +601,11 @@ a {
     padding: 1rem;
 }
 
+.edit {
+    grid-column: span 3;
+    grid-row: span 2;
+}
+
 .thumbnail:hover {
     cursor: pointer;
     transform: translateY(-0.5rem);

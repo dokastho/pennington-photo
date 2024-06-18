@@ -197,7 +197,7 @@ class EditGallery extends React.Component {
             <input className='h1' type='text' value={name} onChange={(e) => { this.handleChange("name", e.target.value) }} /><br />
             <br />
             <label>Description:</label>
-            <input className='h3 em fancy' type='text' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} /><br />
+            <textarea className='h3 em fancy' type='text' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} /><br />
             <br />
             <label>Date:</label>
             <input className='h5' type='date' value={dateTaken} onChange={(e) => { this.handleChange("dateTaken", e.target.value) }} /><br />

@@ -30,7 +30,7 @@ class EditThumbnail extends React.Component {
         break;
     }
     return (
-      <div className='thumbnail' key={`${galleryIdx}-${imgSrc}`} onClick={() => { doEditGallery(galleryIdx) }}>
+      <div className='thumbnail edit' key={`${galleryIdx}-${imgSrc}`} onClick={() => { doEditGallery(galleryIdx) }}>
         <Photo uuid={imgSrc} imgClass='thumbnail-photo' />
         <h3>
           {name}
