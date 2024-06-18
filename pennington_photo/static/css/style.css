@@ -571,7 +571,8 @@ a {
     position: relative;
     top: 5rem;
     padding: 4rem;
-    width: 80%;
+    width: fit-content;
+    max-width: 120vh;
     margin-right: auto;
     margin-left: auto;
 }
@@ -591,12 +592,12 @@ a {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     aspect-ratio: 3/ 2;
     object-fit: cover;
-    grid-column: span 3;
-    grid-row: span 2;
+    grid-column: span 6;
+    grid-row: span 4;
     transition: all 0.2s ease-in-out;
     text-align: center;
     color: black;
-    max-height: 2fr;
+    border: 1vh solid black;
     padding: 1rem;
 }
 
@@ -620,6 +621,7 @@ a {
     grid-row: span 3;
     transition: all 0.2s ease-in-out;
     padding: 1rem;
+    border: 1vh solid black;
 }
 
 .photo-slot-default:hover {
@@ -635,6 +637,7 @@ a {
     grid-row: span 4;
     transition: all 0.2s ease-in-out;
     padding: 1rem;
+    border: 1vh solid black;
 }
 
 .photo-slot-triptych:hover {

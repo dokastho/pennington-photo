@@ -16,6 +16,7 @@ class Thumbnail extends React.Component {
       imgSrc,
       galleryType,
       customClassName,
+      description,
     } = this.props;
     var thumbnailClassName;
     switch (galleryType) {
@@ -36,6 +37,7 @@ class Thumbnail extends React.Component {
           <h3>
             {name}
           </h3>
+          <p>{description}</p>
         </a>
       </div>
     );
@@ -45,6 +47,7 @@ class Thumbnail extends React.Component {
 Thumbnail.propTypes = {
   // default prop values go here if not required
   name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   galleryId: PropTypes.number.isRequired,
   galleryType: PropTypes.string.isRequired,
   imgSrc: PropTypes.string.isRequired,

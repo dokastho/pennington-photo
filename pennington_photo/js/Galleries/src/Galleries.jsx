@@ -35,6 +35,7 @@ class Galleries extends React.Component {
       loaded,
       galleries
     } = this.state
+    console.log(galleries);
     return (
       <>
         {
@@ -51,10 +52,10 @@ class Galleries extends React.Component {
               <h1>
                 Galleries
               </h1>
-              <div className='galleries-tray'>
+              <div className='galleries-tray center'>
                 {
                   galleries.map((gallery) => {
-                    return <Thumbnail key={gallery.galleryId} customClassName={"photo-slot-static-content"} name={gallery.name} galleryId={gallery.galleryId} imgSrc={gallery.thumbnail} galleryType={gallery.type} />
+                    return <Thumbnail key={gallery.galleryId} customClassName={"photo-slot-static-content"} name={gallery.name} galleryId={gallery.galleryId} imgSrc={gallery.thumbnail} galleryType={gallery.type} description={gallery.description} />
                   })
                 }
               </div>
