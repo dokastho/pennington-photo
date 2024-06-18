@@ -15,6 +15,8 @@ class Thumbnail extends React.Component {
       galleryId,
       imgSrc,
       galleryType,
+      customClassName,
+      description,
     } = this.props;
     var thumbnailClassName;
     switch (galleryType) {
@@ -25,7 +27,7 @@ class Thumbnail extends React.Component {
         thumbnailClassName = "triptych";
         break;
       default:
-        thumbnailClassName = "default";
+        thumbnailClassName = customClassName;
         break;
     }
     return (
@@ -35,6 +37,7 @@ class Thumbnail extends React.Component {
           <h3>
             {name}
           </h3>
+          <p>{description}</p>
         </a>
       </div>
     );
@@ -44,9 +47,15 @@ class Thumbnail extends React.Component {
 Thumbnail.propTypes = {
   // default prop values go here if not required
   name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   galleryId: PropTypes.number.isRequired,
   galleryType: PropTypes.string.isRequired,
   imgSrc: PropTypes.string.isRequired,
+  customClassName: PropTypes.string,
 };
+
+Thumbnail.defaultProps = {
+  customClassName: "default"
+}
 
 export default Thumbnail
