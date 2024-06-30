@@ -308,7 +308,7 @@ def swap_pics():
 
 
 @pennington_photo.app.route("/api/v1/swap/pictures/", methods=["POST"])
-def swap_pics():
+def swap_galleries():
     logname = check_session()
     if not logname:
         flask.abort(403)

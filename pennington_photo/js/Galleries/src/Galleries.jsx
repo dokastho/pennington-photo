@@ -35,7 +35,6 @@ class Galleries extends React.Component {
       loaded,
       galleries
     } = this.state
-    console.log(galleries);
     return (
       <>
         {

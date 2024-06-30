@@ -9,7 +9,8 @@ def get_admin():
     connection = get_db()
     
     cur = connection.execute(
-        "SELECT * FROM galleries",
+        "SELECT * FROM galleries "
+        "ORDER BY ordernum",
         ()
     )
     

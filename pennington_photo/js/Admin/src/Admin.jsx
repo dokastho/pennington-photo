@@ -42,7 +42,6 @@ class Admin extends React.Component {
       return response.json();
     })
     .then((data) => {
-      console.log(data)
       this.setState({
         galleries: data.galleries,
         users: data.users,
@@ -58,8 +57,9 @@ class Admin extends React.Component {
     this.setState({ displayedContent, editingGalleryIdx: NOT_EDITING });
   }
 
-  doEditGallery(editingGalleryIdx) {
-    this.setState({ editingGalleryIdx });
+  doEditGallery(args) {
+    const { galleryIdx } = args;
+    this.setState({ editingGalleryIdx: galleryIdx });
   }
 
   deleteGallery(args) {
@@ -110,6 +110,8 @@ class Admin extends React.Component {
       content = <SizeList sizes={sizes} />
     }
 
+    const rerender = Math.random();
+
     return (
       <>
         <BrowserView>
@@ -123,7 +125,7 @@ class Admin extends React.Component {
           <div className={loaded ? 'loaded' : 'loading'}>
             <div className='admin-page'>
               <SideBar setContentFocus={this.showContent} />
-              <div className='admin-content'>
+              <div className='admin-content' key={`${displayedContent}-key-${rerender}`}>
                 {content}
               </div>
             </div>

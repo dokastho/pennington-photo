@@ -79,8 +79,6 @@ class EditGallery extends React.Component {
   swap(lhs, rhs) {
     const { content } = this.state;
     const { photos } = content;
-    console.log(photos[lhs]);
-    console.log(photos[rhs]);
     fetch('/api/v1/swap/pictures/',
       {
         credentials: 'same-origin',
@@ -97,13 +95,13 @@ class EditGallery extends React.Component {
       })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
-        this.setState({ saveState: SAVED });
         const temp = photos[lhs];
         photos[lhs] = photos[rhs];
         photos[rhs] = temp;
         const tempon = photos[lhs].ordernum;
         photos[lhs].ordernum = photos[rhs].ordernum;
         photos[rhs].ordernum = tempon;
+        this.setState({ saveState: SAVED });
         return response;
       })
       .catch((error) => console.log(error));

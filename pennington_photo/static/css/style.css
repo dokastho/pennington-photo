@@ -905,6 +905,7 @@ label.fancy {
 .arrows {
     display: flex;
     justify-content: space-between;
+    pointer-events: all;
 }
 
 .arrow {

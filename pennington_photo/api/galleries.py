@@ -10,7 +10,8 @@ def get_galleries():
     connection = get_db()
     
     cur = connection.execute(
-        "SELECT * FROM galleries",
+        "SELECT * FROM galleries "
+        "ORDER BY ordernum",
         ()
     )
     
