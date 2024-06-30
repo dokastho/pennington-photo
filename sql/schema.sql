@@ -15,6 +15,7 @@ CREATE TABLE galleries(
   description VARCHAR(256),
   created DATETIME DEFAULT CURRENT_TIMESTAMP,
   dateTaken DATE,
+  ordernum INTEGER NOT NULL,
   FOREIGN KEY(owner) REFERENCES users(username) ON DELETE CASCADE
 );
 
