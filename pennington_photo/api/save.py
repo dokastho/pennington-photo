@@ -264,6 +264,49 @@ def update_sizename():
     return flask.Response(status=204)
 
 
+@pennington_photo.app.route("/api/v1/swap/galleries/", methods=["POST"])
+def swap_pics():
+    logname = check_session()
+    if not logname:
+        flask.abort(403)
+        pass
+
+    body = flask.request.get_json()
+    if body is None:
+        flask.abort(400)
+        pass
+
+    keys = ["lhsId", "rhsId", "lhsOrdernum", "rhsOrdernum"]
+    for key in keys:
+        if key not in body:
+            flask.abort(400)
+            pass
+        pass
+    
+    connection = get_db()
+    cur = connection.execute(
+        "UPDATE galleries "
+        "SET ordernum = ? "
+        "WHERE galleryId = ?",
+        (
+            body["lhsOrdernum"],
+            body["rhsId"],
+        )
+    )
+    cur.fetchone()
+    cur = connection.execute(
+        "UPDATE galleries "
+        "SET ordernum = ? "
+        "WHERE galleryId = ?",
+        (
+            body["rhsOrdernum"],
+            body["lhsId"],
+        )
+    )
+    cur.fetchone()
+    return flask.Response(status=204)
+
+
 @pennington_photo.app.route("/api/v1/swap/pictures/", methods=["POST"])
 def swap_pics():
     logname = check_session()

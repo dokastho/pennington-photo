@@ -34,18 +34,34 @@ def new_gallery():
     if date_taken == '':
         date_taken = None
     files = flask.request.files.getlist('file')
+    
+    # get max ordernum
+    cur = connection.execute(
+        "SELECT ordernum "
+        "FROM galleries "
+        "ORDER BY ordernum DESC "
+        "LIMIT 1",
+        ()
+    )
+    blob = cur.fetchone()
+    ordernum = 0
+    if blob is not None:
+        ordernum = blob["ordernum"]
+        pass
+    ordernum += 1
 
     connection = get_db()
     cur = connection.execute(
         "INSERT INTO galleries"
-        "(owner, name, description, datetaken, type) "
-        "VALUES (?, ?, ?, ?, ?)",
+        "(owner, name, description, datetaken, type, ordernum) "
+        "VALUES (?, ?, ?, ?, ?, ?)",
         (
             logname,
             name,
             description,
             date_taken,
             gallery_type,
+            ordernum,
         )
     )
     cur.fetchone()
