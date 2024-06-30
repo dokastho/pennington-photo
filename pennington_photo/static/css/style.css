@@ -597,7 +597,6 @@ a {
     transition: all 0.2s ease-in-out;
     text-align: center;
     color: black;
-    border: 1vh solid black;
     padding: 1rem;
 }
 
@@ -626,7 +625,6 @@ a {
     grid-row: span 3;
     transition: all 0.2s ease-in-out;
     padding: 1rem;
-    border: 1vh solid black;
 }
 
 .photo-slot-default:hover {
@@ -642,7 +640,6 @@ a {
     grid-row: span 4;
     transition: all 0.2s ease-in-out;
     padding: 1rem;
-    border: 1vh solid black;
 }
 
 .photo-slot-triptych:hover {
@@ -667,14 +664,15 @@ a {
 
 .photo {
     object-fit: scale-down;
-    /* pointer-events: none; */
-    width: -webkit-fill-available;
-    height: -webkit-fill-available;
+    max-width: -webkit-fill-available;
+    max-height: -webkit-fill-available;
+    border: 1vh solid black;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .photo-slot-static-content {
     box-shadow: none;
-    /* object-fit: cover; */
     grid-column: span 3;
     grid-row: span 3;
     padding: 1rem;
