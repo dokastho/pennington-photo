@@ -2,7 +2,7 @@
 
 body {
     background-color: white;
-    font-family: 'Futura', Arial, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin: 0px;
     padding: 0px;
 }
@@ -261,6 +261,7 @@ a {
 
 .welcome-page {
     color: white;
+    text-align: center;
 }
 
 .background-img {
@@ -268,8 +269,9 @@ a {
     object-fit: cover;
     object-position: top left;
     margin: 1vh;
-    margin-top: 9vh;
+    margin-top: 9.75vh;
     border: 1vh solid black;
+    max-width: 150vh;
 }
 
 .info-page {
@@ -295,72 +297,26 @@ a {
 .home-info-content {
     margin-left: auto;
     margin-right: auto;
-    display: flex;
-    max-width: 80%;
-    flex-direction: column;
-}
-
-.side-by-side {
-    flex-direction: row;
-}
-
-.favorites-info-content-side-by-side {
-    max-width: 100%;
-}
-
-.info-text {
-    width: 50%;
-    padding-right: 2rem;
-    font-size: x-large;
-}
-
-.info-img {
-    width: 50%;
-    height: 100%;
-    margin-top: auto;
-    margin-bottom: auto;
-    padding-left: 2rem;
-    text-align: center;
+    max-width: 150vh;
 }
 
 .home-info-text {
-    width: 100%;
-    padding-right: 2rem;
+    padding: 2rem;
     font-size: x-large;
 }
 
 .home-info-img {
-    width: 70%;
+    width: 40%;
+    float: right;
     margin-top: auto;
     margin-bottom: auto;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.nopadside {
-    padding-right: 0;
-    padding-left: 0;
-}
-
-.bio-text {
-    width: 50%;
-    padding-left: 2rem;
-}
-
-.bio-img {
-    width: 50%;
-    height: 100%;
-    margin-top: auto;
-    margin-bottom: auto;
-    padding-right: 2rem;
 }
 
 .navbar {
     position: fixed;
     width: 100%;
     top: 0vw;
-    height: 8vh;
+    height: 8.75vh;
     z-index: 100;
     display: inline-flex;
     justify-content: space-around;
@@ -405,6 +361,7 @@ a {
     margin: 0%;
     padding: 0%;
     font-size: xx-large;
+    height: 4vh;
 }
 
 .navbar-links {
@@ -619,12 +576,13 @@ a {
 
 .photo-slot-default {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    aspect-ratio: 3/ 3;
     object-fit: cover;
     grid-column: span 3;
     grid-row: span 3;
     transition: all 0.2s ease-in-out;
     padding: 1rem;
+    text-align: center;
+    height: min-content;
 }
 
 .photo-slot-default:hover {
@@ -634,12 +592,13 @@ a {
 
 .photo-slot-triptych {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    aspect-ratio: 6/ 4;
     object-fit: cover;
     grid-column: span 6;
     grid-row: span 4;
     transition: all 0.2s ease-in-out;
     padding: 1rem;
+    text-align: center;
+    height: min-content;
 }
 
 .photo-slot-triptych:hover {
@@ -649,12 +608,13 @@ a {
 
 .photo-slot-mirror-image {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    aspect-ratio: 6/ 4;
     object-fit: cover;
     grid-column: span 6;
     grid-row: span 4;
     transition: all 0.2s ease-in-out;
     padding: 1rem;
+    text-align: center;
+    height: min-content;
 }
 
 .photo-slot-mirror-image:hover {

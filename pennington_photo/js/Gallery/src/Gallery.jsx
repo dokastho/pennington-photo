@@ -69,15 +69,11 @@ class Gallery extends React.Component {
               <h1>
                 {name}
               </h1>
-              <h3 className='fancy'>
+              <p className='fancy'>
                 {
-                  description.length === 0 ? <br /> : (
-                    <em>
-                      "{description}"
-                    </em>
-                  )
+                  description.length === 0 ? <br /> : (description)
                 }
-              </h3>
+              </p>
               <h3>
                 {
                   dateTaken === 0 ? <br /> : (
