@@ -49,6 +49,7 @@ class Photo extends React.Component {
       imgClass,
       id,
       clickCallback,
+      clickArgs,
     } = this.props;
     return (
       <>
@@ -64,7 +65,7 @@ class Photo extends React.Component {
           id={id === '' ? uuid : id}
           className={`photo ${imgClass} ${loaded ? 'loaded' : 'loading-invis'}${focused ? '' : ' blur'}`}
           onLoad={() => { this.setLoaded() }}
-          onClick={() => { clickCallback() }}
+          onClick={() => { clickCallback(clickArgs) }}
         />
       </>
     );
@@ -74,6 +75,7 @@ class Photo extends React.Component {
 Photo.defaultProps = {
   imgClass: 'photo-slot-default',
   id: '',
+  clickArgs: {},
 }
 
 Photo.propTypes = {
@@ -81,6 +83,7 @@ Photo.propTypes = {
   uuid: PropTypes.string.isRequired,
   id: PropTypes.string,
   imgClass: PropTypes.string,
+  clickArgs: PropTypes.instanceOf(Object)
   // clickCallback
 };
 
