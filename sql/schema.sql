@@ -38,15 +38,9 @@ CREATE TABLE pictures(
 CREATE TABLE sizenames(
   sizenameId INTEGER PRIMARY KEY AUTOINCREMENT,
   owner VARCHAR(20) NOT NULL,
+  price INTEGER NOT NULL,
   name TINYTEXT NOT NULL,
   FOREIGN KEY(owner) REFERENCES users(username) ON DELETE CASCADE
-);
-
-CREATE TABLE defaultSizePrices(
-  priceId INTEGER PRIMARY KEY AUTOINCREMENT,
-  price INTEGER NOT NULL,
-  sizenameId INTEGER NOT NULL,
-  FOREIGN KEY(sizenameId) REFERENCES sizenames(sizenameId) ON DELETE CASCADE
 );
 
 CREATE TABLE pictureprices(

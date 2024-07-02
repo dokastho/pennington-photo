@@ -56,7 +56,7 @@ class EditSize extends React.Component {
       info,
       price,
     } = content;
-    callback({ sizenameId, info });
+    callback({ sizenameId, info, price });
     fetch(`/api/v1/save/sizename/`,
       {
         credentials: 'same-origin',

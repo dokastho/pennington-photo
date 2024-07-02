@@ -58,7 +58,8 @@ def get_admin():
     users = cur.fetchall()
     
     cur = connection.execute(
-        "SELECT sizenameId, name FROM sizenames",
+        "SELECT sizenameId, name, price  "
+        "FROM sizenames",
         ()
     )
     

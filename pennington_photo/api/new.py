@@ -188,7 +188,7 @@ def new_size():
         flask.abort(400)
         pass
 
-    keys = ["name"]
+    keys = ["name", "price"]
     for key in keys:
         if key not in body:
             flask.abort(400)
@@ -198,11 +198,12 @@ def new_size():
     connection = get_db()
     cur = connection.execute(
         "INSERT INTO sizenames "
-        "(owner, name) "
-        "VALUES (?, ?)",
+        "(owner, name, price) "
+        "VALUES (?, ?, ?)",
         (
             logname,
             body["name"],
+            body["price"],
         )
     )
     cur.fetchone()
@@ -215,27 +216,4 @@ def new_size():
         ()
     )
 
-    sizename_id = cur.fetchone()["sizenameId"]
-
-    cur = connection.execute(
-        "INSERT INTO defaultSizePrices "
-        "(price, sizenameId) "
-        "VALUES (?, ?)",
-        (
-            0,
-            sizename_id,
-        )
-    )
-    cur.fetchone()
-
-    cur = connection.execute(
-        "SELECT price, priceId "
-        "FROM defaultSizePrices "
-        "ORDER BY priceId DESC "
-        "LIMIT 1",
-        ()
-    )
-
-    price_id = cur.fetchone()["priceId"]
-
-    return flask.jsonify({"sizenameId": sizename_id, "priceId": price_id}), 201
+    return flask.jsonify(cur.fetchone()), 201

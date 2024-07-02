@@ -39,11 +39,11 @@ class SizeList extends React.Component {
     const {
       sizes
     } = this.state;
-    const { sizenameId, info, defaultPrice } = size;
+    const { sizenameId, info, price } = size;
     sizes.forEach((s) => {
       if (s.sizenameId == sizenameId) {
         s.name = info;
-        s.price = defaultPrice;
+        s.price = price;
       }
     })
     this.setState({ sizes });

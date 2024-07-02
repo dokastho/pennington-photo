@@ -243,20 +243,21 @@ def update_sizename():
         flask.abort(400)
         pass
 
-    keys = ["sizenameId", "info"]
+    keys = ["sizenameId", "info", "price"]
     for key in keys:
         if key not in body:
             flask.abort(400)
             pass
         pass
     
-    connection = get_db()
+    connection = get_db()  # check that price is 'int'
     cur = connection.execute(
         "UPDATE sizenames "
-        "SET name = ? "
+        "SET name = ?, price = ? "
         "WHERE sizenameId = ?",
         (
             body["info"],
+            body["price"],
             body["sizenameId"],
         )
     )
