@@ -23,8 +23,8 @@ class EditSize extends React.Component {
   }
 
   componentDidMount() {
-    const { sizename } = this.props;
-    this.setState({ content: { info: sizename } });
+    const { sizename, defaultPrice } = this.props;
+    this.setState({ content: { info: sizename, price: defaultPrice } });
   }
 
   handleChange(key, val) {
@@ -53,7 +53,8 @@ class EditSize extends React.Component {
       content
     } = this.state;
     const {
-      info
+      info,
+      price,
     } = content;
     callback({ sizenameId, info });
     fetch(`/api/v1/save/sizename/`,
@@ -63,7 +64,7 @@ class EditSize extends React.Component {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ info, sizenameId }),
+        body: JSON.stringify({ info, sizenameId, price }),
       })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
@@ -85,12 +86,14 @@ class EditSize extends React.Component {
     } = this.state;
     const {
       info,
+      price,
     } = content;
     return (
       <div className='edit-account'>
         <h3>Manage Size: "{info}"</h3>
         <hr />
         <input type='text' value={info} onChange={(e) => { this.handleChange("info", e.target.value) }} />
+        <input type='number' value={price} onChange={(e) => { this.handleChange("price", e.target.value) }} />
         <hr />
         <div className='menu-buttons'>
           <div>
@@ -108,6 +111,7 @@ class EditSize extends React.Component {
 EditSize.propTypes = {
   // prop types go here
   sizename: PropTypes.string.isRequired,
+  defaultPrice: PropTypes.number.isRequired,
   sizenameId: PropTypes.number.isRequired,
   // deleteSize
   // cancelEdit

@@ -39,10 +39,11 @@ class SizeList extends React.Component {
     const {
       sizes
     } = this.state;
-    const { sizenameId, info } = size;
+    const { sizenameId, info, defaultPrice } = size;
     sizes.forEach((s) => {
       if (s.sizenameId == sizenameId) {
         s.name = info;
+        s.price = defaultPrice;
       }
     })
     this.setState({ sizes });
@@ -57,7 +58,7 @@ class SizeList extends React.Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name: "blank" }),
+        body: JSON.stringify({ name: "blank", price: 0 }),
       })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
@@ -97,7 +98,7 @@ class SizeList extends React.Component {
         <h1>Manage Print Sizes</h1>
         {
           isEditing ? (
-            <EditSize sizename={sizes[editingSizeIdx].name} sizenameId={sizes[editingSizeIdx].sizenameId} deleteSize={this.deleteSize} cancelEdit={this.cancelEdit} callback={this.setSizeInfo} />
+            <EditSize sizename={sizes[editingSizeIdx].name} defaultPrice={sizes[editingSizeIdx].price} sizenameId={sizes[editingSizeIdx].sizenameId} deleteSize={this.deleteSize} cancelEdit={this.cancelEdit} callback={this.setSizeInfo} />
           ) : (
             <>
               <h3><div className='submit-button' onClick={() => {this.createSize()}}>Create a new print size</div></h3>
@@ -106,6 +107,7 @@ class SizeList extends React.Component {
                   return (
                     <div className='edit-list-item' onClick={() => { this.selectSize(idx) }}>
                       <h3>{size.name}</h3>
+                      <h3>{size.price}</h3>
                     </div>
                   );
                 })

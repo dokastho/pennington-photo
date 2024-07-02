@@ -100,6 +100,3 @@ EditGalleries.propTypes = {
 };
 
 export default EditGalleries
-
-// notes
-// still need to do all css
