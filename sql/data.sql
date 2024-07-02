@@ -15,3 +15,15 @@ VALUES  ("donpen", "Matted 11"" x 14"" Print"),
         ("donpen", "Mirror Image 32"" x 40"" Framed"),
         ("donpen", "Triptych 16"" x 32"" Framed"),
         ("donpen", "5”x 7” photographic card available with purchase of print.");
+INSERT INTO defaultSizePrices (price, sizenameId)
+VALUES (350, 1),
+       (450, 2),
+       (550, 3),
+       (750, 4),
+       (750, 5),
+       (950, 6),
+       (1250, 7),
+       (1450, 8),
+       (1250, 9),
+       (1450, 10),
+       (1450, 11);

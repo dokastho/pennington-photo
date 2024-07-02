@@ -42,6 +42,13 @@ CREATE TABLE sizenames(
   FOREIGN KEY(owner) REFERENCES users(username) ON DELETE CASCADE
 );
 
+CREATE TABLE defaultSizePrices(
+  priceId INTEGER PRIMARY KEY AUTOINCREMENT,
+  price INTEGER NOT NULL,
+  sizenameId INTEGER NOT NULL,
+  FOREIGN KEY(sizenameId) REFERENCES sizenames(sizenameId) ON DELETE CASCADE
+);
+
 CREATE TABLE pictureprices(
   picturepriceId INTEGER PRIMARY KEY AUTOINCREMENT,
   owner VARCHAR(20) NOT NULL,
