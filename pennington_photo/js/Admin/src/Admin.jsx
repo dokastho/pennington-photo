@@ -59,6 +59,7 @@ class Admin extends React.Component {
 
   doEditGallery(args) {
     const { galleryIdx } = args;
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
     this.setState({ editingGalleryIdx: galleryIdx });
   }
 
