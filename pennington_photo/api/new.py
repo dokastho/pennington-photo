@@ -36,6 +36,7 @@ def new_gallery():
     files = flask.request.files.getlist('file')
 
     # get max ordernum
+    connection = get_db()
     cur = connection.execute(
         "SELECT ordernum "
         "FROM galleries "
@@ -76,21 +77,24 @@ def new_gallery():
     )
     galleryId = cur.fetchone()['galleryId']
 
+    ordernum = 0
     for file in files:
         if not file:
             break
 
         uuid = get_uuid(file.filename)
         file.save(pennington_photo.app.config["UPLOADS_FOLDER"] / uuid)
+        ordernum += 1
         cur = connection.execute(
             "INSERT INTO pictures"
-            "(galleryId, owner, name, uuid) "
-            "VALUES (?, ?, ?, ?)",
+            "(galleryId, owner, name, uuid, ordernum) "
+            "VALUES (?, ?, ?, ?, ?)",
             (
                 galleryId,
                 logname,
                 file.filename,
                 uuid,
+                ordernum,
             )
         )
         cur.fetchone()
