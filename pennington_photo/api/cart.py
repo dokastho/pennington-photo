@@ -28,7 +28,7 @@ def get_cart_contents():
             if 'size' not in photo:
                 photo['size'] = ""
             cur = connection.execute(
-                "SELECT s.name as info, price "
+                "SELECT s.name as info, pp.price "
                 "FROM sizenames s "
                 "INNER JOIN pictureprices pp "
                 "ON s.sizenameId = pp.sizenameId "

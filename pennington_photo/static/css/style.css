@@ -877,7 +877,7 @@ label.fancy {
 
 .cart-line {
     text-align: left;
-    width: 60vw;
+    max-width: 1200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
