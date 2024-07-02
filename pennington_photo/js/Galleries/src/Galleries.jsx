@@ -54,6 +54,7 @@ class Galleries extends React.Component {
               <h4>
                 Welcome to my photographic galleries that display prints created using either an 8&quot;x10&quot; or 4&quot;x5&quot; film view camera. Traditional and tedious photographic darkroom processes are utilized to develop the negative and then printed on silver bromide, fiber based photographic paper. Each print is also toned in selenium for additional permanence and protection from atmospheric effects. Processed prints are mounted on white acid free 4 ply 100% cotton rag museum board. My ultimate goal is to present exceptional B &amp; W photographic images.
               </h4>
+              <br />
               <div className='galleries-tray center'>
                 {
                   galleries.map((gallery) => {
