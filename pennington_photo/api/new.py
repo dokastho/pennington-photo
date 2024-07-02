@@ -34,7 +34,7 @@ def new_gallery():
     if date_taken == '':
         date_taken = None
     files = flask.request.files.getlist('file')
-    
+
     # get max ordernum
     cur = connection.execute(
         "SELECT ordernum "
@@ -79,7 +79,7 @@ def new_gallery():
     for file in files:
         if not file:
             break
-        
+
         uuid = get_uuid(file.filename)
         file.save(pennington_photo.app.config["UPLOADS_FOLDER"] / uuid)
         cur = connection.execute(
@@ -105,9 +105,9 @@ def new_photo():
     if not logname:
         flask.abort(403)
         pass
-    
+
     connection = get_db()
-    
+
     body = flask.request.form
     if body is None:
         flask.abort(400)
@@ -118,14 +118,14 @@ def new_photo():
             flask.abort(400)
             pass
         pass
-    
+
     photos = flask.request.files.getlist('file')
     if len(photos) == 0:
         flask.abort(400)
         pass
-    
+
     galleryId = body["galleryId"]
-    
+
     # get max ordernum
     cur = connection.execute(
         "SELECT ordernum "
@@ -140,7 +140,7 @@ def new_photo():
     if blob is not None:
         ordernum = blob["ordernum"]
         pass
-    
+
     for file in photos:
         uuid = get_uuid(file.filename)
         file.save(pennington_photo.app.config["UPLOADS_FOLDER"] / uuid)
@@ -159,7 +159,7 @@ def new_photo():
         )
         cur.fetchone()
         pass
-    
+
     # set gallery last-updated timestamp
     created = arrow.utcnow().format()
     cur = connection.execute(
@@ -172,7 +172,7 @@ def new_photo():
         )
     )
     cur.fetchone()
-    
+
     return flask.redirect("/admin/")
 
 
@@ -206,7 +206,7 @@ def new_size():
         )
     )
     cur.fetchone()
-    
+
     cur = connection.execute(
         "SELECT name, sizenameId "
         "FROM sizenames "
@@ -214,6 +214,28 @@ def new_size():
         "LIMIT 1",
         ()
     )
-    
-    return flask.jsonify(cur.fetchone()), 201
-    
+
+    sizename_id = cur.fetchone()["sizenameId"]
+
+    cur = connection.execute(
+        "INSERT INTO defaultSizePrices "
+        "(price, sizenameId) "
+        "VALUES (?, ?)",
+        (
+            0,
+            sizename_id,
+        )
+    )
+    cur.fetchone()
+
+    cur = connection.execute(
+        "SELECT price, priceId "
+        "FROM defaultSizePrices "
+        "ORDER BY priceId DESC "
+        "LIMIT 1",
+        ()
+    )
+
+    price_id = cur.fetchone()["priceId"]
+
+    return flask.jsonify({"sizenameId": sizename_id, "priceId": price_id}), 201
