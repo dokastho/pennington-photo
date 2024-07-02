@@ -991,6 +991,18 @@ label.fancy {
         height: fit-content;
     }
 
+    .edit-menu-area {
+        min-height: fit-content;
+    }
+
+    .full-height {
+        height: -webkit-fill-available;
+    }
+
+    .full-width {
+        width: -webkit-fill-available;
+    }
+
     input[type=submit] {
         border-radius: 0.75rem;
     }

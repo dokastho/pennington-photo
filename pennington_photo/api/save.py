@@ -126,7 +126,7 @@ def select_size():
         flask.abort(400)
         pass
 
-    keys = ["pictureId", "sizenameId"]
+    keys = ["pictureId", "sizenameId", "price"]
     for key in keys:
         if key not in body:
             flask.abort(400)
@@ -142,7 +142,7 @@ def select_size():
             logname,
             body["pictureId"],
             body["sizenameId"],
-            0
+            int(body["price"]),
         )
     )
     cur.fetchone()

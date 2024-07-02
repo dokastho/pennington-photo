@@ -139,10 +139,16 @@ class EditablePhoto extends React.Component {
     const {
       content
     } = this.state;
-    const { price, offered, sizeId, picturepriceId } = size;
+    const {
+      price,
+      offered,
+      sizeId,
+      picturepriceId
+    } = size;
+
     content.sizes.forEach((s) => {
       if (s.sizenameId == sizeId) {
-        s.price = Number(price);
+        s.actualPrice = Number(price);
         s.offered = Number(offered);
         s.picturepriceId = picturepriceId;
       }
@@ -222,7 +228,8 @@ class EditablePhoto extends React.Component {
                         return (
                           <EditablePriceCheckBox
                             offered={Boolean(size.offered)}
-                            price={size.price}
+                            actualPrice={size.actualPrice}
+                            defaultPrice={size.defaultPrice}
                             info={size.name}
                             picturepriceId={size.picturepriceId}
                             sizeId={size.sizenameId}
@@ -236,21 +243,19 @@ class EditablePhoto extends React.Component {
                     <br />
                   </div>
                 </div>
-                <div className='edit-box-bottom short wide' id={uuid}>
+                <div className='edit-box-bottom wide' id={uuid}>
                   <div className='edit-box-column' id={uuid}>
                     {/* name desc stars */}
                     <label id={uuid} className='fancy'>Name:</label>
-                    <input id={uuid} className='span fancy' type='text' value={name} onChange={(e) => { this.handleChange("name", e.target.value) }} />
+                    <br id={uuid} />
+                    <input id={uuid} className='span fancy full-width' type='text' value={name} onChange={(e) => { this.handleChange("name", e.target.value) }} />
                     <br id={uuid} />
                     <label id={uuid} className='fancy'>Description:</label>
-                    <input id={uuid} className='span fancy' type='text' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} />
                     <br id={uuid} />
-                    <label id={uuid} className='fancy'>Stars:</label>
-                    <input id={uuid} className='span fancy' type='number' min="1" max="5" value={stars} onChange={(e) => { this.handleChange("stars", e.target.value) }} />
-                    <br id={uuid} />
+                    <textarea id={uuid} className='edit-menu-area full-height' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} />
                     <br id={uuid} />
                     <div className='menu-buttons' id={uuid}>
-                      <div>
+                      <div id={uuid}>
                         <button id={uuid} type='submit' onClick={() => { this.doSave() }}>Save</button>
                         <label id={uuid} className='fancy'>{saveState}</label>
                       </div>
@@ -258,12 +263,19 @@ class EditablePhoto extends React.Component {
                     </div>
                   </div>
                   <div className='edit-box-column' id={uuid}>
-                    {/* edition qty and total */}
+                    {/* edition qty, total and stars */}
+                    <br id={uuid} />
+                    <br id={uuid} />
+                    <br id={uuid} />
+                    <br id={uuid} />
                     <label id={uuid} className='fancy'>Edition:</label>
                     <input id={uuid} className='span fancy' type='number' value={qty} onChange={(e) => { this.handleChange("qty", e.target.value) }} />
-                    <br />
+                    <br id={uuid} />
                     <label id={uuid} className='fancy'>Limit:</label>
                     <input id={uuid} className='span fancy' type='number' value={total} onChange={(e) => { this.handleChange("total", e.target.value) }} />
+                    <br id={uuid} />
+                    <label id={uuid} className='fancy'>Stars:</label>
+                    <input id={uuid} className='span fancy' type='number' min="1" max="5" value={stars} onChange={(e) => { this.handleChange("stars", e.target.value) }} />
                   </div>
                 </div>
               </div>

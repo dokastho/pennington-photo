@@ -13,7 +13,7 @@ class EditablePriceCheckBox extends React.Component {
       // state attributes go here
       content: {
         offered: false,
-        price: 0,
+        actualPrice: 0,
         info: "",
       },
       saveState: SAVED,
@@ -29,34 +29,44 @@ class EditablePriceCheckBox extends React.Component {
   componentDidMount() {
     const {
       offered,
-      price,
+      defaultPrice,
+      actualPrice,
       info,
       picturepriceId,
     } = this.props;
 
-    const content = {
-      offered,
-      price,
-      info,
+    if (actualPrice === null) {
+      const content = {
+        offered,
+        actualPrice: defaultPrice,
+        info,
+      };
+      this.setState({ content, picturepriceId });
     }
-
-    this.setState({ content, picturepriceId });
+    else {
+      const content = {
+        offered,
+        actualPrice,
+        info,
+      };
+      this.setState({ content, picturepriceId });
+    }
   }
 
   handleSelectChange(offered) {
-    const { pictureId, sizeId, callback } = this.props;
+    const { pictureId, defaultPrice, sizeId, callback } = this.props;
     const { content, picturepriceId } = this.state;
     content.offered = offered;
-    content.price = 0;
     this.setState({ content });
-    const { price } = content;
-    callback({ price, offered, sizeId, picturepriceId });
     let uri = '';
     if (offered) {
       uri = '/api/v1/save/pictureprice/select/';
+      content.actualPrice = defaultPrice;
     } else {
       uri = '/api/v1/save/pictureprice/deselect/';
     }
+    const { actualPrice } = content;
+    callback({ price: actualPrice, offered, sizeId, picturepriceId });
 
     fetch(uri,
       {
@@ -70,6 +80,7 @@ class EditablePriceCheckBox extends React.Component {
           picturepriceId,
           pictureId,
           sizenameId: sizeId,
+          price: actualPrice,
         }),
       })
       .then((response) => {
@@ -79,7 +90,7 @@ class EditablePriceCheckBox extends React.Component {
       })
       .then((data) => {
         const { picturepriceId } = data;
-        callback({ price, offered, sizeId, picturepriceId });
+        callback({ price: actualPrice, offered, sizeId, picturepriceId });
         this.setState({ picturepriceId });
       })
       .catch((error) => console.log(error));
@@ -113,10 +124,10 @@ class EditablePriceCheckBox extends React.Component {
       picturepriceId,
     } = this.state;
     const {
-      price,
+      actualPrice,
       offered
     } = content;
-    callback({ price, offered, sizeId, picturepriceId });
+    callback({ price: actualPrice, offered, sizeId, picturepriceId });
 
     fetch('/api/v1/save/price/',
       {
@@ -126,7 +137,7 @@ class EditablePriceCheckBox extends React.Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ price, picturepriceId }),
+        body: JSON.stringify({ price: actualPrice, picturepriceId }),
       })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
@@ -146,7 +157,7 @@ class EditablePriceCheckBox extends React.Component {
     } = this.props;
     const {
       info,
-      price,
+      actualPrice,
       offered,
     } = content;
     return (
@@ -159,7 +170,7 @@ class EditablePriceCheckBox extends React.Component {
           offered ? (
             <span id={uuid} className='right-text'>
               <label id={uuid}>Price: </label>
-              <input id={uuid} type='text' value={price} onChange={(e) => { this.handleChange("price", e.target.value) }} />
+              <input id={uuid} type='text' value={actualPrice} onChange={(e) => { this.handleChange("actualPrice", e.target.value) }} />
             </span>
           ) : (
             <span>
@@ -176,7 +187,8 @@ EditablePriceCheckBox.propTypes = {
   // prop types go here
   // s: PropTypes.string.isRequired,
   offered: PropTypes.bool.isRequired,
-  price: PropTypes.number,
+  defaultPrice: PropTypes.number,
+  actualPrice: PropTypes.number,
   info: PropTypes.string.isRequired,
   uuid: PropTypes.string.isRequired,
   picturepriceId: PropTypes.number,

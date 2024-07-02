@@ -38,7 +38,8 @@ def get_admin():
             picture_id = photo["pictureId"]
             
             cur = connection.execute(
-                "SELECT name, s.price, picturepriceId, s.sizenameId, pictureId as offered "
+                "SELECT s.name, s.price as defaultPrice, p.price as actualPrice, "
+                "p.picturepriceId, s.sizenameId, pictureId as offered "
                 "FROM sizenames s "
                 "LEFT JOIN pictureprices p "
                 "ON s.sizenameId = p.sizenameId "
