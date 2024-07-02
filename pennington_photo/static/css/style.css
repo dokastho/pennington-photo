@@ -188,6 +188,10 @@ input[type=number] {
     width: 1200px;
 }
 
+.no1200 {
+    width: auto;
+}
+
 .save-buttons {
     display: flex;
     justify-content: flex-start;
