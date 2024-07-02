@@ -97,8 +97,11 @@ class EditSize extends React.Component {
           <label>Name: </label>
           <input className='edit-size-input' type='text' value={info} onChange={(e) => { this.handleChange("info", e.target.value) }} />
           </div>
+          <br />
+          <br />
+          <p>This price will be the default for this print size. You can change it for any specific picture if you would like.</p>
           <div>
-            <label>Price: </label>
+            <label>Default Price: </label>
             <input type='number' value={price} onChange={(e) => { this.handleChange("price", e.target.value) }} />
           </div>
         </div>
