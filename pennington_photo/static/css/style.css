@@ -184,6 +184,8 @@ input[type=number] {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-width: fit-content;
+    width: 1200px;
 }
 
 .save-buttons {
@@ -423,6 +425,20 @@ a {
 
 .edit-list-item {
     cursor: pointer;
+    display: flex;
+    width: 1200px;
+    min-width: fit-content;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-size-input {
+    width: fit-content;
+}
+
+.edit-list-menu {
+    display: block;
+    align-items: center;
 }
 
 .edit-list-item.h3:hover {

@@ -257,7 +257,7 @@ def update_sizename():
         "WHERE sizenameId = ?",
         (
             body["info"],
-            body["price"],
+            int(body["price"]),
             body["sizenameId"],
         )
     )

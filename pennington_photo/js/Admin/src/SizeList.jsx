@@ -65,7 +65,7 @@ class SizeList extends React.Component {
         return response.json();
       })
       .then((data) => {
-        this.setState((prevState) => ({ editingSizeIdx: NOT_EDITING, sizes: [...prevState.sizes,data] }));
+        this.setState((prevState) => ({ editingSizeIdx: NOT_EDITING, sizes: [...prevState.sizes, data] }));
       })
       .catch((error) => console.log(error));
   }
@@ -98,17 +98,21 @@ class SizeList extends React.Component {
         <h1>Manage Print Sizes</h1>
         {
           isEditing ? (
-            <EditSize sizename={sizes[editingSizeIdx].name} defaultPrice={sizes[editingSizeIdx].price} sizenameId={sizes[editingSizeIdx].sizenameId} deleteSize={this.deleteSize} cancelEdit={this.cancelEdit} callback={this.setSizeInfo} />
+            <EditSize sizename={sizes[editingSizeIdx].name} price={sizes[editingSizeIdx].price} sizenameId={sizes[editingSizeIdx].sizenameId} deleteSize={this.deleteSize} cancelEdit={this.cancelEdit} callback={this.setSizeInfo} />
           ) : (
             <>
-              <h3><div className='submit-button' onClick={() => {this.createSize()}}>Create a new print size</div></h3>
+              <h3><div className='submit-button' onClick={() => { this.createSize() }}>Create a new print size</div></h3>
               {
                 sizes.map((size, idx) => {
                   return (
-                    <div className='edit-list-item' onClick={() => { this.selectSize(idx) }}>
-                      <h3>{size.name}</h3>
-                      <h3>{size.price}</h3>
-                    </div>
+                    <>
+                      <div className='edit-list-item' onClick={() => { this.selectSize(idx) }}>
+                        <h3>{size.name}</h3>
+                        <h3>${size.price}</h3>
+                      </div>
+                      <hr style={{width: '1200px', minWidth: "fit-content", float: "left"}} />
+                      <br />
+                    </>
                   );
                 })
               }

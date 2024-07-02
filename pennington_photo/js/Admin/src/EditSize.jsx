@@ -23,8 +23,8 @@ class EditSize extends React.Component {
   }
 
   componentDidMount() {
-    const { sizename, defaultPrice } = this.props;
-    this.setState({ content: { info: sizename, price: defaultPrice } });
+    const { sizename, price } = this.props;
+    this.setState({ content: { info: sizename, price } });
   }
 
   handleChange(key, val) {
@@ -90,10 +90,18 @@ class EditSize extends React.Component {
     } = content;
     return (
       <div className='edit-account'>
-        <h3>Manage Size: "{info}"</h3>
         <hr />
-        <input type='text' value={info} onChange={(e) => { this.handleChange("info", e.target.value) }} />
-        <input type='number' value={price} onChange={(e) => { this.handleChange("price", e.target.value) }} />
+        <h3>Manage Size: "{info}"</h3>
+        <div className='edit-list-menu'>
+          <div>
+          <label>Name: </label>
+          <input className='edit-size-input' type='text' value={info} onChange={(e) => { this.handleChange("info", e.target.value) }} />
+          </div>
+          <div>
+            <label>Price: </label>
+            <input type='number' value={price} onChange={(e) => { this.handleChange("price", e.target.value) }} />
+          </div>
+        </div>
         <hr />
         <div className='menu-buttons'>
           <div>
@@ -111,7 +119,7 @@ class EditSize extends React.Component {
 EditSize.propTypes = {
   // prop types go here
   sizename: PropTypes.string.isRequired,
-  defaultPrice: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
   sizenameId: PropTypes.number.isRequired,
   // deleteSize
   // cancelEdit

@@ -203,13 +203,13 @@ def new_size():
         (
             logname,
             body["name"],
-            body["price"],
+            int(body["price"]),
         )
     )
     cur.fetchone()
 
     cur = connection.execute(
-        "SELECT name, sizenameId "
+        "SELECT name, sizenameId, price "
         "FROM sizenames "
         "ORDER BY sizenameId DESC "
         "LIMIT 1",
