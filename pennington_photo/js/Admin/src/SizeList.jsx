@@ -105,14 +105,14 @@ class SizeList extends React.Component {
               {
                 sizes.map((size, idx) => {
                   return (
-                    <>
-                      <div className='edit-list-item' onClick={() => { this.selectSize(idx) }}>
+                    <div className='withmax1200px'>
+                      <div className='edit-list-item full-width' onClick={() => { this.selectSize(idx) }}>
                         <h3>{size.name}</h3>
                         <h3>${size.price}</h3>
                       </div>
-                      <hr style={{width: '1200px', minWidth: "fit-content", float: "left"}} />
+                      <hr className='full-width' style={{float: "left"}} />
                       <br />
-                    </>
+                    </div>
                   );
                 })
               }

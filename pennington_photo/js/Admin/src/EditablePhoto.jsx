@@ -252,9 +252,9 @@ class EditablePhoto extends React.Component {
                     <br id={uuid} />
                     <label id={uuid} className='fancy'>Description:</label>
                     <br id={uuid} />
-                    <textarea id={uuid} className='edit-menu-area full-height' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} />
+                    <textarea id={uuid} className='edit-menu-area' value={description} onChange={(e) => { this.handleChange("description", e.target.value) }} />
                     <br id={uuid} />
-                    <div className='menu-buttons' id={uuid}>
+                    <div className='menu-buttons with1200px' id={uuid}>
                       <div id={uuid}>
                         <button id={uuid} type='submit' onClick={() => { this.doSave() }}>Save</button>
                         <label id={uuid} className='fancy'>{saveState}</label>

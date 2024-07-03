@@ -185,11 +185,14 @@ input[type=number] {
     justify-content: space-between;
     align-items: center;
     min-width: fit-content;
+}
+
+.with1200px {
     width: 1200px;
 }
 
-.no1200 {
-    width: auto;
+.withmax1200px {
+    max-width: 1200px;
 }
 
 .save-buttons {
@@ -430,8 +433,6 @@ a {
 .edit-list-item {
     cursor: pointer;
     display: flex;
-    width: 1200px;
-    min-width: fit-content;
     justify-content: space-between;
     align-items: center;
 }
@@ -701,7 +702,7 @@ a {
     left: 0px;
     overflow: hidden;
     pointer-events: all;
-    background-color: rgba(128,128,128,0.2);
+    background-color: rgba(128, 128, 128, 0.2);
 }
 
 .upload-lock-flexbox {
@@ -942,6 +943,14 @@ label.fancy {
     background-color: gray;
 }
 
+.full-height {
+    height: -webkit-fill-available;
+}
+
+.full-width {
+    width: -webkit-fill-available;
+}
+
 /* mobile */
 @media only screen and (max-width: 1200px) {
     .galleries-tray {
@@ -997,14 +1006,6 @@ label.fancy {
 
     .edit-menu-area {
         min-height: fit-content;
-    }
-
-    .full-height {
-        height: -webkit-fill-available;
-    }
-
-    .full-width {
-        width: -webkit-fill-available;
     }
 
     input[type=submit] {

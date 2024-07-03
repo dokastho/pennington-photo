@@ -101,7 +101,7 @@ class Contact extends React.Component {
                 <br />
                 {
                   sent ? <h1 className='successpass'>Sent</h1> : (
-                    <div className="menu-buttons no1200">
+                    <div className="menu-buttons">
                       <input type='button' onClick={() => { this.handleChage("name", ""); this.handleChage("email", ""); this.handleChage("message", ""); }} value='Clear' />
                       <input type="submit" value="Send" />
                     </div>
