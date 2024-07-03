@@ -95,7 +95,7 @@ class ClickablePhoto extends React.Component {
                 {
                   showDetails ? (
                     <>
-                      <h3 className='fancy big-text smallpad'>{name}</h3>
+                      <h3 className='alt big-text smallpad'>{name}</h3>
                       {
                         description === "" ? null : (<h3 className='alt big-text smallpad'><em>{description}</em></h3>)
                       }
