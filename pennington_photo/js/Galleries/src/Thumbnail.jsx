@@ -33,11 +33,11 @@ class Thumbnail extends React.Component {
     return (
       <div className='thumbnail'>
         <a href={`/gallery/${galleryId}/`}>
-          <Photo uuid={imgSrc} imgClass={`thumbnail-photo-${thumbnailClassName}`} />
-          <h3>
+          <h1>
             {name}
-          </h3>
+          </h1>
           <p>{description}</p>
+          <Photo uuid={imgSrc} imgClass={`thumbnail-photo-${thumbnailClassName}`} />
         </a>
       </div>
     );
