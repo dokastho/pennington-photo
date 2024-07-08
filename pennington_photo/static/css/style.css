@@ -596,6 +596,11 @@ p {
     transition: all 0.2s ease-in-out;
 }
 
+.gallery-desc-thumbnail-padding {
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
 .photos-tray {
     display: grid;
     grid-template-columns: repeat(6, 1fr);

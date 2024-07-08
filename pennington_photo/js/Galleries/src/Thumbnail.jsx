@@ -36,7 +36,7 @@ class Thumbnail extends React.Component {
           <h1>
             {name}
           </h1>
-          <p>{description}</p>
+          <p className='gallery-desc-thumbnail-padding'>{description}</p>
           <Photo uuid={imgSrc} imgClass={`thumbnail-photo-${thumbnailClassName}`} />
         </a>
       </div>
