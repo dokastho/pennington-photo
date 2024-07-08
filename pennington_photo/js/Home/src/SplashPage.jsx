@@ -1,6 +1,5 @@
+import PropTypes from 'prop-types';
 import React from 'react'
-
-const imgName = 'IMG_3942.jpg';
 
 class SplashPage extends React.Component {
 
@@ -10,14 +9,22 @@ class SplashPage extends React.Component {
 
   render() {
     const {
-      setLoaded
+      setLoaded,
+      imgName,
+      loadedIdx,
     } = this.props;
     return (
       <div className='welcome-page'>
-        <img src={`/static/img/${imgName}`} className='background-img' onLoad={() => {setLoaded()}} key={'background'} />
+        <img src={`/static/img/${imgName}`} className='background-img' onLoad={() => {setLoaded(loadedIdx)}} key={'background'} />
       </div>
     );
   }
 }
+
+SplashPage.propTypes = {
+  imgName: PropTypes.string.isRequired,
+  loadedIdx: PropTypes.number.isRequired,
+  // setLoaded
+};
 
 export default SplashPage

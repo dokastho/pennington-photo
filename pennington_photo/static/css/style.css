@@ -284,7 +284,6 @@ a {
 }
 
 .info-page {
-    height: 100vh;
     color: black;
 }
 
@@ -312,6 +311,10 @@ a {
 .home-info-text {
     padding: 2rem;
     font-size: x-large;
+}
+
+.text-justify {
+    text-align: justify;
 }
 
 .home-info-img {

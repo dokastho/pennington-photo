@@ -8,34 +8,38 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: false,
+      loaded: [false, false],
       fetched: false,
       rendered: false,
     }
     this.setLoaded = this.setLoaded.bind(this);
   }
 
-  setLoaded() {
-    this.setState({ loaded: true });
+  setLoaded(idx) {
+    const { loaded } = this.state;
+    loaded[idx] = true;
+    this.setState({ loaded });
   }
 
   render() {
     const {
       loaded,
     } = this.state
+    const fullyLoaded = loaded[0] && loaded[1];
     return (
       <>
         {
-          loaded ? (
+          fullyLoaded ? (
             null
           ) : (
             <Loading />
           )
         }
-        <div className={loaded ? 'loaded' : 'loading'}>
+        <div className={fullyLoaded ? 'loaded' : 'loading'}>
           <NavBar />
-          <SplashPage setLoaded={this.setLoaded} />
+          <SplashPage setLoaded={this.setLoaded} imgName={'IMG_3942.jpg'} loadedIdx={0} />
           <InfoPage />
+          <SplashPage setLoaded={this.setLoaded} imgName={'home2.jpg'} loadedIdx={1} />
         </div>
       </>
     )
