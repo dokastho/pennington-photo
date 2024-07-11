@@ -52,21 +52,25 @@ def get_gallery(gallery_id):
     gallery["photos"] = cur.fetchall()
     for photo in gallery["photos"]:
         cur = connection.execute(
-            "SELECT price AS minprice FROM pictureprices "
-            "WHERE pictureId = ? "
-            "AND price > 0 "
-            "ORDER BY price "
-            "LIMIT 1",
+            "SELECT p.price, s.name " 
+            "FROM pictureprices p "
+            "JOIN sizenames s "
+            "ON s.sizenameId = p.sizenameId "
+            "AND p.pictureId = ? "
+            "AND p.price > 0",
             (photo["pictureId"],)
         )
         
-        blob = cur.fetchone()
-        photo["minprice"] = None
+        blob = cur.fetchall()
+        photo["sizes"] = []
         if blob:
-            photo["minprice"] = blob["minprice"]
+            photo["sizes"] = blob
+            pass
+        pass
     
     if gallery["description"] is None:
         gallery["description"] = ""
+        pass
     
     if gallery["dateTaken"] is not None:
         dmy = gallery["dateTaken"]
