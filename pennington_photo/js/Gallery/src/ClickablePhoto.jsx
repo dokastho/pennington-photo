@@ -3,6 +3,7 @@ import React from 'react'
 import Photo from './Photo';
 import CartButton from './CartButton';
 import GALLERYTYPES from './GalleryTypes';
+import PhotoSizeListUser from './PhotoSizeListUser';
 
 class ClickablePhoto extends React.Component {
 
@@ -52,7 +53,7 @@ class ClickablePhoto extends React.Component {
       name,
       qty,
       total,
-      minprice,
+      sizes,
       imgClass,
       description,
       galleryType,
@@ -106,7 +107,7 @@ class ClickablePhoto extends React.Component {
                         both ? (<p className='alt smallpad'><em>Edition: {qty} of {total} available</em></p>) : null
                       }
                       {
-                        minprice ? (<p className='alt smallpad'><em>From ${minprice}</em></p>) : (<h3 className='alt big-text smallpad'><em>Not Available For Sale</em></h3>)
+                        // minprice ? (<p className='alt smallpad'><em>From ${minprice}</em></p>) : (<h3 className='alt big-text smallpad'><em>Not Available For Sale</em></h3>)
                       }
                       <div id={uuid} className='details-box mfs' onClick={() => { this.toggleDetails() }}>
                         hide details
@@ -118,9 +119,7 @@ class ClickablePhoto extends React.Component {
                     </div>
                   )
                 }
-                {
-                  minprice ? (<CartButton photo={name} uuid={uuid} />) : (null)
-                }
+                <PhotoSizeListUser sizes={sizes} uuidForPhoto={uuid} photoName={name} />
               </div>
             </div>
           ) : null
@@ -141,7 +140,7 @@ ClickablePhoto.propTypes = {
   name: PropTypes.string.isRequired,
   qty: PropTypes.number,
   total: PropTypes.number,
-  minprice: PropTypes.number,
+  sizes: PropTypes.instanceOf(Array).isRequired,
   galleryType: PropTypes.string.isRequired,
   imgClass: PropTypes.string,
   description: PropTypes.string,

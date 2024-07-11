@@ -1,44 +1,22 @@
 import PropTypes from 'prop-types';
 import React from 'react'
 
+const CARTSTR = "Add to Cart";
+
 class CartButton extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      added: false,
       checked: false,
-      loaded: false
     };
     this.addToCart = this.addToCart.bind(this);
+    this.onHover = this.onHover.bind(this);
+    this.notHover = this.notHover.bind(this);
   }
 
   componentDidMount() {
-    const {
-      uuid
-    } = this.props;
-    fetch('/api/v1/cart/status/',
-      {
-        credentials: 'same-origin',
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ uuid }),
-      })
-      .then((response) => {
-        if (!response.ok) throw Error(response.statusText);
-        return response.json();
-      })
-      .then((data) => {
-        if (data.in) {
-          this.setState({ added: true, loaded: true });
-        } else {
-          this.setState({ loaded: true });
-        }
-      })
-      .catch((error) => console.log(error));
+    this.notHover();
   }
 
   addToCart() {
@@ -61,7 +39,7 @@ class CartButton extends React.Component {
       })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
-        this.setState({ added: true, checked: true });
+        this.setState({ checked: true });
         setTimeout(() => {
           this.setState({ checked: false });
         }, 500);
@@ -70,17 +48,35 @@ class CartButton extends React.Component {
       .catch((error) => console.log(error));
   }
 
+  onHover() {
+    this.setState({ text: CARTSTR });
+  }
+
+  notHover() {
+    const { price } = this.props;
+    this.setState({ text: `$${price}` });
+  }
+
   render() {
     const {
-      added,
       checked,
-      loaded
+      text,
     } = this.state;
     const {
-      uuid
+      uuid,
     } = this.props;
     return (
-      loaded ? <button id={uuid} className={`cart-button mfs ${checked ? 'done' : null}`} onClick={() => { this.addToCart() }}>{checked ? 'Done!' : added ? 'Add Another?' : 'Add to Cart'}</button> : null
+      <button
+        id={uuid}
+        className={`cart-button mfs ${checked ? 'done' : null}`}
+        onClick={() => { this.addToCart() }}
+        disabled={checked}
+        onMouseEnter={() => { this.onHover() }}
+        onMouseLeave={() => { this.notHover() }}
+      >
+        {checked ? 'Done!' : text}
+        {text === CARTSTR || checked ? null : <img src="/static/icon/Cart.png" className='home-info-img nopad' key="cart-button" />}
+      </button>
     );
   }
 }
@@ -89,6 +85,7 @@ CartButton.propTypes = {
   // prop types go here
   photo: PropTypes.string.isRequired,
   uuid: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
 };
 
 export default CartButton

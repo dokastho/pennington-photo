@@ -97,7 +97,7 @@ class Gallery extends React.Component {
                     name={photo.name}
                     qty={photo.qty}
                     total={photo.total}
-                    minprice={photo.minprice}
+                    sizes={photo.sizes}
                     description={photo.description}
                     galleryType={galleryType}
                   />)

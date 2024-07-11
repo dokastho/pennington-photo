@@ -163,6 +163,10 @@ button.cart-button:active {
 
 button.cart-button {
     min-width: 9rem;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 input[type=number] {
@@ -326,6 +330,10 @@ p {
     float: right;
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.nopad {
+    margin: 0;
 }
 
 .navbar {
