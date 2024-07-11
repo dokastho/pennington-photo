@@ -120,6 +120,7 @@ class ClickablePhoto extends React.Component {
                   )
                 }
                 <PhotoSizeListUser sizes={sizes} uuidForPhoto={uuid} photoName={name} />
+                <hr />
               </div>
             </div>
           ) : null

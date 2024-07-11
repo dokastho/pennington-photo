@@ -18,7 +18,7 @@ class PhotoSizeListUser extends React.Component {
       <>
         {
           sizes.length === 0 ? <h3 className='alt big-text smallpad'><em>Not Available For Sale</em></h3> :
-            <div className='edit-box'>
+            <div className='edit-box bottom-space'>
               {sizes.map((size) => {
                 return (
                   <div className='size-checkbox smallpad' >
