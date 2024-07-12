@@ -11,7 +11,7 @@ class ClickablePhoto extends React.Component {
     super(props);
     this.state = {
       blownUp: false,
-      showDetails: false,
+      showDetails: true,
     };
     this.clickToBlowUp = this.clickToBlowUp.bind(this);
     this.wrapperRef = React.createRef();
