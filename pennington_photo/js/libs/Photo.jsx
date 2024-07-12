@@ -8,7 +8,8 @@ class Photo extends React.Component {
     super(props);
     this.state = {
       loaded: false,
-      focused: true
+      focused: true,
+      defaultClassName: 'photo',
     };
     this.setLoaded = this.setLoaded.bind(this);
     this.toggleFocused = this.toggleFocused.bind(this);
@@ -19,6 +20,16 @@ class Photo extends React.Component {
     window.addEventListener("blur", (e) => { this.toggleFocused(e, false) })
     window.addEventListener("focus", (e) => { this.toggleFocused(e, true) })
     document.addEventListener('contextmenu', (e) => { this.handleContextMenu(e) });
+
+    const userAgent = navigator.userAgent.toLowerCase();
+    if (userAgent.indexOf('safari') != -1) {
+      if (userAgent.indexOf('chrome') > -1) {
+        //browser is chrome
+      } else {
+        //browser is safari, add css
+        this.setState({ defaultClassName: 'photo-no-border' });
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -42,7 +53,8 @@ class Photo extends React.Component {
   render() {
     const {
       loaded,
-      focused
+      focused,
+      defaultClassName,
     } = this.state;
     const {
       uuid,
@@ -63,7 +75,7 @@ class Photo extends React.Component {
         <img
           src={`/static/img/${uuid}`}
           id={id === '' ? uuid : id}
-          className={`photo ${imgClass} ${loaded ? 'loaded' : 'loading-invis'}${focused ? '' : ' blur'}`}
+          className={`${defaultClassName} ${imgClass} ${loaded ? 'loaded' : 'loading-invis'}${focused ? '' : ' blur'}`}
           onLoad={() => { this.setLoaded() }}
           onClick={() => { clickCallback(clickArgs) }}
         />

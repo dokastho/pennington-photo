@@ -672,6 +672,14 @@ p {
     margin-right: auto;
 }
 
+.photo-no-border {
+    object-fit: scale-down;
+    max-width: -webkit-fill-available;
+    max-height: -webkit-fill-available;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .photo-slot-static-content {
     box-shadow: none;
     grid-column: span 3;
