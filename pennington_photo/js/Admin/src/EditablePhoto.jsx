@@ -288,7 +288,7 @@ class EditablePhoto extends React.Component {
 }
 
 EditablePhoto.defaultProps = {
-  imgClass: 'photo-slot-default',
+  imgClass: 'photo-slot-default ar',
 }
 
 EditablePhoto.propTypes = {
