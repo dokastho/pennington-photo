@@ -180,9 +180,20 @@ class EditablePhoto extends React.Component {
       sizes,
     } = content;
     const loadingArrows = !loadedArrows[0] || !loadedArrows[1];
+
+    let safariAR = '';
+    const userAgent = navigator.userAgent.toLowerCase();
+    if (userAgent.indexOf('safari') != -1) {
+      if (userAgent.indexOf('chrome') > -1) {
+        //browser is chrome
+      } else {
+        //browser is safari, add css
+        safariAR = " ar";
+      }
+    }
     return (
       <>
-        <div className={imgClass} key={uuid}>
+        <div className={`${imgClass}${safariAR}`} key={uuid}>
           <Photo
             uuid={uuid}
             id={uuid}
@@ -288,7 +299,7 @@ class EditablePhoto extends React.Component {
 }
 
 EditablePhoto.defaultProps = {
-  imgClass: 'photo-slot-default ar',
+  imgClass: 'photo-slot-default',
 }
 
 EditablePhoto.propTypes = {
