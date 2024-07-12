@@ -615,6 +615,10 @@ p {
     grid-gap: 2rem;
 }
 
+.ar {
+    aspect-ratio: 3 / 2;
+}
+
 .photo-slot-default {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     object-fit: cover;
