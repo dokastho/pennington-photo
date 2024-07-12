@@ -78,7 +78,7 @@ class ClickablePhoto extends React.Component {
     if (userAgent.indexOf('safari') != -1) {
       if (userAgent.indexOf('chrome') > -1) {
         //browser is chrome
-      } else {
+      } else if (photoClassName === "default") {
         //browser is safari, add css
         photoClassName = photoClassName.concat(" ar");
       }
