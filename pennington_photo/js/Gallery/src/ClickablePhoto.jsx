@@ -74,6 +74,15 @@ class ClickablePhoto extends React.Component {
         photoClassName = "default";
         break;
     }
+    const userAgent = navigator.userAgent.toLowerCase();
+    if (userAgent.indexOf('safari') != -1) {
+      if (userAgent.indexOf('chrome') > -1) {
+        //browser is chrome
+      } else {
+        //browser is safari, add css
+        photoClassName = photoClassName.concat(" ar");
+      }
+    }
     return (
       <>
         <div className={`photo-slot-${photoClassName}`}>

@@ -27,7 +27,7 @@ class Photo extends React.Component {
         //browser is chrome
       } else {
         //browser is safari, add css
-        this.setState({ defaultClassName: 'photo-no-border ar' });
+        this.setState({ defaultClassName: 'photo-no-border' });
       }
     }
   }
