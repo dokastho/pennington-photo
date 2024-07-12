@@ -52,7 +52,7 @@ def get_gallery(gallery_id):
     gallery["photos"] = cur.fetchall()
     for photo in gallery["photos"]:
         cur = connection.execute(
-            "SELECT p.price, s.name " 
+            "SELECT p.price, s.name, p.sizenameId " 
             "FROM pictureprices p "
             "JOIN sizenames s "
             "ON s.sizenameId = p.sizenameId "

@@ -24,7 +24,7 @@ class PhotoSizeListUser extends React.Component {
                   <div className='size-checkbox smallpad' >
                     <label>{size.name}</label>
                     <span className='right-text'>
-                      <CartButton uuid={uuidForPhoto} photo={photoName} price={size.price} />
+                      <CartButton uuid={uuidForPhoto} photo={photoName} price={size.price} sizenameId={size.sizenameId} />
                     </span>
                   </div>
                 )
