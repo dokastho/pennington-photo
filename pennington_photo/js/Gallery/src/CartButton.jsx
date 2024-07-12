@@ -20,7 +20,7 @@ class CartButton extends React.Component {
   }
 
   addToCart() {
-    const { photo, uuid } = this.props;
+    const { photo, uuid, sizenameId } = this.props;
     // fetch all gallery metadata
     fetch('/api/v1/cart/add/',
       {
@@ -33,7 +33,8 @@ class CartButton extends React.Component {
         body: JSON.stringify({
           photo: {
             name: photo,
-            uuid
+            uuid,
+            sizenameId,
           }
         }),
       })
@@ -86,6 +87,7 @@ CartButton.propTypes = {
   photo: PropTypes.string.isRequired,
   uuid: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
+  sizenameId: PropTypes.number.isRequired,
 };
 
 export default CartButton

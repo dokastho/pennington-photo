@@ -5,9 +5,11 @@ import hashlib
 import pennington_photo
 from pennington_photo.common.model import get_db
 
-def do_hash(s: str) -> str:
+
+def do_hash(s: str, sn_id: int) -> str:
     m = hashlib.sha256()
     m.update(s.encode('utf-8'))
+    m.update(sn_id.to_bytes(length=8, byteorder='big'))
     return m.hexdigest()
 
 
@@ -16,7 +18,7 @@ def get_cart_contents():
     data = {
         'cart': []
     }
-    
+
     connection = get_db()
 
     if 'cart' in flask.session:
@@ -74,27 +76,39 @@ def cart_add():
 
     if 'photo' not in body:
         flask.abort(400)
-
-    item = body['photo']
-    key = do_hash(item['uuid'])
-    val = {
-        'name': item['name'],
-        'uuid': item['uuid'],
-        'qty': 1,
-    }
-
     if 'cart' not in flask.session:
         flask.session['cart'] = dict()
         pass
-    
+
+    item = body['photo']
+    key = do_hash(item['uuid'], item['sizenameId'])
 
     cart = flask.session['cart']
 
-    while key in cart.keys():
-        key = do_hash(key)
+    if key in cart.keys():
+        cart[key]['qty'] += 1
         pass
-    val["hashId"] = key
-    cart[key] = val
+
+    else:
+        connection = get_db()
+        cur = connection.execute(
+            "SELECT name "
+            "FROM sizenames "
+            "WHERE sizenameId = ?",
+            (item['sizenameId'],)
+        )
+        sizename = cur.fetchone()['name']
+        val = {
+            'name': item['name'],
+            'uuid': item['uuid'],
+            'size': sizename,
+            'sizenameId': item['sizenameId'],
+            'qty': 1,
+        }
+        val["hashId"] = key
+        cart[key] = val
+        pass
+
     flask.session['cart'] = cart
 
     return flask.Response(status=204)
@@ -123,7 +137,7 @@ def cart_update():
         }
         cart_p[photo['hashId']] = val
         pass
-    
+
     flask.session['cart'] = cart_p
 
     return flask.Response(status=204)
