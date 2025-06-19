@@ -20,7 +20,7 @@ def main():
     if not os.path.isfile(pennington_photo.app.config['SITE_ROOT'] / "static" / "js" / "index.bundle.js"):
         print("This app has not been installed yet.\n\nInstall with `pphoto install`")
         exit(1)
-    
+
     app.run(host='0.0.0.0', port=app.config["MY_PORT"])
     pass
 

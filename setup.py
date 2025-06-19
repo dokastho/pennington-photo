@@ -47,7 +47,7 @@ setup(
         'selenium',
     ],
     python_requires='>=3.9',
-        entry_points={
+    entry_points={
         'console_scripts': [
             'pphoto = pennington_photo.__main__:main'
         ]
