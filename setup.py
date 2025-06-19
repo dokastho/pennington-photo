@@ -34,7 +34,10 @@ setup(
     install_requires=[
         'arrow',
         'bs4',
-        'Flask',
+        'boto3',
+        'flask',
+        'flask_cors',
+        'prometheus-flask-exporter',
         'html5validator',
         'pycodestyle',
         'pydocstyle',
