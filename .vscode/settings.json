@@ -1,0 +1,11 @@
+{
+    "python.testing.pytestArgs": [
+        "pennington_photo"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "eslint.workingDirectories": [
+        "pennington_photo"
+    ],
+    "autopep8.args": ["--ignore=E501"]
+}

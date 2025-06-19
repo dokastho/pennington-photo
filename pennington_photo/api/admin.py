@@ -4,18 +4,19 @@ import pennington_photo
 import flask
 from pennington_photo.common.model import get_db
 
+
 @pennington_photo.app.route("/api/v1/admin/")
 def get_admin():
     connection = get_db()
-    
+
     cur = connection.execute(
         "SELECT * FROM galleries "
         "ORDER BY ordernum",
         ()
     )
-    
+
     galleries = cur.fetchall()
-    
+
     for gallery in galleries:
         cur = connection.execute(
             "SELECT * FROM pictures WHERE galleryId = ? ORDER BY stars DESC, ordernum",
@@ -33,10 +34,10 @@ def get_admin():
             (gallery["galleryId"],)
         )
         gallery["photos"] = cur.fetchall()
-        
+
         for photo in gallery["photos"]:
             picture_id = photo["pictureId"]
-            
+
             cur = connection.execute(
                 "SELECT s.name, s.price as defaultPrice, p.price as actualPrice, "
                 "p.picturepriceId, s.sizenameId, pictureId as offered "
@@ -48,29 +49,28 @@ def get_admin():
             )
             photo["sizes"] = cur.fetchall()
             pass
-            
+
         pass
-    
+
     cur = connection.execute(
         "SELECT username FROM users",
         ()
     )
-    
+
     users = cur.fetchall()
-    
+
     cur = connection.execute(
         "SELECT sizenameId, name, price  "
         "FROM sizenames",
         ()
     )
-    
+
     sizes = cur.fetchall()
-    
-    
+
     data = {
         "galleries": galleries,
         "users": users,
         "sizes": sizes
     }
-    
+
     return flask.jsonify(data), 201

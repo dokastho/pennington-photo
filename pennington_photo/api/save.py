@@ -120,7 +120,7 @@ def select_size():
     if not logname:
         flask.abort(403)
         pass
-    
+
     body = flask.request.get_json()
     if body is None:
         flask.abort(400)
@@ -163,7 +163,7 @@ def deselect_size():
     if not logname:
         flask.abort(403)
         pass
-    
+
     body = flask.request.get_json()
     if body is None:
         flask.abort(400)
@@ -216,7 +216,7 @@ def update_price():
     if not pictureprice_id:
         flask.abort(400)
         pass
-    
+
     connection = get_db()
     cur = connection.execute(
         "UPDATE pictureprices "
@@ -249,7 +249,7 @@ def update_sizename():
             flask.abort(400)
             pass
         pass
-    
+
     connection = get_db()  # check that price is 'int'
     cur = connection.execute(
         "UPDATE sizenames "
@@ -283,7 +283,7 @@ def swap_pics():
             flask.abort(400)
             pass
         pass
-    
+
     connection = get_db()
     cur = connection.execute(
         "UPDATE galleries "
@@ -326,7 +326,7 @@ def swap_galleries():
             flask.abort(400)
             pass
         pass
-    
+
     connection = get_db()
     cur = connection.execute(
         "UPDATE pictures "

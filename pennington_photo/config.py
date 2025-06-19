@@ -8,7 +8,7 @@ SECRET_KEY = (b'\x8a\xac\xb5\xd4\x19\xe6\xef',
 SESSION_COOKIE_NAME = 'login'
 SITE_ROOT = pathlib.Path(__file__).resolve().parent.parent
 # File Upload to static/img/
-UPLOADS_FOLDER = SITE_ROOT/"pennington_photo"/"static"/"img"
+UPLOADS_FOLDER = SITE_ROOT / "pennington_photo" / "static" / "img"
 # Database file is var/resume.sqlite3
-DATABASE_FILENAME = SITE_ROOT/'var'/'pennington_photo.sqlite3'
+DATABASE_FILENAME = SITE_ROOT / 'var' / 'pennington_photo.sqlite3'
 EMAIL_RECIPIENT = "tjdokas@gmail.com"

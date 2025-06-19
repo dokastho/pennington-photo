@@ -2,19 +2,20 @@
 import boto3
 from botocore.exceptions import ClientError
 
+
 def send_email_ses():
     SENDER = "noreply <noreply@penningtonphotographic.com>"
 
     RECIPIENT = "tjdokas@gmail.com"
-    
+
     SUBJECT = "Amazon SES Test (SDK for Python)"
 
     # The email body for recipients with non-HTML email clients.
     BODY_TEXT = ("Amazon SES Test (Python)\r\n"
-                "This email was sent with Amazon SES using the "
-                "AWS SDK for Python (Boto)."
-                )
-                
+                 "This email was sent with Amazon SES using the "
+                 "AWS SDK for Python (Boto)."
+                 )
+
     # The HTML body of the email.
     BODY_HTML = """<html>
     <head></head>
@@ -26,19 +27,19 @@ def send_email_ses():
         AWS SDK for Python (Boto)</a>.</p>
     </body>
     </html>
-                """            
+                """
 
     # The character encoding for the email.
     CHARSET = "UTF-8"
-    
+
     AWS_REGION = "us-east-1"
 
     # Create a new SES resource and specify a region.
-    client = boto3.client('ses',region_name=AWS_REGION)
+    client = boto3.client('ses', region_name=AWS_REGION)
 
     # Try to send the email.
     try:
-        #Provide the contents of the email.
+        # Provide the contents of the email.
         response = client.send_email(
             Destination={
                 'ToAddresses': [
@@ -66,14 +67,15 @@ def send_email_ses():
             # following line
             # ConfigurationSetName=CONFIGURATION_SET,
         )
-    # Display an error if something goes wrong.	
+    # Display an error if something goes wrong.
     except ClientError as e:
         print(e.response['Error']['Message'])
     else:
         print("Email sent! Message ID:"),
         print(response['MessageId'])
-    
+
     pass
+
 
 if __name__ == "__main__":
     send_email_ses()
