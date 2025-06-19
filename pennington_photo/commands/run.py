@@ -21,8 +21,6 @@ def main():
         print("This app has not been installed yet.\n\nInstall with `pphoto install`")
         exit(1)
     
-    pennington_photo.REG_THR.start()    
-    
     app.run(host='0.0.0.0', port=app.config["MY_PORT"])
     pass
 
