@@ -9,6 +9,7 @@ Written by TJ Dokas
 
 import flask
 from flask_cors import CORS
+from prometheus_flask_exporter import PrometheusMetrics
 # app is a single object used by all the code modules in this package
 app = flask.Flask(__name__)  # pylint: disable=invalid-name
 CORS(app)
@@ -28,3 +29,5 @@ app.config.from_envvar('SITE_SETTINGS', silent=True)
 import pennington_photo.api  # noqa: E402  pylint: disable=wrong-import-position
 import pennington_photo.views  # noqa: E402  pylint: disable=wrong-import-position
 import pennington_photo.common  # noqa: E402  pylint: disable=wrong-import-position
+
+metrics = PrometheusMetrics(app)
