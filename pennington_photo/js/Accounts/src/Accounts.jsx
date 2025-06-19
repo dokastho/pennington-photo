@@ -1,7 +1,12 @@
-import React from 'react'
+/**
+ * Pennington Photographics
+ *
+ * TJ Dokas <mailto:tjdokas@gmail.com>
+ */
+
+import React from "react";
 
 class Accounts extends React.Component {
-
   constructor(props) {
     super(props);
   }
@@ -14,10 +19,11 @@ class Accounts extends React.Component {
           <input type="submit" value="logout" />
         </form>
         <br />
-        <a href="/accounts/password/">Change password</a><br />
+        <a href="/accounts/password/">Change password</a>
+        <br />
       </div>
     );
   }
 }
 
-export default Accounts
+export default Accounts;

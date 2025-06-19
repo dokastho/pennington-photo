@@ -1,11 +1,16 @@
-import PropTypes from 'prop-types';
-import React from 'react'
-import EditUser from './EditUser';
+/**
+ * Pennington Photographics
+ *
+ * TJ Dokas <mailto:tjdokas@gmail.com>
+ */
+
+import PropTypes from "prop-types";
+import React from "react";
+import EditUser from "./EditUser";
 
 const NOT_EDITING = -1;
 
 class UserList extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -19,9 +24,7 @@ class UserList extends React.Component {
   }
 
   componentDidMount() {
-    const {
-      users
-    } = this.props;
+    const { users } = this.props;
     const logname = document.getElementById("logname").content;
 
     this.setState({ users, logname, editingUserIdx: NOT_EDITING });
@@ -36,56 +39,61 @@ class UserList extends React.Component {
   }
 
   deleteUser(args) {
-    const {
-      user
-    } = args;
-    fetch(`/accounts/?target=/admin/`,
-      {
-        credentials: 'same-origin',
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ operation: 'delete', user }),
-      })
+    const { user } = args;
+    fetch(`/accounts/?target=/admin/`, {
+      credentials: "same-origin",
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ operation: "delete", user }),
+    })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
-        this.setState((prevState) => ({ editingUserIdx: NOT_EDITING, users: prevState.users.filter((u) => u.username !== user) }));
+        this.setState((prevState) => ({
+          editingUserIdx: NOT_EDITING,
+          users: prevState.users.filter((u) => u.username !== user),
+        }));
         return response.json();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }
 
   render() {
-    const {
-      users,
-      editingUserIdx,
-      logname
-    } = this.state;
+    const { users, editingUserIdx, logname } = this.state;
     const isEditing = editingUserIdx !== NOT_EDITING;
     return (
       <>
         <h1>Manage Administrators</h1>
-        {
-          isEditing ? (
-            <EditUser logname={logname} username={users[editingUserIdx].username} deleteUser={this.deleteUser} cancelEdit={this.cancelEdit} />
-          ) : (
-            <>
-              <h3><a href='/accounts/create/' className='logout-button'>Create a new Administrator Account</a></h3>
-              {
-                users.map((user, idx) => {
-                  return (
-                    <div className='edit-list-item' onClick={() => { this.selectUser(idx) }}>
-                      <h3>{user.username}</h3>
-                    </div>
-                  );
-                })
-              }
-            </>
-          )
-
-        }
+        {isEditing ? (
+          <EditUser
+            logname={logname}
+            username={users[editingUserIdx].username}
+            deleteUser={this.deleteUser}
+            cancelEdit={this.cancelEdit}
+          />
+        ) : (
+          <>
+            <h3>
+              <a href="/accounts/create/" className="logout-button">
+                Create a new Administrator Account
+              </a>
+            </h3>
+            {users.map((user, idx) => {
+              return (
+                <div
+                  className="edit-list-item"
+                  onClick={() => {
+                    this.selectUser(idx);
+                  }}
+                >
+                  <h3>{user.username}</h3>
+                </div>
+              );
+            })}
+          </>
+        )}
       </>
     );
   }
@@ -95,6 +103,4 @@ UserList.propTypes = {
   users: PropTypes.instanceOf(Array).isRequired,
 };
 
-export default UserList
-
-// todo: add user delete with confirmatory buttons and user create
+export default UserList;

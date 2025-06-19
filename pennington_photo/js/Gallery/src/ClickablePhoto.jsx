@@ -1,12 +1,17 @@
-import PropTypes from 'prop-types';
-import React from 'react'
-import Photo from './Photo';
-import CartButton from './CartButton';
-import GALLERYTYPES from './GalleryTypes';
-import PhotoSizeListUser from './PhotoSizeListUser';
+/**
+ * Pennington Photographics
+ *
+ * TJ Dokas <mailto:tjdokas@gmail.com>
+ */
+
+import PropTypes from "prop-types";
+import React from "react";
+import Photo from "./Photo";
+import CartButton from "./CartButton";
+import GALLERYTYPES from "./GalleryTypes";
+import PhotoSizeListUser from "./PhotoSizeListUser";
 
 class ClickablePhoto extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +29,7 @@ class ClickablePhoto extends React.Component {
     if (event.target.id != uuid) {
       document.removeEventListener("mousedown", this.handleClickOutside);
       this.setState({ blownUp: false });
-      document.getElementById('body').style["overflow"] = "auto";
+      document.getElementById("body").style["overflow"] = "auto";
     }
   }
 
@@ -40,14 +45,11 @@ class ClickablePhoto extends React.Component {
     }
     this.setState({ blownUp: true });
     document.addEventListener("mousedown", this.handleClickOutside);
-    document.getElementById('body').style["overflow"] = "hidden";
+    document.getElementById("body").style["overflow"] = "hidden";
   }
 
   render() {
-    const {
-      blownUp,
-      showDetails
-    } = this.state;
+    const { blownUp, showDetails } = this.state;
     const {
       uuid,
       name,
@@ -75,11 +77,9 @@ class ClickablePhoto extends React.Component {
         break;
     }
     const userAgent = navigator.userAgent.toLowerCase();
-    if (userAgent.indexOf('safari') != -1) {
-      if (userAgent.indexOf('chrome') > -1) {
-        //browser is chrome
+    if (userAgent.indexOf("safari") != -1) {
+      if (userAgent.indexOf("chrome") > -1) {
       } else if (photoClassName === "default") {
-        //browser is safari, add css
         photoClassName = photoClassName.concat(" ar");
       }
     }
@@ -93,59 +93,76 @@ class ClickablePhoto extends React.Component {
             clickCallback={this.clickToBlowUp}
           />
         </div>
-        {
-          blownUp ? (
-            <div className='blown-up-container'>
-              <div className='blown-up-content'>
-                <Photo
-                  uuid={uuid}
+        {blownUp ? (
+          <div className="blown-up-container">
+            <div className="blown-up-content">
+              <Photo
+                uuid={uuid}
+                id={uuid}
+                imgClass={`blown-up-image${showDetails ? "" : "-big"}`}
+              />
+              {showDetails ? (
+                <>
+                  <h3 className="alt big-text smallpad">{name}</h3>
+                  {description === "" ? null : (
+                    <h3 className="alt big-text smallpad">
+                      <em>{description}</em>
+                    </h3>
+                  )}
+                  {onlyTotal ? (
+                    <p className="alt smallpad">
+                      <em>Limited Edition of {total}</em>
+                    </p>
+                  ) : null}
+                  {both ? (
+                    <p className="alt smallpad">
+                      <em>
+                        Edition: {qty} of {total} available
+                      </em>
+                    </p>
+                  ) : null}
+                  {}
+                  <div
+                    id={uuid}
+                    className="details-box mfs"
+                    onClick={() => {
+                      this.toggleDetails();
+                    }}
+                  >
+                    hide details
+                  </div>
+                </>
+              ) : (
+                <div
                   id={uuid}
-                  imgClass={`blown-up-image${showDetails ? '' : '-big'}`}
-                />
-                {
-                  showDetails ? (
-                    <>
-                      <h3 className='alt big-text smallpad'>{name}</h3>
-                      {
-                        description === "" ? null : (<h3 className='alt big-text smallpad'><em>{description}</em></h3>)
-                      }
-                      {
-                        onlyTotal ? (<p className='alt smallpad'><em>Limited Edition of {total}</em></p>) : null
-                      }
-                      {
-                        both ? (<p className='alt smallpad'><em>Edition: {qty} of {total} available</em></p>) : null
-                      }
-                      {
-                        // minprice ? (<p className='alt smallpad'><em>From ${minprice}</em></p>) : (<h3 className='alt big-text smallpad'><em>Not Available For Sale</em></h3>)
-                      }
-                      <div id={uuid} className='details-box mfs' onClick={() => { this.toggleDetails() }}>
-                        hide details
-                      </div>
-                    </>
-                  ) : (
-                    <div id={uuid} className='details-box mfs' onClick={() => { this.toggleDetails() }}>
-                      show details
-                    </div>
-                  )
-                }
-                <PhotoSizeListUser sizes={sizes} uuidForPhoto={uuid} photoName={name} />
-                <hr />
-              </div>
+                  className="details-box mfs"
+                  onClick={() => {
+                    this.toggleDetails();
+                  }}
+                >
+                  show details
+                </div>
+              )}
+              <PhotoSizeListUser
+                sizes={sizes}
+                uuidForPhoto={uuid}
+                photoName={name}
+              />
+              <hr />
             </div>
-          ) : null
-        }
+          </div>
+        ) : null}
       </>
     );
   }
 }
 
 ClickablePhoto.defaultProps = {
-  imgClass: '',
-  description: '',
-}
+  imgClass: "",
+  description: "",
+};
 
 ClickablePhoto.propTypes = {
-  // prop types go here
   uuid: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   qty: PropTypes.number,
@@ -156,4 +173,4 @@ ClickablePhoto.propTypes = {
   description: PropTypes.string,
 };
 
-export default ClickablePhoto
+export default ClickablePhoto;

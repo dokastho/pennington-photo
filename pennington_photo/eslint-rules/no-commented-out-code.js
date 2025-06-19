@@ -6,7 +6,7 @@ const LICENSE_COMMENT = {
   type: 'Block',
   value: LICENSE,
   start: 0,
-  end: 41,
+  end: 77,
 }
 
 export default {
@@ -57,22 +57,22 @@ export default {
             comments.forEach(comment => {
               const text = comment.value.trim();
 
-              // permit radar links with a fixme
+              // permit github issue links with a fixme
               const firstLine = text.split('\n')[0]
-              const fixmeRadarExpr = /FIXME:\s+rdar:\/\/[0-9]+/i;
-              if (fixmeRadarExpr.test(firstLine)) { } // ignore
+              const fixmeGithubIssueExpr = /FIXME:\s+https:\/\/github.com\/dokastho\/pennington-photo\/issues\/[0-9]+/i;
+              if (fixmeGithubIssueExpr.test(firstLine)) { } // ignore
               else if (text.startsWith('eslint-disable-next-line')) { } // ignore
-              else if (firstLine.startsWith('FIXME:') && !fixmeRadarExpr.test(firstLine)) {
+              else if (firstLine.startsWith('FIXME:') && !fixmeGithubIssueExpr.test(firstLine)) {
                 context.report({
                   node: comment,
-                  message: 'FIXME\'s need a Radar link. ie:\n\n/* FIXME: rdar//xxxxxxxx\ncode here...\n*/\n',
+                  message: 'FIXME\'s need a github issue link. ie:\n\n/* FIXME: https://github.com/dokastho/pennington-photo/issues/xx\ncode here...\n*/\n',
                 });
               }
 
               else if (text.startsWith('TODO:')) {
                 context.report({
                   node: comment,
-                  message: 'Commenting a TODO is not allowed. Please file a radar to track this issue and paste the link along with a FIXME, ie:\n\n/* FIXME: rdar//xxxxxxxx\ncode here...\n*/\n',
+                  message: 'Commenting a TODO is not allowed. Please file a github issue to track this issue and paste the link along with a FIXME, ie:\n\n/* FIXME: https://github.com/dokastho/pennington-photo/issues/xx\ncode here...\n*/\n',
                 });
               }
 
@@ -80,7 +80,7 @@ export default {
               else {
                 context.report({
                   node: comment,
-                  message: 'Commenting code without a radar link is not allowed.\n\nTo leave a comment for code context, ignore the error for this line. Otherwise, please create a radar to track this code if it is needed or remove it if not. ie:\n\n/* FIXME: rdar//xxxxxxxx\ncode here...\n*/\n',
+                  message: 'Commenting code without a github issue link is not allowed.\n\nTo leave a comment for code context, ignore the error for this line. Otherwise, please create a github issue to track this code if it is needed or remove it if not. ie:\n\n/* FIXME: https://github.com/dokastho/pennington-photo/issues/xx\ncode here...\n*/\n',
                 });
               }
             });

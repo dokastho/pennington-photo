@@ -1,6 +1,8 @@
 
 const LICENSE = `/**
- *  Baseband SoC Panic Debug Tool
+ * Pennington Photographics
+ *
+ * TJ Dokas <mailto:tjdokas@gmail.com>
  */`
 
 export { LICENSE };

@@ -1,15 +1,20 @@
-import PropTypes from 'prop-types';
-import React from 'react'
-import Loading from './Loading';
+/**
+ * Pennington Photographics
+ *
+ * TJ Dokas <mailto:tjdokas@gmail.com>
+ */
+
+import PropTypes from "prop-types";
+import React from "react";
+import Loading from "./Loading";
 
 class Photo extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       loaded: false,
       focused: true,
-      defaultClassName: 'photo',
+      defaultClassName: "photo",
     };
     this.setLoaded = this.setLoaded.bind(this);
     this.toggleFocused = this.toggleFocused.bind(this);
@@ -17,25 +22,35 @@ class Photo extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener("blur", (e) => { this.toggleFocused(e, false) })
-    window.addEventListener("focus", (e) => { this.toggleFocused(e, true) })
-    document.addEventListener('contextmenu', (e) => { this.handleContextMenu(e) });
+    window.addEventListener("blur", (e) => {
+      this.toggleFocused(e, false);
+    });
+    window.addEventListener("focus", (e) => {
+      this.toggleFocused(e, true);
+    });
+    document.addEventListener("contextmenu", (e) => {
+      this.handleContextMenu(e);
+    });
 
     const userAgent = navigator.userAgent.toLowerCase();
-    if (userAgent.indexOf('safari') != -1) {
-      if (userAgent.indexOf('chrome') > -1) {
-        //browser is chrome
+    if (userAgent.indexOf("safari") != -1) {
+      if (userAgent.indexOf("chrome") > -1) {
       } else {
-        //browser is safari, add css
-        this.setState({ defaultClassName: 'photo-no-border' });
+        this.setState({ defaultClassName: "photo-no-border" });
       }
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener("blur", (e) => { this.toggleFocused(e, false) })
-    window.removeEventListener("focus", (e) => { this.toggleFocused(e, true) })
-    document.removeEventListener('contextmenu', (e) => { this.handleContextMenu(e) });
+    window.removeEventListener("blur", (e) => {
+      this.toggleFocused(e, false);
+    });
+    window.removeEventListener("focus", (e) => {
+      this.toggleFocused(e, true);
+    });
+    document.removeEventListener("contextmenu", (e) => {
+      this.handleContextMenu(e);
+    });
   }
 
   setLoaded() {
@@ -48,36 +63,24 @@ class Photo extends React.Component {
 
   handleContextMenu(e) {
     e.preventDefault();
-  };
+  }
 
   render() {
-    const {
-      loaded,
-      focused,
-      defaultClassName,
-    } = this.state;
-    const {
-      uuid,
-      imgClass,
-      id,
-      clickCallback,
-      clickArgs,
-    } = this.props;
+    const { loaded, focused, defaultClassName } = this.state;
+    const { uuid, imgClass, id, clickCallback, clickArgs } = this.props;
     return (
       <>
-        {
-          loaded ? (
-            null
-          ) : (
-            <Loading />
-          )
-        }
+        {loaded ? null : <Loading />}
         <img
           src={`/static/img/${uuid}`}
-          id={id === '' ? uuid : id}
-          className={`${defaultClassName} ${imgClass} ${loaded ? 'loaded' : 'loading-invis'}${focused ? '' : ' blur'}`}
-          onLoad={() => { this.setLoaded() }}
-          onClick={() => { clickCallback(clickArgs) }}
+          id={id === "" ? uuid : id}
+          className={`${defaultClassName} ${imgClass} ${loaded ? "loaded" : "loading-invis"}${focused ? "" : " blur"}`}
+          onLoad={() => {
+            this.setLoaded();
+          }}
+          onClick={() => {
+            clickCallback(clickArgs);
+          }}
         />
       </>
     );
@@ -85,18 +88,16 @@ class Photo extends React.Component {
 }
 
 Photo.defaultProps = {
-  imgClass: 'photo-slot-default',
-  id: '',
+  imgClass: "photo-slot-default",
+  id: "",
   clickArgs: {},
-}
+};
 
 Photo.propTypes = {
-  // prop types go here
   uuid: PropTypes.string.isRequired,
   id: PropTypes.string,
   imgClass: PropTypes.string,
-  clickArgs: PropTypes.instanceOf(Object)
-  // clickCallback
+  clickArgs: PropTypes.instanceOf(Object),
 };
 
-export default Photo
+export default Photo;

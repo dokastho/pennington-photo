@@ -5,8 +5,9 @@
   "main": "src/index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf dist && npx webpack && cp ./dist/index.bundle.js ../../static/js/login.bundle.js",
-    "rebuild": "rm -rf dist && rm -rf node_modules/ && npm i && npm audit fix && npx webpack && cp ./dist/index.bundle.js ../../static/js/login.bundle.js"
+    "lint": "eslint './src/**/*.jsx'",
+    "build": "rm -rf dist && npm run lint && npx webpack && cp ./dist/index.bundle.js ../../static/js/login.bundle.js",
+    "rebuild": "rm -rf dist && rm -rf node_modules/ && npm i && npm audit fix && npm run lint && npx webpack && cp ./dist/index.bundle.js ../../static/js/login.bundle.js"
   },
   "devDependencies": {
     "@babel/core": ">=7.15.5",

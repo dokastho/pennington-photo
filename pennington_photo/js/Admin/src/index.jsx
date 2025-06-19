@@ -1,7 +1,13 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import Admin from './Admin';
+/**
+ * Pennington Photographics
+ *
+ * TJ Dokas <mailto:tjdokas@gmail.com>
+ */
 
-const container = document.getElementById('reactEntry');
+import React from "react";
+import { createRoot } from "react-dom/client";
+import Admin from "./Admin";
+
+const container = document.getElementById("reactEntry");
 const root = createRoot(container);
 root.render(<Admin />);
