@@ -1,4 +1,10 @@
-"""API endpoint for fetching galleries metadata & contents."""
+"""
+Pennington Photographics
+
+TJ Dokas <mailto:tjdokas@gmail.com>
+
+API endpoint for fetching galleries metadata & contents
+"""
 
 import pennington_photo
 import flask

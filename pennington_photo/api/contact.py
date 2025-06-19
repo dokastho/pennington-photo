@@ -1,4 +1,10 @@
-"""Handle requests and sending emails."""
+"""
+Pennington Photographics
+
+TJ Dokas <mailto:tjdokas@gmail.com>
+
+Handle requests and sending emails
+"""
 
 import arrow
 import flask

@@ -1,3 +1,11 @@
+"""
+Pennington Photographics
+
+TJ Dokas <mailto:tjdokas@gmail.com>
+
+API namespace
+"""
+
 from pennington_photo.api.account import *
 from pennington_photo.api.admin import *
 from pennington_photo.api.cart import *

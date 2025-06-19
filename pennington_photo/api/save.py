@@ -1,4 +1,10 @@
-"""Handle edits for gallery requests."""
+"""
+Pennington Photographics
+
+TJ Dokas <mailto:tjdokas@gmail.com>
+
+Handle edits for gallery requests
+"""
 
 import pennington_photo
 import flask

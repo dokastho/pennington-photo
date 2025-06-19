@@ -1,4 +1,12 @@
-"""Package initializer."""
+"""
+Pennington Photographics
+
+TJ Dokas <mailto:tjdokas@gmail.com>
+
+Don Pennington's online photographics gallery & store.
+Written by TJ Dokas
+"""
+
 import flask
 from flask_cors import CORS
 # app is a single object used by all the code modules in this package

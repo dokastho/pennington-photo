@@ -12,3 +12,4 @@ UPLOADS_FOLDER = SITE_ROOT / "static" / "img"
 # Database file is var/resume.sqlite3
 DATABASE_FILENAME = SITE_ROOT / 'var' / 'pennington_photo.sqlite3'
 EMAIL_RECIPIENT = "tjdokas@gmail.com"
+MY_PORT = 8186

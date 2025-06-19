@@ -1,4 +1,10 @@
-"""Handle Cart Requests."""
+"""
+Pennington Photographics
+
+TJ Dokas <mailto:tjdokas@gmail.com>
+
+Handle Cart Requests.
+"""
 
 import flask
 import hashlib

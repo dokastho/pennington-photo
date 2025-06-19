@@ -1,4 +1,11 @@
-"""accounts interface."""
+"""
+Pennington Photographics
+
+TJ Dokas <mailto:tjdokas@gmail.com>
+
+accounts interface
+"""
+
 import uuid
 import hashlib
 import os

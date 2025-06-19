@@ -1,4 +1,10 @@
-"""Render cart view."""
+"""
+Pennington Photographics
+
+TJ Dokas <mailto:tjdokas@gmail.com>
+
+Render cart view
+"""
 
 import flask
 import pennington_photo

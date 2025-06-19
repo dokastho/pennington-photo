@@ -1,3 +1,11 @@
+"""
+Pennington Photographics
+
+TJ Dokas <mailto:tjdokas@gmail.com>
+
+Contact page view
+"""
+
 import pennington_photo
 import flask
 from pennington_photo.common.model import check_session
@@ -5,7 +13,7 @@ from pennington_photo.common.model import check_session
 
 @pennington_photo.app.route("/contact/")
 def show_contact():
-    """Render galleries for the site."""
+    """Render contact view for the site."""
 
     checkout = flask.request.args.get("checkout")
     context = {
