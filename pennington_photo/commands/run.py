@@ -15,7 +15,7 @@ app = pennington_photo.app
 
 @click.command("run")
 def main():
-    """Run the BBSPDT Server"""
+    """Run the Pennington Photographic Server"""
 
     if not os.path.isfile(pennington_photo.app.config['SITE_ROOT'] / "static" / "js" / "index.bundle.js"):
         print("This app has not been installed yet.\n\nInstall with `pphoto install`")

@@ -3,6 +3,6 @@ repos:
     hooks:
       - id: autopep8-custom
         name: autopep8 custom formatting
-        entry: bash -c 'git ls-files "*.py" | xargs autopep8 --in-place --pep8-passes 2000 --verbose --ignore=E501'
+        entry: bash -c 'git ls-files "*.py" | xargs /Users/dokastho/Library/Python/3.9/bin/autopep8 --in-place --pep8-passes 2000 --verbose --ignore=E501'
         language: system
         always_run: true

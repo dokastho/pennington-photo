@@ -37,10 +37,6 @@ WORKDIR /app/pennington_photo
 RUN ./bin/sitedb create
 WORKDIR /app
 
-# Resolve final dependencies in bin
-RUN rm /app/pennington_photo/bin/sshpass
-RUN cp /usr/bin/sshpass /app/pennington_photo/bin/sshpass
-
 # Expose the port Flask runs on
 EXPOSE 8186
 
@@ -50,4 +46,4 @@ ENV FLASK_RUN_HOST=0.0.0.0
 ENV PYTHONUNBUFFERED=0
 
 # Command to run the application
-CMD ["bbspdt", "run"]
+CMD ["pphoto", "run"]
