@@ -1,4 +1,5 @@
-FROM --platform=linux/amd64 python:3.9.6
+FROM python:3.9.6
+# FROM --platform=linux/amd64 python:3.9.6
 
 WORKDIR /app
 
@@ -43,7 +44,11 @@ EXPOSE 8186
 # Set environment variables
 ENV FLASK_APP=pennington_photo
 ENV FLASK_RUN_HOST=0.0.0.0
+# Set environment variables
+ENV VIRTUAL_HOST=photos.dokastho.io
+ENV VIRTUAL_PORT=8186
 ENV PYTHONUNBUFFERED=0
+ENV PROD=1
 
 # Command to run the application
 CMD ["pphoto", "run"]
