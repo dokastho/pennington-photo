@@ -1,4 +1,10 @@
-"""Site model (database) API."""
+"""
+Pennington Photographics
+
+TJ Dokas <mailto:tjdokas@gmail.com>
+
+Site model (database) API
+"""
 from datetime import datetime
 import hashlib
 import sqlite3

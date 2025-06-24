@@ -1,4 +1,10 @@
-"""Handle requests for new galleries and photos."""
+"""
+Pennington Photographics
+
+TJ Dokas <mailto:tjdokas@gmail.com>
+
+Handle requests for new galleries and photos
+"""
 
 import pennington_photo
 import arrow

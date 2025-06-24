@@ -1,6 +1,16 @@
-"""Package initializer."""
+"""
+Pennington Photographics
+
+TJ Dokas <mailto:tjdokas@gmail.com>
+
+Don Pennington's online photographics gallery & store.
+Written by TJ Dokas
+"""
+
 import flask
 from flask_cors import CORS
+from prometheus_flask_exporter import PrometheusMetrics
+from flask import request
 # app is a single object used by all the code modules in this package
 app = flask.Flask(__name__)  # pylint: disable=invalid-name
 CORS(app)
@@ -20,3 +30,11 @@ app.config.from_envvar('SITE_SETTINGS', silent=True)
 import pennington_photo.api  # noqa: E402  pylint: disable=wrong-import-position
 import pennington_photo.views  # noqa: E402  pylint: disable=wrong-import-position
 import pennington_photo.common  # noqa: E402  pylint: disable=wrong-import-position
+
+metrics = PrometheusMetrics(app)
+metrics.register_default(
+    metrics.counter(
+        'by_path_counter', 'Request count by request paths',
+        labels={'path': lambda: request.path}
+    )
+)

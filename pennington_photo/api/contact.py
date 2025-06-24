@@ -1,4 +1,10 @@
-"""Handle requests and sending emails."""
+"""
+Pennington Photographics
+
+TJ Dokas <mailto:tjdokas@gmail.com>
+
+Handle requests and sending emails
+"""
 
 import arrow
 import flask
@@ -40,8 +46,8 @@ def handle_contact():
             "name": name,
             "email": email,
             "message": message,
-            "total_cost" : total_cost,
-            "subject" : f"Invoice Order From {name}",
+            "total_cost": total_cost,
+            "subject": f"Invoice Order From {name}",
             "checkout": True
         }
         pass
@@ -68,11 +74,11 @@ def send_email_ses(body_content: str, subject: str):
     region = "us-east-1"
 
     # Create a new SES resource and specify a region.
-    client = boto3.client('ses',region_name=region)
+    client = boto3.client('ses', region_name=region)
 
     # Try to send the email.
     try:
-        #Provide the contents of the email.
+        # Provide the contents of the email.
         response = client.send_email(
             Destination={
                 'ToAddresses': [
@@ -97,11 +103,11 @@ def send_email_ses(body_content: str, subject: str):
             },
             Source=sender
         )
-    # Display an error if something goes wrong.	
+    # Display an error if something goes wrong.
     except ClientError as e:
         print(e.response['Error']['Message'])
     else:
         print("Email sent! Message ID:"),
         print(response['MessageId'])
-    
+
     pass

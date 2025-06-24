@@ -1,3 +1,11 @@
+"""
+Pennington Photographics
+
+TJ Dokas <mailto:tjdokas@gmail.com>
+
+Index (default) view endpoints
+"""
+
 import pennington_photo
 import flask
 from pennington_photo.common.model import check_session

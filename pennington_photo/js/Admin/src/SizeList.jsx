@@ -1,11 +1,16 @@
-import PropTypes from 'prop-types';
-import React from 'react'
-import EditSize from './EditSize';
+/**
+ * Pennington Photographics
+ *
+ * TJ Dokas <mailto:tjdokas@gmail.com>
+ */
+
+import PropTypes from "prop-types";
+import React from "react";
+import EditSize from "./EditSize";
 
 const NOT_EDITING = -1;
 
 class SizeList extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -20,9 +25,7 @@ class SizeList extends React.Component {
   }
 
   componentDidMount() {
-    const {
-      sizes
-    } = this.props;
+    const { sizes } = this.props;
 
     this.setState({ sizes, editingSizeIdx: NOT_EDITING });
   }
@@ -36,90 +39,103 @@ class SizeList extends React.Component {
   }
 
   setSizeInfo(size) {
-    const {
-      sizes
-    } = this.state;
+    const { sizes } = this.state;
     const { sizenameId, info, price } = size;
     sizes.forEach((s) => {
       if (s.sizenameId == sizenameId) {
         s.name = info;
         s.price = price;
       }
-    })
+    });
     this.setState({ sizes });
   }
 
   createSize() {
-    fetch(`/api/v1/size/new/`,
-      {
-        credentials: 'same-origin',
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name: "blank", price: 0 }),
-      })
+    fetch(`/api/v1/size/new/`, {
+      credentials: "same-origin",
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name: "blank", price: 0 }),
+    })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
         return response.json();
       })
       .then((data) => {
-        this.setState((prevState) => ({ editingSizeIdx: NOT_EDITING, sizes: [...prevState.sizes, data] }));
+        this.setState((prevState) => ({
+          editingSizeIdx: NOT_EDITING,
+          sizes: [...prevState.sizes, data],
+        }));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }
 
   deleteSize(args) {
-    const {
-      sizenameId
-    } = args;
-    fetch(`/api/v1/delete/sizenames/${sizenameId}/`,
-      {
-        credentials: 'same-origin',
-        method: 'POST',
-      })
+    const { sizenameId } = args;
+    fetch(`/api/v1/delete/sizenames/${sizenameId}/`, {
+      credentials: "same-origin",
+      method: "POST",
+    })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
-        this.setState((prevState) => ({ editingSizeIdx: NOT_EDITING, sizes: prevState.sizes.filter((u) => u.sizenameId !== sizenameId) }));
+        this.setState((prevState) => ({
+          editingSizeIdx: NOT_EDITING,
+          sizes: prevState.sizes.filter((u) => u.sizenameId !== sizenameId),
+        }));
         return response;
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }
 
   render() {
-    const {
-      sizes,
-      editingSizeIdx,
-    } = this.state;
+    const { sizes, editingSizeIdx } = this.state;
     const isEditing = editingSizeIdx !== NOT_EDITING;
     return (
       <>
         <h1>Manage Print Sizes</h1>
-        {
-          isEditing ? (
-            <EditSize sizename={sizes[editingSizeIdx].name} price={sizes[editingSizeIdx].price} sizenameId={sizes[editingSizeIdx].sizenameId} deleteSize={this.deleteSize} cancelEdit={this.cancelEdit} callback={this.setSizeInfo} />
-          ) : (
-            <>
-              <h3><div className='submit-button' onClick={() => { this.createSize() }}>Create a new print size</div></h3>
-              {
-                sizes.map((size, idx) => {
-                  return (
-                    <div className='withmax1200px'>
-                      <div className='edit-list-item full-width' onClick={() => { this.selectSize(idx) }}>
-                        <h3>{size.name}</h3>
-                        <h3>${size.price}</h3>
-                      </div>
-                      <hr className='full-width' style={{float: "left"}} />
-                      <br />
-                    </div>
-                  );
-                })
-              }
-            </>
-          )
-
-        }
+        {isEditing ? (
+          <EditSize
+            sizename={sizes[editingSizeIdx].name}
+            price={sizes[editingSizeIdx].price}
+            sizenameId={sizes[editingSizeIdx].sizenameId}
+            deleteSize={this.deleteSize}
+            cancelEdit={this.cancelEdit}
+            callback={this.setSizeInfo}
+          />
+        ) : (
+          <>
+            <h3>
+              <div
+                className="submit-button"
+                onClick={() => {
+                  this.createSize();
+                }}
+              >
+                Create a new print size
+              </div>
+            </h3>
+            {sizes.map((size, idx) => {
+              return (
+                <div className="withmax1200px">
+                  <div
+                    className="edit-list-item full-width"
+                    onClick={() => {
+                      this.selectSize(idx);
+                    }}
+                  >
+                    <h3>{size.name}</h3>
+                    <h3>${size.price}</h3>
+                  </div>
+                  <hr className="full-width" style={{ float: "left" }} />
+                  <br />
+                </div>
+              );
+            })}
+          </>
+        )}
       </>
     );
   }
@@ -129,4 +145,4 @@ SizeList.propTypes = {
   sizes: PropTypes.instanceOf(Array).isRequired,
 };
 
-export default SizeList
+export default SizeList;

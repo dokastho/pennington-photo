@@ -1,0 +1,39 @@
+{
+	"Docstring": {
+		"prefix": [
+			"!docstring",
+		],
+		"body": [
+			"\"\"\"",
+			"Pennington Photographics",
+			"",
+			"TJ Dokas <mailto:tjdokas@gmail.com>",
+			"",
+			"${0:what's this file for?}",
+			"\"\"\"",
+		],
+		"description": "Default File Docstring"
+	},
+	"JS License": {
+		"prefix": [
+			".jsxlicense",
+		],
+		"body": [
+			"/**",
+			" * Pennington Photographics",
+			" *",
+			" * TJ Dokas <mailto:tjdokas@gmail.com>",
+			" */\n\n",
+		],
+		"description": "Default License for JSX Files"
+	},
+	"State Decoupler": {
+		"prefix": [
+			"cscs",
+		],
+		"body": [
+			"const { ${0:variable(s)} } = this.state;",
+		],
+		"description": "Default File Docstring"
+	}
+}

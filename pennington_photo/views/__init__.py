@@ -1,3 +1,11 @@
+"""
+Pennington Photographics
+
+TJ Dokas <mailto:tjdokas@gmail.com>
+
+Views namespace
+"""
+
 from pennington_photo.views.admin import *
 from pennington_photo.views.account import *
 from pennington_photo.views.cart import *

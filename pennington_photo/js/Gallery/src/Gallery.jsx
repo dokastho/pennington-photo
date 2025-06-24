@@ -1,11 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import NavBar from './NavBar';
-import Loading from './Loading';
-import ClickablePhoto from './ClickablePhoto';
+/**
+ * Pennington Photographics
+ *
+ * TJ Dokas <mailto:tjdokas@gmail.com>
+ */
+
+import React from "react";
+import PropTypes from "prop-types";
+import NavBar from "./NavBar";
+import Loading from "./Loading";
+import ClickablePhoto from "./ClickablePhoto";
 
 class Gallery extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -22,8 +27,7 @@ class Gallery extends React.Component {
 
   componentDidMount() {
     const galleryId = document.getElementById("galleryId").content;
-    // fetch all gallery metadata
-    fetch(`/api/v1/gallery/${galleryId}/`, { credentials: 'same-origin' })
+    fetch(`/api/v1/gallery/${galleryId}/`, { credentials: "same-origin" })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
         return response.json();
@@ -40,7 +44,7 @@ class Gallery extends React.Component {
           galleryId: galleryId,
         });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }
 
   render() {
@@ -52,46 +56,28 @@ class Gallery extends React.Component {
       dateTaken,
       created,
       galleryType,
-    } = this.state
+    } = this.state;
     return (
       <>
-        {
-          loaded ? (
-            null
-          ) : (
-            <Loading />
-          )
-        }
-        <div className={loaded ? 'loaded' : 'loading'}>
+        {loaded ? null : <Loading />}
+        <div className={loaded ? "loaded" : "loading"}>
           <NavBar />
-          <div className='site-contents'>
-            <div className='dialogue'>
-              <h1>
-                {name}
-              </h1>
-              <p className='fancy'>
-                {
-                  description.length === 0 ? <br /> : (description)
-                }
+          <div className="site-contents">
+            <div className="dialogue">
+              <h1>{name}</h1>
+              <p className="fancy">
+                {description.length === 0 ? <br /> : description}
               </p>
-              <h3>
-                {
-                  dateTaken === 0 ? <br /> : (
-                    <>{dateTaken}</>
-                  )
-                }
-              </h3>
+              <h3>{dateTaken === 0 ? <br /> : <>{dateTaken}</>}</h3>
               <h5>
-                <em>
-                  Updated {created}
-                </em>
+                <em>Updated {created}</em>
               </h5>
               <br />
             </div>
             <div className={`photos-tray ${galleryType}`}>
-              {
-                photos.map((photo) => {
-                  return (<ClickablePhoto
+              {photos.map((photo) => {
+                return (
+                  <ClickablePhoto
                     key={photo.uuid}
                     uuid={photo.uuid}
                     name={photo.name}
@@ -100,15 +86,15 @@ class Gallery extends React.Component {
                     sizes={photo.sizes}
                     description={photo.description}
                     galleryType={galleryType}
-                  />)
-                })
-              }
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
       </>
-    )
+    );
   }
 }
 
-export default Gallery
+export default Gallery;

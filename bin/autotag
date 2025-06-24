@@ -1,0 +1,20 @@
+#!env/bin/python3
+
+from git import Repo
+import pathlib
+import pkg_resources
+import pennington_photo as pkg
+
+
+obj = Repo(pathlib.Path(__file__).parent.parent)
+tag = obj.create_tag(f'{pkg.__name__}@{pkg_resources.get_distribution(pkg.__name__).version}')
+obj.remotes.origin.push(tag.path)
+
+tagstr = """ .-.             .-.
+.' `.            : :
+`. .'.--.   .--. : :
+ : :' .; ; ' .; ::_;
+ :_;`.__,_;`._. ;:_;
+            .-. :   
+            `._.'   """
+print(tagstr)

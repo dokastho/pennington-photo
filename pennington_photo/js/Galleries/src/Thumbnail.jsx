@@ -1,10 +1,15 @@
-import PropTypes from 'prop-types';
-import React from 'react'
-import Photo from './Photo';
-import GALLERYTYPES from './GalleryTypes'
+/**
+ * Pennington Photographics
+ *
+ * TJ Dokas <mailto:tjdokas@gmail.com>
+ */
+
+import PropTypes from "prop-types";
+import React from "react";
+import Photo from "./Photo";
+import GALLERYTYPES from "./GalleryTypes";
 
 class Thumbnail extends React.Component {
-
   constructor(props) {
     super(props);
   }
@@ -31,13 +36,14 @@ class Thumbnail extends React.Component {
         break;
     }
     return (
-      <div className='thumbnail'>
+      <div className="thumbnail">
         <a href={`/gallery/${galleryId}/`}>
-          <h1>
-            {name}
-          </h1>
-          <p className='gallery-desc-thumbnail-padding'>{description}</p>
-          <Photo uuid={imgSrc} imgClass={`thumbnail-photo-${thumbnailClassName}`} />
+          <h1>{name}</h1>
+          <p className="gallery-desc-thumbnail-padding">{description}</p>
+          <Photo
+            uuid={imgSrc}
+            imgClass={`thumbnail-photo-${thumbnailClassName}`}
+          />
         </a>
       </div>
     );
@@ -45,7 +51,6 @@ class Thumbnail extends React.Component {
 }
 
 Thumbnail.propTypes = {
-  // default prop values go here if not required
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   galleryId: PropTypes.number.isRequired,
@@ -55,7 +60,7 @@ Thumbnail.propTypes = {
 };
 
 Thumbnail.defaultProps = {
-  customClassName: "default"
-}
+  customClassName: "default",
+};
 
-export default Thumbnail
+export default Thumbnail;

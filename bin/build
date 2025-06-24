@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+source env/bin/activate
+pip3 install -e .
+./bin/autotag
+git clean -fdxe env
+rm -rf build
+rm -rf dist
+deactivate
+pip3 install -q build
+python3 -m build
+pip3 install --user --upgrade twine
+twine upload --config-file /Users/dokastho/.pypirc --repository apple-pypi dist/* --verbose

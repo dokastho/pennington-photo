@@ -1,13 +1,18 @@
-import PropTypes from 'prop-types';
-import React from 'react'
-import ConfirmatoryButton from './Buttons';
+/**
+ * Pennington Photographics
+ *
+ * TJ Dokas <mailto:tjdokas@gmail.com>
+ */
+
+import PropTypes from "prop-types";
+import React from "react";
+import ConfirmatoryButton from "./Buttons";
 
 const SAVED = "Saved.";
 const SAVING = "Saving...";
 const UNSAVED = "Unsaved Changes.";
 
 class EditSize extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +20,7 @@ class EditSize extends React.Component {
         info: "",
       },
       saveState: SAVED,
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
     this.doSave = this.doSave.bind(this);
 
@@ -28,9 +33,7 @@ class EditSize extends React.Component {
   }
 
   handleChange(key, val) {
-    const {
-      content
-    } = this.state;
+    const { content } = this.state;
     content[key] = val;
     this.setState({ content, saveState: UNSAVED });
     if (this.timeout) {
@@ -45,74 +48,88 @@ class EditSize extends React.Component {
   }
 
   doSave() {
-    const {
-      sizenameId,
-      callback
-    } = this.props;
-    const {
-      content
-    } = this.state;
-    const {
-      info,
-      price,
-    } = content;
+    const { sizenameId, callback } = this.props;
+    const { content } = this.state;
+    const { info, price } = content;
     callback({ sizenameId, info, price });
-    fetch(`/api/v1/save/sizename/`,
-      {
-        credentials: 'same-origin',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ info, sizenameId, price }),
-      })
+    fetch(`/api/v1/save/sizename/`, {
+      credentials: "same-origin",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ info, sizenameId, price }),
+    })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
         this.setState({ saveState: SAVED });
         return response;
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }
 
   render() {
-    const {
-      sizenameId,
-      deleteSize,
-      cancelEdit,
-    } = this.props;
-    const {
-      content,
-      saveState,
-    } = this.state;
-    const {
-      info,
-      price,
-    } = content;
+    const { sizenameId, deleteSize, cancelEdit } = this.props;
+    const { content, saveState } = this.state;
+    const { info, price } = content;
     return (
-      <div className='edit-account'>
+      <div className="edit-account">
         <hr />
         <h3>Manage Size: "{info}"</h3>
-        <div className='edit-list-menu'>
+        <div className="edit-list-menu">
           <div>
-          <label>Name: </label>
-          <input className='edit-size-input' type='text' value={info} onChange={(e) => { this.handleChange("info", e.target.value) }} />
+            <label>Name: </label>
+            <input
+              className="edit-size-input"
+              type="text"
+              value={info}
+              onChange={(e) => {
+                this.handleChange("info", e.target.value);
+              }}
+            />
           </div>
           <br />
           <br />
-          <p>This price will be the default for this print size. You can change it for any specific picture if you would like.</p>
+          <p>
+            This price will be the default for this print size. You can change
+            it for any specific picture if you would like.
+          </p>
           <div>
             <label>Default Price: </label>
-            <input type='number' value={price} onChange={(e) => { this.handleChange("price", e.target.value) }} />
+            <input
+              type="number"
+              value={price}
+              onChange={(e) => {
+                this.handleChange("price", e.target.value);
+              }}
+            />
           </div>
         </div>
         <hr />
-        <div className='menu-buttons'>
+        <div className="menu-buttons">
           <div>
-            <button type='submit' onClick={() => { this.doSave() }}>Save</button>
-            <label className='fancy'>{saveState}</label>
+            <button
+              type="submit"
+              onClick={() => {
+                this.doSave();
+              }}
+            >
+              Save
+            </button>
+            <label className="fancy">{saveState}</label>
           </div>
-          <button onClick={() => { cancelEdit() }}>go back</button>
-          <ConfirmatoryButton text={"Delete"} args={{ sizenameId }} callback={deleteSize} />
+          <button
+            onClick={() => {
+              cancelEdit();
+            }}
+          >
+            go back
+          </button>
+          <ConfirmatoryButton
+            text={"Delete"}
+            args={{ sizenameId }}
+            callback={deleteSize}
+          />
         </div>
       </div>
     );
@@ -120,13 +137,9 @@ class EditSize extends React.Component {
 }
 
 EditSize.propTypes = {
-  // prop types go here
   sizename: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   sizenameId: PropTypes.number.isRequired,
-  // deleteSize
-  // cancelEdit
-  // callback
 };
 
-export default EditSize
+export default EditSize;

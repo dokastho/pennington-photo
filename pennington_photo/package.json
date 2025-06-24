@@ -1,0 +1,42 @@
+{
+    "name": "pennington-photo",
+    "version": "0.1.0",
+    "description": "Don Pennington's online photographics gallery & store",
+    "author": "TJ Dokas",
+    "license": "MIT",
+    "type": "module",
+    "repository": {},
+    "engines": {
+        "node": ">=8.0.0"
+    },
+    "directories": {
+        "test": "tests"
+    },
+    "scripts": {
+        "test": "pytest -vvv --cache-clear",
+        "build": "python3 bin/build.py"
+    },
+    "dependencies": {
+        "accounts": "file:js/Accounts",
+        "admin": "file:js/Admin",
+        "cart": "file:js/Cart",
+        "contact": "file:js/Contact",
+        "galleries": "file:js/Galleries",
+        "gallery": "file:js/Gallery",
+        "home": "file:js/Home",
+        "login": "file:js/Login"
+    },
+    "devDependencies": {
+        "@babel/eslint-parser": "^7.24.8",
+        "@babel/preset-react": "^7.24.7",
+        "@eslint/compat": "^1.1.1",
+        "@eslint/config-array": "^0.17.0",
+        "@eslint/js": "^9.9.0",
+        "@eslint/object-schema": "^2.1.4",
+        "eslint": "^9.15.0",
+        "eslint-plugin-prettier": "^5.2.1",
+        "eslint-plugin-react": "^7.35.0",
+        "eslint-plugin-react-hooks": "^5.1.0-rc.1",
+        "globals": "^15.9.0"
+    }
+}

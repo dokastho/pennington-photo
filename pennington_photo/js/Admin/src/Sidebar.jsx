@@ -1,15 +1,19 @@
-import PropTypes from 'prop-types';
-import React from 'react'
+/**
+ * Pennington Photographics
+ *
+ * TJ Dokas <mailto:tjdokas@gmail.com>
+ */
+
+import React from "react";
 
 const items = ["Galleries", "Administrators", "Print Sizes"];
 
 class SideBar extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      logname: ""
-    }
+      logname: "",
+    };
   }
 
   componentDidMount() {
@@ -18,43 +22,48 @@ class SideBar extends React.Component {
   }
 
   render() {
-    const {
-      setContentFocus
-    } = this.props;
-    const {
-      logname
-    } = this.state;
+    const { setContentFocus } = this.props;
+    const { logname } = this.state;
     return (
       <>
-        <div className='sidebar' >
+        <div className="sidebar">
           <div className="admin-welcome">
             <h1>Pennington Photographics Administrator Tools</h1>
             <hr />
-            <h1 className='sidebar-item'><a href='/home/'>Back to Site</a></h1>
+            <h1 className="sidebar-item">
+              <a href="/home/">Back to Site</a>
+            </h1>
             <hr />
             <h3 className="fancy">Welcome {logname}.</h3>
-            <span>Not {logname}? <a href="/accounts/logout/" className='logout-button'>logout</a></span>
+            <span>
+              Not {logname}?{" "}
+              <a href="/accounts/logout/" className="logout-button">
+                logout
+              </a>
+            </span>
             <br />
             <br />
             <hr />
             <br />
           </div>
-          {
-            items.map((item) => {
-              return (
-                <div className='sidebar-item' key={item} onClick={() => { setContentFocus(item.toLowerCase()) }} >
-                  {item}
-                </div>
-              )
-            })
-          }
+          {items.map((item) => {
+            return (
+              <div
+                className="sidebar-item"
+                key={item}
+                onClick={() => {
+                  setContentFocus(item.toLowerCase());
+                }}
+              >
+                {item}
+              </div>
+            );
+          })}
           <br />
           <br />
           <br />
-          <a href='/new/'>
-            <div className='new-button'>
-              Create a new gallery
-            </div>
+          <a href="/new/">
+            <div className="new-button">Create a new gallery</div>
           </a>
         </div>
       </>
@@ -62,11 +71,4 @@ class SideBar extends React.Component {
   }
 }
 
-SideBar.propTypes = {
-  // setContentFocus
-}
-
 export default SideBar;
-
-// notes
-// needs css

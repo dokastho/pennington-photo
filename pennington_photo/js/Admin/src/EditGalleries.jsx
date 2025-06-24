@@ -1,19 +1,24 @@
-import PropTypes from 'prop-types';
-import React from 'react'
-import EditThumbnail from './EditThumbnail';
+/**
+ * Pennington Photographics
+ *
+ * TJ Dokas <mailto:tjdokas@gmail.com>
+ */
+
+import PropTypes from "prop-types";
+import React from "react";
+import EditThumbnail from "./EditThumbnail";
 
 const SAVED = "Saved.";
 const SAVING = "Saving...";
 const UNSAVED = "Unsaved Changes.";
 
 class EditGalleries extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       galleries: [],
       saveState: SAVED,
-    }
+    };
 
     this.swap = this.swap.bind(this);
     this.swapleft = this.swapleft.bind(this);
@@ -27,20 +32,19 @@ class EditGalleries extends React.Component {
 
   swap(lhs, rhs) {
     const { galleries } = this.state;
-    fetch('/api/v1/swap/galleries/',
-      {
-        credentials: 'same-origin',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          lhsId: galleries[lhs].galleryId,
-          rhsId: galleries[rhs].galleryId,
-          lhsOrdernum: galleries[lhs].ordernum,
-          rhsOrdernum: galleries[rhs].ordernum
-        }),
-      })
+    fetch("/api/v1/swap/galleries/", {
+      credentials: "same-origin",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        lhsId: galleries[lhs].galleryId,
+        rhsId: galleries[rhs].galleryId,
+        lhsOrdernum: galleries[lhs].ordernum,
+        rhsOrdernum: galleries[rhs].ordernum,
+      }),
+    })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
         const temp = galleries[lhs];
@@ -52,7 +56,7 @@ class EditGalleries extends React.Component {
         this.setState({ saveState: SAVED });
         return response;
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }
 
   swapleft(idx) {
@@ -68,26 +72,29 @@ class EditGalleries extends React.Component {
   }
 
   render() {
-    const {
-      doEditGallery,
-    } = this.props;
-    const {
-      galleries
-    } = this.state;
+    const { doEditGallery } = this.props;
+    const { galleries } = this.state;
     return (
       <>
-        <div className='dialogue'>
-          <h1>
-            Your Galleries
-          </h1>
+        <div className="dialogue">
+          <h1>Your Galleries</h1>
           <br />
         </div>
-        <div className='galleries-tray'>
-          {
-            galleries.map((gallery, idx) => {
-              return (<EditThumbnail key={gallery.galleryId} name={gallery.name} galleryIdx={idx} imgSrc={gallery.thumbnail} doEditGallery={doEditGallery} galleryType={gallery.type} swapleft={this.swapleft} swapright={this.swapright} />)
-            })
-          }
+        <div className="galleries-tray">
+          {galleries.map((gallery, idx) => {
+            return (
+              <EditThumbnail
+                key={gallery.galleryId}
+                name={gallery.name}
+                galleryIdx={idx}
+                imgSrc={gallery.thumbnail}
+                doEditGallery={doEditGallery}
+                galleryType={gallery.type}
+                swapleft={this.swapleft}
+                swapright={this.swapright}
+              />
+            );
+          })}
         </div>
       </>
     );
@@ -96,7 +103,6 @@ class EditGalleries extends React.Component {
 
 EditGalleries.propTypes = {
   galleries: PropTypes.instanceOf(Array).isRequired,
-  // doEditGallery
 };
 
-export default EditGalleries
+export default EditGalleries;

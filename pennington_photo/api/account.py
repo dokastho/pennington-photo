@@ -1,4 +1,11 @@
-"""accounts interface."""
+"""
+Pennington Photographics
+
+TJ Dokas <mailto:tjdokas@gmail.com>
+
+accounts interface
+"""
+
 import uuid
 import hashlib
 import os
@@ -111,7 +118,7 @@ def do_delete(connection):
     # user must be logged in
     if 'logname' not in session:
         abort(403)
-        
+
     if not model.get_logname():
         abort(403)
 
